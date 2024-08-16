@@ -6,14 +6,18 @@ internal class MathParser
 {
     private StringReader _reader;
 
-    private Token _lookahead = new EOFToken();
-
-    public enum Operation
+    private double _numval;
+    private TokenType _lookahead;
+    public enum TokenType
     {
         PLUS,
         MINUS,
         MULTI,
-        DIV
+        DIV,
+        NUM,
+        OBRACKET,
+        CBRACKET,
+        EOF
     }
 
     public MathParser(string expression)
@@ -21,36 +25,12 @@ internal class MathParser
         _reader = new StringReader(expression);
     }
 
-    public abstract class Token { }
-
-    public class OpenBracketToken : Token { }
-    public class CloseBracketToken : Token { }
-
-    public class EOFToken : Token { }
-    public class OperatorToken : Token
-    {
-        public Operation _op;
-        public OperatorToken(Operation op)
-        {
-            _op = op;
-        }
-    }
-
-    public class NumValueToken : Token
-    {
-        public readonly double _value;
-        public NumValueToken(double value)
-        {
-            _value = value;
-        }
-    }
-
     private void LookAhead()
     {
         var c = this._reader.Read();
         if (c == -1)
         {
-            _lookahead = new EOFToken();
+            _lookahead = TokenType.EOF;
             return;
         }
         switch ((char) c)
@@ -58,32 +38,32 @@ internal class MathParser
             
             case '(':
                 {
-                    _lookahead = new OpenBracketToken();
+                    _lookahead = TokenType.OBRACKET;
                     return;
                 }
             case ')':
                 {
-                    _lookahead = new CloseBracketToken();
+                    _lookahead = TokenType.CBRACKET;
                     return;
                 }
             case '+':
                 {
-                    _lookahead = new OperatorToken(Operation.PLUS);
+                    _lookahead = TokenType.PLUS;
                     return;
                 }
             case '-':
                 {
-                    _lookahead = new OperatorToken(Operation.MINUS);
+                    _lookahead = TokenType.MINUS;
                     return;
                 }
             case '*':
                 {
-                    _lookahead = new OperatorToken(Operation.MULTI);
+                    _lookahead = TokenType.MULTI;
                     return;
                 }
             case '/':
                 {
-                    _lookahead = new OperatorToken(Operation.DIV);
+                    _lookahead = TokenType.DIV;
                     return;
                 }
         }
@@ -95,9 +75,9 @@ internal class MathParser
             {
                 builder.Append((char) this._reader.Read());
             }
-            if (double.TryParse(builder.ToString(), out var numval))
+            if (double.TryParse(builder.ToString(), out _numval))
             {
-                _lookahead = new NumValueToken(numval);
+                _lookahead = TokenType.NUM;
                 return;
             }
         }
@@ -113,7 +93,7 @@ internal class MathParser
 
     private double AddExpression()
     {
-        if ((_lookahead is OperatorToken && ((OperatorToken)_lookahead)._op == Operation.MINUS) || _lookahead is OpenBracketToken || _lookahead is NumValueToken) 
+        if (_lookahead == TokenType.MINUS || _lookahead == TokenType.OBRACKET || _lookahead == TokenType.NUM) 
         {
             return MultiplyExpression() + RepeatAddExpression();
         }
@@ -122,20 +102,17 @@ internal class MathParser
 
     private double RepeatAddExpression()
     {
-        if(_lookahead is OperatorToken)
+        if (_lookahead == TokenType.PLUS)
         {
-            if (((OperatorToken)_lookahead)._op==Operation.PLUS)
-            {
-                LookAhead();
-                return MultiplyExpression() + RepeatAddExpression();
-            }
-            else if (((OperatorToken)_lookahead)._op == Operation.MINUS)
-            {
-                LookAhead();
-                return -(MultiplyExpression() + RepeatAddExpression());
-            }
+            LookAhead();
+            return MultiplyExpression() + RepeatAddExpression(); 
         }
-        else if (_lookahead is CloseBracketToken || _lookahead is EOFToken)
+        else if (_lookahead == TokenType.MINUS)
+        {
+            LookAhead();
+            return -(MultiplyExpression() + RepeatAddExpression());
+        }
+        else if (_lookahead == TokenType.CBRACKET || _lookahead == TokenType.EOF)
         {
             return 0;
         }
@@ -144,7 +121,7 @@ internal class MathParser
 
     private double MultiplyExpression()
     {
-        if ((_lookahead is OperatorToken && ((OperatorToken)_lookahead)._op == Operation.MINUS) || _lookahead is OpenBracketToken || _lookahead is NumValueToken)
+        if (_lookahead == TokenType.MINUS || _lookahead == TokenType.OBRACKET || _lookahead == TokenType.NUM)
         {
             return NegativeExpression() * RepeatMultiplyExpression();
         }
@@ -153,21 +130,17 @@ internal class MathParser
 
     private double RepeatMultiplyExpression()
     {
-        if (_lookahead is OperatorToken)
+       if (_lookahead == TokenType.MULTI)
         {
-            if (((OperatorToken)_lookahead)._op == Operation.MULTI)
-            {
-                LookAhead();
-                return NegativeExpression() * RepeatMultiplyExpression();
-            }
-            else if (((OperatorToken)_lookahead)._op == Operation.DIV)
-            {
-                LookAhead();
-                return 1 / (NegativeExpression() * RepeatMultiplyExpression());
-            }
-            else { return 1; }
+            LookAhead();
+            return NegativeExpression() * RepeatMultiplyExpression();
         }
-        else if (_lookahead is CloseBracketToken || _lookahead is EOFToken)
+        else if (_lookahead == TokenType.DIV)
+        {
+            LookAhead();
+            return 1 / (NegativeExpression() * RepeatMultiplyExpression());
+        }
+        else if (_lookahead == TokenType.PLUS || _lookahead == TokenType.MINUS || _lookahead == TokenType.CBRACKET || _lookahead == TokenType.EOF)
         {
             return 1;
         }
@@ -176,12 +149,12 @@ internal class MathParser
 
     private double NegativeExpression()
     {
-        if (_lookahead is OperatorToken && ((OperatorToken)_lookahead)._op == Operation.MINUS)
+        if (_lookahead == TokenType.MINUS)
         {
             LookAhead();
             return -BracketOrNumExpression();
         }
-        else if (_lookahead is OpenBracketToken || _lookahead is NumValueToken)
+        else if (_lookahead == TokenType.OBRACKET || _lookahead == TokenType.NUM)
         {
             return BracketOrNumExpression();
         }
@@ -190,20 +163,20 @@ internal class MathParser
 
     private double BracketOrNumExpression()
     {
-        if (_lookahead is OpenBracketToken)
+        if (_lookahead == TokenType.OBRACKET)
         {
             LookAhead();
             var tmp = AddExpression();
-            if (_lookahead is CloseBracketToken)
+            if (_lookahead == TokenType.CBRACKET)
             {
                 LookAhead();
             }
             else throw new Exception("Expected )");
             return tmp;
         }
-        if (_lookahead is NumValueToken)
+        if (_lookahead == TokenType.NUM)
         {
-            var result = ((NumValueToken)_lookahead)._value;
+            var result = _numval;
             LookAhead();
             return result;
         }
