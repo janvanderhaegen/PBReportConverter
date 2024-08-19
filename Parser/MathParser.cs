@@ -37,13 +37,8 @@ internal class MathParser
     private void LookAhead()
     {
         ReadChar();
-        if (_lastChar == '\uffff')
-        {
-            _lookahead = TokenType.EOF;
-            return;
-        }
 
-        while (_lastChar == ' ')
+        while (Char.IsWhiteSpace(_lastChar))
         {
             ReadChar();
         }
@@ -83,6 +78,11 @@ internal class MathParser
             case '^':
                 {
                     _lookahead = TokenType.EXP;
+                    return;
+                }
+            case '\uffff':
+                {
+                    _lookahead = TokenType.EOF;
                     return;
                 }
         }

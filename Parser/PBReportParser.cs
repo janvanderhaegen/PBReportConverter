@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using ReportMigration.Models;
 
 namespace ReportMigration.Parser;
 
@@ -7,7 +8,7 @@ public enum Token
     OPBRACKET,
     CLBRACKET,
     EQUALS,
-    SPACE,
+    WHITESPACE,
     NEWLINE,
     IDENTIFIER,
     EOF
@@ -15,35 +16,56 @@ public enum Token
 
 internal class PBReportParser
 {
-    private static readonly char[] invalidIdentifierChars = { '(', ')', '=', ' ' };
-    private StringReader _reader;
+    private static readonly char[] invalidIdentifierChars = { '(', ')', '=' };
+    private readonly StreamReader _reader;
+    private int _readerPosition = 0;
+    private int _linePosition = 1;
+    private char _lastChar;
 
     private string _stringval;
     private Token _lookahead;
 
     private List<Tuple<string, Dictionary<string, string>>> _structure = new List<Tuple<string, Dictionary<string, string>>>();
 
-    public PBReportParser(string expression)
+    public PBReportParser(string path)
     {
-        _reader = new StringReader(expression);
+        _reader = new StreamReader(path);
         _stringval = "";
     }
+
+    private char ReadChar()
+    {
+        _readerPosition++;
+        return _lastChar = (char)_reader.Read();
+    }
+
+    public List<Tuple<string, Dictionary<string, string>>> GetStructure() { return _structure; }
+
     private void LookAhead()
     {
-        StringBuilder builder = new StringBuilder();
-        var c = this._reader.Read();
-        if (c == -1)
+        if (Char.IsWhiteSpace(ReadChar()))
         {
-            _lookahead = Token.EOF;
+            while (Char.IsWhiteSpace((char)_reader.Peek()))
+            {
+                if(ReadChar() == '\n')
+                {
+                    _linePosition++;
+                    _readerPosition = 0;
+                }
+            }
+            _lookahead = Token.WHITESPACE;
             return;
         }
-        switch ((char) c)
+
+        StringBuilder builder = new();
+
+        switch (_lastChar)
         {
             case '"':
                 {
-                    while ((c = (char)this._reader.Read()) != '"')
+                    while (ReadChar() != '"')
                     {
-                        builder.Append(c);
+                        builder.Append(_lastChar);
                     }
                     _stringval = builder.ToString();
                     _lookahead = Token.IDENTIFIER;
@@ -64,121 +86,117 @@ internal class PBReportParser
                     _lookahead = Token.EQUALS;
                     return;
                 }
-            case ' ':
+            case '\uffff':
                 {
-                    while((char) this._reader.Peek() == ' ')
-                    {
-                        this._reader.Read();
-                    }
-                    _lookahead = Token.SPACE;
+                    _lookahead = Token.EOF;
                     return;
                 }
-            case '\n':
-                {
-                    _lookahead = Token.NEWLINE;
-                    return;
-                }
-
         }
-        builder.Append((char) c);
-        while (!invalidIdentifierChars.Contains((char)this._reader.Peek()))
+        builder.Append(_lastChar);
+        while (!invalidIdentifierChars.Contains((char)this._reader.Peek()) && !Char.IsWhiteSpace((char)this._reader.Peek()))
         {
-            builder.Append((char) this._reader.Read());
+            builder.Append(ReadChar());
         }
         _stringval = builder.ToString();
         _lookahead = Token.IDENTIFIER;
         return;
     }
 
-    public List<Tuple<string, Dictionary<string, string>>> Parse()
+    public void Parse()
     {
         LookAhead();
         Line();
-        LP();
-
-        return _structure;
+        LineRepeat();
     }
 
     private void Line()
     {
         if(_lookahead != Token.IDENTIFIER)
         {
-            throw new FormatException("Wrong format of input file, expected string");
+            throw new ($"Expected alphanumeric string in line: {_linePosition} at position: {_readerPosition}, found character: {_lastChar}");
         }
         var key = _stringval;
         LookAhead();
         if (_lookahead != Token.OPBRACKET)
         {
-            throw new FormatException("Wrong format of input file, expected (");
+            throw new ($"Expected '(' in line: {_linePosition} at position: {_readerPosition}, found character: {_lastChar}");
         }
-        var args = Args();
-        _structure.Add(new(key, args));
+        Args(key);
+    }
+    private void LineRepeat()
+    {
+        if (_lookahead == Token.WHITESPACE)
+        {
+            LookAhead();
+            Line();
+            LineRepeat();
+        }
+        if (_lookahead == Token.EOF)
+        {
+            return;
+        }
+        throw new ($"Expected newline separator or end of file in line: {_linePosition} at position: {_readerPosition}, found character: {_lastChar}");
     }
 
-    private Dictionary<string, string> Args()
+    private void Args(string key)
     {
         Dictionary<string, string> result = new Dictionary<string, string>();
         LookAhead();
-        var arg = Arg();
-        result.Add(arg.Key, arg.Value);
-        AP(result);
-        LookAhead();
-        return result;
+        Arg(result);
+        ArgRepeat(result);
+        _structure.Add(new(key, result));
     }
 
-    private (string Key, string Value) Arg()
+    private void Arg(Dictionary<string, string> result)
     {
         if (_lookahead != Token.IDENTIFIER)
         {
-            throw new FormatException("Wrong format of input file, expected string");
+            throw new ($"Expected alphanumeric string in line: {_linePosition} at position: {_readerPosition}, found character: {_lastChar}");
         }
         var key = _stringval;
 
         LookAhead();
+
+        if(_lookahead == Token.WHITESPACE)
+        {
+            LookAhead();
+        }
+
         if (_lookahead != Token.EQUALS)
         {
-            throw new FormatException("Wrong format of input file, expected =");
+            throw new ($"Expected '=' in line: {_linePosition} at position: {_readerPosition}, found character: {_lastChar}");
         }
 
         LookAhead();
+
+        if (_lookahead == Token.WHITESPACE)
+        {
+            LookAhead();
+        }
         if (_lookahead != Token.IDENTIFIER)
         {
-            throw new FormatException("Wrong format of input file, expected string");
+            throw new ($"Expected alphanumeric string in line: {_linePosition} at position: {_readerPosition}, found character: {_lastChar}");
         }
 
         LookAhead();
 
-        return (key, _stringval);
+        result.Add(key, _stringval);
     }
 
-    private void AP(Dictionary<string, string> result)
+    private void ArgRepeat(Dictionary<string, string> result)
     {
-        if (_lookahead == Token.SPACE)
+        if (_lookahead == Token.WHITESPACE)
         {
             LookAhead();
-            var arg = Arg();
-            result.Add(arg.Key, arg.Value);
-            AP(result);
-        }
-        if (_lookahead == Token.CLBRACKET) 
-        {
+            Arg(result);
+            ArgRepeat(result);
             return;
         }
-        throw new FormatException("Wrong format of input file, expected string or )");
-    }
-
-    private void LP()
-    {
-        if (_lookahead == Token.NEWLINE)
+        if (_lookahead == Token.CLBRACKET)
         {
             LookAhead();
-            Line();
-            LP();
-        }
-        if(_lookahead == Token.EOF)
-        {
             return;
         }
-        throw new FormatException("Wrong format of input file, expected \\n or EOF");
+        throw new ($"Expected whitespace separator or ')' in line: {_linePosition} at position: {_readerPosition}, found character: {_lastChar}");
     }
 }
