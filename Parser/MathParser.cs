@@ -67,11 +67,11 @@ internal class MathParser
                     return;
                 }
         }
-        if (Char.IsDigit((char) c))
+        if (Char.IsDigit((char) c) || (char)c == '.')
         {
             StringBuilder builder = new StringBuilder();
             builder.Append((char) c);
-            while (Char.IsDigit((char) this._reader.Peek()))
+            while (Char.IsDigit((char) this._reader.Peek()) || (char) this._reader.Peek() == '.')
             {
                 builder.Append((char) this._reader.Read());
             }
@@ -97,7 +97,7 @@ internal class MathParser
         {
             return MultiplyExpression() + RepeatAddExpression();
         }
-        throw new Exception("Expected ( or num");
+        throw new Exception("Expected - or ( or num");
     }
 
     private double RepeatAddExpression()
@@ -125,7 +125,7 @@ internal class MathParser
         {
             return NegativeExpression() * RepeatMultiplyExpression();
         }
-        throw new Exception("Expected ( or num");
+        throw new Exception("Expected - or ( or num");
     }
 
     private double RepeatMultiplyExpression()
@@ -152,7 +152,7 @@ internal class MathParser
         if (_lookahead == TokenType.MINUS)
         {
             LookAhead();
-            return -BracketOrNumExpression();
+            return -NegativeExpression();
         }
         else if (_lookahead == TokenType.OBRACKET || _lookahead == TokenType.NUM)
         {
