@@ -4,7 +4,9 @@ namespace ReportMigration.Parser;
 
 internal class MathParser
 {
-    private StringReader _reader;
+    private readonly StringReader _reader;
+    private int _readerPosition = -1;
+    private char _lastChar;
 
     private double _numval;
     private TokenType _lookahead;
@@ -14,6 +16,7 @@ internal class MathParser
         MINUS,
         MULTI,
         DIV,
+        EXP,
         NUM,
         OBRACKET,
         CBRACKET,
@@ -25,17 +28,28 @@ internal class MathParser
         _reader = new StringReader(expression);
     }
 
+    private char ReadChar()
+    {
+        _readerPosition++;
+        return _lastChar = (char)_reader.Read();
+    }
+
     private void LookAhead()
     {
-        var c = this._reader.Read();
-        if (c == -1)
+        ReadChar();
+        if (_lastChar == '\uffff')
         {
             _lookahead = TokenType.EOF;
             return;
         }
-        switch ((char) c)
+
+        while (_lastChar == ' ')
         {
-            
+            ReadChar();
+        }
+
+        switch (_lastChar)
+        {
             case '(':
                 {
                     _lookahead = TokenType.OBRACKET;
@@ -66,22 +80,39 @@ internal class MathParser
                     _lookahead = TokenType.DIV;
                     return;
                 }
+            case '^':
+                {
+                    _lookahead = TokenType.EXP;
+                    return;
+                }
         }
-        if (Char.IsDigit((char) c) || (char)c == '.')
+
+        StringBuilder builder = new StringBuilder();
+        if ('0' <= _lastChar && _lastChar <= '9')
         {
-            StringBuilder builder = new StringBuilder();
-            builder.Append((char) c);
-            while (Char.IsDigit((char) this._reader.Peek()) || (char) this._reader.Peek() == '.')
+            builder.Append(_lastChar);
+            while ('0' <= (char)_reader.Peek() && (char)_reader.Peek() <= '9')
             {
-                builder.Append((char) this._reader.Read());
+                builder.Append(ReadChar());
             }
+
+            if ((char) _reader.Peek() == '.')
+            {
+                builder.Append(ReadChar());
+                while ('0' <= (char)_reader.Peek() && (char)_reader.Peek() <= '9')
+                {
+                    builder.Append(ReadChar());
+                }
+            }
+
             if (double.TryParse(builder.ToString(), out _numval))
             {
                 _lookahead = TokenType.NUM;
                 return;
             }
         }
-        throw new Exception("Unexpected character");
+
+        throw new Exception($"Unexpected character: {_lastChar} at position: {_readerPosition}");
     }
 
     public double Parse()
@@ -97,7 +128,7 @@ internal class MathParser
         {
             return MultiplyExpression() + RepeatAddExpression();
         }
-        throw new Exception("Expected - or ( or num");
+        throw new Exception($"Expected - or ( or num at position: {_readerPosition}, found character: {_lastChar}");
     }
 
     private double RepeatAddExpression()
@@ -116,7 +147,7 @@ internal class MathParser
         {
             return 0;
         }
-        throw new Exception("Expected + or - or end of expression");
+        throw new Exception($"Expected + or - or end of expression at position: {_readerPosition}, found character: {_lastChar}");
     }
 
     private double MultiplyExpression()
@@ -125,7 +156,7 @@ internal class MathParser
         {
             return NegativeExpression() * RepeatMultiplyExpression();
         }
-        throw new Exception("Expected - or ( or num");
+        throw new Exception($"Expected - or ( or num at position: {_readerPosition}, found character: {_lastChar}");
     }
 
     private double RepeatMultiplyExpression()
@@ -144,7 +175,7 @@ internal class MathParser
         {
             return 1;
         }
-        throw new Exception("Expected * or / or end of expression");
+        throw new Exception($"Expected * or / or end of expression at position: {_readerPosition}, found character: {_lastChar}");
     }
 
     private double NegativeExpression()
@@ -156,9 +187,32 @@ internal class MathParser
         }
         else if (_lookahead == TokenType.OBRACKET || _lookahead == TokenType.NUM)
         {
-            return BracketOrNumExpression();
+            return ExponentExpression();
         }
-        throw new Exception("Expected - or ( or num");
+        throw new Exception($"Expected - or ( or num at position: {_readerPosition}, found character: {_lastChar}");
+    }
+
+    private double ExponentExpression()
+    {
+        if (_lookahead == TokenType.OBRACKET || _lookahead == TokenType.NUM)
+        {
+            return Math.Pow(BracketOrNumExpression(), ExponentRepeatExpression());
+        }
+        throw new Exception($"Expected ( or num at position: {_readerPosition}, found character: {_lastChar}");
+    }
+
+    private double ExponentRepeatExpression()
+    {
+        if (_lookahead == TokenType.EXP)
+        {
+            LookAhead();
+            return Math.Pow(NegativeExpression(), ExponentRepeatExpression());
+        }
+        else if(_lookahead == TokenType.MULTI || _lookahead == TokenType.DIV || _lookahead == TokenType.PLUS || _lookahead == TokenType.MINUS || _lookahead == TokenType.CBRACKET || _lookahead == TokenType.EOF)
+        {
+            return 1;
+        }
+        throw new Exception($"Expected ^ at position: {_readerPosition}, found character: {_lastChar}");
     }
 
     private double BracketOrNumExpression()
@@ -171,7 +225,7 @@ internal class MathParser
             {
                 LookAhead();
             }
-            else throw new Exception("Expected )");
+            else throw new Exception($"Expected ) at position: {_readerPosition}, found character: {_lastChar}");
             return tmp;
         }
         if (_lookahead == TokenType.NUM)
@@ -180,6 +234,6 @@ internal class MathParser
             LookAhead();
             return result;
         }
-        throw new Exception("Expected ( or num");
+        throw new Exception($"Expected ( or num at position: {_readerPosition}, found character: {_lastChar}");
     }
 }
