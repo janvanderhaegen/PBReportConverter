@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using DevExpress.Data.Async.Helpers;
 using ReportMigration.Models;
 
 namespace ReportMigration.Parser;
@@ -8,38 +9,39 @@ public enum Token
     OPBRACKET,
     CLBRACKET,
     EQUALS,
+    COMMA,
     WHITESPACE,
     NEWLINE,
     IDENTIFIER,
     EOF
 }
 
-internal class PBReportParser
+internal class PBReportParser(string path)
 {
     private static readonly char[] invalidIdentifierChars = { '(', ')', '=' };
-    private readonly StreamReader _reader;
-    private int _readerPosition = 0;
-    private int _linePosition = 1;
+    private readonly StreamReader _reader = new StreamReader(path);
+    private int _colPosition = 1;
+    private int _linePosition = 0;
     private char _lastChar;
 
-    private string _stringval;
+    private string _stringval = "";
     private Token _lookahead;
 
-    private List<Tuple<string, Dictionary<string, string>>> _structure = new List<Tuple<string, Dictionary<string, string>>>();
-
-    public PBReportParser(string path)
-    {
-        _reader = new StreamReader(path);
-        _stringval = "";
-    }
+    private List<ContainerModel> _structure = new List<ContainerModel>();
 
     private char ReadChar()
     {
-        _readerPosition++;
+        _colPosition++;
         return _lastChar = (char)_reader.Read();
     }
 
-    public List<Tuple<string, Dictionary<string, string>>> GetStructure() { return _structure; }
+    private void ReadCharSkipWhitespace()
+    {
+        do ReadChar();
+        while (_lastChar >= 0 && char.IsWhiteSpace((char)_lastChar));
+    }
+
+    public List<ContainerModel> GetStructure() { return _structure; }
 
     private void LookAhead()
     {
@@ -47,10 +49,10 @@ internal class PBReportParser
         {
             while (Char.IsWhiteSpace((char)_reader.Peek()))
             {
-                if(ReadChar() == '\n')
+                if (ReadChar() == '\n')
                 {
                     _linePosition++;
-                    _readerPosition = 0;
+                    _colPosition = 0;
                 }
             }
             _lookahead = Token.WHITESPACE;
@@ -76,7 +78,7 @@ internal class PBReportParser
                     _lookahead = Token.OPBRACKET;
                     return;
                 }
-            case ')': 
+            case ')':
                 {
                     _lookahead = Token.CLBRACKET;
                     return;
@@ -84,6 +86,11 @@ internal class PBReportParser
             case '=':
                 {
                     _lookahead = Token.EQUALS;
+                    return;
+                }
+            case ',':
+                {
+                    _lookahead = Token.COMMA;
                     return;
                 }
             case '\uffff':
@@ -102,6 +109,22 @@ internal class PBReportParser
         return;
     }
 
+    public string ParseString()
+    {
+        Span<char> buf = stackalloc char[32];
+        int pos = 0;
+        while (!invalidIdentifierChars.Contains((char)_lastChar) && !Char.IsWhiteSpace((char)_lastChar))
+        {
+            buf[pos++] = (char)_lastChar;
+            ReadChar();
+        }
+        if (pos == 0) throw new Exception($"Unexpected character {FormatChar(_lastChar)} at ({_linePosition}, {_colPosition}).");
+
+        var result = buf[..pos].ToString();
+
+        return result;
+    }
+
     public void Parse()
     {
         LookAhead();
@@ -111,17 +134,13 @@ internal class PBReportParser
 
     private void Line()
     {
-        if(_lookahead != Token.IDENTIFIER)
+        if (_lookahead != Token.IDENTIFIER)
         {
-            throw new ($"Expected alphanumeric string in line: {_linePosition} at position: {_readerPosition}, found character: {_lastChar}");
+            throw new($"Expected alphanumeric string in line: {_linePosition} at position: {_colPosition}, found character: {_lastChar}");
         }
         var key = _stringval;
         LookAhead();
-        if (_lookahead != Token.OPBRACKET)
-        {
-            throw new ($"Expected '(' in line: {_linePosition} at position: {_readerPosition}, found character: {_lastChar}");
-        }
-        Args(key);
+        Attributes(key);
     }
     private void LineRepeat()
     {
@@ -135,23 +154,42 @@ internal class PBReportParser
         {
             return;
         }
-        throw new ($"Expected newline separator or end of file in line: {_linePosition} at position: {_readerPosition}, found character: {_lastChar}");
+        throw new ($"Expected newline separator or end of file in line: {_linePosition} at position: {_colPosition}, found character: {_lastChar}");
     }
 
-    private void Args(string key)
+    private void Attributes(string key)
     {
-        Dictionary<string, string> result = new Dictionary<string, string>();
+        if (_lookahead != Token.OPBRACKET)
+        {
+            throw new($"Expected '(' in line: {_linePosition} at position: {_colPosition}, found character: {_lastChar}");
+        }
+        Dictionary<string, object> attributes = new Dictionary<string, object>();
         LookAhead();
-        Arg(result);
-        ArgRepeat(result);
-        _structure.Add(new(key, result));
+        Attr(attributes);
+        AttrRepeat(attributes);
+        if (attributes.TryGetValue("band", out var band))
+        {
+            var container = FindContainerByName(band);
+            if (container != null)
+            {
+                container.Elements.Add(new(key) { Attributes = attributes });
+            }
+            else
+            {
+                throw new($"No container defined with the name: {band}");
+            }
+        }
+        else 
+        {
+            _structure.Add(new(key) { Attributes = attributes });   
+        }
     }
 
-    private void Arg(Dictionary<string, string> result)
+    private void Attr(Dictionary<string, object> attributes)
     {
         if (_lookahead != Token.IDENTIFIER)
         {
-            throw new ($"Expected alphanumeric string in line: {_linePosition} at position: {_readerPosition}, found character: {_lastChar}");
+            throw new ($"Expected alphanumeric string in line: {_linePosition} at position: {_colPosition}, found character: {_lastChar}");
         }
         var key = _stringval;
 
@@ -164,32 +202,81 @@ internal class PBReportParser
 
         if (_lookahead != Token.EQUALS)
         {
-            throw new ($"Expected '=' in line: {_linePosition} at position: {_readerPosition}, found character: {_lastChar}");
+            throw new ($"Expected '=' in line: {_linePosition} at position: {_colPosition}, found character: {_lastChar}");
         }
-
         LookAhead();
 
         if (_lookahead == Token.WHITESPACE)
         {
             LookAhead();
         }
-        if (_lookahead != Token.IDENTIFIER)
+
+        if (_lookahead == Token.IDENTIFIER)
         {
-            throw new ($"Expected alphanumeric string in line: {_linePosition} at position: {_readerPosition}, found character: {_lastChar}");
+            LookAhead();
+
+            attributes.Add(key, _stringval);
+            return;
         }
-
-        LookAhead();
-
-        result.Add(key, _stringval);
+        else if (_lookahead == Token.OPBRACKET) 
+        {
+            LookAhead();
+            attributes.Add(key, StringList());
+            return;
+        }
+        throw new($"Expected alphanumeric string in line: {_linePosition} at position: {_colPosition}, found character: {_lastChar}");
     }
 
-    private void ArgRepeat(Dictionary<string, string> result)
+    private List<string> StringList()
+    {
+        if (_lookahead != Token.IDENTIFIER)
+        {
+            throw new($"Expected alphanumeric string in line: {_linePosition} at position: {_colPosition}, found character: {_lastChar}");
+        }
+        var result = new List<string>() { _stringval };
+        LookAhead();
+        result.AddRange(ListRepeat());
+        return result;
+    }
+
+    private List<string> ListRepeat()
     {
         if (_lookahead == Token.WHITESPACE)
         {
             LookAhead();
-            Arg(result);
-            ArgRepeat(result);
+        }
+
+        if (_lookahead == Token.COMMA)
+        {
+            LookAhead();
+            if (_lookahead == Token.WHITESPACE)
+            {
+                LookAhead();
+            }
+            if (_lookahead != Token.IDENTIFIER)
+            {
+                throw new($"Expected alphanumeric string in line: {_linePosition} at position: {_colPosition}, found character: {_lastChar}");
+            }
+            var result = new List<string>() { _stringval };
+            LookAhead();
+            result.AddRange(ListRepeat());
+            return result;
+        }
+        if (_lookahead == Token.CLBRACKET)
+        {
+            LookAhead();
+            return new List<string>();
+        }
+        throw new($"Expected ',' or ')' in line: {_linePosition} at position: {_colPosition}, found character: {_lastChar}");
+    }
+
+    private void AttrRepeat(Dictionary<string, object> attributes)
+    {
+        if (_lookahead == Token.WHITESPACE)
+        {
+            LookAhead();
+            Attr(attributes);
+            AttrRepeat(attributes);
             return;
         }
         if (_lookahead == Token.CLBRACKET)
@@ -197,6 +284,27 @@ internal class PBReportParser
             LookAhead();
             return;
         }
-        throw new ($"Expected whitespace separator or ')' in line: {_linePosition} at position: {_readerPosition}, found character: {_lastChar}");
+        throw new ($"Expected whitespace separator or ')' in line: {_linePosition} at position: {_colPosition}, found character: {_lastChar}");
+    }
+
+    private ContainerModel? FindContainerByName(object band)
+    {
+        if (band.GetType() != typeof(string))
+        {
+            throw new("Value of attribute 'band' is not of type 'string'");
+        }
+        var name = (string)band;
+        foreach (var container in _structure)
+        {
+            if(name == container._objectType)
+            {
+                return container;
+            }
+            if (container._objectType == "group" && name.Split('.')[1] == (string)container.Attributes["level"])
+            {
+                return container;
+            }
+        }
+        return null;
     }
 }
