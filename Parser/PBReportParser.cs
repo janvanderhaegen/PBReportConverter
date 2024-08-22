@@ -18,21 +18,29 @@ public enum Token
 
 internal class PBReportParser(string path)
 {
-    private static readonly char[] invalidIdentifierChars = { '(', ')', '=' };
     private readonly StreamReader _reader = new StreamReader(path);
-    private int _colPosition = 1;
-    private int _linePosition = 0;
-    private char _lastChar;
-
-    private string _stringval = "";
-    private Token _lookahead;
+    private int _col = 1;
+    private int _row = 0;
+    private int _lastChar;
+    private char _testChar;
 
     private List<ContainerModel> _structure = new List<ContainerModel>();
 
-    private char ReadChar()
+    private static string FormatChar(int c) => c < 32 ? $"\\x{c:X2}" : $"'{(char)c}'";
+
+    private void ReadChar()
     {
-        _colPosition++;
-        return _lastChar = (char)_reader.Read();
+        _lastChar = _reader.Read();
+        _testChar = (char)_lastChar;
+        if (_lastChar == '\n')
+        {
+            _row++;
+            _col = 0;
+        }
+        else if (_lastChar >= 0)
+        {
+            _col++;
+        }
     }
 
     private void ReadCharSkipWhitespace()
@@ -43,264 +51,220 @@ internal class PBReportParser(string path)
 
     public List<ContainerModel> GetStructure() { return _structure; }
 
-    private void LookAhead()
-    {
-        if (Char.IsWhiteSpace(ReadChar()))
-        {
-            while (Char.IsWhiteSpace((char)_reader.Peek()))
-            {
-                if (ReadChar() == '\n')
-                {
-                    _linePosition++;
-                    _colPosition = 0;
-                }
-            }
-            _lookahead = Token.WHITESPACE;
-            return;
-        }
-
-        StringBuilder builder = new();
-
-        switch (_lastChar)
-        {
-            case '"':
-                {
-                    while (ReadChar() != '"')
-                    {
-                        builder.Append(_lastChar);
-                    }
-                    _stringval = builder.ToString();
-                    _lookahead = Token.IDENTIFIER;
-                    return;
-                }
-            case '(':
-                {
-                    _lookahead = Token.OPBRACKET;
-                    return;
-                }
-            case ')':
-                {
-                    _lookahead = Token.CLBRACKET;
-                    return;
-                }
-            case '=':
-                {
-                    _lookahead = Token.EQUALS;
-                    return;
-                }
-            case ',':
-                {
-                    _lookahead = Token.COMMA;
-                    return;
-                }
-            case '\uffff':
-                {
-                    _lookahead = Token.EOF;
-                    return;
-                }
-        }
-        builder.Append(_lastChar);
-        while (!invalidIdentifierChars.Contains((char)this._reader.Peek()) && !Char.IsWhiteSpace((char)this._reader.Peek()))
-        {
-            builder.Append(ReadChar());
-        }
-        _stringval = builder.ToString();
-        _lookahead = Token.IDENTIFIER;
-        return;
-    }
-
-    public string ParseString()
-    {
-        Span<char> buf = stackalloc char[32];
-        int pos = 0;
-        while (!invalidIdentifierChars.Contains((char)_lastChar) && !Char.IsWhiteSpace((char)_lastChar))
-        {
-            buf[pos++] = (char)_lastChar;
-            ReadChar();
-        }
-        if (pos == 0) throw new Exception($"Unexpected character {FormatChar(_lastChar)} at ({_linePosition}, {_colPosition}).");
-
-        var result = buf[..pos].ToString();
-
-        return result;
-    }
-
     public void Parse()
     {
-        LookAhead();
-        Line();
-        LineRepeat();
+        ReadCharSkipWhitespace();
+        ParseObject();
     }
 
-    private void Line()
+    private void ParseObject()
     {
-        if (_lookahead != Token.IDENTIFIER)
-        {
-            throw new($"Expected alphanumeric string in line: {_linePosition} at position: {_colPosition}, found character: {_lastChar}");
-        }
-        var key = _stringval;
-        LookAhead();
-        Attributes(key);
-    }
-    private void LineRepeat()
-    {
-        if (_lookahead == Token.WHITESPACE)
-        {
-            LookAhead();
-            Line();
-            LineRepeat();
-        }
-        if (_lookahead == Token.EOF)
-        {
-            return;
-        }
-        throw new ($"Expected newline separator or end of file in line: {_linePosition} at position: {_colPosition}, found character: {_lastChar}");
-    }
+        var key = ParseIdentifier();
 
-    private void Attributes(string key)
-    {
-        if (_lookahead != Token.OPBRACKET)
-        {
-            throw new($"Expected '(' in line: {_linePosition} at position: {_colPosition}, found character: {_lastChar}");
-        }
-        Dictionary<string, object> attributes = new Dictionary<string, object>();
-        LookAhead();
-        Attr(attributes);
-        AttrRepeat(attributes);
+        var attributes = ParseAttributes(key);
+
         if (attributes.TryGetValue("band", out var band))
         {
             var container = FindContainerByName(band);
             if (container != null)
             {
-                container.Elements.Add(new(key) { Attributes = attributes });
+                container._elements.Add(new(key, attributes));
             }
             else
             {
-                throw new($"No container defined with the name: {band}");
+                throw new Exception($"Unexpected character {FormatChar(_lastChar)} at ({_row}, {_col}).");
             }
         }
-        else 
+        else
         {
-            _structure.Add(new(key) { Attributes = attributes });   
+            _structure.Add(new(key, attributes));
+        }
+
+        for (; ; )
+        {
+            ReadCharSkipWhitespace();
+            if (_lastChar >= 0)
+            {
+                ParseObject();
+            }
+            else
+            {
+                return;
+            }
         }
     }
 
-    private void Attr(Dictionary<string, object> attributes)
+    private string ParseString()
     {
-        if (_lookahead != Token.IDENTIFIER)
-        {
-            throw new ($"Expected alphanumeric string in line: {_linePosition} at position: {_colPosition}, found character: {_lastChar}");
-        }
-        var key = _stringval;
+        Span<char> buf = stackalloc char[8192];
+        int pos = 0;
 
-        LookAhead();
-
-        if(_lookahead == Token.WHITESPACE)
+        if((char)_lastChar == '"')
         {
-            LookAhead();
+            ReadChar();
+            while ((char)_lastChar != '"')
+            {
+                buf[pos++] = (char)_lastChar;
+                ReadChar();
+            }
+            ReadChar();
+            if (pos == 0)
+            {
+                return "";
+            }
+        }
+        else
+        {
+            while(Char.IsAsciiLetterOrDigit((char) _lastChar) || _lastChar == '.' || _lastChar == '_')
+            {
+                buf[pos++] = (char)_lastChar;
+                ReadChar();
+            }
+
+            if(_lastChar == '(')
+            {
+                ReadChar();
+                var str = ParseString();
+
+                str.AsSpan().CopyTo(buf);
+                pos += str.Length;
+
+                if (_lastChar != ')') 
+                {
+                    throw new Exception($"Unexpected character {FormatChar(_lastChar)} at ({_row}, {_col}).");
+                }
+                buf[pos++] = (char)_lastChar;
+                ReadChar();
+            }
+
+            if (pos == 0) throw new Exception($"Unexpected character {FormatChar(_lastChar)} at ({_row}, {_col}).");
         }
 
-        if (_lookahead != Token.EQUALS)
-        {
-            throw new ($"Expected '=' in line: {_linePosition} at position: {_colPosition}, found character: {_lastChar}");
-        }
-        LookAhead();
-
-        if (_lookahead == Token.WHITESPACE)
-        {
-            LookAhead();
-        }
-
-        if (_lookahead == Token.IDENTIFIER)
-        {
-            LookAhead();
-
-            attributes.Add(key, _stringval);
-            return;
-        }
-        else if (_lookahead == Token.OPBRACKET) 
-        {
-            LookAhead();
-            attributes.Add(key, StringList());
-            return;
-        }
-        throw new($"Expected alphanumeric string in line: {_linePosition} at position: {_colPosition}, found character: {_lastChar}");
+        return buf[..pos].ToString();
     }
 
-    private List<string> StringList()
+    private string ParseIdentifier()
     {
-        if (_lookahead != Token.IDENTIFIER)
+        Span<char> buf = stackalloc char[256];
+        int pos = 0;
+
+        while (Char.IsAsciiLetterOrDigit((char)_lastChar) || _lastChar == '.' || _lastChar == '_')
         {
-            throw new($"Expected alphanumeric string in line: {_linePosition} at position: {_colPosition}, found character: {_lastChar}");
+            buf[pos++] = (char)_lastChar;
+            ReadChar();
         }
-        var result = new List<string>() { _stringval };
-        LookAhead();
-        result.AddRange(ListRepeat());
+        if (pos == 0) throw new Exception($"Unexpected character {FormatChar(_lastChar)} at ({_row}, {_col}).");
+
+        return buf[..pos].ToString();
+    }
+
+    private Dictionary<string, object> ParseAttributes(string key)
+    {
+        Dictionary<string, object> attributes = new Dictionary<string, object>();
+        if(key == "table")
+        {
+            attributes.Add("columns", new List<ObjectModel>());
+        }
+        if ((char)_lastChar != '(')
+        {
+            throw new Exception($"Unexpected character {FormatChar(_lastChar)} at ({_row}, {_col}).");
+        }
+
+        for(;;)
+        {
+            if(_lastChar == ')')
+            {
+                ReadChar();
+                break;
+            }
+            var attr = ParseAttribute();
+            if(attr.key == "column")
+            {
+                (attributes["columns"] as List<ObjectModel>)!.Add(new(attr.key, (attr.value as Dictionary<string, object>)!));
+            }else
+            {
+                attributes.Add(attr.key, attr.value);
+            }
+        }
+
+        return attributes;
+    }
+
+    private (string key, object value) ParseAttribute()
+    {
+        ReadCharSkipWhitespace();
+        var key = ParseIdentifier();
+
+        if (Char.IsWhiteSpace((char)_lastChar))
+        {
+            ReadCharSkipWhitespace();
+        }
+
+        if (_lastChar != '=')
+        {
+            throw new Exception($"Unexpected character {FormatChar(_lastChar)} at ({_row}, {_col})."); 
+        } 
+        ReadCharSkipWhitespace();
+
+        if (_lastChar == '(')
+        {
+            if (key == "column")
+            {
+                return (key, ParseAttributes(key));
+            }
+            ReadCharSkipWhitespace();
+            return (key, ParseList());
+        }
+        else
+        {
+            return (key, ParseString());
+        }
+
+    }
+
+    private List<object> ParseList()
+    {
+        var result = new List<object>();
+        for (;;)
+        {
+            if (_lastChar == ')'){
+                ReadChar();
+                break;
+            }
+            if (Char.IsWhiteSpace((char)_lastChar))
+            {
+                ReadCharSkipWhitespace();
+            }
+            if(_lastChar == '(')
+            {
+                ReadChar();
+                result.Add(ParseList());
+            }
+            else if (_lastChar == ',')
+            {
+                ReadCharSkipWhitespace();
+            }else
+            {
+                result.Add(ParseString());
+            }
+        }
         return result;
-    }
-
-    private List<string> ListRepeat()
-    {
-        if (_lookahead == Token.WHITESPACE)
-        {
-            LookAhead();
-        }
-
-        if (_lookahead == Token.COMMA)
-        {
-            LookAhead();
-            if (_lookahead == Token.WHITESPACE)
-            {
-                LookAhead();
-            }
-            if (_lookahead != Token.IDENTIFIER)
-            {
-                throw new($"Expected alphanumeric string in line: {_linePosition} at position: {_colPosition}, found character: {_lastChar}");
-            }
-            var result = new List<string>() { _stringval };
-            LookAhead();
-            result.AddRange(ListRepeat());
-            return result;
-        }
-        if (_lookahead == Token.CLBRACKET)
-        {
-            LookAhead();
-            return new List<string>();
-        }
-        throw new($"Expected ',' or ')' in line: {_linePosition} at position: {_colPosition}, found character: {_lastChar}");
-    }
-
-    private void AttrRepeat(Dictionary<string, object> attributes)
-    {
-        if (_lookahead == Token.WHITESPACE)
-        {
-            LookAhead();
-            Attr(attributes);
-            AttrRepeat(attributes);
-            return;
-        }
-        if (_lookahead == Token.CLBRACKET)
-        {
-            LookAhead();
-            return;
-        }
-        throw new ($"Expected whitespace separator or ')' in line: {_linePosition} at position: {_colPosition}, found character: {_lastChar}");
     }
 
     private ContainerModel? FindContainerByName(object band)
     {
         if (band.GetType() != typeof(string))
         {
-            throw new("Value of attribute 'band' is not of type 'string'");
+            throw new Exception($"Unexpected character {FormatChar(_lastChar)} at ({_row}, {_col}).");
         }
         var name = (string)band;
         foreach (var container in _structure)
         {
-            if(name == container._objectType)
+            if (name == container._objectType)
             {
                 return container;
             }
-            if (container._objectType == "group" && name.Split('.')[1] == (string)container.Attributes["level"])
+            if (container._objectType == "group" && name.Split('.')[1] == (string)container._attributes["level"])
             {
                 return container;
             }

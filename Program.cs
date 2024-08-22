@@ -1,8 +1,13 @@
-﻿using ReportMigration.Parser;
+﻿using ReportMigration.Converters;
+using ReportMigration.Parser;
 
-var parser = new PBReportParser("C:\\Users\\Tadija\\source\\repos\\ReportMigration\\Reports\\TestReport.pbl");
-parser.Parse();
+//var parser = new PBReportParser("C:\\Users\\Tadija\\source\\repos\\ReportMigration\\Reports\\TestReport.pbl");
+//parser.Parse();
 
-var result = parser.GetStructure();
+//var result = parser.GetStructure();
 
-Console.WriteLine(result);
+//Console.WriteLine(result);
+
+var converter = new PblToRepxConverter("C:\\Users\\Tadija\\source\\repos\\ReportMigration\\Reports\\TestReport.pbl", "C:\\Users\\Tadija\\source\\repos\\ReportMigration\\Reports\\TestReport.repx");
+
+converter.GenerateRepxFile();
