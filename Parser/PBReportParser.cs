@@ -23,6 +23,9 @@ internal class PBReportParser(string path)
     private int _row = 0;
     private int _lastChar;
     private char _testChar;
+    public int reportHeight = 0;
+    public int reportWidth = 0;
+    public int groupCount = 0;
 
     private List<ContainerModel> _structure = new List<ContainerModel>();
 
@@ -61,6 +64,11 @@ internal class PBReportParser(string path)
     {
         var key = ParseIdentifier();
 
+        if (key == "group")
+        {
+            groupCount++;
+        }
+
         var attributes = ParseAttributes(key);
 
         if (attributes.TryGetValue("band", out var band))
@@ -69,6 +77,16 @@ internal class PBReportParser(string path)
             if (container != null)
             {
                 container._elements.Add(new(key, attributes));
+                if(attributes.TryGetValue("x", out var x))
+                {
+                    //var xint = Int32.Parse((string)x);
+                    //var width = Int32.Parse((string)attributes["width"]);
+                    ////var width = attributes["width"];
+                    //if (xint + width > reportWidth)
+                    //{
+                    //    reportWidth = xint + width;
+                    //}
+                }
             }
             else
             {
@@ -78,6 +96,15 @@ internal class PBReportParser(string path)
         else
         {
             _structure.Add(new(key, attributes));
+            if(attributes.TryGetValue("height", out var height))
+            {
+                reportHeight += Int32.Parse((string)height);
+            }
+            else if(attributes.TryGetValue("header.height", out height))
+            {
+                reportHeight += Int32.Parse((string)height);
+                reportHeight += Int32.Parse((string)attributes["trailer.height"]);
+            }
         }
 
         for (; ; )

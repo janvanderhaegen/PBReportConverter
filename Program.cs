@@ -1,13 +1,8 @@
 ﻿using ReportMigration.Converters;
-using ReportMigration.Parser;
 
-//var parser = new PBReportParser("C:\\Users\\Tadija\\source\\repos\\ReportMigration\\Reports\\TestReport.pbl");
-//parser.Parse();
+var curDirectory = Directory.GetCurrentDirectory();
+var projectPath = curDirectory.Substring(0, curDirectory.IndexOf("\\bin"));
 
-//var result = parser.GetStructure();
-
-//Console.WriteLine(result);
-
-var converter = new PblToRepxConverter("C:\\Users\\Tadija\\source\\repos\\ReportMigration\\Reports\\TestReport.pbl", "C:\\Users\\Tadija\\source\\repos\\ReportMigration\\Reports\\TestReport.repx");
+var converter = new PblToRepxConverter(Path.Combine(projectPath, "PBReports\\TestReport.pbl"), Path.Combine(projectPath, "RepxReports\\TestReport.repx"));
 
 converter.GenerateRepxFile();
