@@ -1,35 +1,17 @@
-﻿using DevExpress.Pdf.Native.BouncyCastle.Asn1.Cms;
+﻿namespace ReportMigration.Models;
 
-namespace ReportMigration.Models;
-
-internal class ObjectModel(string objType, Dictionary<string, object> attributes)
+internal class ObjectModel(string objType, Dictionary<string, string> attributes)
 {
     public string _objectType = objType;
-    public Dictionary<string, object> _attributes = attributes;
+    public Dictionary<string, string> _attributes = attributes;
 }
 
-internal class ContainerModel : ObjectModel
+internal class ContainerModel(string objType, Dictionary<string, string> attributes) : ObjectModel(objType, attributes)
 {
-    public ContainerModel(string objType, Dictionary<string, object> attributes) : base(objType, attributes)
-    {
-    }
-
-    public List<ObjectModel> _elements { get; } = new List<ObjectModel>();
+    public List<ObjectModel> _elements = [];
 }
 
-internal class TableModel : ObjectModel
+internal class TableModel(string objType, Dictionary<string, string> attributes, List<ObjectModel> columns) : ContainerModel(objType, attributes)
 {
-    public TableModel(string objType, Dictionary<string, object> attributes, List<ObjectModel> columns) : base(objType, attributes)
-    {
-        _columns = columns;
-    }
-    public List<ObjectModel> _columns;
+    public List<ObjectModel> _columns = columns;
 }
-
-//internal class SubModel : ObjectModel
-//{
-//    public SubModel(string objType, Dictionary<string, object> attributes) : base(objType)
-//    {
-//        _attributes = attributes;
-//    }
-//}
