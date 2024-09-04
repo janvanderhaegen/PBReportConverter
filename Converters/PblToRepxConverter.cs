@@ -1,30 +1,39 @@
 ﻿using ReportMigration.Models;
 using ReportMigration.Parser;
 using ReportMigration.Helpers;
+using DevExpress.XtraReports.UI;
 
 namespace ReportMigration.Converters;
 
-internal class PblToRepxConverter(string inputDir, string outputPath)
+internal class PblToRepxConverter(string inputDir, string outputDir)
 {
     //private readonly List<ContainerModel> _structure;
     private int _ref = 1;
-    private readonly StreamWriter _writer = new(outputPath);
+    private StreamWriter? _writer;
+    private readonly PBExpressionParser _parser = new();
     private readonly string _inputDir = inputDir;
+    private readonly string _outputDir = outputDir;
     //private int height;
     //private int width;
     private int _tabulator = 0;
     private int _groupCount;
     private TableModel? _tableContainer;
-    private Dictionary<string, int> _globalParams = [];
+    private double _globalHeight;
+    private double _globalWidth;
+    private readonly Dictionary<string, int> _currentParams = [];
+    private readonly List<(string name, string expression)> _currentComputes = [];
 
     public void GenerateRepxFile(string fileName)
     {
         PBReportParser parser = new(Path.Combine(_inputDir, fileName));
+        _writer = new(Path.Combine(_outputDir, $"{fileName[..^2]}.repx"));
         var structure = parser.Parse();
-        _groupCount = parser.groupCount;
+        _groupCount = parser.GroupCount;
+        _globalHeight = parser.ReportHeight;
+        _globalWidth = parser.ReportWidth;
         WriteSingleLine("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
         var dataReportAttributes = structure[0]._attributes;
-        WriteStartObject($"<XtraReportsLayoutSerializer SerializerVersion=\"24.1.4.0\" Ref=\"{_ref++}\" ControlType=\"DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral\" Name=\"XtraReport1\" VerticalContentSplitting=\"Smart\" Margins=\"{dataReportAttributes["print.margin.left"]}, {dataReportAttributes["print.margin.right"]}, {dataReportAttributes["print.margin.top"]}, {dataReportAttributes["print.margin.bottom"]}\" PaperKind=\"Custom\" PageWidth=\"2000\" PageHeight=\"1500\" Version=\"24.1\" DataMember=\"Query\" DataSource=\"#Ref-0\">");
+        WriteStartObject($"<XtraReportsLayoutSerializer SerializerVersion=\"24.1.4.0\" Ref=\"{_ref++}\" ControlType=\"DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral\" Name=\"XtraReport1\" VerticalContentSplitting=\"Smart\" Margins=\"{X(dataReportAttributes["print.margin.left"])}, {X(dataReportAttributes["print.margin.right"])}, {Y(dataReportAttributes["print.margin.top"])}, {Y(dataReportAttributes["print.margin.bottom"])}\" PaperKind=\"Custom\" PageWidth=\"{parser.ReportWidth + X(dataReportAttributes["print.margin.left"]) + X(dataReportAttributes["print.margin.right"])}\" PageHeight=\"{parser.ReportHeight + Y(dataReportAttributes["print.margin.top"]) + Y(dataReportAttributes["print.margin.bottom"]) + 200}\" Version=\"24.1\" DataMember=\"Query\" DataSource=\"#Ref-0\">");
         GenerateBody(structure, 0);
 
         WriteEndObject("</XtraReportsLayoutSerializer>");
@@ -35,10 +44,11 @@ internal class PblToRepxConverter(string inputDir, string outputPath)
     {
         _tableContainer = (TableModel)structure.Where(x => x.GetType() == typeof(TableModel)).ToList()[0];
         var parameters = GenerateDataSource(_tableContainer, dataSourceRef);
+        var dataReportAttributes = structure[0]._attributes;
         WriteStartObject("<Bands>");
         int itemCounter = 1;
-        WriteSingleLine($"<Item{itemCounter++} Ref=\"{_ref++}\" ControlType=\"TopMarginBand\" Name=\"TopMargin\"/>");
-        WriteSingleLine($"<Item{itemCounter++} Ref=\"{_ref++}\" ControlType=\"BottomMarginBand\" Name=\"BottomMargin\"/>");
+        WriteSingleLine($"<Item{itemCounter++} Ref=\"{_ref++}\" ControlType=\"TopMarginBand\" Name=\"TopMargin\" HeightF=\"{Y(dataReportAttributes["print.margin.top"])}\"/>");
+        WriteSingleLine($"<Item{itemCounter++} Ref=\"{_ref++}\" ControlType=\"BottomMarginBand\" Name=\"BottomMargin\" HeightF=\"{Y(dataReportAttributes["print.margin.bottom"])}\"/>");
         foreach (var container in structure[1..])
         {
             switch (container._objectType)
@@ -62,6 +72,14 @@ internal class PblToRepxConverter(string inputDir, string outputPath)
 
         WriteEndObject("</Bands>");
 
+        WriteStartObject("<CalculatedFields>");
+        itemCounter = 1;
+        foreach (var (name, expression) in _currentComputes)
+        {
+            WriteSingleLine($"<Item{itemCounter++} Ref=\"{_ref++}\" Name=\"{name}\" Expression=\"{expression}\" DataMember=\"Query\" />");
+        }
+        WriteEndObject("</CalculatedFields>");
+        _currentComputes.Clear();
         return parameters;
     }
 
@@ -70,19 +88,27 @@ internal class PblToRepxConverter(string inputDir, string outputPath)
         var objType = PBFormattingHelper.ConvertElementType(subreport._objectType);
         var attributes = subreport._attributes;
         var parameters = Parameters(attributes["nest_arguments"]);
+
+        var tmpHeight = _globalHeight;
+        var tmpWidth = _globalWidth;
+
         PBReportParser parser = new(Path.Combine(_inputDir, $"{attributes["dataobject"]}.p"));
         var structure = parser.Parse();
+
+        _globalHeight = parser.ReportHeight;
+        _globalWidth = parser.ReportWidth;
+
         WriteStartObject($"<Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"{objType}\" Name=\"{attributes["name"]}\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\">");
         var dataWindowAttributes = structure[0]._attributes;
         var dataSourceRef = _ref++;
-        WriteStartObject($"<ReportSource Ref=\"{_ref++}\" ControlType=\"ReportMigration.XtraReports.{attributes["dataobject"]}, ReportMigration, Version=1.0.0.0, Culture=neutral\" VerticalContentSplitting=\"Smart\" Margins=\"{dataWindowAttributes["print.margin.left"]}, {dataWindowAttributes["print.margin.right"]}, {dataWindowAttributes["print.margin.top"]}, {dataWindowAttributes["print.margin.bottom"]}\" PaperKind=\"Custom\" PageWidth=\"{X(attributes["width"])}\" PageHeight=\"{Y(attributes["height"])}\" Version=\"24.1\" DataMember=\"Query\" DataSource=\"#Ref-{dataSourceRef}\">");
+        WriteStartObject($"<ReportSource Ref=\"{_ref++}\" ControlType=\"ReportMigration.XtraReports.{attributes["dataobject"]}, ReportMigration, Version=1.0.0.0, Culture=neutral\" VerticalContentSplitting=\"Smart\" Margins=\"{X(dataWindowAttributes["print.margin.left"])}, {X(dataWindowAttributes["print.margin.right"])}, {Y(dataWindowAttributes["print.margin.top"])}, {Y(dataWindowAttributes["print.margin.bottom"])}\" PaperKind=\"Custom\" PageWidth=\"{parser.ReportWidth}\" PageHeight=\"{parser.ReportHeight}\" Version=\"24.1\" DataMember=\"Query\" DataSource=\"#Ref-{dataSourceRef}\">");
         var paramsList = GenerateBody(structure, dataSourceRef);
         WriteEndObject("</ReportSource>");
         WriteStartObject("<ParameterBindings>");
         var subItemCounter = 0;
         foreach (var parameter in parameters)
         {
-            if (_globalParams.TryGetValue(parameter, out var refNum))
+            if (_currentParams.TryGetValue(parameter, out var refNum))
             {
                 var paramName = paramsList[subItemCounter++];
                 WriteSingleLine($"<Item{subItemCounter} Ref=\"{_ref++}\" ParameterName=\"{paramName}\" Parameter=\"#Ref-{refNum}\" />");
@@ -96,6 +122,11 @@ internal class PblToRepxConverter(string inputDir, string outputPath)
         WriteEndObject("</ParameterBindings>");
 
         WriteEndObject($"</Item{itemCounter++}>");
+
+        _globalHeight = tmpHeight;
+        _globalWidth = tmpWidth;
+
+        parameters.Clear();
     }
 
     public void GenerateElement(ContainerModel container, ref int itemCounter)
@@ -109,7 +140,8 @@ internal class PblToRepxConverter(string inputDir, string outputPath)
         var elements = container._elements;
         int subItemCounter = 1;
         var backgroundShapes = new List<ObjectModel>();
-        WriteStartObject($"<Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"{objType}Band\" Name=\"{objType}\" HeightF=\"{Y(attributes["height"])}\">");
+        var height = Y(attributes["height"]);
+        WriteStartObject($"<Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"{objType}Band\" Name=\"{container._objectType}\" HeightF=\"{height}\"{SetVisible(height)}>");
         WriteStartObject("<Controls>");
         foreach (var element in elements)
         {
@@ -119,15 +151,24 @@ internal class PblToRepxConverter(string inputDir, string outputPath)
             }
             else
             {
-                GenerateSubElement(element, ref subItemCounter);
+                GenerateSubElement(element, ref subItemCounter, container);
             }
         }
         foreach (var element in backgroundShapes)
         {
-            GenerateSubElement(element, ref subItemCounter);
+            GenerateSubElement(element, ref subItemCounter, container);
         }
         WriteEndObject("</Controls>");
         WriteEndObject($"</Item{itemCounter++}>");
+    }
+
+    private static string SetVisible(double height)
+    {
+        if(height > 0)
+        {
+            return "";
+        }
+        return " Visible=\"False\"";
     }
 
     public void GenerateGroupElements(ContainerModel container, ref int itemCounter)
@@ -149,7 +190,8 @@ internal class PblToRepxConverter(string inputDir, string outputPath)
         var backgroundShapes = new List<ObjectModel>();
 
         // Generate Group Header
-        WriteStartObject($"<Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"GroupHeaderBand\" Name=\"groupHeaderBand{attributes["level"]}\" Level=\"{_groupCount - level}\" HeightF=\"{Y(attributes["header.height"])}\">");
+        var height = Y(attributes["header.height"]);
+        WriteStartObject($"<Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"GroupHeaderBand\" Name=\"groupHeaderBand{attributes["level"]}\" Level=\"{_groupCount - level}\" HeightF=\"{height}\"{SetVisible(height)}>");
         var groupBy = GroupBy(attributes["by"]);
         WriteStartObject("<GroupFields>");
         foreach (var elem in groupBy)
@@ -167,18 +209,19 @@ internal class PblToRepxConverter(string inputDir, string outputPath)
             }
             else
             {
-                GenerateSubElement(element, ref subItemCounter);
+                GenerateSubElement(element, ref subItemCounter, container);
             }
         }
         foreach (var element in backgroundShapes.Where(x => x._attributes["band"].Contains("header")))
         {
-            GenerateSubElement(element, ref subItemCounter);
+            GenerateSubElement(element, ref subItemCounter, container);
         }
         WriteEndObject("</Controls>");
         WriteEndObject($"</Item{itemCounter++}>");
 
         // Generate Group Footer
-        WriteStartObject($"<Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"GroupFooterBand\" Name=\"groupFooterBand{attributes["level"]}\" Level=\"{_groupCount - level}\" HeightF=\"{Y(attributes["trailer.height"])}\">");
+        height = Y(attributes["trailer.height"]);
+        WriteStartObject($"<Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"GroupFooterBand\" Name=\"groupFooterBand{attributes["level"]}\" Level=\"{_groupCount - level}\" HeightF=\"{height}\"{SetVisible(height)}>");
         WriteStartObject("<Controls>");
         subItemCounter = 1;
         backgroundShapes.Clear();
@@ -190,18 +233,18 @@ internal class PblToRepxConverter(string inputDir, string outputPath)
             }
             else
             {
-                GenerateSubElement(element, ref subItemCounter);
+                GenerateSubElement(element, ref subItemCounter, container);
             }
         }
         foreach (var element in backgroundShapes.Where(x => x._attributes["band"].Contains("trailer")))
         {
-            GenerateSubElement(element, ref subItemCounter);
+            GenerateSubElement(element, ref subItemCounter, container);
         }
         WriteEndObject("</Controls>");
         WriteEndObject($"</Item{itemCounter++}>");
     }
 
-    public void GenerateSubElement(ObjectModel element, ref int itemCounter)
+    public void GenerateSubElement(ObjectModel element, ref int itemCounter, ContainerModel container )
     {
         var objType = PBFormattingHelper.ConvertElementType(element._objectType);
         if (objType == null)
@@ -209,6 +252,44 @@ internal class PblToRepxConverter(string inputDir, string outputPath)
             return;
         }
         var attributes = element._attributes;
+        double x;
+        double y;
+        if(!attributes.TryGetValue("x", out var xstr))
+        {
+            x = X(attributes["x1"]);
+            y = Y(attributes["y1"]);
+        }
+        else
+        {
+            x = X(xstr);
+            y = Y(attributes["y"]);
+        }
+
+        double containerHeight;
+        var band = attributes["band"];
+
+        if (band.Contains("header."))
+        {
+            containerHeight = Y(container._attributes["header.height"]);
+        }
+        else if (band.Contains("trailer."))
+        {
+            containerHeight = Y(container._attributes["trailer.height"]);
+        }
+        else
+        {
+            containerHeight = Y(container._attributes["height"]);
+        }
+
+        bool visibility;
+        if (attributes["visible"] == "0")
+        {
+            visibility = false;
+        }
+        else
+        {
+            visibility = x < _globalWidth && y < containerHeight;
+        }
 
         switch (element._objectType)
         {
@@ -219,7 +300,7 @@ internal class PblToRepxConverter(string inputDir, string outputPath)
                 }
             case "column":
                 {
-                    WriteStartObject($"<Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"{objType}\" Name=\"{attributes["name"]}\" TextFormatString=\"{{0:{FixFormattingString(attributes["format"])}}}\" TextAlignment=\"{Alignment(attributes["alignment"])}\"  Multiline=\"true\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\" AnchorVertical=\"Both\" Font=\"{attributes["font.face"]}, {attributes["font.height"][1..]}pt{CheckBold(attributes["font.weight"])}\">");
+                    WriteStartObject($"<Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"{objType}\" Name=\"{attributes["name"]}\" TextFormatString=\"{FixFormattingString(attributes["format"])}\" TextAlignment=\"{Alignment(attributes["alignment"])}\"  Multiline=\"true\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\" AnchorVertical=\"Both\" Font=\"{attributes["font.face"]}, {attributes["font.height"][1..]}pt{CheckBold(attributes["font.weight"])}\" Visible=\"{visibility}\">");
                     WriteStartObject("<ExpressionBindings>");
                     WriteSingleLine($"<Item1 Ref=\"{_ref++}\" EventName=\"BeforePrint\" PropertyName=\"Text\" Expression=\"[{attributes["name"]}]\"/>");
                     WriteEndObject("</ExpressionBindings>");
@@ -228,31 +309,54 @@ internal class PblToRepxConverter(string inputDir, string outputPath)
                 }
             case "text":
                 {
-                    WriteSingleLine($"<Item{itemCounter++} Ref=\"{_ref++}\" ControlType=\"{objType}\" Name=\"{attributes["name"]}\" TextAlignment=\"{Alignment(attributes["alignment"])}\" Multiline=\"true\" Text=\"{attributes["text"].Replace('&', '-')}\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\" AnchorVertical=\"Both\" Font=\"{attributes["font.face"]}, {attributes["font.height"][1..]}pt{CheckBold(attributes["font.weight"])}\" />");
+                    WriteSingleLine($"<Item{itemCounter++} Ref=\"{_ref++}\" ControlType=\"{objType}\" Name=\"{attributes["name"]}\" TextAlignment=\"{Alignment(attributes["alignment"])}\" Multiline=\"true\" Text=\"{attributes["text"].Replace('&', '-')}\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\" AnchorVertical=\"Both\" Font=\"{attributes["font.face"]}, {attributes["font.height"][1..]}pt{CheckBold(attributes["font.weight"])}\" Visible=\"{visibility}\"/>");
                     break;
                 }
             case "compute":
                 {
-                    WriteStartObject($"<Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"{objType}\" Name=\"{attributes["name"]}\" TextFormatString=\"{{0:{FixFormattingString(attributes["format"])}}}\" TextAlignment=\"{Alignment(attributes["alignment"])}\"  Multiline=\"true\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\" AnchorVertical=\"Both\" Font=\"{attributes["font.face"]}, {attributes["font.height"][1..]}pt{CheckBold(attributes["font.weight"])}\">");
+                    var name = attributes["name"];
+                    var expression = Expression(attributes["expression"]);
+                    WriteStartObject($"<Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"{objType}\" Name=\"{name}_field\" TextFormatString=\"{FixFormattingString(attributes["format"])}\" TextAlignment=\"{Alignment(attributes["alignment"])}\"  Multiline=\"true\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\" AnchorVertical=\"Both\" Font=\"{attributes["font.face"]}, {attributes["font.height"][1..]}pt{CheckBold(attributes["font.weight"])}\" Visible=\"{visibility}\">");
                     WriteStartObject("<ExpressionBindings>");
-                    WriteSingleLine($"<Item1 Ref=\"{_ref++}\" EventName=\"BeforePrint\" PropertyName=\"Text\" Expression=\"{attributes["expression"].Replace("IF", "Iif")}\"/>");
+                    WriteSingleLine($"<Item1 Ref=\"{_ref++}\" EventName=\"BeforePrint\" PropertyName=\"Text\" Expression=\"[{name}]\"/>");
                     WriteEndObject("</ExpressionBindings>");
                     WriteEndObject($"</Item{itemCounter++}>");
+                    _currentComputes.Add((name, expression));
                     break;
                 }
             case "line":
                 {
-                    var (x1, x2, y) = (attributes["x1"], attributes["x2"], attributes["y1"]);
-                    if(!attributes.TryGetValue("background.gradient.color", out var color))
+                    var (x2, y2) = (X(attributes["x2"]), Y(attributes["y2"]));
+                    if (!attributes.TryGetValue("background.gradient.color", out var color))
                     {
                         color = "";
                     }
-                    WriteSingleLine($"<Item{itemCounter++} Ref=\"{_ref++}\" ControlType=\"{objType}\" Name=\"{attributes["name"]}\" FillColor=\"{Color(color)}\" SizeF=\"{X(x2)-X(x1)},10\" LocationFloat=\"{X(x1)},{Y(y)}\" />");
+                    double length;
+                    double height;
+
+                    if (x2 > _globalWidth)
+                    {
+                        length = _globalWidth - x;
+                    }
+                    else
+                    {
+                        length = x2 - x;
+                    }
+                    if (y2 > containerHeight)
+                    {
+                        height = containerHeight - y;
+                    }
+                    else
+                    {
+                        height = y2 - y;
+                    }
+                    var direction = length == 0 ? "Vertical" : "Horizontal";
+                    WriteSingleLine($"<Item{itemCounter++} Ref=\"{_ref++}\" ControlType=\"{objType}\" Name=\"{attributes["name"]}\" FillColor=\"{Color(color)}\" SizeF=\"{length},{height}\" LocationFloat=\"{x},{y}\"  LineDirection=\"{direction}\" Visible=\"{visibility}\"/>");
                     break;
                 }
             case "rectangle":
                 {
-                    WriteStartObject($"<Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"{objType}\" Name=\"{attributes["name"]}\" FillColor=\"{Color(attributes["background.gradient.color"])}\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\">");
+                    WriteStartObject($"<Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"{objType}\" Name=\"{attributes["name"]}\" FillColor=\"{Color(attributes["background.gradient.color"])}\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\" Visible=\"{visibility}\">");
                     WriteSingleLine($"<Shape Ref=\"{_ref++}\" ShapeName=\"Rectangle\"/>");
                     WriteEndObject($"</Item{itemCounter++}>");
                     break;
@@ -270,10 +374,7 @@ internal class PblToRepxConverter(string inputDir, string outputPath)
             var itemCounter = 1;
             foreach (var element in Parameters(parameters))
             {
-                if (!_globalParams.ContainsKey(element))
-                {
-                    _globalParams.Add(element, _ref);
-                }
+                _currentParams.TryAdd(element, _ref);
                 paramsList.Add(element);
                 WriteSingleLine($"<Item{itemCounter++} Ref=\"{_ref++}\" Name=\"{element}\"/>");
             }
@@ -333,19 +434,27 @@ internal class PblToRepxConverter(string inputDir, string outputPath)
         return PBFormattingHelper.GetParameters(paramString);
     }
 
-    private static string Expression(string expression)
+    private string Expression(string expression)
     {
-        //return PBFormattingHelper.ParseExpression(expression);
-        return "";
+        var parsedExpression = _parser.Parse(expression);
+        //foreach (var column in _columns)
+        //{
+        //    if (column._attributes["name"])
+        //    {
+        //        parsedExpression.Replace(compute, $"[ReportItems.{compute}]");
+        //    }
+        //}
+        return parsedExpression.Replace("forall", "");
     }
 
     private static string FixFormattingString(string value)
     {
-        if(value.ToLower() == "[general]")
+        if(value.Equals("[general]", StringComparison.CurrentCultureIgnoreCase))
         {
             return "";
         }
-        return value.ToLower().Replace("mm", "MM");
+
+        return $"{{0:{value.ToLower().Replace("mm", "MM")}}}";
     }
 
     private static string CheckBold(string value)
@@ -377,8 +486,8 @@ internal class PblToRepxConverter(string inputDir, string outputPath)
     {
         for (var i = 0; i < _tabulator; i++)
         {
-            _writer.Write("\t");
+            _writer!.Write("\t");
         }
-        _writer.WriteLine(str);
+        _writer!.WriteLine(str);
     }
 }

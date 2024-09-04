@@ -4,12 +4,12 @@ internal static class PBFormattingHelper
 {
     public static double ConvertX(double value)
     {
-        return Math.Ceiling((value * 1400 + 700) / 6144);
+        return Math.Ceiling((value * 1400 - 700) / 6144);
     }
 
     public static double ConvertY(double value)
     {
-        return Math.Ceiling((value * 200 + 100) / 768);
+        return Math.Ceiling((value * 200 - 100) / 768);
     }
 
     public static string? ConvertElementType(string ctrlType)
@@ -19,6 +19,7 @@ internal static class PBFormattingHelper
             "header" => "ReportHeader",
             "footer" => "ReportFooter",
             "detail" => "Detail",
+            "summary" => "GroupHeader",
             "report" => "XRSubreport",
             "line" => "XRLine",
             "group" => ctrlType,

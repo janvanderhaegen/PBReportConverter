@@ -22,7 +22,11 @@ internal static class DataSourceXmlGenerator
         else if (attributes.TryGetValue("retrieve", out query))
         {
             _writer.WriteLine($"<Query Type=\"CustomSqlQuery\" Name=\"Query\">");
-            _writer.WriteLine($"<Sql>{query.Replace(":", "@").Replace("~\"", "'")}</Sql>");
+            if (!attributes.TryGetValue("sort", out var sortString))
+            {
+                sortString = "";
+            }
+            _writer.WriteLine($"<Sql>{query.Replace(":", "@").Replace("~\"", "'")} {ParseSorting(sortString)}</Sql>");
         }
         else
         {
@@ -45,7 +49,7 @@ internal static class DataSourceXmlGenerator
         foreach (var column in table._columns)
         {
             var colAttributes = column._attributes;
-            _writer.WriteLine($"<Field Name=\"{colAttributes["dbname"]}\" Type=\"String\" />");
+            _writer.WriteLine($"<Field Name=\"{colAttributes["name"]}\" Type=\"String\" />");
         }
         _writer.WriteLine("</View>");
         _writer.WriteLine("</DataSet>");
@@ -56,6 +60,24 @@ internal static class DataSourceXmlGenerator
         var resultString = _writer.ToString();
 
         return Convert.ToBase64String(Encoding.UTF8.GetBytes(resultString));
+    }
+
+    private static string ParseSorting(string sortString)
+    {
+        if(sortString == "")
+        {
+            return sortString;
+        }
+
+        List<string> sortList = [];
+        var sortElements = sortString.Trim().Split(' ');
+        foreach(var sortElement in sortElements.Chunk(2))
+        {
+            var sortMethod = sortElement[1] == "A" ? "ASC" : "DESC";
+            sortList.Add($"{sortElement[0]} {sortMethod}");
+        }
+
+        return "ORDER BY " + string.Join(',', sortList);
     }
 
     private static string GetProcedureName(string query)

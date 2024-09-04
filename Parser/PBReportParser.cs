@@ -1,4 +1,5 @@
 ﻿using ReportMigration.Models;
+using ReportMigration.Helpers;
 
 namespace ReportMigration.Parser;
 
@@ -9,11 +10,18 @@ internal class PBReportParser(string path)
     private int _col = 1;
     private int _row = 0;
     private int _lastChar;
-    public int reportHeight = 0;
-    public int reportWidth = 0;
-    public int groupCount = 0;
-
     private readonly List<ContainerModel> _structure = [];
+    public double ReportHeight { get; set; } = 0;
+    public double ReportWidth { get; set; } = 0;
+    public int GroupCount { get; set; } = 0;
+
+    public double _horizontalMarginSum = 0;
+    public double _verticalMarginSum = 0;
+    
+    //public int GetGroupCount()
+    //{
+    //    return _groupCount;
+    //}
 
     private static string FormatChar(int c) => c < 32 ? $"\\x{c:X2}" : $"'{(char)c}'";
 
@@ -68,10 +76,16 @@ internal class PBReportParser(string path)
 
         if (key == "group")
         {
-            groupCount++;
+            GroupCount++;
         }
 
         var attributes = ParseAttributes();
+
+        if (key == "datawindow")
+        {
+            _verticalMarginSum = PBFormattingHelper.ConvertY(int.Parse(attributes["print.margin.top"])) + PBFormattingHelper.ConvertY(int.Parse(attributes["print.margin.bottom"]));
+            _horizontalMarginSum = PBFormattingHelper.ConvertX(int.Parse(attributes["print.margin.left"])) + PBFormattingHelper.ConvertX(int.Parse(attributes["print.margin.right"]));
+        }
 
         if (attributes.TryGetValue("band", out var band))
         {
@@ -79,16 +93,30 @@ internal class PBReportParser(string path)
             if (container != null)
             {
                 container._elements.Add(new(key, attributes));
-                //if(attributes.TryGetValue("x", out var x))
-                //{
-                    //var xint = Int32.Parse((string)x);
-                    //var width = Int32.Parse((string)attributes["width"]);
-                    ////var width = attributes["width"];
-                    //if (xint + width > reportWidth)
-                    //{
-                    //    reportWidth = xint + width;
-                    //}
-                //}
+                int height;
+                if (band.Contains("header."))
+                {
+                    height = int.Parse(container._attributes["header.height"]);
+                }
+                else if (band.Contains("trailer."))
+                {
+                    height = int.Parse(container._attributes["trailer.height"]);
+                }
+                else
+                {
+                    height = int.Parse(container._attributes["height"]);
+                }
+                
+                if (attributes.TryGetValue("x", out var x) && height > 0)
+                {
+                    var xint = PBFormattingHelper.ConvertX(int.Parse(x));
+                    var width = PBFormattingHelper.ConvertX(int.Parse(attributes["width"]));
+                    //var width = attributes["width"];
+                    if (xint + width > ReportWidth)
+                    {
+                        ReportWidth = xint + width;
+                    }
+                }
             }
             else
             {
@@ -100,12 +128,12 @@ internal class PBReportParser(string path)
             _structure.Add(new(key, attributes));
             if(attributes.TryGetValue("height", out var height))
             {
-                reportHeight += Int32.Parse(height);
+                ReportHeight += PBFormattingHelper.ConvertY(int.Parse(height));
             }
             else if(attributes.TryGetValue("header.height", out height))
             {
-                reportHeight += Int32.Parse(height);
-                reportHeight += Int32.Parse(attributes["trailer.height"]);
+                ReportHeight += PBFormattingHelper.ConvertY(int.Parse(height));
+                ReportHeight += PBFormattingHelper.ConvertY(int.Parse(attributes["trailer.height"]));
             }
         }
     }
