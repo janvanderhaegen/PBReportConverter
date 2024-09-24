@@ -1,8 +1,6 @@
 ﻿using ReportMigration.Models;
 using ReportMigration.Parser;
 using ReportMigration.Helpers;
-using DevExpress.XtraReports.UI;
-using DevExpress.XtraRichEdit;
 
 namespace ReportMigration.Converters;
 
@@ -15,7 +13,6 @@ internal class PblToRepxConverter(string inputDir, string outputDir)
     private readonly string _outputDir = outputDir;
     private int _tabulator = 0;
     private int _groupCount;
-    //private TableModel? _tableContainer;
     private double _globalHeight;
     private double _globalWidth;
     private readonly Dictionary<string, int> _globalParams = [];
@@ -44,10 +41,6 @@ internal class PblToRepxConverter(string inputDir, string outputDir)
 
         WriteEndObject("</XtraReportsLayoutSerializer>");
         _writer.Flush();
-    }
-
-    private void GenerateReportStructure(List<ContainerModel> structure, bool subreport = false)
-    {
     }
 
     public void GenerateBody(List<ContainerModel> structure)
@@ -117,7 +110,7 @@ internal class PblToRepxConverter(string inputDir, string outputDir)
         var argList = PBFormattingHelper.GetParameters(tableContainer._attributes["arguments"]);
 
         GenerateParameters(argList);
-        GenerateDataSource(tableContainer, 0);
+        GenerateDataSource(tableContainer, dataSourceRef);
         GenerateBody(structure);
 
         WriteEndObject("</ReportSource>");
