@@ -1,23 +1,15 @@
 ﻿using ReportMigration.Converters;
 
-using ReportMigration.Parser;
+Console.WriteLine("Enter path of directory with PowerBuilder files:");
+var pbPath = Console.ReadLine();
 
-//var curDirectory = Directory.GetCurrentDirectory();
-//var projectPath = curDirectory[..curDirectory.IndexOf("\\bin")];
+Console.WriteLine("Enter path of target directory:");
+var repxPath = Console.ReadLine();
 
-////var parser = new PBReportParser(Path.Combine(projectPath, "PBReports\\TestReport.pbl"));
+var files = Directory.GetFiles(pbPath!).Select(f => Path.GetFileName(f));
 
-////parser.Parse();
-
-////var result = parser.GetStructure();
-//var fileName = "d_pop_stmt";
-
-//var converter = new PblToRepxConverter(Path.Combine(projectPath, "PBReports"), Path.Combine(projectPath, $"RepxReports\\{fileName}.repx"));
-
-//converter.GenerateRepxFile($"{fileName}.p");
-
-var parser = new PBExpressionParser(" round(whd_vol / mcf_whd_vol ,4)");
-
-var result = parser.Parse();
-
-var a = 1;
+foreach (var fileName in files)
+{
+    var converter = new PblToRepxConverter(pbPath!, repxPath!);
+    converter.GenerateRepxFile(fileName);
+}

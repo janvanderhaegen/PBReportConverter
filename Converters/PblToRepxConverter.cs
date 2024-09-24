@@ -2,48 +2,56 @@
 using ReportMigration.Parser;
 using ReportMigration.Helpers;
 using DevExpress.XtraReports.UI;
+using DevExpress.XtraRichEdit;
 
 namespace ReportMigration.Converters;
 
 internal class PblToRepxConverter(string inputDir, string outputDir)
 {
-    //private readonly List<ContainerModel> _structure;
     private int _ref = 1;
     private StreamWriter? _writer;
     private readonly PBExpressionParser _parser = new();
     private readonly string _inputDir = inputDir;
     private readonly string _outputDir = outputDir;
-    //private int height;
-    //private int width;
     private int _tabulator = 0;
     private int _groupCount;
-    private TableModel? _tableContainer;
+    //private TableModel? _tableContainer;
     private double _globalHeight;
     private double _globalWidth;
-    private readonly Dictionary<string, int> _currentParams = [];
+    private readonly Dictionary<string, int> _globalParams = [];
     private readonly List<(string name, string expression)> _currentComputes = [];
 
     public void GenerateRepxFile(string fileName)
     {
         PBReportParser parser = new(Path.Combine(_inputDir, fileName));
         _writer = new(Path.Combine(_outputDir, $"{fileName[..^2]}.repx"));
+
         var structure = parser.Parse();
         _groupCount = parser.GroupCount;
         _globalHeight = parser.ReportHeight;
         _globalWidth = parser.ReportWidth;
+
         WriteSingleLine("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
         var dataReportAttributes = structure[0]._attributes;
         WriteStartObject($"<XtraReportsLayoutSerializer SerializerVersion=\"24.1.4.0\" Ref=\"{_ref++}\" ControlType=\"DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral\" Name=\"XtraReport1\" VerticalContentSplitting=\"Smart\" Margins=\"{X(dataReportAttributes["print.margin.left"])}, {X(dataReportAttributes["print.margin.right"])}, {Y(dataReportAttributes["print.margin.top"])}, {Y(dataReportAttributes["print.margin.bottom"])}\" PaperKind=\"Custom\" PageWidth=\"{parser.ReportWidth + X(dataReportAttributes["print.margin.left"]) + X(dataReportAttributes["print.margin.right"])}\" PageHeight=\"{parser.ReportHeight + Y(dataReportAttributes["print.margin.top"]) + Y(dataReportAttributes["print.margin.bottom"]) + 200}\" Version=\"24.1\" DataMember=\"Query\" DataSource=\"#Ref-0\">");
-        GenerateBody(structure, 0);
+
+        var tableContainer = (TableModel)structure.Where(x => x.GetType() == typeof(TableModel)).ToList()[0];
+        var argList = PBFormattingHelper.GetParameters(tableContainer._attributes["arguments"]);
+
+        GenerateParameters(argList);
+        GenerateDataSource(tableContainer, 0);
+        GenerateBody(structure);
 
         WriteEndObject("</XtraReportsLayoutSerializer>");
         _writer.Flush();
     }
 
-    public List<string> GenerateBody(List<ContainerModel> structure, int dataSourceRef)
+    private void GenerateReportStructure(List<ContainerModel> structure, bool subreport = false)
     {
-        _tableContainer = (TableModel)structure.Where(x => x.GetType() == typeof(TableModel)).ToList()[0];
-        var parameters = GenerateDataSource(_tableContainer, dataSourceRef);
+    }
+
+    public void GenerateBody(List<ContainerModel> structure)
+    {
         var dataReportAttributes = structure[0]._attributes;
         WriteStartObject("<Bands>");
         int itemCounter = 1;
@@ -80,43 +88,52 @@ internal class PblToRepxConverter(string inputDir, string outputDir)
         }
         WriteEndObject("</CalculatedFields>");
         _currentComputes.Clear();
-        return parameters;
     }
 
     private void GenerateSubReport(ObjectModel subreport, ref int itemCounter)
     {
         var objType = PBFormattingHelper.ConvertElementType(subreport._objectType);
         var attributes = subreport._attributes;
-        var parameters = Parameters(attributes["nest_arguments"]);
+        var parameterArguments = PBFormattingHelper.GetParameters(attributes["nest_arguments"]);
 
         var tmpHeight = _globalHeight;
         var tmpWidth = _globalWidth;
+        var tmpGroupCount = _groupCount;
 
         PBReportParser parser = new(Path.Combine(_inputDir, $"{attributes["dataobject"]}.p"));
         var structure = parser.Parse();
 
         _globalHeight = parser.ReportHeight;
         _globalWidth = parser.ReportWidth;
+        _groupCount = parser.GroupCount;
 
         WriteStartObject($"<Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"{objType}\" Name=\"{attributes["name"]}\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\">");
         var dataWindowAttributes = structure[0]._attributes;
         var dataSourceRef = _ref++;
+
         WriteStartObject($"<ReportSource Ref=\"{_ref++}\" ControlType=\"ReportMigration.XtraReports.{attributes["dataobject"]}, ReportMigration, Version=1.0.0.0, Culture=neutral\" VerticalContentSplitting=\"Smart\" Margins=\"{X(dataWindowAttributes["print.margin.left"])}, {X(dataWindowAttributes["print.margin.right"])}, {Y(dataWindowAttributes["print.margin.top"])}, {Y(dataWindowAttributes["print.margin.bottom"])}\" PaperKind=\"Custom\" PageWidth=\"{parser.ReportWidth}\" PageHeight=\"{parser.ReportHeight}\" Version=\"24.1\" DataMember=\"Query\" DataSource=\"#Ref-{dataSourceRef}\">");
-        var paramsList = GenerateBody(structure, dataSourceRef);
+
+        var tableContainer = (TableModel)structure.Where(x => x.GetType() == typeof(TableModel)).ToList()[0];
+        var argList = PBFormattingHelper.GetParameters(tableContainer._attributes["arguments"]);
+
+        GenerateParameters(argList);
+        GenerateDataSource(tableContainer, 0);
+        GenerateBody(structure);
+
         WriteEndObject("</ReportSource>");
+
         WriteStartObject("<ParameterBindings>");
         var subItemCounter = 0;
-        foreach (var parameter in parameters)
+        foreach (var arg in parameterArguments)
         {
-            if (_currentParams.TryGetValue(parameter, out var refNum))
+            var paramName = argList[subItemCounter++];
+            if (_globalParams.TryGetValue(arg, out var refNum))
             {
-                var paramName = paramsList[subItemCounter++];
                 WriteSingleLine($"<Item{subItemCounter} Ref=\"{_ref++}\" ParameterName=\"{paramName}\" Parameter=\"#Ref-{refNum}\" />");
             }
             else
             {
-                var paramName = paramsList[subItemCounter++];
-                WriteSingleLine($"<Item{subItemCounter} Ref=\"{_ref++}\" ParameterName=\"{paramName}\" DataMember=\"Query.{parameter}\" />");
+                WriteSingleLine($"<Item{subItemCounter} Ref=\"{_ref++}\" ParameterName=\"{paramName}\" DataMember=\"Query.{arg}\" />");
             }
         }
         WriteEndObject("</ParameterBindings>");
@@ -125,8 +142,19 @@ internal class PblToRepxConverter(string inputDir, string outputDir)
 
         _globalHeight = tmpHeight;
         _globalWidth = tmpWidth;
+        _groupCount = tmpGroupCount;
+    }
 
-        parameters.Clear();
+    private void GenerateParameters(List<string> arguments)
+    {
+        WriteStartObject("<Parameters>");
+        var itemCounter = 1;
+        foreach (var element in arguments)
+        {
+            _globalParams.TryAdd(element, _ref);
+            WriteSingleLine($"<Item{itemCounter++} Ref=\"{_ref++}\" Name=\"{element}\"/>");
+        }
+        WriteEndObject("</Parameters>");
     }
 
     public void GenerateElement(ContainerModel container, ref int itemCounter)
@@ -145,6 +173,7 @@ internal class PblToRepxConverter(string inputDir, string outputDir)
         WriteStartObject("<Controls>");
         foreach (var element in elements)
         {
+            objType = PBFormattingHelper.ConvertElementType(element._objectType);
             if (objType == "XRShape")
             {
                 backgroundShapes.Add(element);
@@ -173,11 +202,6 @@ internal class PblToRepxConverter(string inputDir, string outputDir)
 
     public void GenerateGroupElements(ContainerModel container, ref int itemCounter)
     {
-        var objType = PBFormattingHelper.ConvertElementType(container._objectType);
-        if (objType == null)
-        {
-            return;
-        }
         var attributes = container._attributes;
         var elements = container._elements;
 
@@ -192,7 +216,7 @@ internal class PblToRepxConverter(string inputDir, string outputDir)
         // Generate Group Header
         var height = Y(attributes["header.height"]);
         WriteStartObject($"<Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"GroupHeaderBand\" Name=\"groupHeaderBand{attributes["level"]}\" Level=\"{_groupCount - level}\" HeightF=\"{height}\"{SetVisible(height)}>");
-        var groupBy = GroupBy(attributes["by"]);
+        var groupBy = attributes["by"].Trim('(', ')').Split(',');
         WriteStartObject("<GroupFields>");
         foreach (var elem in groupBy)
         {
@@ -203,7 +227,8 @@ internal class PblToRepxConverter(string inputDir, string outputDir)
         WriteStartObject("<Controls>");
         foreach (var element in elements.Where(x => x._attributes["band"].Contains("header")))
         {
-            if (PBFormattingHelper.ConvertElementType(element._objectType) == "XRShape")
+            var objType = PBFormattingHelper.ConvertElementType(element._objectType);
+            if (objType == "XRShape")
             {
                 backgroundShapes.Add(element);
             }
@@ -212,7 +237,7 @@ internal class PblToRepxConverter(string inputDir, string outputDir)
                 GenerateSubElement(element, ref subItemCounter, container);
             }
         }
-        foreach (var element in backgroundShapes.Where(x => x._attributes["band"].Contains("header")))
+        foreach (var element in backgroundShapes)
         {
             GenerateSubElement(element, ref subItemCounter, container);
         }
@@ -236,7 +261,7 @@ internal class PblToRepxConverter(string inputDir, string outputDir)
                 GenerateSubElement(element, ref subItemCounter, container);
             }
         }
-        foreach (var element in backgroundShapes.Where(x => x._attributes["band"].Contains("trailer")))
+        foreach (var element in backgroundShapes)
         {
             GenerateSubElement(element, ref subItemCounter, container);
         }
@@ -364,26 +389,11 @@ internal class PblToRepxConverter(string inputDir, string outputDir)
         }
     }
 
-    private List<string> GenerateDataSource(TableModel table, int dataSourceRef)
+    private void GenerateDataSource(TableModel table, int dataSourceRef)
     {
-        var paramsList = new List<string>();
-        //List<(string paramName, int refNum)> paramList = [];
-        if (table._attributes.TryGetValue("arguments", out var parameters))
-        {
-            WriteStartObject("<Parameters>");
-            var itemCounter = 1;
-            foreach (var element in Parameters(parameters))
-            {
-                _currentParams.TryAdd(element, _ref);
-                paramsList.Add(element);
-                WriteSingleLine($"<Item{itemCounter++} Ref=\"{_ref++}\" Name=\"{element}\"/>");
-            }
-            WriteEndObject("</Parameters>");
-        }
         WriteStartObject("<ComponentStorage>");
         WriteSingleLine($"<Item1 Ref=\"{dataSourceRef}\" ObjectType=\"DevExpress.DataAccess.Sql.SqlDataSource,DevExpress.DataAccess.v24.1\" Name=\"sqlDataSource1\" Base64=\"{DataSourceXmlGenerator.GenerateDataSourceXML(table)}\"/>");
         WriteEndObject("</ComponentStorage>");
-        return paramsList;
     }
 
     private static double X(string value)
@@ -424,27 +434,10 @@ internal class PblToRepxConverter(string inputDir, string outputDir)
         return PBFormattingHelper.ConvertAlignment(value);
     }
 
-    private static string[] GroupBy(string groupString)
-    {
-        return groupString.Trim('(', ')').Split(',');
-    }
-
-    private static List<string> Parameters(string paramString)
-    {
-        return PBFormattingHelper.GetParameters(paramString);
-    }
-
     private string Expression(string expression)
     {
         var parsedExpression = _parser.Parse(expression);
-        //foreach (var column in _columns)
-        //{
-        //    if (column._attributes["name"])
-        //    {
-        //        parsedExpression.Replace(compute, $"[ReportItems.{compute}]");
-        //    }
-        //}
-        return parsedExpression.Replace("forall", "");
+        return parsedExpression;
     }
 
     private static string FixFormattingString(string value)

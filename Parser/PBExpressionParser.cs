@@ -8,7 +8,7 @@ internal class PBExpressionParser
     private StringReader? _reader;
     private int _lastChar;
     private char _testChar;
-    private StringBuilder _sb = new StringBuilder();
+    private readonly StringBuilder _sb = new();
 
     private static string FormatChar(int c) => c < 32 ? $"\\x{c:X2}" : $"'{(char)c}'";
 
@@ -30,7 +30,6 @@ internal class PBExpressionParser
 
     private void ReadNonAlphanumericChar()
     {
-        //do AddChar();
         while (_lastChar >= 0 && !(char.IsAsciiLetterOrDigit((char)_lastChar) || _lastChar == '(' || _lastChar == ')' || _lastChar == ',' || _lastChar == '\''))
         {
             AddChar();
@@ -176,7 +175,7 @@ internal class PBExpressionParser
         {
             _sb.Append("Reverse(");
             ParseExpression();
-            _sb.Append(")");
+            _sb.Append(')');
         }
         for(; ; )
         {
@@ -193,7 +192,7 @@ internal class PBExpressionParser
         }
     }
 
-    private string FunctionHelper(string function)
+    private static string FunctionHelper(string function)
     {
         return function.ToLower() switch
         {
