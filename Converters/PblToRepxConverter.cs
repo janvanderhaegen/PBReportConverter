@@ -100,7 +100,7 @@ internal class PblToRepxConverter(string inputDir, string outputDir)
         _globalWidth = parser.ReportWidth;
         _groupCount = parser.GroupCount;
 
-        WriteStartObject($"<Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"{objType}\" Name=\"{attributes["name"]}\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\">");
+        WriteStartObject($"<Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"{objType}\" Name=\"{attributes["dataobject"]}\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\">");
         var dataWindowAttributes = structure[0]._attributes;
         var dataSourceRef = _ref++;
 
@@ -262,7 +262,7 @@ internal class PblToRepxConverter(string inputDir, string outputDir)
         WriteEndObject($"</Item{itemCounter++}>");
     }
 
-    public void GenerateSubElement(ObjectModel element, ref int itemCounter, ContainerModel container )
+    public void GenerateSubElement(ObjectModel element, ref int itemCounter, ContainerModel container)
     {
         var objType = PBFormattingHelper.ConvertElementType(element._objectType);
         if (objType == null)
