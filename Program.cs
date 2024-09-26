@@ -8,8 +8,8 @@ var repxPath = Console.ReadLine();
 
 var files = Directory.GetFiles(pbPath!).Select(f => Path.GetFileName(f));
 
+var converter = new PblToRepxConverter(pbPath!, repxPath!);
 foreach (var fileName in files)
 {
-    var converter = new PblToRepxConverter(pbPath!, repxPath!);
     converter.GenerateRepxFile(fileName);
 }
