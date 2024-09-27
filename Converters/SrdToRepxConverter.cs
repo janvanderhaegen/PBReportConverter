@@ -4,7 +4,7 @@ using ReportMigration.Helpers;
 
 namespace ReportMigration.Converters;
 
-internal class PblToRepxConverter(string inputDir, string outputDir)
+internal class SrdToRepxConverter(string inputDir, string outputDir)
 {
     private int _ref = 1;
     private StreamWriter? _writer;
@@ -20,36 +20,46 @@ internal class PblToRepxConverter(string inputDir, string outputDir)
 
     public void GenerateRepxFile(string fileName)
     {
-        Console.WriteLine($"Converting {fileName} to .repx");
-        PBReportParser parser = new(Path.Combine(_inputDir, fileName));
-        var extensionIndex = fileName.LastIndexOf('.');
-        _writer = new(Path.Combine(_outputDir, $"{fileName[..extensionIndex]}.repx"));
+        Console.Write($"Converting {fileName} to .repx");
+        try
+        {
+            PBReportParser parser = new(Path.Combine(_inputDir, fileName));
+            var extensionIndex = fileName.LastIndexOf('.');
+            var outputPath = Path.Combine(_outputDir, $"{fileName[..extensionIndex]}.repx");
+            Directory.CreateDirectory(Path.GetDirectoryName(outputPath)!);
+            _writer = new(outputPath);
 
-        var structure = parser.Parse();
-        _groupCount = parser.GroupCount;
-        _globalHeight = parser.ReportHeight;
-        _globalWidth = parser.ReportWidth;
+            var structure = parser.Parse();
+            _groupCount = parser.GroupCount;
+            _globalHeight = parser.ReportHeight;
+            _globalWidth = parser.ReportWidth;
 
-        WriteSingleLine("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
-        var dataWindowIndex = structure.FindIndex(x => x._objectType == "datawindow");
-        var dataWindowAttributes = structure[dataWindowIndex]._attributes;
-        WriteStartObject($"<XtraReportsLayoutSerializer SerializerVersion=\"24.1.4.0\" Ref=\"{_ref++}\" ControlType=\"DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral\" Name=\"XtraReport1\" VerticalContentSplitting=\"Smart\" Margins=\"{X(dataWindowAttributes["print.margin.left"])}, {X(dataWindowAttributes["print.margin.right"])}, {Y(dataWindowAttributes["print.margin.top"])}, {Y(dataWindowAttributes["print.margin.bottom"])}\" PaperKind=\"Custom\" PageWidth=\"{parser.ReportWidth + X(dataWindowAttributes["print.margin.left"]) + X(dataWindowAttributes["print.margin.right"])}\" PageHeight=\"{parser.ReportHeight + Y(dataWindowAttributes["print.margin.top"]) + Y(dataWindowAttributes["print.margin.bottom"]) + 200}\" Version=\"24.1\" DataMember=\"Query\" DataSource=\"#Ref-0\">");
+            WriteSingleLine("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
+            var dataWindowIndex = structure.FindIndex(x => x._objectType == "datawindow");
+            var dataWindowAttributes = structure[dataWindowIndex]._attributes;
+            WriteStartObject($"<XtraReportsLayoutSerializer SerializerVersion=\"24.1.4.0\" Ref=\"{_ref++}\" ControlType=\"DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral\" Name=\"XtraReport1\" VerticalContentSplitting=\"Smart\" Margins=\"{X(dataWindowAttributes["print.margin.left"])}, {X(dataWindowAttributes["print.margin.right"])}, {Y(dataWindowAttributes["print.margin.top"])}, {Y(dataWindowAttributes["print.margin.bottom"])}\" PaperKind=\"Custom\" PageWidth=\"{parser.ReportWidth + X(dataWindowAttributes["print.margin.left"]) + X(dataWindowAttributes["print.margin.right"])}\" PageHeight=\"{parser.ReportHeight + Y(dataWindowAttributes["print.margin.top"]) + Y(dataWindowAttributes["print.margin.bottom"]) + 200}\" Version=\"24.1\" DataMember=\"Query\" DataSource=\"#Ref-0\">");
 
-        var tableContainer = (TableModel)structure.Where(x => x.GetType() == typeof(TableModel)).ToList()[0];
-        var argList = PBFormattingHelper.GetParameters(tableContainer._attributes["arguments"]);
+            var tableContainer = (TableModel)structure.Where(x => x.GetType() == typeof(TableModel)).ToList()[0];
+            var argList = PBFormattingHelper.GetParameters(tableContainer._attributes["arguments"]);
 
-        GenerateParameters(argList);
-        GenerateDataSource(tableContainer, 0);
-        GenerateBody(structure, dataWindowIndex);
+            GenerateParameters(argList);
+            GenerateDataSource(tableContainer, 0);
+            GenerateBody(structure, dataWindowIndex);
 
-        WriteEndObject("</XtraReportsLayoutSerializer>");
-        _writer.Flush();
-        _writer.Dispose();
+            WriteEndObject("</XtraReportsLayoutSerializer>");
+            _writer.Flush();
+            _writer.Dispose();
 
-        _ref = 1;
-        _tabulator = 0;
-        _globalParams.Clear();
-        _currentComputes.Clear();
+            _ref = 1;
+            _tabulator = 0;
+            _globalParams.Clear();
+            _currentComputes.Clear();
+            Console.Write(" - Done\n");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($" - Failed\n{e.Message}");
+        }   
     }
 
     public void GenerateBody(List<ContainerModel> structure, int dataWindowIndex)
