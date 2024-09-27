@@ -64,7 +64,7 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
         }
         catch (Exception e)
         {
-            Console.WriteLine($" - Failed\n{e.Message}");
+            Console.WriteLine($" - Failed\n\t{e.Message}"); 
         }
     }
 
