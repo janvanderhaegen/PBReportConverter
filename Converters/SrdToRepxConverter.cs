@@ -1,6 +1,7 @@
 ﻿using ReportMigration.Models;
 using ReportMigration.Parser;
 using ReportMigration.Helpers;
+using System.Diagnostics;
 
 namespace ReportMigration.Converters;
 
@@ -44,9 +45,10 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
             WriteStartObject($"<XtraReportsLayoutSerializer SerializerVersion=\"24.1.4.0\" Ref=\"{_ref++}\" ControlType=\"DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral\" Name=\"XtraReport1\" VerticalContentSplitting=\"Smart\" Margins=\"{X(dataWindowAttributes["print.margin.left"])}, {X(dataWindowAttributes["print.margin.right"])}, {Y(dataWindowAttributes["print.margin.top"])}, {Y(dataWindowAttributes["print.margin.bottom"])}\" PaperKind=\"Custom\" PageWidth=\"{parser.ReportWidth + X(dataWindowAttributes["print.margin.left"]) + X(dataWindowAttributes["print.margin.right"])}\" PageHeight=\"{parser.ReportHeight + Y(dataWindowAttributes["print.margin.top"]) + Y(dataWindowAttributes["print.margin.bottom"]) + 200}\" Version=\"24.1\" DataMember=\"Query\" DataSource=\"#Ref-0\">");
 
             var tableContainer = (TableModel)structure.Where(x => x.GetType() == typeof(TableModel)).ToList()[0];
-            var argList = PBFormattingHelper.GetParameters(tableContainer._attributes["arguments"]);
 
-            GenerateParameters(argList);
+
+            if (tableContainer._attributes.ContainsKey("arguments"))
+                GenerateParameters(PBFormattingHelper.GetParameters(tableContainer._attributes["arguments"]));
             GenerateDataSource(tableContainer, 0);
             GenerateBody(structure, dataWindowIndex);
 

@@ -327,10 +327,12 @@ internal class PBReportParser(string path)
                 {
                     throw new Exception($"Buffer overflow while parsing SQL query at that started at {start} to ({_row}, {_col}) in file {_filePath}.");
                 }
-                if (_lastChar == '"' && Char.IsWhiteSpace((char)_reader.Peek()))
+                var current = (char)_lastChar;
+                if (current == '"' && Char.IsWhiteSpace((char)_reader.Peek()))
                 {
                     ReadChar();
-                    if (_reader.Peek() == 'a')
+                    var nextNextChar = (char)_reader.Peek();
+                    if (nextNextChar == 'a' || nextNextChar == ')') //after the last quote, there should be either "arguments = ... )" or if there are no arguments: ")"
                     {
                         break;
                     }
@@ -339,7 +341,7 @@ internal class PBReportParser(string path)
                         buf[pos++] = '"';
                     }
                 }
-                buf[pos++] = (char)_lastChar;
+                buf[pos++] = current;
                 ReadChar();
             }
             if (pos == 0)
