@@ -20,6 +20,7 @@ internal class PblToRepxConverter(string inputDir, string outputDir)
 
     public void GenerateRepxFile(string fileName)
     {
+        Console.WriteLine($"Converting {fileName} to .repx");
         PBReportParser parser = new(Path.Combine(_inputDir, fileName));
         _writer = new(Path.Combine(_outputDir, $"{fileName[..^2]}.repx"));
 
