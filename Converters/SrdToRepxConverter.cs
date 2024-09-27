@@ -22,16 +22,20 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
     public void GenerateRepxFile(string fileName)
     {
         Console.Write($"Converting {fileName} to .repx");
+        var inputPath = Path.Combine(_inputDir, fileName);
+        var extensionIndex = fileName.LastIndexOf('.');
+        var outputPath = Path.Combine(_outputDir, $"{fileName[..extensionIndex]}.repx");
         try
         {
-            PBReportParser parser = new(Path.Combine(_inputDir, fileName));
-            var extensionIndex = fileName.LastIndexOf('.');
-            var outputPath = Path.Combine(_outputDir, $"{fileName[..extensionIndex]}.repx");
-            Directory.CreateDirectory(Path.GetDirectoryName(outputPath)!);
+            PBReportParser parser = new(inputPath);
             if (File.Exists(outputPath))
             {
                 File.Delete(outputPath);
             }
+            else { 
+                Directory.CreateDirectory(Path.GetDirectoryName(outputPath)!);            
+            }
+
             _writer = new(outputPath);
 
             var structure = parser.Parse();
