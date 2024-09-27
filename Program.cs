@@ -30,10 +30,12 @@ foreach (var pebble in pebbles)
     pblToSrdConverter.Unpack(pebble);
 }
 
-var files = Directory.GetFiles(pbPath!).Select(f => Path.GetFileName(f));
 
-var converter = new PblToRepxConverter(pbPath!, repxPath!);
-foreach (var fileName in files)
+var srdFiles = new[] { "*.srd", "*.p" }.SelectMany(pattern => Directory.GetFiles(pbPath!, pattern, SearchOption.AllDirectories)).ToArray();
+Console.WriteLine($"Found {srdFiles.Length} .srd/.p files");
+var converter = new SrdToRepxConverter(pbPath!, repxPath!);
+foreach (var fileName in srdFiles)
 {
-    converter.GenerateRepxFile(fileName);
+    var relativePath = Path.GetRelativePath(pbPath!, fileName);
+    converter.GenerateRepxFile(relativePath);
 }
