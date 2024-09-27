@@ -131,7 +131,7 @@ internal class PBReportParser(string path)
             }
             else
             {
-                throw new Exception($"Unexpected character {FormatChar(_lastChar)} at ({_row}, {_col}) in file {_filePath}.");
+                throw new Exception($"Unexpected character trying to find band in ParseObject: {FormatChar(_lastChar)} at ({_row}, {_col}) in file {_filePath}.");
             }
         }
         else
@@ -153,7 +153,7 @@ internal class PBReportParser(string path)
     {
         if ((char)_lastChar != '(')
         {
-            throw new Exception($"Unexpected character {FormatChar(_lastChar)} at ({_row}, {_col}) in file {_filePath}.");
+            throw new Exception($"Unexpected character while parsing table start: {FormatChar(_lastChar)} at ({_row}, {_col}) in file {_filePath}.");
         }
 
         var columns = new List<ObjectModel>();
@@ -171,7 +171,7 @@ internal class PBReportParser(string path)
 
             if (_lastChar != '=')
             {
-                throw new Exception($"Unexpected character {FormatChar(_lastChar)} at ({_row}, {_col}) in file {_filePath}.");
+                throw new Exception($"Unexpected character while parsing table: {FormatChar(_lastChar)} at ({_row}, {_col}) in file {_filePath}.");
             }
             ReadCharSkipWhitespace();
             if (identifier == "column")
@@ -198,7 +198,7 @@ internal class PBReportParser(string path)
         
         if ((char)_lastChar != '(')
         {
-            throw new Exception($"Unexpected character {FormatChar(_lastChar)} at ({_row}, {_col}) in file {_filePath}.");
+            throw new Exception($"Unexpected character while parsing attributes: {FormatChar(_lastChar)} at ({_row}, {_col}) in file {_filePath}.");
         }
         ReadCharSkipWhitespace();
         for (;;)
@@ -222,7 +222,7 @@ internal class PBReportParser(string path)
 
         if (_lastChar != '=')
         {
-            throw new Exception($"Unexpected character {FormatChar(_lastChar)} at ({_row}, {_col}) in file {_filePath}.");
+            throw new Exception($"Unexpected character while parsing attribute: {FormatChar(_lastChar)} at ({_row}, {_col}) in file {_filePath}.");
         } 
         ReadCharSkipWhitespace();
 
@@ -264,13 +264,13 @@ internal class PBReportParser(string path)
 
                 if (_lastChar != ')')
                 {
-                    throw new Exception($"Unexpected character {FormatChar(_lastChar)} at ({_row}, {_col}) in file {_filePath}.");
+                    throw new Exception($"Unexpected character while parsing string: {FormatChar(_lastChar)} at ({_row}, {_col}) in file {_filePath}.");
                 }
                 buf[pos++] = (char)_lastChar;
                 ReadChar();
             }
 
-            if (pos == 0) throw new Exception($"Unexpected character {FormatChar(_lastChar)} at ({_row}, {_col}) in file {_filePath}.");
+            if (pos == 0) throw new Exception($"Unexpected character while parsing string (end): {FormatChar(_lastChar)} at ({_row}, {_col}) in file {_filePath}.");
         }
 
         if (Char.IsWhiteSpace((char)_lastChar))
@@ -300,7 +300,7 @@ internal class PBReportParser(string path)
             buf[pos++] = (char)_lastChar;
             ReadChar();
         }
-        if (pos == 0) throw new Exception($"Unexpected character {FormatChar(_lastChar)} at ({_row}, {_col}) in file {_filePath}.");
+        if (pos == 0) throw new Exception($"Unexpected character while parsing identifier: {FormatChar(_lastChar)} at ({_row}, {_col}) in file {_filePath}.");
 
         if (Char.IsWhiteSpace((char)_lastChar))
         {
@@ -362,7 +362,7 @@ internal class PBReportParser(string path)
     {
         if (band.GetType() != typeof(string))
         {
-            throw new Exception($"Unexpected character {FormatChar(_lastChar)} at ({_row}, {_col}) in file {_filePath}.");
+            throw new Exception($"Unexpected character while finding container by name: {FormatChar(_lastChar)} at ({_row}, {_col}) in file {_filePath}.");
         }
         var name = (string)band;
         foreach (var container in _structure)
