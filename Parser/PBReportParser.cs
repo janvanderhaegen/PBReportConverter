@@ -1,5 +1,6 @@
 ﻿using ReportMigration.Models;
 using ReportMigration.Helpers;
+using DevExpress.CodeParser;
 
 namespace ReportMigration.Parser;
 
@@ -11,7 +12,7 @@ internal class PBReportParser(string path)
     private int _row = 0;
     private int _lastChar;
     private char _testChar;
-    private readonly List<ContainerModel> _structure = [];
+    private readonly List<ContainerModel> _structure = [new("background", [])];
     public double ReportHeight { get; private set; } = 0;
     public double ReportWidth { get; private set; } = 0;
     public int GroupCount { get; private set; } = 0;
@@ -45,8 +46,6 @@ internal class PBReportParser(string path)
 
     public List<ContainerModel> Parse()
     {
-        // Skips release number
-        _reader.ReadLine();
         ReadCharSkipWhitespace();
 
         for (;;)
@@ -64,7 +63,21 @@ internal class PBReportParser(string path)
 
     private void ParseObject()
     {
+        if (!Char.IsAsciiLetterOrDigit((char)_lastChar))
+        {
+            _reader.ReadLine();
+            ReadCharSkipWhitespace();
+            return;
+        }
+
         var key = ParseIdentifier();
+
+        if ((char)_lastChar != '(')
+        {
+            _reader.ReadLine();
+            ReadCharSkipWhitespace();
+            return;
+        }
 
         if (key == "table")
         {
@@ -90,6 +103,8 @@ internal class PBReportParser(string path)
             if (container != null)
             {
                 container._elements.Add(new(key, attributes));
+                if (container._objectType == "background") return;
+
                 double height;
                 if (band.Contains("header."))
                 {

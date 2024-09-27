@@ -22,7 +22,8 @@ internal class PblToRepxConverter(string inputDir, string outputDir)
     {
         Console.WriteLine($"Converting {fileName} to .repx");
         PBReportParser parser = new(Path.Combine(_inputDir, fileName));
-        _writer = new(Path.Combine(_outputDir, $"{fileName[..^2]}.repx"));
+        var extensionIndex = fileName.LastIndexOf('.');
+        _writer = new(Path.Combine(_outputDir, $"{fileName[..extensionIndex]}.repx"));
 
         var structure = parser.Parse();
         _groupCount = parser.GroupCount;
@@ -30,23 +31,30 @@ internal class PblToRepxConverter(string inputDir, string outputDir)
         _globalWidth = parser.ReportWidth;
 
         WriteSingleLine("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
-        var dataReportAttributes = structure[0]._attributes;
-        WriteStartObject($"<XtraReportsLayoutSerializer SerializerVersion=\"24.1.4.0\" Ref=\"{_ref++}\" ControlType=\"DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral\" Name=\"XtraReport1\" VerticalContentSplitting=\"Smart\" Margins=\"{X(dataReportAttributes["print.margin.left"])}, {X(dataReportAttributes["print.margin.right"])}, {Y(dataReportAttributes["print.margin.top"])}, {Y(dataReportAttributes["print.margin.bottom"])}\" PaperKind=\"Custom\" PageWidth=\"{parser.ReportWidth + X(dataReportAttributes["print.margin.left"]) + X(dataReportAttributes["print.margin.right"])}\" PageHeight=\"{parser.ReportHeight + Y(dataReportAttributes["print.margin.top"]) + Y(dataReportAttributes["print.margin.bottom"]) + 200}\" Version=\"24.1\" DataMember=\"Query\" DataSource=\"#Ref-0\">");
+        var dataWindowIndex = structure.FindIndex(x => x._objectType == "datawindow");
+        var dataWindowAttributes = structure[dataWindowIndex]._attributes;
+        WriteStartObject($"<XtraReportsLayoutSerializer SerializerVersion=\"24.1.4.0\" Ref=\"{_ref++}\" ControlType=\"DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral\" Name=\"XtraReport1\" VerticalContentSplitting=\"Smart\" Margins=\"{X(dataWindowAttributes["print.margin.left"])}, {X(dataWindowAttributes["print.margin.right"])}, {Y(dataWindowAttributes["print.margin.top"])}, {Y(dataWindowAttributes["print.margin.bottom"])}\" PaperKind=\"Custom\" PageWidth=\"{parser.ReportWidth + X(dataWindowAttributes["print.margin.left"]) + X(dataWindowAttributes["print.margin.right"])}\" PageHeight=\"{parser.ReportHeight + Y(dataWindowAttributes["print.margin.top"]) + Y(dataWindowAttributes["print.margin.bottom"]) + 200}\" Version=\"24.1\" DataMember=\"Query\" DataSource=\"#Ref-0\">");
 
         var tableContainer = (TableModel)structure.Where(x => x.GetType() == typeof(TableModel)).ToList()[0];
         var argList = PBFormattingHelper.GetParameters(tableContainer._attributes["arguments"]);
 
         GenerateParameters(argList);
         GenerateDataSource(tableContainer, 0);
-        GenerateBody(structure);
+        GenerateBody(structure, dataWindowIndex);
 
         WriteEndObject("</XtraReportsLayoutSerializer>");
         _writer.Flush();
+        _writer.Dispose();
+
+        _ref = 1;
+        _tabulator = 0;
+        _globalParams.Clear();
+        _currentComputes.Clear();
     }
 
-    public void GenerateBody(List<ContainerModel> structure)
+    public void GenerateBody(List<ContainerModel> structure, int dataWindowIndex)
     {
-        var dataReportAttributes = structure[0]._attributes;
+        var dataReportAttributes = structure[dataWindowIndex]._attributes;
         WriteStartObject("<Bands>");
         int itemCounter = 1;
         WriteSingleLine($"<Item{itemCounter++} Ref=\"{_ref++}\" ControlType=\"TopMarginBand\" Name=\"TopMargin\" HeightF=\"{Y(dataReportAttributes["print.margin.top"])}\"/>");
@@ -102,7 +110,8 @@ internal class PblToRepxConverter(string inputDir, string outputDir)
         _groupCount = parser.GroupCount;
 
         WriteStartObject($"<Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"{objType}\" Name=\"{attributes["dataobject"]}\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\">");
-        var dataWindowAttributes = structure[0]._attributes;
+        var dataWindowIndex = structure.FindIndex(x => x._objectType == "datawindow");
+        var dataWindowAttributes = structure[dataWindowIndex]._attributes;
         var dataSourceRef = _ref++;
 
         WriteStartObject($"<ReportSource Ref=\"{_ref++}\" Name=\"{attributes["dataobject"]}\" ControlType=\"ReportMigration.XtraReports.{attributes["dataobject"]}, ReportMigration, Version=1.0.0.0, Culture=neutral\" VerticalContentSplitting=\"Smart\" Margins=\"{X(dataWindowAttributes["print.margin.left"])}, {X(dataWindowAttributes["print.margin.right"])}, {Y(dataWindowAttributes["print.margin.top"])}, {Y(dataWindowAttributes["print.margin.bottom"])}\" PaperKind=\"Custom\" PageWidth=\"{parser.ReportWidth}\" PageHeight=\"{parser.ReportHeight}\" Version=\"24.1\" DataMember=\"Query\" DataSource=\"#Ref-{dataSourceRef}\">");
@@ -112,7 +121,7 @@ internal class PblToRepxConverter(string inputDir, string outputDir)
 
         GenerateParameters(argList);
         GenerateDataSource(tableContainer, dataSourceRef);
-        GenerateBody(structure);
+        GenerateBody(structure, dataWindowIndex);
 
         WriteEndObject("</ReportSource>");
 
@@ -163,7 +172,9 @@ internal class PblToRepxConverter(string inputDir, string outputDir)
         int subItemCounter = 1;
         var backgroundShapes = new List<ObjectModel>();
         var height = Y(attributes["height"]);
-        WriteStartObject($"<Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"{objType}Band\" Name=\"{container._objectType}\" HeightF=\"{height}\"{SetVisible(height)}>");
+        var summaryLevel = container._objectType == "summary" ? $" Level=\"{_groupCount}\"" : "";
+
+        WriteStartObject($"<Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"{objType}Band\" Name=\"{container._objectType}\" HeightF=\"{height}\"{SetVisible(height)}{summaryLevel}>");
         WriteStartObject("<Controls>");
         foreach (var element in elements)
         {
