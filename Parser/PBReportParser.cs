@@ -312,14 +312,21 @@ internal class PBReportParser(string path)
 
     private string ParseSqlQuery()
     {
-        Span<char> buf = stackalloc char[50000];
+        var start = $"({_row}, {_col})";
+        int bufferSize = 50000;
+        Span<char> buf = stackalloc char[bufferSize];
         int pos = 0;
+
 
         if (_lastChar == '"')
         {
             ReadChar();
             for (; ; )
             {
+                if(pos + 1 == bufferSize)
+                {
+                    throw new Exception($"Buffer overflow while parsing SQL query at that started at {start} to ({_row}, {_col}) in file {_filePath}.");
+                }
                 if (_lastChar == '"' && Char.IsWhiteSpace((char)_reader.Peek()))
                 {
                     ReadChar();
@@ -337,7 +344,7 @@ internal class PBReportParser(string path)
             }
             if (pos == 0)
             {
-                throw new Exception($"Unexpected character {FormatChar(_lastChar)} at ({_row}, {_col}) in file {_filePath}.");
+                throw new Exception($"Unexpected character while parsing SQL query at that started at {start}: {FormatChar(_lastChar)} at ({_row}, {_col}) in file {_filePath}.");
             }
         }
 
@@ -368,5 +375,5 @@ internal class PBReportParser(string path)
             }
         }
         return null;
-    }
+    } 
 }
