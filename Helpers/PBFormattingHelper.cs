@@ -2,14 +2,22 @@
 
 internal static class PBFormattingHelper
 {
-    public static double ConvertX(double value)
+    public static double X(string value)
     {
-        return Math.Ceiling((value * 1400 - 700) / 6144);
+        if (!double.TryParse(value, out var numValue))
+        {
+            throw new Exception($"Couldn't parse value: {value} as int");
+        }
+        return Math.Ceiling((numValue * 1400 - 700) / 6144);
     }
 
-    public static double ConvertY(double value)
+    public static double Y(string value)
     {
-        return Math.Ceiling((value * 200 - 100) / 768);
+        if (!double.TryParse(value, out var numValue))
+        {
+            throw new Exception($"Couldn't parse value: {value} as int");
+        }
+        return Math.Ceiling((numValue * 200 - 100) / 768);
     }
 
     public static string? ConvertElementType(string ctrlType)
@@ -29,12 +37,20 @@ internal static class PBFormattingHelper
         };
     }
 
-    public static string ConvertColor(int colorCode)
+    public static string Color(string colorCode)
     {
-        var red = colorCode % 256;
-        colorCode /= 256;
-        var green = colorCode % 256;
-        var blue = colorCode / 256;
+        if (colorCode == "")
+        {
+            return "Black";
+        }
+        if (!int.TryParse(colorCode, out var numColorCode))
+        {
+            throw new Exception($"Couldn't parse value: {colorCode} as int");
+        }
+        var red = numColorCode % 256;
+        numColorCode /= 256;
+        var green = numColorCode % 256;
+        var blue = numColorCode / 256;
         return $"255,{red},{green},{blue}";
     }
 

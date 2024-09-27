@@ -1,5 +1,4 @@
-﻿using ReportMigration.Models;
-using System.Text;
+﻿using System.Text;
 
 namespace ReportMigration.Parser;
 
@@ -133,11 +132,6 @@ internal class PBExpressionParser
                 {
                     _sb.Append(str);
                 }
-                //if (_lastChar >= 0 && _lastChar != ')' && _lastChar != ',')
-                //{
-                //    ReadNonAlphanumericChar();
-                //}
-                //else { break; }
             }
         }
     }
@@ -147,7 +141,6 @@ internal class PBExpressionParser
         if(_lastChar == '\'')
         {
             AddChar();
-            //_sb.Append(ParseString());
             while(_lastChar >=0 && _lastChar != '\'')
             {
                 AddChar();

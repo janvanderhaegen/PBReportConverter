@@ -1,6 +1,5 @@
 ﻿using ReportMigration.Models;
-using ReportMigration.Helpers;
-using DevExpress.CodeParser;
+using static ReportMigration.Helpers.PBFormattingHelper;
 
 namespace ReportMigration.Parser;
 
@@ -89,8 +88,8 @@ internal class PBReportParser(string path)
 
         if (key == "datawindow")
         {
-            _verticalMarginSum = PBFormattingHelper.ConvertY(double.Parse(attributes["print.margin.top"])) + PBFormattingHelper.ConvertY(double.Parse(attributes["print.margin.bottom"]));
-            _horizontalMarginSum = PBFormattingHelper.ConvertX(double.Parse(attributes["print.margin.left"])) + PBFormattingHelper.ConvertX(double.Parse(attributes["print.margin.right"]));
+            _verticalMarginSum = Y(attributes["print.margin.top"]) + Y(attributes["print.margin.bottom"]);
+            _horizontalMarginSum = X(attributes["print.margin.left"]) + X(attributes["print.margin.right"]);
         }
         else if (key == "group")
         {
@@ -121,8 +120,8 @@ internal class PBReportParser(string path)
                 
                 if (attributes.TryGetValue("x", out var x) && height > 0)
                 {
-                    var xnum = PBFormattingHelper.ConvertX(double.Parse(x));
-                    var width = PBFormattingHelper.ConvertX(double.Parse(attributes["width"]));
+                    var xnum = X(x);
+                    var width = X(attributes["width"]);
                     if (xnum + width > ReportWidth)
                     {
                         ReportWidth = xnum + width;
@@ -139,12 +138,12 @@ internal class PBReportParser(string path)
             _structure.Add(new(key, attributes));
             if(attributes.TryGetValue("height", out var height))
             {
-                ReportHeight += PBFormattingHelper.ConvertY(double.Parse(height));
+                ReportHeight += Y(height);
             }
             else if(attributes.TryGetValue("header.height", out height))
             {
-                ReportHeight += PBFormattingHelper.ConvertY(double.Parse(height));
-                ReportHeight += PBFormattingHelper.ConvertY(double.Parse(attributes["trailer.height"]));
+                ReportHeight += Y(height);
+                ReportHeight += Y(attributes["trailer.height"]);
             }
         }
     }
