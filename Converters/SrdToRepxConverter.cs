@@ -27,6 +27,10 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
             var extensionIndex = fileName.LastIndexOf('.');
             var outputPath = Path.Combine(_outputDir, $"{fileName[..extensionIndex]}.repx");
             Directory.CreateDirectory(Path.GetDirectoryName(outputPath)!);
+            if (File.Exists(outputPath))
+            {
+                File.Delete(outputPath);
+            }
             _writer = new(outputPath);
 
             var structure = parser.Parse();
@@ -59,7 +63,7 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
         catch (Exception e)
         {
             Console.WriteLine($" - Failed\n{e.Message}");
-        }   
+        }
     }
 
     public void GenerateBody(List<ContainerModel> structure, int dataWindowIndex)
@@ -208,7 +212,7 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
 
     private static string SetVisible(double height)
     {
-        if(height > 0)
+        if (height > 0)
         {
             return "";
         }
@@ -294,7 +298,7 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
         var attributes = element._attributes;
         double x;
         double y;
-        if(!attributes.TryGetValue("x", out var xstr))
+        if (!attributes.TryGetValue("x", out var xstr))
         {
             x = X(attributes["x1"]);
             y = Y(attributes["y1"]);
@@ -433,7 +437,7 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
 
     private static string Color(string value)
     {
-        if(value == "")
+        if (value == "")
         {
             return "Black";
         }
@@ -457,7 +461,7 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
 
     private static string FixFormattingString(string value)
     {
-        if(value.Equals("[general]", StringComparison.CurrentCultureIgnoreCase))
+        if (value.Equals("[general]", StringComparison.CurrentCultureIgnoreCase))
         {
             return "";
         }
@@ -471,7 +475,7 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
         {
             throw new Exception($"Couldn't parse value: {value} as int");
         }
-        if(numValue >= 700)
+        if (numValue >= 700)
         {
             return ", style=Bold";
         }
