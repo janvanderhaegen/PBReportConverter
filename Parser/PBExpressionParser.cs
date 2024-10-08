@@ -6,7 +6,7 @@ internal class PBExpressionParser
 {
     private StringReader? _reader;
     private int _lastChar;
-    private char _testChar;
+    private char _lastCharAsChar;
     private readonly StringBuilder _sb = new();
 
     private static string FormatChar(int c) => c < 32 ? $"\\x{c:X2}" : $"'{(char)c}'";
@@ -14,12 +14,12 @@ internal class PBExpressionParser
     private void ReadChar()
     {
         _lastChar = _reader!.Read();
-        _testChar = (char) _lastChar;
+        _lastCharAsChar = (char) _lastChar;
     }
 
     private void AddChar()
     {
-        _sb.Append((char)_lastChar);
+        _sb.Append(_lastCharAsChar);
         if(_lastChar == '=')
         {
             _sb.Append('=');
@@ -29,7 +29,7 @@ internal class PBExpressionParser
 
     private void ReadNonAlphanumericChar()
     {
-        while (_lastChar >= 0 && !(char.IsAsciiLetterOrDigit((char)_lastChar) || _lastChar == '(' || _lastChar == ')' || _lastChar == ',' || _lastChar == '\''))
+        while (_lastChar >= 0 && !(char.IsAsciiLetterOrDigit(_lastCharAsChar) || _lastChar == '(' || _lastChar == ')' || _lastChar == ',' || _lastChar == '\''))
         {
             AddChar();
         }
@@ -38,23 +38,23 @@ internal class PBExpressionParser
     private void ReadCharSkipWhitespace()
     {
         do ReadChar();
-        while (_lastChar >= 0 && char.IsWhiteSpace((char)_lastChar));
+        while (_lastChar >= 0 && char.IsWhiteSpace(_lastCharAsChar));
     }
 
     private string ParseString()
     {
         Span<char> buf = stackalloc char[256];
         int pos = 0;
-        if (Char.IsWhiteSpace((char)_lastChar))
+        if (Char.IsWhiteSpace(_lastCharAsChar))
         {
             ReadCharSkipWhitespace();
         }
-        while (Char.IsAsciiLetterOrDigit((char)_lastChar) || _lastChar == '_')
+        while (Char.IsAsciiLetterOrDigit(_lastCharAsChar) || _lastChar == '_')
         {
-            buf[pos++] = (char)_lastChar;
+            buf[pos++] = _lastCharAsChar;
             ReadChar();
         }
-        if (Char.IsWhiteSpace((char)_lastChar))
+        if (Char.IsWhiteSpace(_lastCharAsChar))
         {
             ReadCharSkipWhitespace();
         }
@@ -111,7 +111,7 @@ internal class PBExpressionParser
                 ParseBracketExpression();
             }
 
-            if (_lastChar == '\'' || Char.IsAsciiDigit((char)_lastChar))
+            if (_lastChar == '\'' || Char.IsAsciiDigit(_lastCharAsChar))
             {
                 ParseLiteral();
             }
@@ -156,7 +156,7 @@ internal class PBExpressionParser
         }
         else
         {
-            while (Char.IsAsciiDigit((char)_lastChar)){
+            while (Char.IsAsciiDigit(_lastCharAsChar)){
                 AddChar();
             }
         }
