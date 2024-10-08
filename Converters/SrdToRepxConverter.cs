@@ -3,7 +3,7 @@ using ReportMigration.Parser;
 using static ReportMigration.Helpers.DataSourceXmlGenerator;
 using static ReportMigration.Helpers.PBFormattingHelper;
 using ReportMigration.Helpers;
-using System.Diagnostics;
+using System.Diagnostics; 
 
 namespace ReportMigration.Converters;
 
@@ -69,8 +69,14 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
             Console.Write(" - Done\n");
         }
         catch (Exception e)
-        {
-            Console.WriteLine($" - Failed\n\t{e.Message}"); 
+        { 
+            Console.WriteLine($" - Failed\n\t{e.Message}");
+            if (File.Exists(outputPath) && _writer != null)
+            { 
+                _writer.Flush();
+                _writer.Dispose();
+                File.Delete(outputPath); 
+            }
         }
     }
 
