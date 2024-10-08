@@ -247,19 +247,20 @@ internal class PBReportParser(string path)
         Span<char> buf = stackalloc char[8192];
         int pos = 0;
 
-        if (_lastChar == '"')
+
+        if (_lastCharAsChar == '"' || _lastCharAsChar == '\'')
         {
+            var initialOpenStringChar = _lastCharAsChar;
             ReadChar();
-            while (_lastCharAsChar != '"')
+            while (_lastCharAsChar != initialOpenStringChar )
             {
                 buf[pos++] = _lastCharAsChar;
                 ReadChar();
             }
             ReadChar();
-        }
+        } 
         else
-        {
-
+        { 
             while (Char.IsAsciiLetterOrDigit(_lastCharAsChar) || _lastChar == '.' || _lastChar == '_')
             {
                 buf[pos++] = _lastCharAsChar;
