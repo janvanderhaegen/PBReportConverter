@@ -1,4 +1,5 @@
 ﻿using ReportMigration.Models;
+using System.Diagnostics;
 using static ReportMigration.Helpers.PBFormattingHelper;
 
 namespace ReportMigration.Parser;
@@ -8,9 +9,9 @@ internal class PBReportParser(string path)
     private readonly StreamReader _reader = new(path);
     private readonly string _filePath = path;
     private int _col = 1;
-    private int _row = 0;
+    private int _row = 1;
     private int _lastChar;
-    private char _testChar;
+    private char _lastCharAsChar;
     private readonly List<ContainerModel> _structure = [new("background", [])];
     public double ReportHeight { get; private set; } = 0;
     public double ReportWidth { get; private set; } = 0;
@@ -19,12 +20,12 @@ internal class PBReportParser(string path)
     public double _horizontalMarginSum = 0;
     public double _verticalMarginSum = 0;
 
-    private static string FormatChar(int c) => c < 32 ? $"\\x{c:X2}" : $"'{(char)c}'";
+    private static string FormatChar(char c) => ((int)c) < 32 ? $"\\x{(int)c:X2}" : $"'{c}'";
 
     private void ReadChar()
     {
         _lastChar = _reader.Read();
-        _testChar = (char)_lastChar;
+        _lastCharAsChar = (char)_lastChar;
 
         if (_lastChar == '\n')
         {
@@ -33,21 +34,28 @@ internal class PBReportParser(string path)
         }
         else if (_lastChar >= 0)
         {
-            _col++;
-        }
+            if(_lastChar == '\t')
+            {
+                _col += 4;
+            }
+            else
+            {
+                _col++;
+            }
+        } 
     }
 
     private void ReadCharSkipWhitespace()
-    {
+    { 
         do ReadChar();
-        while (_lastChar >= 0 && char.IsWhiteSpace((char)_lastChar));
+        while (_lastChar >= 0 && char.IsWhiteSpace(_lastCharAsChar));
     }
 
     public List<ContainerModel> Parse()
     {
         ReadCharSkipWhitespace();
 
-        for (;;)
+        for (; ; )
         {
             if (_lastChar >= 0)
             {
@@ -59,22 +67,26 @@ internal class PBReportParser(string path)
             }
         }
     }
-
+    private void skipRestOfLine(string identifier)
+    {
+        var skippedThisLine = identifier + _reader.ReadLine();
+        _row++;
+        _col = 0;
+        ReadCharSkipWhitespace();
+    }
     private void ParseObject()
     {
-        if (!Char.IsAsciiLetterOrDigit((char)_lastChar))
+        if (!Char.IsAsciiLetterOrDigit(_lastCharAsChar))
         {
-            _reader.ReadLine();
-            ReadCharSkipWhitespace();
+            skipRestOfLine(_lastCharAsChar.ToString());
             return;
         }
 
         var key = ParseIdentifier();
 
-        if ((char)_lastChar != '(')
+        if (_lastCharAsChar != '(')
         {
-            _reader.ReadLine();
-            ReadCharSkipWhitespace();
+            skipRestOfLine(key + ' ' + _lastCharAsChar);
             return;
         }
 
@@ -117,7 +129,7 @@ internal class PBReportParser(string path)
                 {
                     height = double.Parse(container._attributes["height"]);
                 }
-                
+
                 if (attributes.TryGetValue("x", out var x) && height > 0)
                 {
                     var xnum = X(x);
@@ -130,17 +142,17 @@ internal class PBReportParser(string path)
             }
             else
             {
-                throw new Exception($"Unexpected character {FormatChar(_lastChar)} at ({_row}, {_col}) in file {_filePath}.");
+                throw new Exception($"Unexpected character trying to find band in ParseObject: {FormatChar(_lastCharAsChar)} at ({_row}, {_col}) in file {_filePath}.");
             }
         }
         else
         {
             _structure.Add(new(key, attributes));
-            if(attributes.TryGetValue("height", out var height))
+            if (attributes.TryGetValue("height", out var height))
             {
                 ReportHeight += Y(height);
             }
-            else if(attributes.TryGetValue("header.height", out height))
+            else if (attributes.TryGetValue("header.height", out height))
             {
                 ReportHeight += Y(height);
                 ReportHeight += Y(attributes["trailer.height"]);
@@ -150,15 +162,15 @@ internal class PBReportParser(string path)
 
     public void ParseTable()
     {
-        if ((char)_lastChar != '(')
+        if (_lastCharAsChar != '(')
         {
-            throw new Exception($"Unexpected character {FormatChar(_lastChar)} at ({_row}, {_col}) in file {_filePath}.");
+            throw new Exception($"Unexpected character while parsing table start: {FormatChar(_lastCharAsChar)} at ({_row}, {_col}) in file {_filePath}.");
         }
 
         var columns = new List<ObjectModel>();
         var attributes = new Dictionary<string, string>();
         ReadCharSkipWhitespace();
-        for (;;)
+        for (; ; )
         {
             if (_lastChar == ')')
             {
@@ -170,7 +182,7 @@ internal class PBReportParser(string path)
 
             if (_lastChar != '=')
             {
-                throw new Exception($"Unexpected character {FormatChar(_lastChar)} at ({_row}, {_col}) in file {_filePath}.");
+                throw new Exception($"Unexpected character while parsing table: {FormatChar(_lastCharAsChar)} at ({_row}, {_col}) in file {_filePath}.");
             }
             ReadCharSkipWhitespace();
             if (identifier == "column")
@@ -194,13 +206,13 @@ internal class PBReportParser(string path)
     private Dictionary<string, string> ParseAttributes()
     {
         Dictionary<string, string> attributes = [];
-        
-        if ((char)_lastChar != '(')
+
+        if (_lastCharAsChar != '(')
         {
-            throw new Exception($"Unexpected character {FormatChar(_lastChar)} at ({_row}, {_col}) in file {_filePath}.");
+            throw new Exception($"Unexpected character while parsing attributes: {FormatChar(_lastCharAsChar)} at ({_row}, {_col}) in file {_filePath}.");
         }
         ReadCharSkipWhitespace();
-        for (;;)
+        for (; ; )
         {
             if (_lastChar == ')')
             {
@@ -221,8 +233,8 @@ internal class PBReportParser(string path)
 
         if (_lastChar != '=')
         {
-            throw new Exception($"Unexpected character {FormatChar(_lastChar)} at ({_row}, {_col}) in file {_filePath}.");
-        } 
+            throw new Exception($"Unexpected character while parsing attribute: {FormatChar(_lastCharAsChar)} at ({_row}, {_col}) in file {_filePath}.");
+        }
         ReadCharSkipWhitespace();
 
         var value = ParseString();
@@ -235,27 +247,28 @@ internal class PBReportParser(string path)
         Span<char> buf = stackalloc char[8192];
         int pos = 0;
 
-        if (_lastChar == '"')
+
+        if (_lastCharAsChar == '"' || _lastCharAsChar == '\'')
         {
+            var initialOpenStringChar = _lastCharAsChar;
             ReadChar();
-            while ((char)_lastChar != '"')
+            while (_lastCharAsChar != initialOpenStringChar )
             {
-                buf[pos++] = (char)_lastChar;
+                buf[pos++] = _lastCharAsChar;
                 ReadChar();
             }
             ReadChar();
-        }
+        } 
         else
-        {
-
-            while (Char.IsAsciiLetterOrDigit((char)_lastChar) || _lastChar == '.' || _lastChar == '_')
+        { 
+            while (Char.IsAsciiLetterOrDigit(_lastCharAsChar) || _lastChar == '.' || _lastChar == '_')
             {
-                buf[pos++] = (char)_lastChar;
+                buf[pos++] = _lastCharAsChar;
                 ReadChar();
             }
             if (_lastChar == '(')
             {
-                buf[pos++] = (char)_lastChar;
+                buf[pos++] = _lastCharAsChar;
                 ReadChar();
                 var str = ParseString();
                 str.AsSpan().CopyTo(buf.Slice(pos, str.Length));
@@ -263,23 +276,23 @@ internal class PBReportParser(string path)
 
                 if (_lastChar != ')')
                 {
-                    throw new Exception($"Unexpected character {FormatChar(_lastChar)} at ({_row}, {_col}) in file {_filePath}.");
+                    throw new Exception($"Unexpected character while parsing string: {FormatChar(_lastCharAsChar)} at ({_row}, {_col}) in file {_filePath}.");
                 }
-                buf[pos++] = (char)_lastChar;
+                buf[pos++] = _lastCharAsChar;
                 ReadChar();
             }
 
-            if (pos == 0) throw new Exception($"Unexpected character {FormatChar(_lastChar)} at ({_row}, {_col}) in file {_filePath}.");
+            if (pos == 0) throw new Exception($"Unexpected character while parsing string (end): {FormatChar(_lastCharAsChar)} at ({_row}, {_col}) in file {_filePath}.");
         }
 
-        if (Char.IsWhiteSpace((char)_lastChar))
+        if (Char.IsWhiteSpace(_lastCharAsChar))
         {
             ReadCharSkipWhitespace();
         }
 
         if (_lastChar == ',')
         {
-            buf[pos++] = (char)_lastChar;
+            buf[pos++] = _lastCharAsChar;
             ReadCharSkipWhitespace();
             var str = ParseString();
             str.AsSpan().CopyTo(buf.Slice(pos, str.Length));
@@ -294,14 +307,14 @@ internal class PBReportParser(string path)
         Span<char> buf = stackalloc char[256];
         int pos = 0;
 
-        while (Char.IsAsciiLetterOrDigit((char)_lastChar) || _lastChar == '.' || _lastChar == '_')
+        while (Char.IsAsciiLetterOrDigit(_lastCharAsChar) || _lastChar == '.' || _lastChar == '_')
         {
-            buf[pos++] = (char)_lastChar;
+            buf[pos++] = _lastCharAsChar;
             ReadChar();
         }
-        if (pos == 0) throw new Exception($"Unexpected character {FormatChar(_lastChar)} at ({_row}, {_col}) in file {_filePath}.");
+        if (pos == 0) throw new Exception($"Unexpected character while parsing identifier: {FormatChar(_lastCharAsChar)} at ({_row}, {_col}) in file {_filePath}.");
 
-        if (Char.IsWhiteSpace((char)_lastChar))
+        if (Char.IsWhiteSpace(_lastCharAsChar))
         {
             ReadCharSkipWhitespace();
         }
@@ -311,18 +324,27 @@ internal class PBReportParser(string path)
 
     private string ParseSqlQuery()
     {
-        Span<char> buf = stackalloc char[50000];
+        var start = $"({_row}, {_col})";
+        int bufferSize = 50000;
+        Span<char> buf = stackalloc char[bufferSize];
         int pos = 0;
+
 
         if (_lastChar == '"')
         {
             ReadChar();
             for (; ; )
             {
-                if (_lastChar == '"' && Char.IsWhiteSpace((char)_reader.Peek()))
+                if (pos + 1 == bufferSize)
+                {
+                    throw new Exception($"Buffer overflow while parsing SQL query at that started at {start} to ({_row}, {_col}) in file {_filePath}.");
+                }
+                var current = _lastCharAsChar;
+                if (current == '"' && Char.IsWhiteSpace((char)_reader.Peek()))
                 {
                     ReadChar();
-                    if (_reader.Peek() == 'a')
+                    var nextNextChar = (char)_reader.Peek();
+                    if (nextNextChar == 'a' || nextNextChar == ')') //after the last quote, there should be either "arguments = ... )" or if there are no arguments: ")"
                     {
                         break;
                     }
@@ -331,16 +353,16 @@ internal class PBReportParser(string path)
                         buf[pos++] = '"';
                     }
                 }
-                buf[pos++] = (char)_lastChar;
+                buf[pos++] = current;
                 ReadChar();
             }
             if (pos == 0)
             {
-                throw new Exception($"Unexpected character {FormatChar(_lastChar)} at ({_row}, {_col}) in file {_filePath}.");
+                throw new Exception($"Unexpected character while parsing SQL query at that started at {start}: {FormatChar(_lastCharAsChar)} at ({_row}, {_col}) in file {_filePath}.");
             }
         }
 
-        if (Char.IsWhiteSpace((char)_lastChar))
+        if (Char.IsWhiteSpace(_lastCharAsChar))
         {
             ReadCharSkipWhitespace();
         }
@@ -352,7 +374,7 @@ internal class PBReportParser(string path)
     {
         if (band.GetType() != typeof(string))
         {
-            throw new Exception($"Unexpected character {FormatChar(_lastChar)} at ({_row}, {_col}) in file {_filePath}.");
+            throw new Exception($"Unexpected character while finding container by name: {FormatChar(_lastCharAsChar)} at ({_row}, {_col}) in file {_filePath}.");
         }
         var name = (string)band;
         foreach (var container in _structure)

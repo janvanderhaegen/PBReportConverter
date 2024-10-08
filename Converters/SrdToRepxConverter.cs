@@ -2,10 +2,12 @@
 using ReportMigration.Parser;
 using static ReportMigration.Helpers.DataSourceXmlGenerator;
 using static ReportMigration.Helpers.PBFormattingHelper;
+using ReportMigration.Helpers;
+using System.Diagnostics; 
 
 namespace ReportMigration.Converters;
 
-internal class PblToRepxConverter(string inputDir, string outputDir)
+internal class SrdToRepxConverter(string inputDir, string outputDir)
 {
     private int _ref = 1;
     private StreamWriter? _writer;
@@ -21,35 +23,61 @@ internal class PblToRepxConverter(string inputDir, string outputDir)
 
     public void GenerateRepxFile(string fileName)
     {
-        PBReportParser parser = new(Path.Combine(_inputDir, fileName));
+        Console.Write($"Converting {fileName} to .repx");
+        var inputPath = Path.Combine(_inputDir, fileName);
         var extensionIndex = fileName.LastIndexOf('.');
-        _writer = new(Path.Combine(_outputDir, $"{fileName[..extensionIndex]}.repx"));
+        var outputPath = Path.Combine(_outputDir, $"{fileName[..extensionIndex]}.repx");
+        try
+        {
+            PBReportParser parser = new(inputPath);
+            if (File.Exists(outputPath))
+            {
+                File.Delete(outputPath);
+            }
+            else { 
+                Directory.CreateDirectory(Path.GetDirectoryName(outputPath)!);            
+            }
 
-        var structure = parser.Parse();
-        _groupCount = parser.GroupCount;
-        _globalHeight = parser.ReportHeight;
-        _globalWidth = parser.ReportWidth;
+            _writer = new(outputPath);
 
-        WriteSingleLine("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
-        var dataWindowIndex = structure.FindIndex(x => x._objectType == "datawindow");
-        var dataWindowAttributes = structure[dataWindowIndex]._attributes;
-        WriteStartObject($"<XtraReportsLayoutSerializer SerializerVersion=\"24.1.4.0\" Ref=\"{_ref++}\" ControlType=\"DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral\" Name=\"XtraReport1\" VerticalContentSplitting=\"Smart\" Margins=\"{X(dataWindowAttributes["print.margin.left"])}, {X(dataWindowAttributes["print.margin.right"])}, {Y(dataWindowAttributes["print.margin.top"])}, {Y(dataWindowAttributes["print.margin.bottom"])}\" PaperKind=\"Custom\" PageWidth=\"{parser.ReportWidth + X(dataWindowAttributes["print.margin.left"]) + X(dataWindowAttributes["print.margin.right"])}\" PageHeight=\"{parser.ReportHeight + Y(dataWindowAttributes["print.margin.top"]) + Y(dataWindowAttributes["print.margin.bottom"]) + 200}\" Version=\"24.1\" DataMember=\"Query\" DataSource=\"#Ref-0\">");
+            var structure = parser.Parse();
+            _groupCount = parser.GroupCount;
+            _globalHeight = parser.ReportHeight;
+            _globalWidth = parser.ReportWidth;
 
-        var tableContainer = (TableModel)structure.Where(x => x.GetType() == typeof(TableModel)).ToList()[0];
-        var argList = GetParameters(tableContainer._attributes["arguments"]);
+            WriteSingleLine("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
+            var dataWindowIndex = structure.FindIndex(x => x._objectType == "datawindow");
+            var dataWindowAttributes = structure[dataWindowIndex]._attributes;
+            WriteStartObject($"<XtraReportsLayoutSerializer SerializerVersion=\"24.1.4.0\" Ref=\"{_ref++}\" ControlType=\"DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral\" Name=\"XtraReport1\" VerticalContentSplitting=\"Smart\" Margins=\"{X(dataWindowAttributes["print.margin.left"])}, {X(dataWindowAttributes["print.margin.right"])}, {Y(dataWindowAttributes["print.margin.top"])}, {Y(dataWindowAttributes["print.margin.bottom"])}\" PaperKind=\"Custom\" PageWidth=\"{parser.ReportWidth + X(dataWindowAttributes["print.margin.left"]) + X(dataWindowAttributes["print.margin.right"])}\" PageHeight=\"{parser.ReportHeight + Y(dataWindowAttributes["print.margin.top"]) + Y(dataWindowAttributes["print.margin.bottom"]) + 200}\" Version=\"24.1\" DataMember=\"Query\" DataSource=\"#Ref-0\">");
 
-        GenerateParameters(argList);
-        GenerateDataSource(tableContainer, 0);
-        GenerateBody(structure, dataWindowIndex);
+            var tableContainer = (TableModel)structure.Where(x => x.GetType() == typeof(TableModel)).ToList()[0];
 
-        WriteEndObject("</XtraReportsLayoutSerializer>");
-        _writer.Flush();
-        _writer.Dispose();
 
-        _ref = 1;
-        _tabulator = 0;
-        _globalParams.Clear();
-        _currentComputes.Clear();
+            if (tableContainer._attributes.ContainsKey("arguments"))
+                GenerateParameters(PBFormattingHelper.GetParameters(tableContainer._attributes["arguments"]));
+            GenerateDataSource(tableContainer, 0);
+            GenerateBody(structure, dataWindowIndex);
+
+            WriteEndObject("</XtraReportsLayoutSerializer>");
+            _writer.Flush();
+            _writer.Dispose();
+
+            _ref = 1;
+            _tabulator = 0;
+            _globalParams.Clear();
+            _currentComputes.Clear();
+            Console.Write(" - Done\n");
+        }
+        catch (Exception e)
+        { 
+            Console.WriteLine($" - Failed\n\t{e.Message}");
+            if (File.Exists(outputPath) && _writer != null)
+            { 
+                _writer.Flush();
+                _writer.Dispose();
+                File.Delete(outputPath); 
+            }
+        }
     }
 
     public void GenerateBody(List<ContainerModel> structure, int dataWindowIndex)
@@ -198,7 +226,7 @@ internal class PblToRepxConverter(string inputDir, string outputDir)
 
     private static string SetVisible(double height)
     {
-        if(height > 0)
+        if (height > 0)
         {
             return "";
         }
@@ -284,7 +312,7 @@ internal class PblToRepxConverter(string inputDir, string outputDir)
         var attributes = element._attributes;
         double x;
         double y;
-        if(!attributes.TryGetValue("x", out var xstr))
+        if (!attributes.TryGetValue("x", out var xstr))
         {
             x = X(attributes["x1"]);
             y = Y(attributes["y1"]);
@@ -416,7 +444,7 @@ internal class PblToRepxConverter(string inputDir, string outputDir)
 
     private static string FixFormattingString(string value)
     {
-        if(value.Equals("[general]", StringComparison.CurrentCultureIgnoreCase))
+        if (value.Equals("[general]", StringComparison.CurrentCultureIgnoreCase))
         {
             return "";
         }
@@ -430,7 +458,7 @@ internal class PblToRepxConverter(string inputDir, string outputDir)
         {
             throw new Exception($"Couldn't parse value: {value} as int");
         }
-        if(numValue >= 700)
+        if (numValue >= 700)
         {
             return ", style=Bold";
         }
