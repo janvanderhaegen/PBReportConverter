@@ -1,4 +1,4 @@
-﻿namespace ReportMigration.Models;
+﻿namespace PBReportConverter.Models;
 
 internal class ObjectModel(string objType, Dictionary<string, string> attributes)
 {

@@ -1,4 +1,4 @@
-﻿namespace ReportMigration.Helpers;
+﻿namespace PBReportConverter.Helpers;
 
 internal static class PBFormattingHelper
 {

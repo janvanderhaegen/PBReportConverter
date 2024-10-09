@@ -1,7 +1,7 @@
-﻿using ReportMigration.Models;
+﻿using PBReportConverter.Models;
 using System.Text;
 
-namespace ReportMigration.Helpers;
+namespace PBReportConverter.Helpers;
 
 internal static class DataSourceXmlGenerator
 {
@@ -11,7 +11,7 @@ internal static class DataSourceXmlGenerator
         var attributes = table._attributes;
         _writer.WriteLine("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
         _writer.WriteLine("<SqlDataSource Name=\"sqlDataSource1\">");
-        _writer.WriteLine("<Connection Name=\"TestDBConnection\" FromAppConfig=\"true\" />");
+        _writer.WriteLine("<Connection Name=\"TIES Data\" FromAppConfig=\"true\" />");
 
         if (attributes.TryGetValue("procedure", out var query))
         {

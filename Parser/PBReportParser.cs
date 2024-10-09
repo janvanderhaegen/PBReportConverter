@@ -1,12 +1,12 @@
-﻿using ReportMigration.Models;
-using System.Diagnostics;
-using static ReportMigration.Helpers.PBFormattingHelper;
+﻿using PBReportConverter.Helpers;
+using PBReportConverter.Models;
+using static PBReportConverter.Helpers.PBFormattingHelper;
 
-namespace ReportMigration.Parser;
+namespace PBReportConverter.Parser;
 
 internal class PBReportParser(string path)
 {
-    private readonly StreamReader _reader = new(path);
+    private readonly CustomReader _reader = new(path);
     private readonly string _filePath = path;
     private int _col = 1;
     private int _row = 1;
@@ -30,7 +30,7 @@ internal class PBReportParser(string path)
         if (_lastChar == '\n')
         {
             _row++;
-            _col = 0;
+            _col = 1;
         }
         else if (_lastChar >= 0)
         {
@@ -332,6 +332,7 @@ internal class PBReportParser(string path)
 
         if (_lastChar == '"')
         {
+            int bracketCheck = 0;
             ReadChar();
             for (; ; )
             {
@@ -343,8 +344,8 @@ internal class PBReportParser(string path)
                 if (current == '"' && Char.IsWhiteSpace((char)_reader.Peek()))
                 {
                     ReadChar();
-                    var nextNextChar = (char)_reader.Peek();
-                    if (nextNextChar == 'a' || nextNextChar == ')') //after the last quote, there should be either "arguments = ... )" or if there are no arguments: ")"
+                    var nextKeyword = _reader.Peek(9);
+                    if (nextKeyword == "arguments" || (nextKeyword.StartsWith(')') && bracketCheck==0)) //after the last quote, there should be either "arguments = ... )" or if there are no arguments: ")"
                     {
                         break;
                     }
@@ -352,6 +353,14 @@ internal class PBReportParser(string path)
                     {
                         buf[pos++] = '"';
                     }
+                }
+                if(current == '(')
+                {
+                    bracketCheck++;
+                }
+                else if(current == ')')
+                {
+                    bracketCheck--;
                 }
                 buf[pos++] = current;
                 ReadChar();
@@ -391,3 +400,4 @@ internal class PBReportParser(string path)
         return null;
     }
 }
+

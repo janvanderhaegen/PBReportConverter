@@ -1,11 +1,10 @@
-﻿using ReportMigration.Models;
-using ReportMigration.Parser;
-using static ReportMigration.Helpers.DataSourceXmlGenerator;
-using static ReportMigration.Helpers.PBFormattingHelper;
-using ReportMigration.Helpers;
-using System.Diagnostics; 
+﻿using PBReportConverter.Models;
+using PBReportConverter.Parser;
+using static PBReportConverter.Helpers.DataSourceXmlGenerator;
+using static PBReportConverter.Helpers.PBFormattingHelper;
+using PBReportConverter.Helpers;
 
-namespace ReportMigration.Converters;
+namespace PBReportConverter.Converters;
 
 internal class SrdToRepxConverter(string inputDir, string outputDir)
 {
@@ -53,8 +52,8 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
             var tableContainer = (TableModel)structure.Where(x => x.GetType() == typeof(TableModel)).ToList()[0];
 
 
-            if (tableContainer._attributes.ContainsKey("arguments"))
-                GenerateParameters(PBFormattingHelper.GetParameters(tableContainer._attributes["arguments"]));
+            if (tableContainer._attributes.TryGetValue("arguments", out string? value))
+                GenerateParameters(PBFormattingHelper.GetParameters(value));
             GenerateDataSource(tableContainer, 0);
             GenerateBody(structure, dataWindowIndex);
 
@@ -130,7 +129,19 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
         var tmpWidth = _globalWidth;
         var tmpGroupCount = _groupCount;
 
-        PBReportParser parser = new(Path.Combine(_inputDir, $"{attributes["dataobject"]}.p"));
+        var subreportPath = string.Empty;
+        var files = new[] { $"{attributes["dataobject"]}.srd", $"{attributes["dataobject"]}.p" }.SelectMany(pattern => Directory.GetFiles(_inputDir, pattern, SearchOption.AllDirectories)).ToArray();
+        if (files.Length > 0)
+        {
+            subreportPath = files[0];
+        }
+
+        if(subreportPath.Length == 0)
+        {
+            throw new Exception($"Source file doesn't exist for subreport: {attributes["dataobject"]}");
+        }
+
+        PBReportParser parser = new(subreportPath);
         var structure = parser.Parse();
 
         _globalHeight = parser.ReportHeight;
@@ -340,13 +351,20 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
         }
 
         bool visibility;
-        if (attributes["visible"] == "0")
+        if (attributes.TryGetValue("visibility", out var value) && value == "0")
         {
             visibility = false;
         }
         else
         {
             visibility = x < _globalWidth && y < containerHeight;
+        }
+
+        var nameAttr = string.Empty;
+
+        if(attributes.TryGetValue("name", out var name))
+        {
+            nameAttr = $"Name=\"{name}\"";
         }
 
         switch (element._objectType)
@@ -358,7 +376,7 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
                 }
             case "column":
                 {
-                    WriteStartObject($"<Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"{objType}\" Name=\"{attributes["name"]}\" TextFormatString=\"{FixFormattingString(attributes["format"])}\" TextAlignment=\"{ConvertAlignment(attributes["alignment"])}\"  Multiline=\"true\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\" AnchorVertical=\"Both\" Font=\"{attributes["font.face"]}, {attributes["font.height"][1..]}pt{CheckBold(attributes["font.weight"])}\" Visible=\"{visibility}\">");
+                    WriteStartObject($"<Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"{objType}\" {nameAttr} TextFormatString=\"{FixFormattingString(attributes["format"])}\" TextAlignment=\"{ConvertAlignment(attributes["alignment"])}\"  Multiline=\"true\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\" AnchorVertical=\"Both\" Font=\"{attributes["font.face"]}, {attributes["font.height"][1..]}pt{CheckBold(attributes["font.weight"])}\" Visible=\"{visibility}\">");
                     WriteStartObject("<ExpressionBindings>");
                     WriteSingleLine($"<Item1 Ref=\"{_ref++}\" EventName=\"BeforePrint\" PropertyName=\"Text\" Expression=\"[{attributes["name"]}]\"/>");
                     WriteEndObject("</ExpressionBindings>");
@@ -367,15 +385,14 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
                 }
             case "text":
                 {
-                    WriteSingleLine($"<Item{itemCounter++} Ref=\"{_ref++}\" ControlType=\"{objType}\" Name=\"{attributes["name"]}\" TextAlignment=\"{ConvertAlignment(attributes["alignment"])}\" Multiline=\"true\" Text=\"{attributes["text"].Replace('&', '-')}\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\" AnchorVertical=\"Both\" Font=\"{attributes["font.face"]}, {attributes["font.height"][1..]}pt{CheckBold(attributes["font.weight"])}\" Visible=\"{visibility}\"/>");
+                    WriteSingleLine($"<Item{itemCounter++} Ref=\"{_ref++}\" ControlType=\"{objType}\" {nameAttr} TextAlignment=\"{ConvertAlignment(attributes["alignment"])}\" Multiline=\"true\" Text=\"{attributes["text"].Replace('&', '-')}\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\" AnchorVertical=\"Both\" Font=\"{attributes["font.face"]}, {attributes["font.height"][1..]}pt{CheckBold(attributes["font.weight"])}\" Visible=\"{visibility}\"/>");
                     break;
                 }
             case "compute":
                 {
-                    var name = attributes["name"];
                     if(attributes["expression"] == "page()")
                     {
-                        WriteSingleLine($"<Item{itemCounter++} Ref=\"{_ref++}\" ControlType=\"XRPageInfo\" Name=\"{name}\" PageInfo=\"Number\" TextAlignment=\"{ConvertAlignment(attributes["alignment"])}\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\" AnchorVertical=\"Both\" />");
+                        WriteSingleLine($"<Item{itemCounter++} Ref=\"{_ref++}\" ControlType=\"XRPageInfo\" {nameAttr} PageInfo=\"Number\" TextAlignment=\"{ConvertAlignment(attributes["alignment"])}\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\" AnchorVertical=\"Both\" />");
                     }
                     else
                     {
@@ -385,7 +402,7 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
                         WriteSingleLine($"<Item1 Ref=\"{_ref++}\" EventName=\"BeforePrint\" PropertyName=\"Text\" Expression=\"[{name}]\"/>");
                         WriteEndObject("</ExpressionBindings>");
                         WriteEndObject($"</Item{itemCounter++}>");
-                        _currentComputes.Add((name, expression));
+                        _currentComputes.Add((name!, expression));
                     }
                     break;
                 }
