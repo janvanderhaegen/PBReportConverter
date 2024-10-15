@@ -20,6 +20,7 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
     private bool _globalPageAddedCheck = false;
     private readonly Dictionary<string, int> _globalParams = [];
     private List<(string name, string expression)> _currentComputes = [];
+    private List<string> _currentColumns = [];
 
     public void GenerateRepxFile(string fileName)
     {
@@ -52,6 +53,7 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
 
             var tableContainer = (TableModel)structure.Where(x => x.GetType() == typeof(TableModel)).ToList()[0];
 
+            _currentColumns = GetColumns(tableContainer);
 
             if (tableContainer._attributes.TryGetValue("arguments", out string? value))
                 GenerateParameters(PBFormattingHelper.GetParameters(value));
@@ -80,8 +82,20 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
             _tabulator = 0;
             _globalParams.Clear();
             _currentComputes.Clear();
+            _currentColumns.Clear();
             Console.Write(" - Done\n");
         }
+    }
+
+    private List<string> GetColumns(TableModel tableContainer)
+    {
+        var result = new List<string>();
+
+        foreach(var elem in tableContainer._columns)
+        {
+            result.Add(elem._attributes["name"]);
+        }
+        return result;
     }
 
     public void GenerateBody(List<ContainerModel> structure, int dataWindowIndex)
@@ -135,6 +149,7 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
         var tmpPageCheck = _globalPageAddedCheck;
         var tmpUom = uom;
         var tmpComputes = new List<(string name, string expression)>(_currentComputes);
+        var tmpColumns = new List<string>(_currentColumns);
 
         var subreportPath = string.Empty;
         var files = new[] { $"{attributes["dataobject"]}.srd", $"{attributes["dataobject"]}.p" }.SelectMany(pattern => Directory.GetFiles(_inputDir, pattern, SearchOption.AllDirectories)).ToArray();
@@ -166,6 +181,7 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
         WriteStartObject($"<ReportSource Ref=\"{_ref++}\" Name=\"{attributes["dataobject"]}\" ControlType=\"ReportMigration.XtraReports.{attributes["dataobject"]}, ReportMigration, Version=1.0.0.0, Culture=neutral\" VerticalContentSplitting=\"Smart\" Margins=\"{X(dataWindowAttributes["print.margin.left"])}, {X(dataWindowAttributes["print.margin.right"])}, {Y(dataWindowAttributes["print.margin.top"])}, {Y(dataWindowAttributes["print.margin.bottom"])}\" PaperKind=\"Custom\" PageWidth=\"{parser.ReportWidth}\" PageHeight=\"{parser.ReportHeight}\" Version=\"24.1\" DataMember=\"Query\" DataSource=\"#Ref-{dataSourceRef}\">");
 
         var tableContainer = (TableModel)structure.Where(x => x.GetType() == typeof(TableModel)).ToList()[0];
+        _currentColumns = GetColumns(tableContainer);
         var argList = GetParameters(tableContainer._attributes["arguments"]);
 
         GenerateParameters(argList);
@@ -202,6 +218,7 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
         _globalPageAddedCheck = tmpPageCheck;
         uom = tmpUom;
         _currentComputes = tmpComputes;
+        _currentColumns = tmpColumns;
     }
 
     private void GenerateParameters(List<string> arguments)
@@ -399,8 +416,13 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
             case "column":
                 {
                     WriteStartObject($"<Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"{objType}\" {nameAttr} TextFormatString=\"{FixFormattingString(formatString)}\" TextAlignment=\"{ConvertAlignment(attributes["alignment"])}\"  Multiline=\"true\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\" AnchorVertical=\"Both\" Font=\"{attributes["font.face"]}, {attributes["font.height"][1..]}pt{CheckBold(attributes["font.weight"])}\" Visible=\"{visibility}\">");
+                    var colFilterList = _currentColumns.Where(col => attributes["name"].Contains(col)).ToList();
+
+                    // We search for the longest existing column name that can fit into the new column
+                    var expr = colFilterList.Count > 0 ? colFilterList.Aggregate("", (max, cur) => max.Length > cur.Length ? max : cur) : attributes["name"];
+                    
                     WriteStartObject("<ExpressionBindings>");
-                    WriteSingleLine($"<Item1 Ref=\"{_ref++}\" EventName=\"BeforePrint\" PropertyName=\"Text\" Expression=\"[{attributes["name"]}]\"/>");
+                    WriteSingleLine($"<Item1 Ref=\"{_ref++}\" EventName=\"BeforePrint\" PropertyName=\"Text\" Expression=\"[{expr}]\"/>");
                     WriteEndObject("</ExpressionBindings>");
                     WriteEndObject($"</Item{itemCounter++}>");
                     break;

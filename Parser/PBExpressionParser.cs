@@ -9,9 +9,10 @@ internal class PBExpressionParser
     private int _lastChar;
     private char _lastCharAsChar;
     private readonly StringBuilder _sb = new();
-    private readonly StringBuilder _bufferSb = new();
+    private readonly StringBuilder _exprBufferSb = new();
+    private readonly StringBuilder _lastStrBufferSb = new();
     private bool _writeToBuffer = false;
-    private static readonly List<string> _knownOps = ["when", "then", "and", "or"];
+    private static readonly List<string> _knownOps = ["when", "then", "and", "or", "else"];
     private static readonly List<char> _exprDelims = ['(', ')', ',', '\''];
 
 private static string FormatChar(int c) => c < 32 ? $"\\x{c:X2}" : $"'{(char)c}'";
@@ -26,7 +27,7 @@ private static string FormatChar(int c) => c < 32 ? $"\\x{c:X2}" : $"'{(char)c}'
     {
         if (_writeToBuffer)
         {
-            _bufferSb.Append(value);
+            _exprBufferSb.Append(value);
         }
         else
         {
@@ -63,7 +64,7 @@ private static string FormatChar(int c) => c < 32 ? $"\\x{c:X2}" : $"'{(char)c}'
         while (_lastChar >= 0 && char.IsWhiteSpace(_lastCharAsChar));
     }
 
-    private string ParseString(bool writeToBuffer = false)
+    private string ParseString()
     {
         Span<char> buf = stackalloc char[10000];
         int pos = 0;
@@ -84,10 +85,6 @@ private static string FormatChar(int c) => c < 32 ? $"\\x{c:X2}" : $"'{(char)c}'
         if (pos == 0) 
             throw new Exception($"Unexpected character {FormatChar(_lastChar)}.");
 
-        if (writeToBuffer)
-        {
-            _bufferSb.Append(buf[..pos].ToString());
-        }
         return buf[..pos].ToString();
     }
 
@@ -156,10 +153,11 @@ private static string FormatChar(int c) => c < 32 ? $"\\x{c:X2}" : $"'{(char)c}'
 
                 if (_knownOps.Contains(str.ToLower()))
                 {
+                    _lastStrBufferSb.Clear();
                     Append(MapOperation(str.ToLower()));
+                    _lastStrBufferSb.Append(str.ToLower());
                     break;
                 }
-                //_bufferSb.Clear();
                 if (_lastChar == '(')
                 {
                     Append(FunctionHelper(str));
@@ -291,24 +289,30 @@ private static string FormatChar(int c) => c < 32 ? $"\\x{c:X2}" : $"'{(char)c}'
 
     private void ParseCaseParameter()
     {
+        var elseCheck = false;
         _writeToBuffer = true;
         ParseExpression();
-        var expressionToCheck = _bufferSb.ToString();
-        _bufferSb.Clear();
+        var expressionToCheck = _exprBufferSb.ToString();
+        _exprBufferSb.Clear();
         _writeToBuffer = false;
         for (; ; )
         {
             if (_lastChar == ')' || _lastChar < 0)
             {
-                Append("''");
+                if (!elseCheck)
+                {
+                    Append("''");
+                }
                 AddChar();
                 break;
             }
-            //if (_bufferSb.ToString() == "else")
-            //{
-            //    ParseExpression();
-            //    continue;
-            //}
+            if (_lastStrBufferSb.ToString() == "else")
+            {
+                ParseExpression();
+                elseCheck = true;
+                //_exprBufferSb.Clear();
+                continue;
+            }
             Append(expressionToCheck + "==");
             ParseExpression();
             Append(',');
@@ -321,10 +325,10 @@ private static string FormatChar(int c) => c < 32 ? $"\\x{c:X2}" : $"'{(char)c}'
     {
         _writeToBuffer = true;
         ParseExpression();
-        var firstParam = _bufferSb.ToString();
-        _bufferSb.Clear();
+        var firstParam = _exprBufferSb.ToString();
+        _exprBufferSb.Clear();
         ParseExpression();
-        var secondParam = _bufferSb.ToString();
+        var secondParam = _exprBufferSb.ToString();
         _writeToBuffer = false;
         if (_lastChar == ')' || _lastChar < 0)
         {
