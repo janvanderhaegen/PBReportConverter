@@ -17,8 +17,9 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
     private int _groupCount;
     private double _globalHeight;
     private double _globalWidth;
+    private bool _globalPageAddedCheck = false;
     private readonly Dictionary<string, int> _globalParams = [];
-    private readonly List<(string name, string expression)> _currentComputes = [];
+    private List<(string name, string expression)> _currentComputes = [];
 
     public void GenerateRepxFile(string fileName)
     {
@@ -58,14 +59,8 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
             GenerateBody(structure, dataWindowIndex);
 
             WriteEndObject("</XtraReportsLayoutSerializer>");
-            _writer.Flush();
-            _writer.Dispose();
 
-            _ref = 1;
-            _tabulator = 0;
-            _globalParams.Clear();
-            _currentComputes.Clear();
-            Console.Write(" - Done\n");
+            _writer.Flush();
         }
         catch (Exception e)
         { 
@@ -76,6 +71,16 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
                 _writer.Dispose();
                 File.Delete(outputPath); 
             }
+        }
+        finally
+        {
+            _writer?.Dispose();
+
+            _ref = 1;
+            _tabulator = 0;
+            _globalParams.Clear();
+            _currentComputes.Clear();
+            Console.Write(" - Done\n");
         }
     }
 
@@ -123,11 +128,13 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
     {
         var objType = ConvertElementType(subreport._objectType);
         var attributes = subreport._attributes;
-        var parameterArguments = GetParameters(attributes["nest_arguments"]);
 
         var tmpHeight = _globalHeight;
         var tmpWidth = _globalWidth;
         var tmpGroupCount = _groupCount;
+        var tmpPageCheck = _globalPageAddedCheck;
+        var tmpUom = uom;
+        var tmpComputes = new List<(string name, string expression)>(_currentComputes);
 
         var subreportPath = string.Empty;
         var files = new[] { $"{attributes["dataobject"]}.srd", $"{attributes["dataobject"]}.p" }.SelectMany(pattern => Directory.GetFiles(_inputDir, pattern, SearchOption.AllDirectories)).ToArray();
@@ -136,10 +143,12 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
             subreportPath = files[0];
         }
 
-        if(subreportPath.Length == 0)
+        if (subreportPath.Length == 0)
         {
             throw new Exception($"Source file doesn't exist for subreport: {attributes["dataobject"]}");
         }
+
+        WriteStartObject($"<Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"{objType}\" Name=\"{attributes["dataobject"]}\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\">");
 
         PBReportParser parser = new(subreportPath);
         var structure = parser.Parse();
@@ -147,8 +156,9 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
         _globalHeight = parser.ReportHeight;
         _globalWidth = parser.ReportWidth;
         _groupCount = parser.GroupCount;
+        _globalPageAddedCheck = false;
+        _currentComputes.Clear();
 
-        WriteStartObject($"<Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"{objType}\" Name=\"{attributes["dataobject"]}\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\">");
         var dataWindowIndex = structure.FindIndex(x => x._objectType == "datawindow");
         var dataWindowAttributes = structure[dataWindowIndex]._attributes;
         var dataSourceRef = _ref++;
@@ -164,27 +174,34 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
 
         WriteEndObject("</ReportSource>");
 
-        WriteStartObject("<ParameterBindings>");
-        var subItemCounter = 0;
-        foreach (var arg in parameterArguments)
+        if(attributes.TryGetValue("nest_arguments", out var argsString))
         {
-            var paramName = argList[subItemCounter++];
-            if (_globalParams.TryGetValue(arg, out var refNum))
+            var parameterArguments = GetParameters(attributes["nest_arguments"]);
+            WriteStartObject("<ParameterBindings>");
+            var subItemCounter = 0;
+            foreach (var arg in parameterArguments)
             {
-                WriteSingleLine($"<Item{subItemCounter} Ref=\"{_ref++}\" ParameterName=\"{paramName}\" Parameter=\"#Ref-{refNum}\" />");
+                var paramName = argList[subItemCounter++];
+                if (_globalParams.TryGetValue(arg, out var refNum))
+                {
+                    WriteSingleLine($"<Item{subItemCounter} Ref=\"{_ref++}\" ParameterName=\"{paramName}\" Parameter=\"#Ref-{refNum}\" />");
+                }
+                else
+                {
+                    WriteSingleLine($"<Item{subItemCounter} Ref=\"{_ref++}\" ParameterName=\"{paramName}\" DataMember=\"Query.{arg}\" />");
+                }
             }
-            else
-            {
-                WriteSingleLine($"<Item{subItemCounter} Ref=\"{_ref++}\" ParameterName=\"{paramName}\" DataMember=\"Query.{arg}\" />");
-            }
+            WriteEndObject("</ParameterBindings>");
         }
-        WriteEndObject("</ParameterBindings>");
 
         WriteEndObject($"</Item{itemCounter++}>");
 
         _globalHeight = tmpHeight;
         _globalWidth = tmpWidth;
         _groupCount = tmpGroupCount;
+        _globalPageAddedCheck = tmpPageCheck;
+        uom = tmpUom;
+        _currentComputes = tmpComputes;
     }
 
     private void GenerateParameters(List<string> arguments)
@@ -364,9 +381,14 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
 
         if(attributes.TryGetValue("name", out var name))
         {
+            if (_globalParams.ContainsKey(name))
+            {
+                name += "_label";
+            }
             nameAttr = $"Name=\"{name}\"";
         }
 
+        attributes.TryGetValue("format", out var formatString);
         switch (element._objectType)
         {
             case "report":
@@ -376,7 +398,7 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
                 }
             case "column":
                 {
-                    WriteStartObject($"<Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"{objType}\" {nameAttr} TextFormatString=\"{FixFormattingString(attributes["format"])}\" TextAlignment=\"{ConvertAlignment(attributes["alignment"])}\"  Multiline=\"true\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\" AnchorVertical=\"Both\" Font=\"{attributes["font.face"]}, {attributes["font.height"][1..]}pt{CheckBold(attributes["font.weight"])}\" Visible=\"{visibility}\">");
+                    WriteStartObject($"<Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"{objType}\" {nameAttr} TextFormatString=\"{FixFormattingString(formatString)}\" TextAlignment=\"{ConvertAlignment(attributes["alignment"])}\"  Multiline=\"true\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\" AnchorVertical=\"Both\" Font=\"{attributes["font.face"]}, {attributes["font.height"][1..]}pt{CheckBold(attributes["font.weight"])}\" Visible=\"{visibility}\">");
                     WriteStartObject("<ExpressionBindings>");
                     WriteSingleLine($"<Item1 Ref=\"{_ref++}\" EventName=\"BeforePrint\" PropertyName=\"Text\" Expression=\"[{attributes["name"]}]\"/>");
                     WriteEndObject("</ExpressionBindings>");
@@ -390,14 +412,18 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
                 }
             case "compute":
                 {
-                    if(attributes["expression"] == "page()")
+                    if(attributes["expression"].Contains("page()"))
                     {
-                        WriteSingleLine($"<Item{itemCounter++} Ref=\"{_ref++}\" ControlType=\"XRPageInfo\" {nameAttr} PageInfo=\"Number\" TextAlignment=\"{ConvertAlignment(attributes["alignment"])}\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\" AnchorVertical=\"Both\" />");
+                        if (!_globalPageAddedCheck)
+                        {
+                            _globalPageAddedCheck = true;
+                            WriteSingleLine($"<Item{itemCounter++} Ref=\"{_ref++}\" ControlType=\"XRPageInfo\" {nameAttr} PageInfo=\"Number\" TextAlignment=\"{ConvertAlignment(attributes["alignment"])}\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\" AnchorVertical=\"Both\" />");
+                        }
                     }
                     else
                     {
                         var expression = Expression(attributes["expression"]);
-                        WriteStartObject($"<Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"{objType}\" Name=\"{name}_field\" TextFormatString=\"{FixFormattingString(attributes["format"])}\" TextAlignment=\"{ConvertAlignment(attributes["alignment"])}\"  Multiline=\"true\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\" AnchorVertical=\"Both\" Font=\"{attributes["font.face"]}, {attributes["font.height"][1..]}pt{CheckBold(attributes["font.weight"])}\" Visible=\"{visibility}\">");
+                        WriteStartObject($"<Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"{objType}\" Name=\"{name}_field\" TextFormatString=\"{FixFormattingString(formatString)}\" TextAlignment=\"{ConvertAlignment(attributes["alignment"])}\"  Multiline=\"true\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\" AnchorVertical=\"Both\" Font=\"{attributes["font.face"]}, {attributes["font.height"][1..]}pt{CheckBold(attributes["font.weight"])}\" Visible=\"{visibility}\">");
                         WriteStartObject("<ExpressionBindings>");
                         WriteSingleLine($"<Item1 Ref=\"{_ref++}\" EventName=\"BeforePrint\" PropertyName=\"Text\" Expression=\"[{name}]\"/>");
                         WriteEndObject("</ExpressionBindings>");
@@ -438,7 +464,11 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
                 }
             case "rectangle":
                 {
-                    WriteStartObject($"<Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"{objType}\" Name=\"{attributes["name"]}\" FillColor=\"{Color(attributes["background.gradient.color"])}\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\" Visible=\"{visibility}\">");
+                    if (!attributes.TryGetValue("background.gradient.color", out var color))
+                    {
+                        color = "";
+                    }
+                    WriteStartObject($"<Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"{objType}\" Name=\"{attributes["name"]}\" FillColor=\"{Color(color)}\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\" Visible=\"{visibility}\">");
                     WriteSingleLine($"<Shape Ref=\"{_ref++}\" ShapeName=\"Rectangle\"/>");
                     WriteEndObject($"</Item{itemCounter++}>");
                     break;
@@ -459,9 +489,9 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
         return parsedExpression;
     }
 
-    private static string FixFormattingString(string value)
+    private static string FixFormattingString(string? value)
     {
-        if (value.Equals("[general]", StringComparison.CurrentCultureIgnoreCase))
+        if (string.IsNullOrEmpty(value) || value.Equals("[general]", StringComparison.CurrentCultureIgnoreCase))
         {
             return "";
         }

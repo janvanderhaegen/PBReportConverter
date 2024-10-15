@@ -70,7 +70,7 @@ internal static class DataSourceXmlGenerator
         }
 
         List<string> sortList = [];
-        var sortElements = sortString.Trim().Split(' ');
+        var sortElements = sortString.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
         foreach(var sortElement in sortElements.Chunk(2))
         {
             var sortMethod = sortElement[1] == "A" ? "ASC" : "DESC";

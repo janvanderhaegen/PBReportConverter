@@ -2,22 +2,37 @@
 
 internal static class PBFormattingHelper
 {
+    public static int uom;
     public static double X(string value)
     {
-        if (!double.TryParse(value, out var numValue))
+        if (!double.TryParse(value.Split(" ")[0], out var numValue))
         {
-            throw new Exception($"Couldn't parse value: {value} as int");
+            throw new ArgumentException($"Couldn't parse value: {value} as int");
         }
-        return Math.Ceiling((numValue * 1400 - 700) / 6144);
+        return uom switch
+        {
+            0 => Math.Ceiling((numValue * 1400 - 700) / 6144),
+            1 => numValue,
+            2 => Math.Ceiling(numValue /10),
+            3 => Math.Ceiling(numValue / 10 * 2.54),
+            _ => throw new NotImplementedException($"Unit not implemented: {uom}")
+        };
     }
 
     public static double Y(string value)
     {
-        if (!double.TryParse(value, out var numValue))
+        if (!double.TryParse(value.Split(" ")[0], out var numValue))
         {
-            throw new Exception($"Couldn't parse value: {value} as int");
+            throw new ArgumentException($"Couldn't parse value: {value} as int");
         }
-        return Math.Ceiling((numValue * 200 - 100) / 768);
+        return uom switch
+        {
+            0 => Math.Ceiling((numValue * 200 - 100) / 768),
+            1 => numValue,
+            2 => Math.Ceiling(numValue / 10),
+            3 => Math.Ceiling(numValue / 10 * 2.54),
+            _ => throw new NotImplementedException($"Unit not implemented: {uom}")
+        };
     }
 
     public static string? ConvertElementType(string ctrlType)

@@ -8,11 +8,9 @@ internal class PBReportParser(string path)
 {
     private readonly CustomReader _reader = new(path);
     private readonly string _filePath = path;
-    private int _col = 1;
-    private int _row = 1;
     private int _lastChar;
     private char _lastCharAsChar;
-    private readonly List<ContainerModel> _structure = [new("background", [])];
+    private readonly List<ContainerModel> _structure = [];
     public double ReportHeight { get; private set; } = 0;
     public double ReportWidth { get; private set; } = 0;
     public int GroupCount { get; private set; } = 0;
@@ -26,23 +24,6 @@ internal class PBReportParser(string path)
     {
         _lastChar = _reader.Read();
         _lastCharAsChar = (char)_lastChar;
-
-        if (_lastChar == '\n')
-        {
-            _row++;
-            _col = 1;
-        }
-        else if (_lastChar >= 0)
-        {
-            if(_lastChar == '\t')
-            {
-                _col += 4;
-            }
-            else
-            {
-                _col++;
-            }
-        } 
     }
 
     private void ReadCharSkipWhitespace()
@@ -70,8 +51,6 @@ internal class PBReportParser(string path)
     private void skipRestOfLine(string identifier)
     {
         var skippedThisLine = identifier + _reader.ReadLine();
-        _row++;
-        _col = 0;
         ReadCharSkipWhitespace();
     }
     private void ParseObject()
@@ -100,6 +79,7 @@ internal class PBReportParser(string path)
 
         if (key == "datawindow")
         {
+            uom = int.Parse(attributes["units"]);
             _verticalMarginSum = Y(attributes["print.margin.top"]) + Y(attributes["print.margin.bottom"]);
             _horizontalMarginSum = X(attributes["print.margin.left"]) + X(attributes["print.margin.right"]);
         }
@@ -111,38 +91,37 @@ internal class PBReportParser(string path)
         if (attributes.TryGetValue("band", out var band))
         {
             var container = FindContainerByName(band);
-            if (container != null)
+            if (container == null)
             {
+                container = new(band, new() { { "height", "0" } });
                 container._elements.Add(new(key, attributes));
-                if (container._objectType == "background") return;
+                _structure.Add(container);
+            }
+            container._elements.Add(new(key, attributes));
+            if (container._objectType == "background") return;
 
-                double height;
-                if (band.Contains("header."))
-                {
-                    height = double.Parse(container._attributes["header.height"]);
-                }
-                else if (band.Contains("trailer."))
-                {
-                    height = double.Parse(container._attributes["trailer.height"]);
-                }
-                else
-                {
-                    height = double.Parse(container._attributes["height"]);
-                }
-
-                if (attributes.TryGetValue("x", out var x) && height > 0)
-                {
-                    var xnum = X(x);
-                    var width = X(attributes["width"]);
-                    if (xnum + width > ReportWidth)
-                    {
-                        ReportWidth = xnum + width;
-                    }
-                }
+            double height;
+            if (band.Contains("header."))
+            {
+                height = double.Parse(container._attributes["header.height"]);
+            }
+            else if (band.Contains("trailer."))
+            {
+                height = double.Parse(container._attributes["trailer.height"]);
             }
             else
             {
-                throw new Exception($"Unexpected character trying to find band in ParseObject: {FormatChar(_lastCharAsChar)} at ({_row}, {_col}) in file {_filePath}.");
+                height = double.Parse(container._attributes["height"]);
+            }
+
+            if (attributes.TryGetValue("x", out var x) && height > 0)
+            {
+                var xnum = X(x);
+                var width = X(attributes["width"]);
+                if (xnum + width > ReportWidth)
+                {
+                    ReportWidth = xnum + width;
+                }
             }
         }
         else
@@ -164,7 +143,7 @@ internal class PBReportParser(string path)
     {
         if (_lastCharAsChar != '(')
         {
-            throw new Exception($"Unexpected character while parsing table start: {FormatChar(_lastCharAsChar)} at ({_row}, {_col}) in file {_filePath}.");
+            throw new Exception($"Unexpected character while parsing table start: {FormatChar(_lastCharAsChar)} at ({_reader.CurrentLineIndex()}, {_reader.CurrentCharIndex()}) in file {_filePath}.");
         }
 
         var columns = new List<ObjectModel>();
@@ -182,7 +161,7 @@ internal class PBReportParser(string path)
 
             if (_lastChar != '=')
             {
-                throw new Exception($"Unexpected character while parsing table: {FormatChar(_lastCharAsChar)} at ({_row}, {_col}) in file {_filePath}.");
+                throw new Exception($"Unexpected character while parsing table: {FormatChar(_lastCharAsChar)} at ({_reader.CurrentLineIndex()}, {_reader.CurrentCharIndex()}) in file {_filePath}.");
             }
             ReadCharSkipWhitespace();
             if (identifier == "column")
@@ -209,7 +188,7 @@ internal class PBReportParser(string path)
 
         if (_lastCharAsChar != '(')
         {
-            throw new Exception($"Unexpected character while parsing attributes: {FormatChar(_lastCharAsChar)} at ({_row}, {_col}) in file {_filePath}.");
+            throw new Exception($"Unexpected character while parsing attributes: {FormatChar(_lastCharAsChar)} at ({_reader.CurrentLineIndex()}, {_reader.CurrentCharIndex()}) in file {_filePath}.");
         }
         ReadCharSkipWhitespace();
         for (; ; )
@@ -233,7 +212,7 @@ internal class PBReportParser(string path)
 
         if (_lastChar != '=')
         {
-            throw new Exception($"Unexpected character while parsing attribute: {FormatChar(_lastCharAsChar)} at ({_row}, {_col}) in file {_filePath}.");
+            throw new Exception($"Unexpected character while parsing attribute: {FormatChar(_lastCharAsChar)} at ({_reader.CurrentLineIndex()}, {_reader.CurrentCharIndex()}) in file {_filePath}.");
         }
         ReadCharSkipWhitespace();
 
@@ -276,13 +255,13 @@ internal class PBReportParser(string path)
 
                 if (_lastChar != ')')
                 {
-                    throw new Exception($"Unexpected character while parsing string: {FormatChar(_lastCharAsChar)} at ({_row}, {_col}) in file {_filePath}.");
+                    throw new Exception($"Unexpected character while parsing string: {FormatChar(_lastCharAsChar)} at ({_reader.CurrentLineIndex()}, {_reader.CurrentCharIndex()}) in file {_filePath}.");
                 }
                 buf[pos++] = _lastCharAsChar;
                 ReadChar();
             }
 
-            if (pos == 0) throw new Exception($"Unexpected character while parsing string (end): {FormatChar(_lastCharAsChar)} at ({_row}, {_col}) in file {_filePath}.");
+            if (pos == 0) throw new Exception($"Unexpected character while parsing string (end): {FormatChar(_lastCharAsChar)} at ({_reader.CurrentLineIndex()}, {_reader.CurrentCharIndex()}) in file {_filePath}.");
         }
 
         if (Char.IsWhiteSpace(_lastCharAsChar))
@@ -312,7 +291,7 @@ internal class PBReportParser(string path)
             buf[pos++] = _lastCharAsChar;
             ReadChar();
         }
-        if (pos == 0) throw new Exception($"Unexpected character while parsing identifier: {FormatChar(_lastCharAsChar)} at ({_row}, {_col}) in file {_filePath}.");
+        if (pos == 0) throw new Exception($"Unexpected character while parsing identifier: {FormatChar(_lastCharAsChar)} at ({_reader.CurrentLineIndex()}, {_reader.CurrentCharIndex()}) in file {_filePath}.");
 
         if (Char.IsWhiteSpace(_lastCharAsChar))
         {
@@ -324,7 +303,7 @@ internal class PBReportParser(string path)
 
     private string ParseSqlQuery()
     {
-        var start = $"({_row}, {_col})";
+        var start = $"({_reader.CurrentLineIndex()}, {_reader.CurrentCharIndex()})";
         int bufferSize = 50000;
         Span<char> buf = stackalloc char[bufferSize];
         int pos = 0;
@@ -338,7 +317,7 @@ internal class PBReportParser(string path)
             {
                 if (pos + 1 == bufferSize)
                 {
-                    throw new Exception($"Buffer overflow while parsing SQL query at that started at {start} to ({_row}, {_col}) in file {_filePath}.");
+                    throw new Exception($"Buffer overflow while parsing SQL query that started at {start} to ({_reader.CurrentLineIndex()}, {_reader.CurrentCharIndex()}) in file {_filePath}.");
                 }
                 var current = _lastCharAsChar;
                 if (current == '"' && Char.IsWhiteSpace((char)_reader.Peek()))
@@ -367,7 +346,7 @@ internal class PBReportParser(string path)
             }
             if (pos == 0)
             {
-                throw new Exception($"Unexpected character while parsing SQL query at that started at {start}: {FormatChar(_lastCharAsChar)} at ({_row}, {_col}) in file {_filePath}.");
+                throw new Exception($"Unexpected character while parsing SQL query that started at {start}: {FormatChar(_lastCharAsChar)} at ({_reader.CurrentLineIndex()}, {_reader.CurrentCharIndex()}) in file {_filePath}.");
             }
         }
 
@@ -379,22 +358,21 @@ internal class PBReportParser(string path)
         return buf[..pos].ToString().Replace("<", "&lt;").Replace(">", "&gt;");
     }
 
-    private ContainerModel? FindContainerByName(object band)
+    private ContainerModel? FindContainerByName(string name)
     {
-        if (band.GetType() != typeof(string))
-        {
-            throw new Exception($"Unexpected character while finding container by name: {FormatChar(_lastCharAsChar)} at ({_row}, {_col}) in file {_filePath}.");
-        }
-        var name = (string)band;
         foreach (var container in _structure)
         {
             if (name == container._objectType)
             {
                 return container;
             }
-            if (container._objectType == "group" && name.Split('.')[1] == (string)container._attributes["level"])
+            if (container._objectType == "group")
             {
-                return container;
+                var nameSplit = name.Split('.');
+                if(nameSplit.Length > 1 && nameSplit[1] == container._attributes["level"])
+                {
+                    return container;
+                }
             }
         }
         return null;
