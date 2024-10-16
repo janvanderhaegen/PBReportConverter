@@ -14,6 +14,7 @@ internal class PBExpressionParser
     private bool _writeToBuffer = false;
     private static readonly List<string> _knownOps = ["when", "then", "and", "or", "else"];
     private static readonly List<char> _exprDelims = ['(', ')', ',', '\''];
+    private string _event = "BeforePrint";
 
 private static string FormatChar(int c) => c < 32 ? $"\\x{c:X2}" : $"'{(char)c}'";
 
@@ -88,17 +89,18 @@ private static string FormatChar(int c) => c < 32 ? $"\\x{c:X2}" : $"'{(char)c}'
         return buf[..pos].ToString();
     }
 
-    public string Parse(string expression)
+    public (string printEvent, string expr) Parse(string expression)
     {
         _sb.Clear();
         expression = Regex.Replace(expression, @"\sfor [a-zA-Z]+(\s[0-9]+)?", "");
         _reader = new StringReader(expression);
+        _event = "BeforePrint";
         ReadChar();
         ParseExpression();
 
         _reader.Dispose();
 
-        return _sb.ToString().Replace("<>", "!=").Replace("&", "&amp;");
+        return (_event, _sb.ToString().Replace("<>", "!=").Replace("&", "&amp;").Replace("<", "&lt;").Replace(">", "&gt;"));
     }
 
     private void ParseBracketExpression()
@@ -141,7 +143,7 @@ private static string FormatChar(int c) => c < 32 ? $"\\x{c:X2}" : $"'{(char)c}'
             if (_lastChar == '(')
             {
                 ParseBracketExpression();
-                break;
+                continue;
             }
             else if (_lastChar == '\'' || Char.IsAsciiDigit(_lastCharAsChar))
             {
@@ -164,8 +166,20 @@ private static string FormatChar(int c) => c < 32 ? $"\\x{c:X2}" : $"'{(char)c}'
                     AddChar();
                     switch (str){
                         case "case": { ParseCaseParameter(); break; }
-                        case "pos": { ParsePosParameters(); break; }
-                        case "last": { SkipParameters(); break; }
+                        case "string":
+                        case "pos": { FlipParameters(str); break; }
+                        case "page":
+                        case "pageCount":
+                        {
+                            _event = "PrintOnPage";
+                            SkipParameters();
+                            break;
+                        }
+                        case "last": 
+                        {
+                            SkipParameters();
+                            break;
+                        }
                         default:
                         {
                             ParseParameters(str);
@@ -195,7 +209,6 @@ private static string FormatChar(int c) => c < 32 ? $"\\x{c:X2}" : $"'{(char)c}'
         {
             "and" => " && ",
             "or" => " || ",
-            //"else" => ", ",
             _ => ""
         };
     }
@@ -206,16 +219,20 @@ private static string FormatChar(int c) => c < 32 ? $"\\x{c:X2}" : $"'{(char)c}'
         var bracketPairCheck = 0;
         while(_lastChar >= 0)
         {
-            ReadChar();
             if (_lastChar == ')')
             {
-                if (bracketPairCheck == 0) break;
+                if (bracketPairCheck == 0)
+                {
+                    ReadCharSkipWhitespace();
+                    break;
+                }
                 bracketPairCheck--;
             }
             else if (_lastChar == '(')
             {
                 bracketPairCheck++;
             }
+            ReadChar();
         }
     }
 
@@ -264,14 +281,24 @@ private static string FormatChar(int c) => c < 32 ? $"\\x{c:X2}" : $"'{(char)c}'
         }
     }
 
-    private void ParseParameters(string func)
+    private void ParseParameters(string function)
     {
-        if(func == "right")
+        if(function == "right")
         {
             Append("Reverse(");
             ParseExpression();
             Append(')');
         }
+        else if(function == "left")
+        {
+            ParseExpression();
+        }
+
+        if(function == "left" || function == "right")
+        {
+            Append(",0");
+        }
+
         for(; ; )
         {
             if (_lastChar == ',')
@@ -310,7 +337,6 @@ private static string FormatChar(int c) => c < 32 ? $"\\x{c:X2}" : $"'{(char)c}'
             {
                 ParseExpression();
                 elseCheck = true;
-                //_exprBufferSb.Clear();
                 continue;
             }
             Append(expressionToCheck + "==");
@@ -321,19 +347,24 @@ private static string FormatChar(int c) => c < 32 ? $"\\x{c:X2}" : $"'{(char)c}'
         }
     }
 
-    private void ParsePosParameters()
+    private void FlipParameters(string function)
     {
         _writeToBuffer = true;
         ParseExpression();
         var firstParam = _exprBufferSb.ToString();
         _exprBufferSb.Clear();
+        ReadCharSkipWhitespace();
         ParseExpression();
         var secondParam = _exprBufferSb.ToString();
         _writeToBuffer = false;
         if (_lastChar == ')' || _lastChar < 0)
         {
-            Append($"{secondParam}, {firstParam}");
+            Append($"{secondParam}{(function == "string" ? ",0" : "")},{firstParam}");
             AddChar();
+        }
+        else
+        {
+            throw new Exception($"Unexpected character {FormatChar(_lastChar)}.");
         }
     }
 
@@ -343,8 +374,9 @@ private static string FormatChar(int c) => c < 32 ? $"\\x{c:X2}" : $"'{(char)c}'
         {
             "if" => "Iif",
             "sum" => "[].Sum",
+            "cumulativesum" => "sumSum",
             "date" => "GetDate",
-            "left" or "mid" => "Substring",
+            "left" or "mid" or "string" => "Substring",
             "round" => "Round",
             "right" => "Reverse(Substring",
             "isnull" => "IsNull",
@@ -358,6 +390,8 @@ private static string FormatChar(int c) => c < 32 ? $"\\x{c:X2}" : $"'{(char)c}'
             "max" => "[].Max",
             "min" => "[].Min",
             "last" => "[DataSource.RowCount]",
+            "page" => "[Arguments.PageIndex]",
+            "pagecount" => "[Arguments.PageCount]",
             "trim" or "lefttrim" or "righttrim" => "Trim",
             _ => throw new Exception($"Unrecognized function: {function}")
         };

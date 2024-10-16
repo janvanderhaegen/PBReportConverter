@@ -1,7 +1,7 @@
 namespace PBReportConverter.Helpers;
 public class CustomReader(string filePath)
 {
-    private readonly string[] _lines = File.ReadAllLines(filePath).Select(x => x.Replace("~\"", "'").Replace("~t", " ")).ToArray();
+    private readonly string[] _lines = File.ReadAllLines(filePath).Select(x => x.Replace("~\"", "'")).ToArray();
     private int _currentLineIndex = 0;
     private int _currentCharIndex = 0;
 

@@ -1,11 +1,14 @@
-﻿namespace PBReportConverter.Helpers;
+﻿using PBReportConverter.Parser;
+
+namespace PBReportConverter.Helpers;
 
 internal static class PBFormattingHelper
 {
     public static int uom;
+    private static readonly PBExpressionParser _parser = new();
     public static double X(string value)
     {
-        if (!double.TryParse(value.Split(" ")[0], out var numValue))
+        if (!double.TryParse(value.Split("~t")[0], out var numValue))
         {
             throw new ArgumentException($"Couldn't parse value: {value} as int");
         }
@@ -21,7 +24,7 @@ internal static class PBFormattingHelper
 
     public static double Y(string value)
     {
-        if (!double.TryParse(value.Split(" ")[0], out var numValue))
+        if (!double.TryParse(value.Split("~t")[0], out var numValue))
         {
             throw new ArgumentException($"Couldn't parse value: {value} as int");
         }
@@ -33,6 +36,48 @@ internal static class PBFormattingHelper
             3 => Math.Ceiling(numValue / 10 * 2.54),
             _ => throw new NotImplementedException($"Unit not implemented: {uom}")
         };
+    }
+
+    public static (string printEvent, string expr) CheckForExpressionString(string value)
+    {
+        var splitString = value.Split("~t");
+
+        if(splitString.Length == 1)
+        {
+            return (string.Empty, string.Empty);
+        }
+
+        //var expressionStr = Expression(splitString[1]);
+        return Expression(splitString[1]);
+    }
+
+    public static (string printEvent, string expr) Expression(string expression)
+    {
+        //var (printEvent, parsedExpression) = _parser.Parse(expression);
+        return _parser.Parse(expression);
+    }
+
+    public static string MapAttr(string attr)
+    {
+        return attr switch
+        {
+            "visible" => "Visible",
+            "height" => "HeightF",
+            "width" => "WidthF",
+            _ => throw new NotImplementedException($"Unmapped attribute: {attr}")
+        };
+    }
+
+    public static string FixFormattingString(string? value)
+    {
+        if (string.IsNullOrEmpty(value) || value.Equals("[general]", StringComparison.CurrentCultureIgnoreCase))
+        {
+            return "";
+        }
+
+        var formatStr = value.Split("~t")[0];
+
+        return $"{{0:{formatStr.ToLower().Replace("mm", "MM")}}}";
     }
 
     public static string? ConvertElementType(string ctrlType)

@@ -10,7 +10,6 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
 {
     private int _ref = 1;
     private StreamWriter? _writer;
-    private readonly PBExpressionParser _parser = new();
     private readonly string _inputDir = inputDir;
     private readonly string _outputDir = outputDir;
     private int _tabulator = 0;
@@ -21,6 +20,7 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
     private readonly Dictionary<string, int> _globalParams = [];
     private List<(string name, string expression)> _currentComputes = [];
     private List<string> _currentColumns = [];
+    private static readonly List<string> _expressionableAttributes = ["visible", "height", "width"];
 
     public void GenerateRepxFile(string fileName)
     {
@@ -87,7 +87,7 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
         }
     }
 
-    private List<string> GetColumns(TableModel tableContainer)
+    private static List<string> GetColumns(TableModel tableContainer)
     {
         var result = new List<string>();
 
@@ -406,6 +406,24 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
         }
 
         attributes.TryGetValue("format", out var formatString);
+
+        List<(string attr, (string printEvent, string expr))> attrExpressions = [];
+        foreach(var attr in _expressionableAttributes)
+        {
+            if(attributes.TryGetValue(attr, out var attrValue))
+            {
+                var (printEvent, fixedExpression) = CheckForExpressionString(attrValue);
+                if(fixedExpression != string.Empty)
+                {
+                    if(attr == "visible")
+                    {
+                        fixedExpression = fixedExpression.Replace(",1", ",true").Replace(",0", ",false");
+                    }
+                    attrExpressions.Add(new(MapAttr(attr), (printEvent, fixedExpression)));
+                }
+            }
+        }
+
         switch (element._objectType)
         {
             case "report":
@@ -419,22 +437,39 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
                     var colFilterList = _currentColumns.Where(col => attributes["name"].Contains(col)).ToList();
 
                     // We search for the longest existing column name that can fit into the new column
+                    // Repeated columns in PowerBuilder follow the naming structure of [column_name]_[number_of_repeats]
+                    // For example, a second usage of the invoice_nbr column would be called invoice_nbr_1, third would be invoice_nbr_2 etc.
                     var expr = colFilterList.Count > 0 ? colFilterList.Aggregate("", (max, cur) => max.Length > cur.Length ? max : cur) : attributes["name"];
                     
                     WriteStartObject("<ExpressionBindings>");
-                    WriteSingleLine($"<Item1 Ref=\"{_ref++}\" EventName=\"BeforePrint\" PropertyName=\"Text\" Expression=\"[{expr}]\"/>");
+                    var subItemCounter = 1;
+                    WriteSingleLine($"<Item{subItemCounter++} Ref=\"{_ref++}\" EventName=\"BeforePrint\" PropertyName=\"Text\" Expression=\"[{expr}]\"/>");
+                    foreach(var (attr, (prEvent, prExpr)) in attrExpressions)
+                    {
+                        WriteSingleLine($"<Item{subItemCounter++} Ref=\"{_ref++}\" EventName=\"{prEvent}\" PropertyName=\"{attr}\" Expression=\"{prExpr}\"/>");
+                    }
                     WriteEndObject("</ExpressionBindings>");
                     WriteEndObject($"</Item{itemCounter++}>");
                     break;
                 }
             case "text":
                 {
-                    WriteSingleLine($"<Item{itemCounter++} Ref=\"{_ref++}\" ControlType=\"{objType}\" {nameAttr} TextAlignment=\"{ConvertAlignment(attributes["alignment"])}\" Multiline=\"true\" Text=\"{attributes["text"].Replace('&', '-')}\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\" AnchorVertical=\"Both\" Font=\"{attributes["font.face"]}, {attributes["font.height"][1..]}pt{CheckBold(attributes["font.weight"])}\" Visible=\"{visibility}\"/>");
+                    WriteSingleLine($"<Item{itemCounter++} Ref=\"{_ref++}\" ControlType=\"{objType}\" {nameAttr} extAlignment=\"{ConvertAlignment(attributes["alignment"])}\" Multiline=\"true\" Text=\"{attributes["text"].Replace('&', '-')}\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\" AnchorVertical=\"Both\" Font=\"{attributes["font.face"]}, {attributes["font.height"][1..]}pt{CheckBold(attributes["font.weight"])}\" Visible=\"{visibility}\"/>");
+                    if(attrExpressions.Count > 0)
+                    {
+                        WriteStartObject("<ExpressionBindings>");
+                        var subItemCounter = 1;
+                        foreach (var (attr, (prEvent, prExpr)) in attrExpressions)
+                        {
+                            WriteSingleLine($"<Item{subItemCounter++} Ref=\"{_ref++}\" EventName=\"{prEvent}\" PropertyName=\"{attr}\" Expression=\"{prExpr}\"/>");
+                        }
+                        WriteEndObject("</ExpressionBindings>");
+                    }
                     break;
                 }
             case "compute":
                 {
-                    if(attributes["expression"].Contains("page()"))
+                    if(attributes["expression"] == "page()")
                     {
                         if (!_globalPageAddedCheck)
                         {
@@ -444,10 +479,19 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
                     }
                     else
                     {
-                        var expression = Expression(attributes["expression"]);
+                        var (printEvent, expression) = Expression(attributes["expression"]);
                         WriteStartObject($"<Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"{objType}\" Name=\"{name}_field\" TextFormatString=\"{FixFormattingString(formatString)}\" TextAlignment=\"{ConvertAlignment(attributes["alignment"])}\"  Multiline=\"true\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\" AnchorVertical=\"Both\" Font=\"{attributes["font.face"]}, {attributes["font.height"][1..]}pt{CheckBold(attributes["font.weight"])}\" Visible=\"{visibility}\">");
+                        if(container._objectType == "group" && expression.Contains("sum"))
+                        {
+                            WriteSingleLine($"<Summary Ref=\"{_ref++}\" Running=\"Group\" />");
+                        }
                         WriteStartObject("<ExpressionBindings>");
-                        WriteSingleLine($"<Item1 Ref=\"{_ref++}\" EventName=\"BeforePrint\" PropertyName=\"Text\" Expression=\"[{name}]\"/>");
+                        var subItemCounter = 1;
+                        WriteSingleLine($"<Item1 Ref=\"{_ref++}\" EventName=\"{printEvent}\" PropertyName=\"Text\" Expression=\"[{name}]\"/>");
+                        foreach (var (attr, (prEvent, prExpr)) in attrExpressions)
+                        {
+                            WriteSingleLine($"<Item{subItemCounter++} Ref=\"{_ref++}\" EventName=\"{prEvent}\" PropertyName=\"{attr}\" Expression=\"{prExpr}\"/>");
+                        }
                         WriteEndObject("</ExpressionBindings>");
                         WriteEndObject($"</Item{itemCounter++}>");
                         _currentComputes.Add((name!, expression));
@@ -503,22 +547,6 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
         WriteStartObject("<ComponentStorage>");
         WriteSingleLine($"<Item1 Ref=\"{dataSourceRef}\" ObjectType=\"DevExpress.DataAccess.Sql.SqlDataSource,DevExpress.DataAccess.v24.1\" Name=\"sqlDataSource1\" Base64=\"{GenerateDataSourceXML(table)}\"/>");
         WriteEndObject("</ComponentStorage>");
-    }
-
-    private string Expression(string expression)
-    {
-        var parsedExpression = _parser.Parse(expression);
-        return parsedExpression;
-    }
-
-    private static string FixFormattingString(string? value)
-    {
-        if (string.IsNullOrEmpty(value) || value.Equals("[general]", StringComparison.CurrentCultureIgnoreCase))
-        {
-            return "";
-        }
-
-        return $"{{0:{value.ToLower().Replace("mm", "MM")}}}";
     }
 
     private static string CheckBold(string value)

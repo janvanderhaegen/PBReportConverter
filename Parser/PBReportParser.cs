@@ -48,7 +48,7 @@ internal class PBReportParser(string path)
             }
         }
     }
-    private void skipRestOfLine(string identifier)
+    private void SkipRestOfLine(string identifier)
     {
         var skippedThisLine = identifier + _reader.ReadLine();
         ReadCharSkipWhitespace();
@@ -57,7 +57,7 @@ internal class PBReportParser(string path)
     {
         if (!Char.IsAsciiLetterOrDigit(_lastCharAsChar))
         {
-            skipRestOfLine(_lastCharAsChar.ToString());
+            SkipRestOfLine(_lastCharAsChar.ToString());
             return;
         }
 
@@ -65,7 +65,7 @@ internal class PBReportParser(string path)
 
         if (_lastCharAsChar != '(')
         {
-            skipRestOfLine(key + ' ' + _lastCharAsChar);
+            SkipRestOfLine(key + ' ' + _lastCharAsChar);
             return;
         }
 
@@ -330,7 +330,8 @@ internal class PBReportParser(string path)
                     }
                     else
                     {
-                        buf[pos++] = '"';
+                        buf[pos++] = '\'';
+                        continue;
                     }
                 }
                 if(current == '(')
@@ -341,7 +342,7 @@ internal class PBReportParser(string path)
                 {
                     bracketCheck--;
                 }
-                buf[pos++] = current;
+                buf[pos++] = current == '"' ? '\'' : current;
                 ReadChar();
             }
             if (pos == 0)
