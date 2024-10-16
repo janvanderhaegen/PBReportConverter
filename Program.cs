@@ -1,45 +1,73 @@
 ﻿using PBReportConverter.Converters;
+using System;
 using static PBReportConverter.Converters.PblToSrdConverter;
 
-Console.WriteLine("Enter path of directory with PowerBuilder files:");
-var pbPath = Console.ReadLine();
+Console.WriteLine("Enter path of directory with .pbl, .srd or .repx files");
+var inputPath = Console.ReadLine();
 
 //check if input directory exists
-var pbInfo = new DirectoryInfo(pbPath!);
+var pbInfo = new DirectoryInfo(inputPath!);
 if (!pbInfo.Exists)
 {
     Console.WriteLine("Input directory doesn't exist");
     return;
 }
-pbPath = pbInfo.FullName; 
+inputPath = pbInfo.FullName;
 
-//if there are any pbl files, convert them
-var pebbles = Directory.GetFiles(pbPath!, "*.pbl", SearchOption.AllDirectories);
-Console.WriteLine($"Found {pebbles.Length} pbl files");
-foreach (var pebble in pebbles)
+var pebbleFiles = Directory.GetFiles(inputPath!, "*.pbl", SearchOption.AllDirectories);
+var srdFiles = new[] { "*.srd", "*.p" }.SelectMany(pattern => Directory.GetFiles(inputPath!, pattern, SearchOption.AllDirectories)).Where(file => !file.Contains("_frf")).ToArray();
+var repxFiles = Directory.GetFiles(inputPath!, "*.repx", SearchOption.AllDirectories).ToArray();
+
+Console.WriteLine($"Found {pebbleFiles.Length} .pbl, {srdFiles.Length} .pbl, {repxFiles.Length} .repx");
+
+//if there are any pbl files, unpack them
+if (pebbleFiles.Any())
 {
-    Unpack(pebble);
+    Console.WriteLine("Unpackng pbl files...");
+    foreach (var pebble in pebbleFiles)
+    {
+        Unpack(pebble);
+    }
+    Console.WriteLine($"Unpacked {pebbleFiles.Length} pbl files");
 }
-if (pebbles.Length != 0)
-    return;
 
-//else, convert srd files to repx
-Console.WriteLine("Enter path of target directory:");
-var repxPath = Console.ReadLine();
-var repxInfo = new DirectoryInfo(repxPath!);
-if (!repxInfo.Exists)
+//else if there are any srd files, convert them to repx
+else if (srdFiles.Any())
 {
-    repxInfo.Create();
+    Console.WriteLine($"Converting .srd files");
+    Console.WriteLine("Enter path of target directory");
+    var outputPath = Console.ReadLine();
+    var repxInfo = new DirectoryInfo(outputPath!);
+    if (!repxInfo.Exists)
+    {
+        repxInfo.Create();
+    }
+    outputPath = repxInfo.FullName;
+    var converter = new SrdToRepxConverter(inputPath!, outputPath!);
+    foreach (var fileName in srdFiles)
+    {
+        var relativePath = Path.GetRelativePath(inputPath!, fileName);
+        converter.GenerateRepxFile(relativePath);
+    }
+    Console.WriteLine($"Converted {srdFiles.Length} srd files to repx");
 }
-repxPath = repxInfo.FullName;
-
-
-var srdFiles = new[] { "*.srd", "*.p" }.SelectMany(pattern => Directory.GetFiles(pbPath!, pattern, SearchOption.AllDirectories)).Where(file => !file.Contains("_frf")).ToArray();
-Console.WriteLine($"Found {srdFiles.Length} .srd|.p files");
-var converter = new SrdToRepxConverter(pbPath!, repxPath!);
-foreach (var fileName in srdFiles)
+//else if there are any repx files, convert them to json
+else if (repxFiles.Any())
 {
-    var relativePath = Path.GetRelativePath(pbPath!, fileName);
-    converter.GenerateRepxFile(relativePath);
+    Console.WriteLine($"Converting .srd files");
+    Console.WriteLine("Enter path of target directory");
+    var outputPath = Console.ReadLine();
+    var repxInfo = new DirectoryInfo(outputPath!);
+    if (!repxInfo.Exists)
+    {
+        repxInfo.Create();
+    }
+    var repxToJsonConverter = new RepxToJsonConverter(inputPath!, outputPath!);
+    foreach (var fileName in repxFiles)
+    {
+        var relativePath = Path.GetRelativePath(inputPath!, fileName);
+        repxToJsonConverter.ConvertToJson(relativePath);
+    }
+    Console.WriteLine($"Converted {repxFiles.Length} repx files to json");
 }
-Console.ReadLine();
+Console.ReadKey(true);
