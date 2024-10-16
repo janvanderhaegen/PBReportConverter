@@ -1,5 +1,6 @@
 ﻿using PBReportConverter.Converters;
-using ReportMigration.Converters;
+using System;
+using static PBReportConverter.Converters.PblToSrdConverter;
 
 Console.WriteLine("Enter path of directory with PowerBuilder files:");
 var inputPath =Console.ReadLine();
@@ -16,14 +17,14 @@ inputPath = pbInfo.FullName;
 //if there are any pbl files, convert them
 var pebbles = Directory.GetFiles(inputPath!, "*.pbl", SearchOption.AllDirectories);
 Console.WriteLine($"Found {pebbles.Length} pbl files");
-var pblToSrdConverter = new PblToSrdConverter();
 foreach (var pebble in pebbles)
 {
-    pblToSrdConverter.Unpack(pebble);
+    Unpack(pebble);
 }
 if (pebbles.Any())
 {
     Console.WriteLine($"Unpacked {pebbles.Length} pbl files");
+    Console.ReadKey(true);
     return;
 }
 
@@ -38,7 +39,7 @@ if (!repxInfo.Exists)
 outputPath = repxInfo.FullName;
 
 
-var srdFiles = new[] { "*.srd", "*.p" }.SelectMany(pattern => Directory.GetFiles(inputPath!, pattern, SearchOption.AllDirectories)).ToArray();
+var srdFiles = new[] { "*.srd", "*.p" }.SelectMany(pattern => Directory.GetFiles(inputPath!, pattern, SearchOption.AllDirectories)).Where(file => !file.Contains("_frf")).ToArray();
 Console.WriteLine($"Found {srdFiles.Length} .srd|.p files");
 var converter = new SrdToRepxConverter(inputPath!, outputPath!);
 foreach (var fileName in srdFiles)
@@ -49,6 +50,7 @@ foreach (var fileName in srdFiles)
 if (srdFiles.Any())
 {
     Console.WriteLine($"Converted {srdFiles.Length} srd files to repx");
+    Console.ReadKey(true);
     return;
 }
 
@@ -64,5 +66,6 @@ foreach (var fileName in repxFiles)
 if (repxFiles.Any())
 {
     Console.WriteLine($"Converted {repxFiles.Length} repx files to json");
+    Console.ReadKey(true);
     return;
 }
