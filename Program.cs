@@ -2,7 +2,7 @@
 using System;
 using static PBReportConverter.Converters.PblToSrdConverter;
 
-Console.WriteLine("Enter path of directory with PowerBuilder files:");
+Console.WriteLine("Enter path of directory with .pbl - OR - .srd - OR - .repx files");
 var inputPath =Console.ReadLine();
 
 //check if input directory exists
