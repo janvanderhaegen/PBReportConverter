@@ -47,13 +47,11 @@ internal static class PBFormattingHelper
             return (string.Empty, string.Empty);
         }
 
-        //var expressionStr = Expression(splitString[1]);
         return Expression(splitString[1]);
     }
 
     public static (string printEvent, string expr) Expression(string expression)
     {
-        //var (printEvent, parsedExpression) = _parser.Parse(expression);
         return _parser.Parse(expression);
     }
 

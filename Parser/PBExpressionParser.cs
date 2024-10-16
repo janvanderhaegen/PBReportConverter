@@ -12,7 +12,7 @@ internal class PBExpressionParser
     private readonly StringBuilder _exprBufferSb = new();
     private readonly StringBuilder _lastStrBufferSb = new();
     private bool _writeToBuffer = false;
-    private static readonly List<string> _knownOps = ["when", "then", "and", "or", "else"];
+    private static readonly List<string> _knownOps = ["when", "then", "and", "or", "else", "not"];
     private static readonly List<char> _exprDelims = ['(', ')', ',', '\''];
     private string _event = "BeforePrint";
 
@@ -41,14 +41,21 @@ private static string FormatChar(int c) => c < 32 ? $"\\x{c:X2}" : $"'{(char)c}'
         Append(value.ToString());
     }
 
-    private void AddChar()
+    private void AddChar(bool skipWhitespace = true)
     {
         Append(_lastCharAsChar);
         if(_lastChar == '=')
         {
             Append('=');
         }
-        ReadCharSkipWhitespace();
+        if (skipWhitespace)
+        {
+            ReadCharSkipWhitespace();
+        }
+        else
+        {
+            ReadChar();
+        }
     }
 
     private void ReadNonAlphanumericChar()
@@ -155,8 +162,14 @@ private static string FormatChar(int c) => c < 32 ? $"\\x{c:X2}" : $"'{(char)c}'
 
                 if (_knownOps.Contains(str.ToLower()))
                 {
+                    var mapOp = MapOperation(str.ToLower());
+                    if (mapOp != string.Empty)
+                    {
+                        Append(mapOp);
+                        continue;
+
+                    }
                     _lastStrBufferSb.Clear();
-                    Append(MapOperation(str.ToLower()));
                     _lastStrBufferSb.Append(str.ToLower());
                     break;
                 }
@@ -209,6 +222,7 @@ private static string FormatChar(int c) => c < 32 ? $"\\x{c:X2}" : $"'{(char)c}'
         {
             "and" => " && ",
             "or" => " || ",
+            "not" => "!",
             _ => ""
         };
     }
@@ -259,10 +273,10 @@ private static string FormatChar(int c) => c < 32 ? $"\\x{c:X2}" : $"'{(char)c}'
     {
         if(_lastChar == '\'')
         {
-            AddChar();
+            AddChar(false);
             while(_lastChar >=0 && _lastChar != '\'')
             {
-                AddChar();
+                AddChar(false);
             }
             if (_lastChar == '\'')
             {

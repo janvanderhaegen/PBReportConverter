@@ -487,14 +487,15 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
                         }
                         WriteStartObject("<ExpressionBindings>");
                         var subItemCounter = 1;
-                        WriteSingleLine($"<Item1 Ref=\"{_ref++}\" EventName=\"{printEvent}\" PropertyName=\"Text\" Expression=\"[{name}]\"/>");
+                        WriteSingleLine($"<Item{subItemCounter++} Ref=\"{_ref++}\" EventName=\"{printEvent}\" PropertyName=\"Text\" Expression=\"{(printEvent == "BeforePrint" ? $"[{name}]": expression)}\"/>");
                         foreach (var (attr, (prEvent, prExpr)) in attrExpressions)
                         {
                             WriteSingleLine($"<Item{subItemCounter++} Ref=\"{_ref++}\" EventName=\"{prEvent}\" PropertyName=\"{attr}\" Expression=\"{prExpr}\"/>");
                         }
                         WriteEndObject("</ExpressionBindings>");
                         WriteEndObject($"</Item{itemCounter++}>");
-                        _currentComputes.Add((name!, expression));
+                        if(printEvent == "BeforePrint")
+                            _currentComputes.Add((name!, expression));
                     }
                     break;
                 }
