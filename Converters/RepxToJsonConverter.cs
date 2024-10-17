@@ -165,7 +165,31 @@ namespace PBReportConverter.Converters
         private Dictionary<string, string> _commonNameAbbreviations = new()
         {
             {"stmt", "Statement"},
-            {"smmry", "Summary"}
+            {"pop", "Percent of Proceeds"},
+            {"wlhd", "Wellhead"},
+            {"ga", "Gas Analysis"},
+            {"pmnt", "Payment"},
+            {"plt", "Plant"},
+            {"no_plt", "PVR"},
+            {"k", "Contract"},
+            {"stndrd", "Standard"},
+            {"smmry", "Summary"},
+            {"smry", "Summary"},
+            {"reserv", "Reservation"},
+            {"multiprod", "Multiple Product Or Multi Product"},
+            {"imb", "Imbalance"},
+            {"sat", "Saturation"},
+            {"oba", "OBA"},
+            {"hub", "Hub"},
+            {"shp", "Shipper"},
+            {"hdr", "Header"},
+            {"dtl", "Detail"},
+            {"csh", "Cash Out"},
+            {"fxd", "Fixed"},
+            {"bilat", "Bilateral"},
+            {"trn", "Transport"},
+            {"pur", "Purchase"},
+            {"sls", "Sales"}
         };
         internal string FileNameToDisplayName(string name)
         {
