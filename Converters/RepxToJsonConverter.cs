@@ -105,7 +105,7 @@ namespace PBReportConverter.Converters
                         IsPinned = !isSubreport,
                         DisplayName = reportDisplayName,
                         Description = reportDisplayName,
-                        Layout = layout.Replace(Environment.NewLine, "\r\n").Replace("\"", "\\\""),
+                        Layout = layout,
                         QueryConfiguration_LobstaQueryConfigurationId = (string?)null,
                         PermissionTypes = "[]",
                         Category,
