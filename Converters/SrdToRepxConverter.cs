@@ -456,19 +456,28 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
                 }
             case "text":
                 {
-                    var textItemDef = $"Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"{objType}\" {nameAttr} TextAlignment=\"{ConvertAlignment(attributes["alignment"])}\" Multiline=\"true\" Text=\"{attributes["text"].Replace('&', '-')}\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\" AnchorVertical=\"Both\" Font=\"{attributes["font.face"]}, {attributes["font.height"][1..]}pt{CheckBold(attributes["font.weight"])}\" Visible=\"{visibility}\"";
-                    
-                    if(attrExpressions.Count > 0)
+                    var text = attributes["text"].Replace('&', '-');
+
+                    var textItemDef = $"Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"{objType}\" {nameAttr} TextAlignment=\"{ConvertAlignment(attributes["alignment"])}\" Multiline=\"true\" Text=\"{text.Split("~t")[0]}\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\" AnchorVertical=\"Both\" Font=\"{attributes["font.face"]}, {attributes["font.height"][1..]}pt{CheckBold(attributes["font.weight"])}\" Visible=\"{visibility}\"";
+
+                    var (printEvent, fixedExpression) = CheckForExpressionString(text);
+                    if (attrExpressions.Count > 0 || fixedExpression != string.Empty)
                     {
                         WriteStartObject($"<{textItemDef}>");
                         WriteStartObject("<ExpressionBindings>");
                         var subItemCounter = 1;
+
+                        if (fixedExpression != string.Empty)
+                        {
+                            WriteSingleLine($"<Item{subItemCounter++} Ref=\"{_ref++}\" EventName=\"{printEvent}\" PropertyName=\"Text\" Expression=\"{fixedExpression}\"/>");
+                        }
+
                         foreach (var (attr, (prEvent, prExpr)) in attrExpressions)
                         {
                             WriteSingleLine($"<Item{subItemCounter++} Ref=\"{_ref++}\" EventName=\"{prEvent}\" PropertyName=\"{attr}\" Expression=\"{prExpr}\"/>");
                         }
-                        WriteEndObject("</ExpressionBindings>");
 
+                        WriteEndObject("</ExpressionBindings>");
                         WriteEndObject($"</Item{itemCounter++}>");
                     }
                     else

@@ -44,7 +44,7 @@ internal static class PBFormattingHelper
 
         if(splitString.Length == 1)
         {
-            return (string.Empty, string.Empty);
+            return ("BeforePrint", string.Empty);
         }
 
         return Expression(splitString[1]);

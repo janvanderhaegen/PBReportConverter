@@ -599,201 +599,211 @@
 											<Item2 Ref="298" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 										</ExpressionBindings>
 									</Item1>
-									<Item2 Ref="299" ControlType="XRLabel" Name="bs_order_beg_date_t" TextAlignment="MiddleLeft" Multiline="true" Text="Beg Date~tif( type= 'O','', 'Beg Date')" SizeF="75,14" LocationFloat="352,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
+									<Item2 Ref="299" ControlType="XRLabel" Name="bs_order_beg_date_t" TextAlignment="MiddleLeft" Multiline="true" Text="Beg Date" SizeF="75,14" LocationFloat="352,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 										<ExpressionBindings>
-											<Item1 Ref="300" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
+											<Item1 Ref="300" EventName="BeforePrint" PropertyName="Text" Expression="Iif(type=='O','','Beg Date')"/>
+											<Item2 Ref="301" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 										</ExpressionBindings>
 									</Item2>
-									<Item3 Ref="301" ControlType="XRLabel" Name="bs_order_end_date_t" TextAlignment="MiddleLeft" Multiline="true" Text=" End Date~tif( type= 'O','', 'End Date')" SizeF="75,14" LocationFloat="417,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
+									<Item3 Ref="302" ControlType="XRLabel" Name="bs_order_end_date_t" TextAlignment="MiddleLeft" Multiline="true" Text=" End Date" SizeF="75,14" LocationFloat="417,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 										<ExpressionBindings>
-											<Item1 Ref="302" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
+											<Item1 Ref="303" EventName="BeforePrint" PropertyName="Text" Expression="Iif(type=='O','','End Date')"/>
+											<Item2 Ref="304" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 										</ExpressionBindings>
 									</Item3>
-									<Item4 Ref="303" ControlType="XRLabel" Name="document_nbr_t" TextAlignment="MiddleLeft" Multiline="true" Text="Document~tif( type= 'O','', 'Document')" SizeF="67,14" LocationFloat="480,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
+									<Item4 Ref="305" ControlType="XRLabel" Name="document_nbr_t" TextAlignment="MiddleLeft" Multiline="true" Text="Document" SizeF="67,14" LocationFloat="480,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 										<ExpressionBindings>
-											<Item1 Ref="304" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
+											<Item1 Ref="306" EventName="BeforePrint" PropertyName="Text" Expression="Iif(type=='O','','Document')"/>
+											<Item2 Ref="307" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 										</ExpressionBindings>
 									</Item4>
-									<Item5 Ref="305" ControlType="XRLabel" Name="type_comp_desc_t" TextAlignment="MiddleCenter" Multiline="true" Text="Component~tif( type= 'O','', 'Component')" SizeF="67,14" LocationFloat="553,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
+									<Item5 Ref="308" ControlType="XRLabel" Name="type_comp_desc_t" TextAlignment="MiddleCenter" Multiline="true" Text="Component" SizeF="67,14" LocationFloat="553,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 										<ExpressionBindings>
-											<Item1 Ref="306" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
+											<Item1 Ref="309" EventName="BeforePrint" PropertyName="Text" Expression="Iif(type=='O','','Component')"/>
+											<Item2 Ref="310" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 										</ExpressionBindings>
 									</Item5>
-									<Item6 Ref="307" ControlType="XRLabel" Name="based_on_t" TextAlignment="MiddleLeft" Multiline="true" Text="Based On~tif( type= 'O','', 'Based On')" SizeF="67,14" LocationFloat="699,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
+									<Item6 Ref="311" ControlType="XRLabel" Name="based_on_t" TextAlignment="MiddleLeft" Multiline="true" Text="Based On" SizeF="67,14" LocationFloat="699,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 										<ExpressionBindings>
-											<Item1 Ref="308" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
+											<Item1 Ref="312" EventName="BeforePrint" PropertyName="Text" Expression="Iif(type=='O','','Based On')"/>
+											<Item2 Ref="313" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 										</ExpressionBindings>
 									</Item6>
-									<Item7 Ref="309" ControlType="XRLabel" Name="volume_used_t" TextAlignment="MiddleLeft" Multiline="true" Text="Volume~tif( type= 'O','', 'Volume')" SizeF="67,14" LocationFloat="792,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
+									<Item7 Ref="314" ControlType="XRLabel" Name="volume_used_t" TextAlignment="MiddleLeft" Multiline="true" Text="Volume" SizeF="67,14" LocationFloat="792,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 										<ExpressionBindings>
-											<Item1 Ref="310" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
+											<Item1 Ref="315" EventName="BeforePrint" PropertyName="Text" Expression="Iif(type=='O','','Volume')"/>
+											<Item2 Ref="316" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 										</ExpressionBindings>
 									</Item7>
-									<Item8 Ref="311" ControlType="XRLabel" Name="component_price_t" TextAlignment="MiddleLeft" Multiline="true" Text="Per Unit $~tif( type= 'O','', 'Per Unit $')" SizeF="67,14" LocationFloat="874,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
+									<Item8 Ref="317" ControlType="XRLabel" Name="component_price_t" TextAlignment="MiddleLeft" Multiline="true" Text="Per Unit $" SizeF="67,14" LocationFloat="874,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 										<ExpressionBindings>
-											<Item1 Ref="312" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
+											<Item1 Ref="318" EventName="BeforePrint" PropertyName="Text" Expression="Iif(type=='O','','Per Unit $')"/>
+											<Item2 Ref="319" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 										</ExpressionBindings>
 									</Item8>
-									<Item9 Ref="313" ControlType="XRLabel" Name="component_val_t" TextAlignment="MiddleLeft" Multiline="true" Text="Total~tif( type= 'O','', 'Total')" SizeF="87,14" LocationFloat="958,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
+									<Item9 Ref="320" ControlType="XRLabel" Name="component_val_t" TextAlignment="MiddleLeft" Multiline="true" Text="Total" SizeF="87,14" LocationFloat="958,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 										<ExpressionBindings>
-											<Item1 Ref="314" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
+											<Item1 Ref="321" EventName="BeforePrint" PropertyName="Text" Expression="Iif(type=='O','','Total')"/>
+											<Item2 Ref="322" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 										</ExpressionBindings>
 									</Item9>
 								</Controls>
 							</Item15>
-							<Item16 Ref="315" ControlType="GroupFooterBand" Name="groupFooterBand5" Level="1" HeightF="105">
+							<Item16 Ref="323" ControlType="GroupFooterBand" Name="groupFooterBand5" Level="1" HeightF="105">
 								<Controls>
-									<Item1 Ref="316" ControlType="XRLabel" Name="t_12" TextAlignment="MiddleLeft" Multiline="true" Text="Meter Total  ===~tif( type= 'O','', 'Meter Total ===>')" SizeF="93,14" LocationFloat="849,5" AnchorVertical="Both" Font="Calibri, 8pt, style=Bold" Visible="True">
+									<Item1 Ref="324" ControlType="XRLabel" Name="t_12" TextAlignment="MiddleLeft" Multiline="true" Text="Meter Total  ===" SizeF="93,14" LocationFloat="849,5" AnchorVertical="Both" Font="Calibri, 8pt, style=Bold" Visible="True">
 										<ExpressionBindings>
-											<Item1 Ref="317" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
+											<Item1 Ref="325" EventName="BeforePrint" PropertyName="Text" Expression="Iif(type=='O','','Meter Total ======&gt;')"/>
+											<Item2 Ref="326" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 										</ExpressionBindings>
 									</Item1>
-									<Item2 Ref="318" ControlType="XRLabel" Name="t_13" TextAlignment="MiddleLeft" Multiline="true" Text=">" SizeF="20,15" LocationFloat="925,3" AnchorVertical="Both" Font="Calibri, 9pt, style=Bold" Visible="True">
+									<Item2 Ref="327" ControlType="XRLabel" Name="t_13" TextAlignment="MiddleLeft" Multiline="true" Text=">" SizeF="20,15" LocationFloat="925,3" AnchorVertical="Both" Font="Calibri, 9pt, style=Bold" Visible="True">
 										<ExpressionBindings>
-											<Item1 Ref="319" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
+											<Item1 Ref="328" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 										</ExpressionBindings>
 									</Item2>
-									<Item3 Ref="320" ControlType="XRLabel" Name="t_6" TextAlignment="MiddleLeft" Multiline="true" Text="$~tif( type= 'O','', '$')" SizeF="9,13" LocationFloat="959,5" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
+									<Item3 Ref="329" ControlType="XRLabel" Name="t_6" TextAlignment="MiddleLeft" Multiline="true" Text="$" SizeF="9,13" LocationFloat="959,5" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 										<ExpressionBindings>
-											<Item1 Ref="321" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
+											<Item1 Ref="330" EventName="BeforePrint" PropertyName="Text" Expression="Iif(type=='O','','$')"/>
+											<Item2 Ref="331" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 										</ExpressionBindings>
 									</Item3>
-									<Item4 Ref="322" ControlType="XRLabel" Name="compute_9_field" TextFormatString="{0:#,##0.00;(#,##0.00)}" TextAlignment="MiddleRight"  Multiline="true" SizeF="84,20" LocationFloat="960,5" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
+									<Item4 Ref="332" ControlType="XRLabel" Name="compute_9_field" TextFormatString="{0:#,##0.00;(#,##0.00)}" TextAlignment="MiddleRight"  Multiline="true" SizeF="84,20" LocationFloat="960,5" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 										<ExpressionBindings>
-											<Item1 Ref="323" EventName="BeforePrint" PropertyName="Text" Expression="[compute_9]"/>
-											<Item2 Ref="324" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
+											<Item1 Ref="333" EventName="BeforePrint" PropertyName="Text" Expression="[compute_9]"/>
+											<Item2 Ref="334" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 										</ExpressionBindings>
 									</Item4>
-									<Item5 Ref="325" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="97,0" LocationFloat="947,22"  LineDirection="Horizontal" Visible="True"/>
-									<Item6 Ref="326" ControlType="XRLine" Name="l_3" FillColor="255,128,128,128" SizeF="97,0" LocationFloat="947,19"  LineDirection="Horizontal" Visible="True"/>
-									<Item7 Ref="327" ControlType="XRLine" Name="l_2" FillColor="255,128,128,128" SizeF="97,0" LocationFloat="947,1"  LineDirection="Horizontal" Visible="True"/>
+									<Item5 Ref="335" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="97,0" LocationFloat="947,22"  LineDirection="Horizontal" Visible="True"/>
+									<Item6 Ref="336" ControlType="XRLine" Name="l_3" FillColor="255,128,128,128" SizeF="97,0" LocationFloat="947,19"  LineDirection="Horizontal" Visible="True"/>
+									<Item7 Ref="337" ControlType="XRLine" Name="l_2" FillColor="255,128,128,128" SizeF="97,0" LocationFloat="947,1"  LineDirection="Horizontal" Visible="True"/>
 								</Controls>
 							</Item16>
-							<Item17 Ref="328" ControlType="GroupHeaderBand" Name="groupHeaderBand6" Level="0" HeightF="17">
+							<Item17 Ref="338" ControlType="GroupHeaderBand" Name="groupHeaderBand6" Level="0" HeightF="17">
 								<GroupFields>
-									<Item1 Ref="329" FieldName="order_rev_nbr" />
-									<Item2 Ref="330" FieldName="acctg_trans_seq_nbr" />
+									<Item1 Ref="339" FieldName="order_rev_nbr" />
+									<Item2 Ref="340" FieldName="acctg_trans_seq_nbr" />
 								</GroupFields>
 								<Controls>
-									<Item1 Ref="331" ControlType="XRLabel" Name="type_comp_desc" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="138,13" LocationFloat="558,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
+									<Item1 Ref="341" ControlType="XRLabel" Name="type_comp_desc" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="138,13" LocationFloat="558,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 										<ExpressionBindings>
-											<Item1 Ref="332" EventName="BeforePrint" PropertyName="Text" Expression="[type_comp_desc]"/>
-											<Item2 Ref="333" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
+											<Item1 Ref="342" EventName="BeforePrint" PropertyName="Text" Expression="[type_comp_desc]"/>
+											<Item2 Ref="343" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 										</ExpressionBindings>
 									</Item1>
-									<Item2 Ref="334" ControlType="XRLabel" Name="document_nbr" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="88,13" LocationFloat="478,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
+									<Item2 Ref="344" ControlType="XRLabel" Name="document_nbr" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="88,13" LocationFloat="478,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 										<ExpressionBindings>
-											<Item1 Ref="335" EventName="BeforePrint" PropertyName="Text" Expression="[document_nbr]"/>
-											<Item2 Ref="336" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O' || acctg_trans_seq_nbr!=1,false,true)"/>
+											<Item1 Ref="345" EventName="BeforePrint" PropertyName="Text" Expression="[document_nbr]"/>
+											<Item2 Ref="346" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O' || acctg_trans_seq_nbr!=1,false,true)"/>
 										</ExpressionBindings>
 									</Item2>
-									<Item3 Ref="337" ControlType="XRLabel" Name="bs_order_end_date_comp_field" TextFormatString="{0:[shortdate] }" TextAlignment="MiddleLeft"  Multiline="true" SizeF="66,13" LocationFloat="417,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
+									<Item3 Ref="347" ControlType="XRLabel" Name="bs_order_end_date_comp_field" TextFormatString="{0:[shortdate] }" TextAlignment="MiddleLeft"  Multiline="true" SizeF="66,13" LocationFloat="417,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 										<ExpressionBindings>
-											<Item1 Ref="338" EventName="BeforePrint" PropertyName="Text" Expression="[bs_order_end_date_comp]"/>
-											<Item2 Ref="339" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O' || acctg_trans_seq_nbr!=1,false,true)"/>
+											<Item1 Ref="348" EventName="BeforePrint" PropertyName="Text" Expression="[bs_order_end_date_comp]"/>
+											<Item2 Ref="349" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O' || acctg_trans_seq_nbr!=1,false,true)"/>
 										</ExpressionBindings>
 									</Item3>
-									<Item4 Ref="340" ControlType="XRLabel" Name="based_on" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="82,13" LocationFloat="699,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
+									<Item4 Ref="350" ControlType="XRLabel" Name="based_on" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="82,13" LocationFloat="699,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 										<ExpressionBindings>
-											<Item1 Ref="341" EventName="BeforePrint" PropertyName="Text" Expression="[based_on]"/>
-											<Item2 Ref="342" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
+											<Item1 Ref="351" EventName="BeforePrint" PropertyName="Text" Expression="[based_on]"/>
+											<Item2 Ref="352" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 										</ExpressionBindings>
 									</Item4>
-									<Item5 Ref="343" ControlType="XRLabel" Name="volume_used_comp_field" TextFormatString="{0:#,###.0;(#,##0.0)}" TextAlignment="MiddleRight"  Multiline="true" SizeF="75,14" LocationFloat="782,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
+									<Item5 Ref="353" ControlType="XRLabel" Name="volume_used_comp_field" TextFormatString="{0:#,###.0;(#,##0.0)}" TextAlignment="MiddleRight"  Multiline="true" SizeF="75,14" LocationFloat="782,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 										<ExpressionBindings>
-											<Item1 Ref="344" EventName="BeforePrint" PropertyName="Text" Expression="[volume_used_comp]"/>
-											<Item2 Ref="345" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
+											<Item1 Ref="354" EventName="BeforePrint" PropertyName="Text" Expression="[volume_used_comp]"/>
+											<Item2 Ref="355" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 										</ExpressionBindings>
 									</Item5>
-									<Item6 Ref="346" ControlType="XRLabel" Name="component_price_comp_field" TextFormatString="{0:#,##0.000000;(#,##0.000000)}" TextAlignment="MiddleRight"  Multiline="true" SizeF="90,14" LocationFloat="863,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
+									<Item6 Ref="356" ControlType="XRLabel" Name="component_price_comp_field" TextFormatString="{0:#,##0.000000;(#,##0.000000)}" TextAlignment="MiddleRight"  Multiline="true" SizeF="90,14" LocationFloat="863,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 										<ExpressionBindings>
-											<Item1 Ref="347" EventName="BeforePrint" PropertyName="Text" Expression="[component_price_comp]"/>
-											<Item2 Ref="348" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
+											<Item1 Ref="357" EventName="BeforePrint" PropertyName="Text" Expression="[component_price_comp]"/>
+											<Item2 Ref="358" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 										</ExpressionBindings>
 									</Item6>
-									<Item7 Ref="349" ControlType="XRLabel" Name="bs_order_beg_date_comp_field" TextFormatString="{0:[shortdate]}" TextAlignment="MiddleLeft"  Multiline="true" SizeF="66,13" LocationFloat="352,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
+									<Item7 Ref="359" ControlType="XRLabel" Name="bs_order_beg_date_comp_field" TextFormatString="{0:[shortdate]}" TextAlignment="MiddleLeft"  Multiline="true" SizeF="66,13" LocationFloat="352,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 										<ExpressionBindings>
-											<Item1 Ref="350" EventName="BeforePrint" PropertyName="Text" Expression="[bs_order_beg_date_comp]"/>
-											<Item2 Ref="351" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O' || acctg_trans_seq_nbr!=1,false,true)"/>
+											<Item1 Ref="360" EventName="BeforePrint" PropertyName="Text" Expression="[bs_order_beg_date_comp]"/>
+											<Item2 Ref="361" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O' || acctg_trans_seq_nbr!=1,false,true)"/>
 										</ExpressionBindings>
 									</Item7>
-									<Item8 Ref="352" ControlType="XRLabel" Name="compute_5_field" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="210,14" LocationFloat="6,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
+									<Item8 Ref="362" ControlType="XRLabel" Name="compute_5_field" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="210,14" LocationFloat="6,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 										<ExpressionBindings>
-											<Item1 Ref="353" EventName="BeforePrint" PropertyName="Text" Expression="[compute_5]"/>
-											<Item2 Ref="354" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O' || acctg_trans_seq_nbr!=1,false,true)"/>
+											<Item1 Ref="363" EventName="BeforePrint" PropertyName="Text" Expression="[compute_5]"/>
+											<Item2 Ref="364" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O' || acctg_trans_seq_nbr!=1,false,true)"/>
 										</ExpressionBindings>
 									</Item8>
-									<Item9 Ref="355" ControlType="XRLabel" Name="t_3" TextAlignment="MiddleLeft" Multiline="true" Text="$" SizeF="9,13" LocationFloat="860,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
+									<Item9 Ref="365" ControlType="XRLabel" Name="t_3" TextAlignment="MiddleLeft" Multiline="true" Text="$" SizeF="9,13" LocationFloat="860,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 										<ExpressionBindings>
-											<Item1 Ref="356" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
+											<Item1 Ref="366" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 										</ExpressionBindings>
 									</Item9>
-									<Item10 Ref="357" ControlType="XRLabel" Name="t_4" TextAlignment="MiddleLeft" Multiline="true" Text="$" SizeF="9,13" LocationFloat="959,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
+									<Item10 Ref="367" ControlType="XRLabel" Name="t_4" TextAlignment="MiddleLeft" Multiline="true" Text="$" SizeF="9,13" LocationFloat="959,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 										<ExpressionBindings>
-											<Item1 Ref="358" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
+											<Item1 Ref="368" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 										</ExpressionBindings>
 									</Item10>
-									<Item11 Ref="359" ControlType="XRLabel" Name="compute_1_field" TextFormatString="{0:#,##0.00;(#,##0.00)}" TextAlignment="MiddleRight"  Multiline="true" SizeF="84,14" LocationFloat="960,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
+									<Item11 Ref="369" ControlType="XRLabel" Name="compute_1_field" TextFormatString="{0:#,##0.00;(#,##0.00)}" TextAlignment="MiddleRight"  Multiline="true" SizeF="84,14" LocationFloat="960,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 										<ExpressionBindings>
-											<Item1 Ref="360" EventName="BeforePrint" PropertyName="Text" Expression="[compute_1]"/>
-											<Item2 Ref="361" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
+											<Item1 Ref="370" EventName="BeforePrint" PropertyName="Text" Expression="[compute_1]"/>
+											<Item2 Ref="371" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 										</ExpressionBindings>
 									</Item11>
 								</Controls>
 							</Item17>
-							<Item18 Ref="362" ControlType="GroupFooterBand" Name="groupFooterBand6" Level="0" HeightF="-0" Visible="False">
+							<Item18 Ref="372" ControlType="GroupFooterBand" Name="groupFooterBand6" Level="0" HeightF="-0" Visible="False">
 								<Controls>
 								</Controls>
 							</Item18>
 						</Bands>
 						<CalculatedFields>
-							<Item1 Ref="363" Name="compute_2" Expression="Iif(type=='O','',facility_name+': '+Trim(station_nbr)+'/'+Trim(station_name))" DataMember="Query" />
-							<Item2 Ref="364" Name="compute_9" Expression="[].Sum(component_val)" DataMember="Query" />
-							<Item3 Ref="365" Name="bs_order_end_date_comp" Expression="[].Max(bs_order_end_date)" DataMember="Query" />
-							<Item4 Ref="366" Name="volume_used_comp" Expression="[].Sum(volume_used)" DataMember="Query" />
-							<Item5 Ref="367" Name="component_price_comp" Expression="Iif([].Sum(volume_used)==0,0.0,[].Sum(component_val)/[].Sum(volume_used))" DataMember="Query" />
-							<Item6 Ref="368" Name="bs_order_beg_date_comp" Expression="[].Min(bs_order_beg_date)" DataMember="Query" />
-							<Item7 Ref="369" Name="compute_5" Expression=" deal_nbr+'-'+order_nbr+'-'+order_rev_nbr" DataMember="Query" />
-							<Item8 Ref="370" Name="compute_1" Expression="[].Sum(component_val)" DataMember="Query" />
+							<Item1 Ref="373" Name="compute_2" Expression="Iif(type=='O','',facility_name+': '+Trim(station_nbr)+'/'+Trim(station_name))" DataMember="Query" />
+							<Item2 Ref="374" Name="compute_9" Expression="[].Sum(component_val)" DataMember="Query" />
+							<Item3 Ref="375" Name="bs_order_end_date_comp" Expression="[].Max(bs_order_end_date)" DataMember="Query" />
+							<Item4 Ref="376" Name="volume_used_comp" Expression="[].Sum(volume_used)" DataMember="Query" />
+							<Item5 Ref="377" Name="component_price_comp" Expression="Iif([].Sum(volume_used)==0,0.0,[].Sum(component_val)/[].Sum(volume_used))" DataMember="Query" />
+							<Item6 Ref="378" Name="bs_order_beg_date_comp" Expression="[].Min(bs_order_beg_date)" DataMember="Query" />
+							<Item7 Ref="379" Name="compute_5" Expression=" deal_nbr+'-'+order_nbr+'-'+order_rev_nbr" DataMember="Query" />
+							<Item8 Ref="380" Name="compute_1" Expression="[].Sum(component_val)" DataMember="Query" />
 						</CalculatedFields>
 					</ReportSource>
 					<ParameterBindings>
-						<Item1 Ref="371" ParameterName="dwra_statement_nbr" DataMember="Query.statement_nbr" />
-						<Item2 Ref="372" ParameterName="dwra_statement_rev" DataMember="Query.statement_rev_nbr" />
-						<Item3 Ref="373" ParameterName="dwra_run_user_name" DataMember="Query.run_user_name" />
-						<Item4 Ref="374" ParameterName="dwra_run_date" DataMember="Query.run_date" />
-						<Item5 Ref="375" ParameterName="deal_nbr" Parameter="#Ref-266" />
-						<Item6 Ref="376" ParameterName="order_nbr" Parameter="#Ref-267" />
+						<Item1 Ref="381" ParameterName="dwra_statement_nbr" DataMember="Query.statement_nbr" />
+						<Item2 Ref="382" ParameterName="dwra_statement_rev" DataMember="Query.statement_rev_nbr" />
+						<Item3 Ref="383" ParameterName="dwra_run_user_name" DataMember="Query.run_user_name" />
+						<Item4 Ref="384" ParameterName="dwra_run_date" DataMember="Query.run_date" />
+						<Item5 Ref="385" ParameterName="deal_nbr" Parameter="#Ref-266" />
+						<Item6 Ref="386" ParameterName="order_nbr" Parameter="#Ref-267" />
 					</ParameterBindings>
 				</Item2>
 			</Controls>
 		</Item15>
-		<Item16 Ref="377" ControlType="GroupFooterBand" Name="groupFooterBand5" Level="1" HeightF="-0" Visible="False">
+		<Item16 Ref="387" ControlType="GroupFooterBand" Name="groupFooterBand5" Level="1" HeightF="-0" Visible="False">
 			<Controls>
 			</Controls>
 		</Item16>
-		<Item17 Ref="378" ControlType="GroupHeaderBand" Name="groupHeaderBand6" Level="0" HeightF="-0" Visible="False">
+		<Item17 Ref="388" ControlType="GroupHeaderBand" Name="groupHeaderBand6" Level="0" HeightF="-0" Visible="False">
 			<GroupFields>
-				<Item1 Ref="379" FieldName="order_rev_nbr" />
-				<Item2 Ref="380" FieldName="acctg_trans_seq_nbr" />
+				<Item1 Ref="389" FieldName="order_rev_nbr" />
+				<Item2 Ref="390" FieldName="acctg_trans_seq_nbr" />
 			</GroupFields>
 			<Controls>
 			</Controls>
 		</Item17>
-		<Item18 Ref="381" ControlType="GroupFooterBand" Name="groupFooterBand6" Level="0" HeightF="-0" Visible="False">
+		<Item18 Ref="391" ControlType="GroupFooterBand" Name="groupFooterBand6" Level="0" HeightF="-0" Visible="False">
 			<Controls>
 			</Controls>
 		</Item18>
 	</Bands>
 	<CalculatedFields>
-		<Item1 Ref="382" Name="compute_4" Expression="GetDate(Substring(curr_prod_mo,0,2)+'/1/'+Reverse(Substring(Reverse(curr_prod_mo),0,4)))" DataMember="Query" />
-		<Item2 Ref="383" Name="contract_mcf" Expression="[].Sum(Iif((acctg_trans_seq_nbr==1 &amp;&amp; type!='O'),Iif(IsNull(mcf),0,mcf),0))" DataMember="Query" />
-		<Item3 Ref="384" Name="contract_sat_mmbtu" Expression="[].Sum(Iif((acctg_trans_seq_nbr==1 &amp;&amp; type!='O'),Iif(IsNull(sat_mmbtu),0,sat_mmbtu),0))" DataMember="Query" />
-		<Item4 Ref="385" Name="contract_dry_mmbtu" Expression="[].Sum(Iif((acctg_trans_seq_nbr==1 &amp;&amp; type!='O'),Iif(IsNull(dry_mmbtu),0,dry_mmbtu),0))" DataMember="Query" />
-		<Item5 Ref="386" Name="contract_component_val" Expression="[].Sum(component_val)" DataMember="Query" />
-		<Item6 Ref="387" Name="prod_mo_mcf" Expression="[].Sum(Iif((acctg_trans_seq_nbr==1 &amp;&amp; type!='O'),Iif(IsNull(mcf),0,mcf),0))" DataMember="Query" />
-		<Item7 Ref="388" Name="prod_mo_sat_mmbtu" Expression="[].Sum(Iif((acctg_trans_seq_nbr==1 &amp;&amp; type!='O'),Iif(IsNull(sat_mmbtu),0,sat_mmbtu),0))" DataMember="Query" />
-		<Item8 Ref="389" Name="prod_mo_dry_mmbtu" Expression="[].Sum(Iif((acctg_trans_seq_nbr==1 &amp;&amp; type!='O'),Iif(IsNull(dry_mmbtu),0,dry_mmbtu),0))" DataMember="Query" />
-		<Item9 Ref="390" Name="prod_mo_component_val" Expression="[].Sum(component_val)" DataMember="Query" />
+		<Item1 Ref="392" Name="compute_4" Expression="GetDate(Substring(curr_prod_mo,0,2)+'/1/'+Reverse(Substring(Reverse(curr_prod_mo),0,4)))" DataMember="Query" />
+		<Item2 Ref="393" Name="contract_mcf" Expression="[].Sum(Iif((acctg_trans_seq_nbr==1 &amp;&amp; type!='O'),Iif(IsNull(mcf),0,mcf),0))" DataMember="Query" />
+		<Item3 Ref="394" Name="contract_sat_mmbtu" Expression="[].Sum(Iif((acctg_trans_seq_nbr==1 &amp;&amp; type!='O'),Iif(IsNull(sat_mmbtu),0,sat_mmbtu),0))" DataMember="Query" />
+		<Item4 Ref="395" Name="contract_dry_mmbtu" Expression="[].Sum(Iif((acctg_trans_seq_nbr==1 &amp;&amp; type!='O'),Iif(IsNull(dry_mmbtu),0,dry_mmbtu),0))" DataMember="Query" />
+		<Item5 Ref="396" Name="contract_component_val" Expression="[].Sum(component_val)" DataMember="Query" />
+		<Item6 Ref="397" Name="prod_mo_mcf" Expression="[].Sum(Iif((acctg_trans_seq_nbr==1 &amp;&amp; type!='O'),Iif(IsNull(mcf),0,mcf),0))" DataMember="Query" />
+		<Item7 Ref="398" Name="prod_mo_sat_mmbtu" Expression="[].Sum(Iif((acctg_trans_seq_nbr==1 &amp;&amp; type!='O'),Iif(IsNull(sat_mmbtu),0,sat_mmbtu),0))" DataMember="Query" />
+		<Item8 Ref="399" Name="prod_mo_dry_mmbtu" Expression="[].Sum(Iif((acctg_trans_seq_nbr==1 &amp;&amp; type!='O'),Iif(IsNull(dry_mmbtu),0,dry_mmbtu),0))" DataMember="Query" />
+		<Item9 Ref="400" Name="prod_mo_component_val" Expression="[].Sum(component_val)" DataMember="Query" />
 	</CalculatedFields>
 </XtraReportsLayoutSerializer>
