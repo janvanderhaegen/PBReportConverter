@@ -319,8 +319,7 @@ internal class PBReportParser(string path)
                 {
                     throw new Exception($"Buffer overflow while parsing SQL query that started at {start} to ({_reader.CurrentLineIndex()}, {_reader.CurrentCharIndex()}) in file {_filePath}.");
                 }
-                var current = _lastCharAsChar;
-                if (current == '"' && Char.IsWhiteSpace((char)_reader.Peek()))
+                if (_lastCharAsChar == '"' && Char.IsWhiteSpace((char)_reader.Peek()))
                 {
                     ReadChar();
                     var nextKeyword = _reader.Peek(9);
@@ -334,15 +333,20 @@ internal class PBReportParser(string path)
                         continue;
                     }
                 }
-                if(current == '(')
+                if(_lastCharAsChar == '(')
                 {
                     bracketCheck++;
                 }
-                else if(current == ')')
+                else if(_lastCharAsChar == ')')
                 {
                     bracketCheck--;
                 }
-                buf[pos++] = current == '"' ? '\'' : current;
+                else if(_lastCharAsChar == '/' && _reader.Peek() == '/')
+                {
+                    SkipRestOfLine(_lastCharAsChar.ToString());
+                    continue;
+                }
+                buf[pos++] = _lastCharAsChar == '"' ? '\'' : _lastCharAsChar;
                 ReadChar();
             }
             if (pos == 0)

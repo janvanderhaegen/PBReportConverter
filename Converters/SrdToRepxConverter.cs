@@ -385,7 +385,7 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
         }
 
         bool visibility;
-        if (attributes.TryGetValue("visibility", out var value) && value == "0")
+        if (attributes.TryGetValue("visible", out var value) && value == "0")
         {
             visibility = false;
         }
@@ -419,6 +419,7 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
                     {
                         fixedExpression = fixedExpression.Replace(",1", ",true").Replace(",0", ",false");
                     }
+
                     attrExpressions.Add(new(MapAttr(attr), (printEvent, fixedExpression)));
                 }
             }
@@ -449,14 +450,17 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
                         WriteSingleLine($"<Item{subItemCounter++} Ref=\"{_ref++}\" EventName=\"{prEvent}\" PropertyName=\"{attr}\" Expression=\"{prExpr}\"/>");
                     }
                     WriteEndObject("</ExpressionBindings>");
+
                     WriteEndObject($"</Item{itemCounter++}>");
                     break;
                 }
             case "text":
                 {
-                    WriteSingleLine($"<Item{itemCounter++} Ref=\"{_ref++}\" ControlType=\"{objType}\" {nameAttr} extAlignment=\"{ConvertAlignment(attributes["alignment"])}\" Multiline=\"true\" Text=\"{attributes["text"].Replace('&', '-')}\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\" AnchorVertical=\"Both\" Font=\"{attributes["font.face"]}, {attributes["font.height"][1..]}pt{CheckBold(attributes["font.weight"])}\" Visible=\"{visibility}\"/>");
+                    var textItemDef = $"Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"{objType}\" {nameAttr} TextAlignment=\"{ConvertAlignment(attributes["alignment"])}\" Multiline=\"true\" Text=\"{attributes["text"].Replace('&', '-')}\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\" AnchorVertical=\"Both\" Font=\"{attributes["font.face"]}, {attributes["font.height"][1..]}pt{CheckBold(attributes["font.weight"])}\" Visible=\"{visibility}\"";
+                    
                     if(attrExpressions.Count > 0)
                     {
+                        WriteStartObject($"<{textItemDef}>");
                         WriteStartObject("<ExpressionBindings>");
                         var subItemCounter = 1;
                         foreach (var (attr, (prEvent, prExpr)) in attrExpressions)
@@ -464,6 +468,13 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
                             WriteSingleLine($"<Item{subItemCounter++} Ref=\"{_ref++}\" EventName=\"{prEvent}\" PropertyName=\"{attr}\" Expression=\"{prExpr}\"/>");
                         }
                         WriteEndObject("</ExpressionBindings>");
+
+                        WriteEndObject($"</Item{itemCounter++}>");
+                    }
+                    else
+                    {
+                        WriteSingleLine($"<{textItemDef}/>");
+                        itemCounter++;
                     }
                     break;
                 }
@@ -479,9 +490,10 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
                     }
                     else
                     {
-                        var (printEvent, expression) = Expression(attributes["expression"]);
+                        var baseExpr = attributes["expression"];
+                        var (printEvent, expression) = Expression(baseExpr);
                         WriteStartObject($"<Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"{objType}\" Name=\"{name}_field\" TextFormatString=\"{FixFormattingString(formatString)}\" TextAlignment=\"{ConvertAlignment(attributes["alignment"])}\"  Multiline=\"true\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\" AnchorVertical=\"Both\" Font=\"{attributes["font.face"]}, {attributes["font.height"][1..]}pt{CheckBold(attributes["font.weight"])}\" Visible=\"{visibility}\">");
-                        if(container._objectType == "group" && expression.Contains("sum"))
+                        if(container._objectType == "group" && baseExpr.Contains("cumulative"))
                         {
                             WriteSingleLine($"<Summary Ref=\"{_ref++}\" Running=\"Group\" />");
                         }
@@ -493,6 +505,7 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
                             WriteSingleLine($"<Item{subItemCounter++} Ref=\"{_ref++}\" EventName=\"{prEvent}\" PropertyName=\"{attr}\" Expression=\"{prExpr}\"/>");
                         }
                         WriteEndObject("</ExpressionBindings>");
+
                         WriteEndObject($"</Item{itemCounter++}>");
                         if(printEvent == "BeforePrint")
                             _currentComputes.Add((name!, expression));

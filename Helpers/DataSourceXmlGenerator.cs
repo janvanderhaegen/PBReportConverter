@@ -1,5 +1,7 @@
 ﻿using PBReportConverter.Models;
 using System.Text;
+using System.Text.RegularExpressions;
+using static PBReportConverter.Helpers.PBFormattingHelper;
 
 namespace PBReportConverter.Helpers;
 
@@ -13,33 +15,38 @@ internal static class DataSourceXmlGenerator
         _writer.WriteLine("<SqlDataSource Name=\"sqlDataSource1\">");
         _writer.WriteLine("<Connection Name=\"TIES Data\" FromAppConfig=\"true\" />");
 
+        var parameters = new List<string>();
         if (attributes.TryGetValue("procedure", out var query))
         {
             _writer.WriteLine($"<Query Type=\"StoredProcQuery\" Name=\"Query\">");
             var procedureName = GetProcedureName(query);
             _writer.WriteLine($"<ProcName>{procedureName}</ProcName>");
+            parameters = GetProcedureParams(query);
         }
         else if (attributes.TryGetValue("retrieve", out query))
         {
             _writer.WriteLine($"<Query Type=\"CustomSqlQuery\" Name=\"Query\">");
-            if (!attributes.TryGetValue("sort", out var sortString))
+            if (!attributes.TryGetValue("sort", out var sortString) || query.Contains("ORDER BY", StringComparison.CurrentCultureIgnoreCase))
             {
                 sortString = "";
             }
-            _writer.WriteLine($"<Sql>{query.Replace(":", "@").Replace("~\"", "'")} {ParseSorting(sortString)}</Sql>");
+            _writer.WriteLine($"<Sql>{query.Replace(":", "@").Replace("~\"", "'")} {ParseSorting(sortString, table)}</Sql>");
+            
+            if (attributes.TryGetValue("arguments", out var paramString))
+            {
+                parameters = GetParameters(paramString);
+            }
         }
         else
         {
             throw new Exception("SQL statement for data source is undefined");
         }
 
-        if (attributes.TryGetValue("arguments", out var parameters))
+        foreach (var paramName in parameters)
         {
-            foreach (var paramName in PBFormattingHelper.GetParameters(parameters))
-            {
-                _writer.WriteLine($"<Parameter Name=\"@{paramName}\" Type=\"DevExpress.DataAccess.Expression\">(System.String)(?{paramName})</Parameter>");
-            }
+            _writer.WriteLine($"<Parameter Name=\"@{paramName}\" Type=\"DevExpress.DataAccess.Expression\">(System.String)(?{paramName})</Parameter>");
         }
+
         _writer.WriteLine("</Query>");
 
         _writer.WriteLine("<ResultSchema>");
@@ -62,7 +69,17 @@ internal static class DataSourceXmlGenerator
         return Convert.ToBase64String(Encoding.UTF8.GetBytes(resultString));
     }
 
-    private static string ParseSorting(string sortString)
+    private static List<string> GetProcedureParams(string query)
+    {
+        var startIndex = query.IndexOf(';')+1;
+        var subString = query[startIndex..];
+        Regex paramPattern = new(@"@([_a-zA-Z]+)");
+
+        var matches = Regex.Matches(subString, @"@([_a-zA-Z]+)");
+        return matches.Select(x => x.Groups[1].Value).ToList();
+    }
+
+    private static string ParseSorting(string sortString, TableModel table)
     {
         if(sortString == "")
         {
@@ -73,8 +90,12 @@ internal static class DataSourceXmlGenerator
         var sortElements = sortString.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
         foreach(var sortElement in sortElements.Chunk(2))
         {
-            var sortMethod = sortElement[1] == "A" ? "ASC" : "DESC";
-            sortList.Add($"{sortElement[0]} {sortMethod}");
+            var sortField = sortElement[0];
+            if(table._columns.Where(col => col._attributes["name"] == sortField).Any())
+            {
+                var sortMethod = sortElement[1] == "A" ? "ASC" : "DESC";
+                sortList.Add($"{sortElement[0]} {sortMethod}");
+            }
         }
 
         return "ORDER BY " + string.Join(',', sortList);

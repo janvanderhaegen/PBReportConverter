@@ -15,8 +15,9 @@ internal class PBExpressionParser
     private static readonly List<string> _knownOps = ["when", "then", "and", "or", "else", "not"];
     private static readonly List<char> _exprDelims = ['(', ')', ',', '\''];
     private string _event = "BeforePrint";
+    internal static readonly string[] sourceArray = ["left", "right"];
 
-private static string FormatChar(int c) => c < 32 ? $"\\x{c:X2}" : $"'{(char)c}'";
+    private static string FormatChar(int c) => c < 32 ? $"\\x{c:X2}" : $"'{(char)c}'";
 
     private void ReadChar()
     {
@@ -99,7 +100,7 @@ private static string FormatChar(int c) => c < 32 ? $"\\x{c:X2}" : $"'{(char)c}'
     public (string printEvent, string expr) Parse(string expression)
     {
         _sb.Clear();
-        expression = Regex.Replace(expression, @"\sfor [a-zA-Z]+(\s[0-9]+)?", "");
+        expression = Regex.Replace(expression, @"\sfor [a-zA-Z0-9]+(\s[0-9]+)?", "");
         _reader = new StringReader(expression);
         _event = "BeforePrint";
         ReadChar();
@@ -177,18 +178,19 @@ private static string FormatChar(int c) => c < 32 ? $"\\x{c:X2}" : $"'{(char)c}'
                 {
                     Append(FunctionHelper(str));
                     AddChar();
-                    switch (str){
+                    switch (str.ToLower()){
                         case "case": { ParseCaseParameter(); break; }
                         case "string":
                         case "pos": { FlipParameters(str); break; }
                         case "page":
-                        case "pageCount":
+                        case "pagecount":
                         {
                             _event = "PrintOnPage";
                             SkipParameters();
                             break;
                         }
-                        case "last": 
+                        case "last":
+                        case "cumulativesum":
                         {
                             SkipParameters();
                             break;
@@ -196,11 +198,11 @@ private static string FormatChar(int c) => c < 32 ? $"\\x{c:X2}" : $"'{(char)c}'
                         default:
                         {
                             ParseParameters(str);
-                            if (str == "right")
+                            if (str.Equals("right", StringComparison.CurrentCultureIgnoreCase))
                             {
                                 Append(')');
                             }
-                            else if (str == "getrow")
+                            else if (str.Equals("getrow", StringComparison.CurrentCultureIgnoreCase))
                             {
                                 Append("+1");
                             }
@@ -297,18 +299,18 @@ private static string FormatChar(int c) => c < 32 ? $"\\x{c:X2}" : $"'{(char)c}'
 
     private void ParseParameters(string function)
     {
-        if(function == "right")
+        if(function.Equals("right", StringComparison.CurrentCultureIgnoreCase))
         {
             Append("Reverse(");
             ParseExpression();
             Append(')');
         }
-        else if(function == "left")
+        else if(function.Equals("left", StringComparison.CurrentCultureIgnoreCase))
         {
             ParseExpression();
         }
 
-        if(function == "left" || function == "right")
+        if (sourceArray.Contains(function.ToLower()))
         {
             Append(",0");
         }
@@ -347,7 +349,7 @@ private static string FormatChar(int c) => c < 32 ? $"\\x{c:X2}" : $"'{(char)c}'
                 AddChar();
                 break;
             }
-            if (_lastStrBufferSb.ToString() == "else")
+            if (_lastStrBufferSb.ToString().Equals("else", StringComparison.CurrentCultureIgnoreCase))
             {
                 ParseExpression();
                 elseCheck = true;
@@ -370,10 +372,11 @@ private static string FormatChar(int c) => c < 32 ? $"\\x{c:X2}" : $"'{(char)c}'
         ReadCharSkipWhitespace();
         ParseExpression();
         var secondParam = _exprBufferSb.ToString();
+        _exprBufferSb.Clear();
         _writeToBuffer = false;
         if (_lastChar == ')' || _lastChar < 0)
         {
-            Append($"{secondParam}{(function == "string" ? ",0" : "")},{firstParam}");
+            Append($"{secondParam}{(function.Equals("string", StringComparison.CurrentCultureIgnoreCase) ? ",0" : "")},{firstParam}");
             AddChar();
         }
         else
@@ -388,7 +391,7 @@ private static string FormatChar(int c) => c < 32 ? $"\\x{c:X2}" : $"'{(char)c}'
         {
             "if" => "Iif",
             "sum" => "[].Sum",
-            "cumulativesum" => "sumSum",
+            "cumulativesum" => "1",
             "date" => "GetDate",
             "left" or "mid" or "string" => "Substring",
             "round" => "Round",
