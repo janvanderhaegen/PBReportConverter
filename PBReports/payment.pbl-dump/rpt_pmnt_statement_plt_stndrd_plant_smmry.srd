@@ -1,0 +1,434 @@
+﻿$PBExportHeader$rpt_pmnt_statement_plt_stndrd_plant_smmry.srd
+release 19;
+datawindow(units=0 timer_interval=0 color=16777215 brushmode=0 transparency=0 gradient.angle=0 gradient.color=8421504 gradient.focus=0 gradient.repetition.count=0 gradient.repetition.length=100 gradient.repetition.mode=0 gradient.scale=100 gradient.spread=100 gradient.transparency=0 picture.blur=0 picture.clip.bottom=0 picture.clip.left=0 picture.clip.right=0 picture.clip.top=0 picture.mode=0 picture.scale.x=100 picture.scale.y=100 picture.transparency=0 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.background=no print.preview.background=no print.preview.outline=yes hidegrayline=no showbackcoloronxp=no picture.file="" )
+header(height=136 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+summary(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+footer(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+detail(height=60 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+table(column=(type=number updatewhereclause=yes name=all_gal dbname="all_gal" )
+ column=(type=char(40) updatewhereclause=yes name=description dbname="description" )
+ column=(type=number updatewhereclause=yes name=inlet_theo dbname="inlet_theo" )
+ column=(type=char(7) updatewhereclause=yes name=disposition_code dbname="disposition_code" )
+ column=(type=char(3) updatewhereclause=yes name=product_type_code dbname="product_type_code" )
+ retrieve="  SELECT Sum(IsNull(mcf.c2_vol,0)) +   
+         Sum(IsNull(mcf.prp_c2_vol,0)) all_gal,   
+         d.description,
+			Sum(IsNull(mcf.c2_theo_vol,0)) inlet_theo,
+f.disposition_code,
+			d.product_type_code 			
+    FROM plant_mcf_settlement mcf,   
+         plant_mmbtu_settlement mmbtu,
+			facility_proc_parameter f,
+			product_settlement_disp p,
+			valid_disposition d,
+			valid_product_type pt,
+			valid_gas_units vgu ,
+			price_ref_entries pr
+   WHERE (mcf.run_datetime = mmbtu.run_datetime) and 
+		( mcf.deal_nbr = mmbtu.deal_nbr ) and  
+         ( mcf.path_nbr = mmbtu.path_nbr ) and  
+         ( mcf.order_nbr = mmbtu.order_nbr ) and  
+         ( mcf.rev_nbr = mmbtu.rev_nbr ) and
+			( mcf.proc_pipe = f.pipeline_code ) and  
+			( f.disposition_code = ~"C2~" ) and
+			( f.fractionation = 'Y' ) and
+			( f.beg_eff_date = (SELECT max(beg_eff_date)
+								FROM facility_proc_parameter p
+								WHERE f.pipeline_code = p.pipeline_code
+								and beg_eff_date <= :dwra_prod_month) ) and
+			( mcf.related_k = p.contract_nbr ) and 
+			( mcf.eff_date = p.eff_date ) and
+			( mcf.prov_seq_nbr = p.prov_seq_nbr ) and 
+			( p.disposition_code = ~"C2~" ) and 
+			d.disposition_code = f.disposition_code and 
+         ( (mcf.run_datetime = :dwra_run_datetime) and 
+				( mcf.proc_pipe = :dwra_facility_cd ) and
+				( mcf.start_date = :dwra_prod_month ) and
+				( mcf.proc_k = :dwra_contract_nbr )  )    and
+			pt.product_type_code = 'C2' and 
+			pt.volume_unit = vgu.unit_code and
+		p.tik_price_ref = pr.reference_code and
+		p.tik_price_ref_prod_type = pr.product_type_code and 
+		p.tik_price_ref_date = pr.reference_date and
+		:dwra_prod_month between pr.from_date and pr.to_date
+group by f.disposition_code,d.description,
+f.disposition_code,
+			d.product_type_code
+Union 
+  SELECT Sum(IsNull(mcf.c3_vol,0)) +   
+         Sum(IsNull(mcf.prp_c3_vol,0)) all_gal,   
+			d.description,
+			Sum(IsNull(mcf.c3_theo_vol,0))  inlet_theo,
+f.disposition_code,
+			d.product_type_code
+    FROM plant_mcf_settlement mcf,   
+         plant_mmbtu_settlement mmbtu,
+			facility_proc_parameter f,
+			product_settlement_disp p,
+			valid_disposition d ,
+			valid_product_type pt,
+			valid_gas_units vgu ,
+			price_ref_entries pr
+   WHERE (mcf.run_datetime = mmbtu.run_datetime) and 
+		( mcf.deal_nbr = mmbtu.deal_nbr ) and  
+         ( mcf.path_nbr = mmbtu.path_nbr ) and  
+         ( mcf.order_nbr = mmbtu.order_nbr ) and  
+         ( mcf.rev_nbr = mmbtu.rev_nbr ) and
+			( mcf.proc_pipe = f.pipeline_code ) and  
+			( f.disposition_code = ~"C3~" ) and
+			( f.fractionation = 'Y' ) and
+			( f.beg_eff_date = (SELECT max(beg_eff_date)
+								FROM facility_proc_parameter p
+								WHERE f.pipeline_code = p.pipeline_code
+								and beg_eff_date <= :dwra_prod_month) ) and
+			( mcf.related_k = p.contract_nbr ) and 
+			( mcf.eff_date = p.eff_date ) and
+			( mcf.prov_seq_nbr = p.prov_seq_nbr ) and 
+			( p.disposition_code = ~"C3~" ) and 
+			d.disposition_code = f.disposition_code and
+         ( (mcf.run_datetime = :dwra_run_datetime) and 
+				( mcf.proc_pipe = :dwra_facility_cd ) and
+				( mcf.start_date = :dwra_prod_month ) and
+				( mcf.proc_k = :dwra_contract_nbr )  )  and
+			pt.product_type_code = 'C3' and 
+			pt.volume_unit = vgu.unit_code  and
+		p.tik_price_ref = pr.reference_code and
+		p.tik_price_ref_prod_type = pr.product_type_code and 
+		p.tik_price_ref_date = pr.reference_date and
+		:dwra_prod_month between pr.from_date and pr.to_date
+group by f.disposition_code,d.description,
+f.disposition_code,
+			d.product_type_code
+Union 
+  SELECT Sum(IsNull(mcf.ic4_vol,0)) +   
+         Sum(IsNull(mcf.prp_ic4_vol,0)) all_gal,   
+			d.description,
+			Sum(IsNull(mcf.ic4_theo_vol,0))  inlet_theo,
+f.disposition_code,
+			d.product_type_code
+    FROM plant_mcf_settlement mcf,   
+         plant_mmbtu_settlement mmbtu,
+			facility_proc_parameter f,
+			product_settlement_disp p,
+			valid_disposition d,
+			valid_product_type pt,
+			valid_gas_units vgu ,
+			price_ref_entries pr
+   WHERE (mcf.run_datetime = mmbtu.run_datetime) and 
+		( mcf.deal_nbr = mmbtu.deal_nbr ) and  
+         ( mcf.path_nbr = mmbtu.path_nbr ) and  
+         ( mcf.order_nbr = mmbtu.order_nbr ) and  
+         ( mcf.rev_nbr = mmbtu.rev_nbr ) and
+			( mcf.proc_pipe = f.pipeline_code ) and  
+			( f.disposition_code = ~"IC4~" ) and
+			( f.fractionation = 'Y' ) and
+			( f.beg_eff_date = (SELECT max(beg_eff_date)
+								FROM facility_proc_parameter p
+								WHERE f.pipeline_code = p.pipeline_code
+								and beg_eff_date <= :dwra_prod_month) ) and
+			( mcf.related_k = p.contract_nbr ) and 
+			( mcf.eff_date = p.eff_date ) and
+			( mcf.prov_seq_nbr = p.prov_seq_nbr ) and 
+			( p.disposition_code = ~"IC4~" ) and 
+			d.disposition_code = f.disposition_code and 
+         ( (mcf.run_datetime = :dwra_run_datetime) and 
+				( mcf.proc_pipe = :dwra_facility_cd ) and
+				( mcf.start_date = :dwra_prod_month ) and
+				( mcf.proc_k = :dwra_contract_nbr )  ) and
+			
+			pt.product_type_code = 'C4I' and 
+			pt.volume_unit = vgu.unit_code  and
+		p.tik_price_ref = pr.reference_code and
+		p.tik_price_ref_prod_type = pr.product_type_code and 
+		p.tik_price_ref_date = pr.reference_date and
+		:dwra_prod_month between pr.from_date and pr.to_date   
+group by f.disposition_code,d.description,
+f.disposition_code,
+			d.product_type_code
+Union 
+Select Sum(IsNull(mcf.nc4_vol,0)) +   
+         Sum(IsNull(mcf.prp_nc4_vol,0)) all_gal,   
+			d.description,
+			Sum(IsNull(mcf.nc4_theo_vol,0))  inlet_theo,
+f.disposition_code,
+			d.product_type_code
+    FROM plant_mcf_settlement mcf,   
+         plant_mmbtu_settlement mmbtu,
+			facility_proc_parameter f,
+			product_settlement_disp p,
+			valid_disposition d ,
+			valid_product_type pt,
+			valid_gas_units vgu ,
+			price_ref_entries pr
+   WHERE (mcf.run_datetime = mmbtu.run_datetime) and 
+		( mcf.deal_nbr = mmbtu.deal_nbr ) and  
+         ( mcf.path_nbr = mmbtu.path_nbr ) and  
+         ( mcf.order_nbr = mmbtu.order_nbr ) and  
+         ( mcf.rev_nbr = mmbtu.rev_nbr ) and
+			( mcf.proc_pipe = f.pipeline_code ) and  
+			( f.disposition_code = ~"NC4~" ) and
+			( f.fractionation = 'Y' ) and
+			( f.beg_eff_date = (SELECT max(beg_eff_date)
+								FROM facility_proc_parameter p
+								WHERE f.pipeline_code = p.pipeline_code
+								and beg_eff_date <= :dwra_prod_month) ) and
+			( mcf.related_k = p.contract_nbr ) and 
+			( mcf.eff_date = p.eff_date ) and
+			( mcf.prov_seq_nbr = p.prov_seq_nbr ) and 
+			( p.disposition_code = ~"NC4~" ) and 
+			 d.disposition_code = f.disposition_code and 
+         ( (mcf.run_datetime = :dwra_run_datetime) and 
+				( mcf.proc_pipe = :dwra_facility_cd ) and
+				( mcf.start_date = :dwra_prod_month ) and
+				( mcf.proc_k = :dwra_contract_nbr )  ) and
+			
+			pt.product_type_code = 'C4N' and 
+			pt.volume_unit = vgu.unit_code and
+		p.tik_price_ref = pr.reference_code and
+		p.tik_price_ref_prod_type = pr.product_type_code and 
+		p.tik_price_ref_date = pr.reference_date and
+		:dwra_prod_month between pr.from_date and pr.to_date    
+group by f.disposition_code,d.description,
+f.disposition_code,
+			d.product_type_code
+Union 
+  SELECT Sum(IsNull(mcf.c5_vol,0)) +   
+         Sum(IsNull(mcf.prp_c5_vol,0)) all_gal,   
+			d.description,
+			Sum(IsNull(mcf.c5_theo_vol,0)) inlet_theo,
+f.disposition_code,
+			d.product_type_code
+    FROM plant_mcf_settlement mcf,   
+         plant_mmbtu_settlement mmbtu,
+			facility_proc_parameter f,
+			product_settlement_disp p,
+			valid_disposition d ,
+			valid_product_type pt,
+			valid_gas_units vgu ,
+			price_ref_entries pr
+   WHERE (mcf.run_datetime = mmbtu.run_datetime) and 
+		( mcf.deal_nbr = mmbtu.deal_nbr ) and  
+         ( mcf.path_nbr = mmbtu.path_nbr ) and  
+         ( mcf.order_nbr = mmbtu.order_nbr ) and  
+         ( mcf.rev_nbr = mmbtu.rev_nbr ) and
+			( mcf.proc_pipe = f.pipeline_code ) and  
+			( f.disposition_code = ~"C5+~" ) and
+			( f.fractionation = 'Y' ) and
+			( f.beg_eff_date = (SELECT max(beg_eff_date)
+								FROM facility_proc_parameter p
+								WHERE f.pipeline_code = p.pipeline_code
+								and beg_eff_date <= :dwra_prod_month) ) and
+			( mcf.related_k = p.contract_nbr ) and 
+			( mcf.eff_date = p.eff_date ) and
+			( mcf.prov_seq_nbr = p.prov_seq_nbr ) and 
+			( p.disposition_code = ~"C5+~" ) and 
+			d.disposition_code = f.disposition_code and
+         ( (mcf.run_datetime = :dwra_run_datetime) and 
+				( mcf.proc_pipe = :dwra_facility_cd ) and
+				( mcf.start_date = :dwra_prod_month ) and
+				( mcf.proc_k = :dwra_contract_nbr )  )  and
+			 pt.product_type_code = 'C5+' and 
+			pt.volume_unit = vgu.unit_code  and
+		p.tik_price_ref = pr.reference_code and
+		p.tik_price_ref_prod_type = pr.product_type_code and 
+		p.tik_price_ref_date = pr.reference_date and
+		:dwra_prod_month between pr.from_date and pr.to_date  
+group by f.disposition_code,d.description,
+f.disposition_code,
+			d.product_type_code
+Union 
+  SELECT Sum(IsNull(mcf.ic5_vol,0)) +   
+         Sum(IsNull(mcf.prp_ic5_vol,0)) all_gal,   
+			d.description,
+			Sum(IsNull(mcf.ic5_theo_vol,0))  inlet_theo,
+f.disposition_code,
+			d.product_type_code
+    FROM plant_mcf_settlement mcf,   
+         plant_mmbtu_settlement mmbtu,
+			facility_proc_parameter f,
+			product_settlement_disp p,
+			valid_disposition d ,
+			valid_product_type pt,
+			valid_gas_units vgu,
+			price_ref_entries pr 
+   WHERE (mcf.run_datetime = mmbtu.run_datetime) and 
+		( mcf.deal_nbr = mmbtu.deal_nbr ) and  
+         ( mcf.path_nbr = mmbtu.path_nbr ) and  
+         ( mcf.order_nbr = mmbtu.order_nbr ) and  
+         ( mcf.rev_nbr = mmbtu.rev_nbr ) and
+			( mcf.proc_pipe = f.pipeline_code ) and  
+			( f.disposition_code = ~"IC5~" ) and
+			( f.fractionation = 'Y' ) and
+			( f.beg_eff_date = (SELECT max(beg_eff_date)
+								FROM facility_proc_parameter p
+								WHERE f.pipeline_code = p.pipeline_code
+								and beg_eff_date <= :dwra_prod_month) ) and
+			( mcf.related_k = p.contract_nbr ) and 
+			( mcf.eff_date = p.eff_date ) and
+			( mcf.prov_seq_nbr = p.prov_seq_nbr ) and 
+			( p.disposition_code = ~"IC5~" ) and 
+			d.disposition_code = f.disposition_code and 
+         ( (mcf.run_datetime = :dwra_run_datetime) and 
+				( mcf.proc_pipe = :dwra_facility_cd ) and
+				( mcf.start_date = :dwra_prod_month ) and
+				( mcf.proc_k = :dwra_contract_nbr )  ) and
+			pt.product_type_code = 'C5I' and 
+			pt.volume_unit = vgu.unit_code and
+		p.tik_price_ref = pr.reference_code and
+		p.tik_price_ref_prod_type = pr.product_type_code and 
+		p.tik_price_ref_date = pr.reference_date  and
+		:dwra_prod_month between pr.from_date and pr.to_date  
+group by f.disposition_code,d.description,
+f.disposition_code,
+			d.product_type_code
+Union 
+Select Sum(IsNull(mcf.nc5_vol,0)) +   
+         Sum(IsNull(mcf.prp_nc5_vol,0)) all_gal,   
+			d.description,
+			Sum(IsNull(mcf.nc5_theo_vol,0))  inlet_theo,
+f.disposition_code,
+			d.product_type_code
+    FROM plant_mcf_settlement mcf,   
+         plant_mmbtu_settlement mmbtu,
+			facility_proc_parameter f,
+			product_settlement_disp p,
+			valid_disposition d ,
+			valid_product_type pt,
+			valid_gas_units vgu ,
+			price_ref_entries pr
+   WHERE (mcf.run_datetime = mmbtu.run_datetime) and 
+		( mcf.deal_nbr = mmbtu.deal_nbr ) and  
+         ( mcf.path_nbr = mmbtu.path_nbr ) and  
+         ( mcf.order_nbr = mmbtu.order_nbr ) and  
+         ( mcf.rev_nbr = mmbtu.rev_nbr ) and
+			( mcf.proc_pipe = f.pipeline_code ) and  
+			( f.disposition_code = ~"NC5~" ) and
+			( f.fractionation = 'Y' ) and
+			( f.beg_eff_date = (SELECT max(beg_eff_date)
+								FROM facility_proc_parameter p
+								WHERE f.pipeline_code = p.pipeline_code
+								and beg_eff_date <= :dwra_prod_month) ) and
+			( mcf.related_k = p.contract_nbr ) and 
+			( mcf.eff_date = p.eff_date ) and
+			( mcf.prov_seq_nbr = p.prov_seq_nbr ) and 
+			( p.disposition_code = ~"NC5~" ) and 
+				 d.disposition_code = f.disposition_code and 
+         ( (mcf.run_datetime = :dwra_run_datetime) and 
+				( mcf.proc_pipe = :dwra_facility_cd ) and
+				( mcf.start_date = :dwra_prod_month ) and
+				( mcf.proc_k = :dwra_contract_nbr )  ) and
+			pt.product_type_code = 'C5N' and 
+			pt.volume_unit = vgu.unit_code   and
+		p.tik_price_ref = pr.reference_code and
+		p.tik_price_ref_prod_type = pr.product_type_code and 
+		p.tik_price_ref_date = pr.reference_date  and
+		:dwra_prod_month between pr.from_date and pr.to_date
+group by f.disposition_code,d.description,
+f.disposition_code,
+			d.product_type_code
+Union 
+  SELECT Sum(IsNull(mcf.c6_vol,0)) +   
+         Sum(IsNull(mcf.prp_c6_vol,0)) all_gal,   
+         d.description,
+			Sum(IsNull(mcf.c6_theo_vol,0)) inlet_theo,
+f.disposition_code,
+			d.product_type_code
+    FROM plant_mcf_settlement mcf,   
+         plant_mmbtu_settlement mmbtu,
+			facility_proc_parameter f,
+			product_settlement_disp p,
+			valid_disposition d ,
+			valid_product_type pt,
+			valid_gas_units vgu ,
+			price_ref_entries pr
+   WHERE (mcf.run_datetime = mmbtu.run_datetime) and 
+		( mcf.deal_nbr = mmbtu.deal_nbr ) and  
+         ( mcf.path_nbr = mmbtu.path_nbr ) and  
+         ( mcf.order_nbr = mmbtu.order_nbr ) and  
+         ( mcf.rev_nbr = mmbtu.rev_nbr ) and
+			( mcf.proc_pipe = f.pipeline_code ) and  
+			( f.disposition_code = ~"C6+~" ) and
+			( f.fractionation = 'Y' ) and
+			( f.beg_eff_date = (SELECT max(beg_eff_date)
+								FROM facility_proc_parameter p
+								WHERE f.pipeline_code = p.pipeline_code
+								and beg_eff_date <= :dwra_prod_month) ) and
+			( mcf.related_k = p.contract_nbr ) and 
+			( mcf.eff_date = p.eff_date ) and
+			( mcf.prov_seq_nbr = p.prov_seq_nbr ) and 
+			( p.disposition_code = ~"C6+~" ) and 
+			d.disposition_code = f.disposition_code and
+         ( (mcf.run_datetime = :dwra_run_datetime) and 
+				( mcf.proc_pipe = :dwra_facility_cd ) and
+				( mcf.start_date = :dwra_prod_month ) and
+				( mcf.proc_k = :dwra_contract_nbr )  ) and
+			pt.product_type_code = 'C6+' and 
+			pt.volume_unit = vgu.unit_code  and
+		p.tik_price_ref = pr.reference_code and
+		p.tik_price_ref_prod_type = pr.product_type_code and 
+		p.tik_price_ref_date = pr.reference_date and
+		:dwra_prod_month between pr.from_date and pr.to_date   
+group by f.disposition_code,d.description,
+f.disposition_code,
+			d.product_type_code
+Union
+ SELECT  Sum(Isnull(b.residue,0)) + Sum(Isnull(b.prp_residue,0)) residue,
+			'Residue',
+       Sum(IsNull(b.residue_theo_vol,0)) residue_theo ,
+			'Residue',
+			'Gas'
+    FROM plant_mmbtu_settlement b Join product_settlement_disp p on  b.related_k = p.contract_nbr
+												and b.eff_date = p.eff_date
+												and b.prov_seq_nbr = p.prov_seq_nbr
+										Join price_ref_entries pr on p.tik_price_ref = pr.reference_code and
+											p.tik_price_ref_prod_type = pr.product_type_code and 
+											p.tik_price_ref_date = pr.reference_date 	
+   WHERE ( (b.run_datetime = :dwra_run_datetime) and 
+				( b.proc_pipe = :dwra_facility_cd ) and 				
+				( b.start_date = :dwra_prod_month )  and 
+				( b.proc_k = :dwra_contract_nbr )) and
+				( p.disposition_code = ~"RES~" ) and 
+				:dwra_prod_month between pr.from_date and pr.to_date
+Union
+  
+ SELECT NULL,
+			'Plant BTU',
+       (Sum(Isnull(b.residue,0)) + Sum(Isnull(b.prp_residue,0)))/(Sum(Isnull(m.residue,0)) + Sum(Isnull(m.prp_residue,0))) inlet_theo,
+			'TU',
+			'Gas'
+    FROM plant_mmbtu_settlement b Join plant_mcf_settlement m on b.run_datetime = m.run_datetime 
+											and b.deal_nbr = m.deal_nbr
+											and b.path_nbr = m.path_nbr
+											and b.order_nbr = m.order_nbr
+											and b.rev_nbr = m.rev_nbr
+										Join product_settlement_disp p on  b.related_k = p.contract_nbr
+											and b.eff_date = p.eff_date
+											and b.prov_seq_nbr = p.prov_seq_nbr 
+										Join price_ref_entries pr on p.tik_price_ref = pr.reference_code and
+											p.tik_price_ref_prod_type = pr.product_type_code and 
+											p.tik_price_ref_date = pr.reference_date 	
+   WHERE (  (b.run_datetime = :dwra_run_datetime) and 
+				( b.proc_pipe = :dwra_facility_cd ) and 				
+				( b.start_date = :dwra_prod_month )  and 
+				( b.proc_k = :dwra_contract_nbr )) and
+				( p.disposition_code = ~"RES~" ) and 
+				:dwra_prod_month between pr.from_date and pr.to_date
+" arguments=(("dwra_prod_month", datetime),("dwra_facility_cd", string),("dwra_contract_nbr", string),("dwra_run_datetime", datetime))  sort="product_type_code A disposition_code A " )
+text(band=header alignment="2" text="Plant Product Volumes" border="0" color="0" x="297" y="0" height="56" width="672" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+line(band=header x1="0" y1="56" x2="1161" y2="60"  name=l_2 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" )
+text(band=header alignment="1" text="Allocated" border="0" color="0" x="891" y="72" height="56" width="247" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=header alignment="1" text="Theoretical" border="0" color="0" x="521" y="72" height="56" width="270" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="14" y="4" height="48" width="443" format="[general]" html.valueishtml="0"  name=description visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="0" x="795" y="4" height="48" width="343" format="#,##0.00" html.valueishtml="0"  name=all_gal visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=3 alignment="1" tabsequence=32766 border="0" color="0" x="462" y="4" height="48" width="325" format="#,##0.00" html.valueishtml="0"  name=inlet_theo visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" nativepdf.customsize=0 nativepdf.customorientation=0 nativepdf.pdfstandard=0 nativepdf.useprintspec=no )
+export.xhtml()
+ 

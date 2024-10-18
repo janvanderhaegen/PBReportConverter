@@ -1,0 +1,48 @@
+﻿$PBExportHeader$rpt_move_invoice_oba_charges.srd
+$PBExportComments$Crosstex Move Invoice - XM2
+release 19;
+datawindow(units=2 timer_interval=0 color=1073741824 brushmode=0 transparency=0 gradient.angle=0 gradient.color=8421504 gradient.focus=0 gradient.repetition.count=0 gradient.repetition.length=100 gradient.repetition.mode=0 gradient.scale=100 gradient.spread=100 gradient.transparency=0 picture.blur=0 picture.clip.bottom=0 picture.clip.left=0 picture.clip.right=0 picture.clip.top=0 picture.mode=0 picture.scale.x=100 picture.scale.y=100 picture.transparency=0 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 1 print.margin.left = 0 print.margin.right = 0 print.margin.top = 250 print.margin.bottom = 250 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.background=no print.preview.background=no print.preview.outline=yes hidegrayline=no showbackcoloronxp=no picture.file="" )
+header(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+summary(height=270 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+footer(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+detail(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+table(column=(type=char(13) updatewhereclause=yes name=statement_nbr dbname="invoice_statement_temp.statement_nbr" dbalias=".statement_nbr" )
+ column=(type=char(3) updatewhereclause=yes name=statement_rev_nbr dbname="invoice_statement_temp.statement_rev_nbr" dbalias=".statement_rev_nbr" )
+ column=(type=char(40) updatewhereclause=yes name=type_comp_desc dbname="invoice_statement_temp.type_comp_desc" dbalias=".type_comp_desc" )
+ column=(type=char(1) updatewhereclause=yes name=prior_month_adj_ind dbname="invoice_statement_temp.prior_month_adj_ind" dbalias=".prior_month_adj_ind" )
+ column=(type=number updatewhereclause=yes name=value_sum dbname="compute_0005" )
+ retrieve="  SELECT invoice_statement_temp.statement_nbr,   
+         invoice_statement_temp.statement_rev_nbr,   
+         invoice_statement_temp.type_comp_desc,   
+         invoice_statement_temp.prior_month_adj_ind,   
+         sum( ROUND(invoice_statement_temp.value,2) )  value_sum
+    FROM invoice_statement_temp  
+   WHERE ( invoice_statement_temp.statement_nbr = :statement_nbr ) AND  
+         ( invoice_statement_temp.statement_rev_nbr = :statement_rev_nbr ) AND  
+         ( invoice_statement_temp.prior_month_adj_ind = 'N' ) AND  
+         ( invoice_statement_temp.run_user_name = :run_user_name ) AND  
+         ( invoice_statement_temp.run_date = :run_date ) AND  
+         ( invoice_statement_temp.type <> 'A' ) AND
+		( invoice_statement_temp.value <> 0 )
+GROUP BY invoice_statement_temp.statement_nbr,   
+         invoice_statement_temp.statement_rev_nbr,   
+         invoice_statement_temp.type_comp_desc,   
+         invoice_statement_temp.prior_month_adj_ind  
+ORDER BY invoice_statement_temp.type_comp_desc DESC   
+" arguments=(("statement_nbr", string),("statement_rev_nbr", string),("run_user_name", string),("run_date", datetime))  sort="type_comp_desc A " )
+group(level=1 header.height=187 trailer.height=0 by=("type_comp_desc" ) header.color="536870912" header.transparency="0" header.gradient.color="8421504" header.gradient.transparency="0" header.gradient.angle="0" header.brushmode="0" header.gradient.repetition.mode="0" header.gradient.repetition.count="0" header.gradient.repetition.length="100" header.gradient.focus="0" header.gradient.scale="100" header.gradient.spread="100" trailer.color="536870912" trailer.transparency="0" trailer.gradient.color="8421504" trailer.gradient.transparency="0" trailer.gradient.angle="0" trailer.brushmode="0" trailer.gradient.repetition.mode="0" trailer.gradient.repetition.count="0" trailer.gradient.repetition.length="100" trailer.gradient.focus="0" trailer.gradient.scale="100" trailer.gradient.spread="100" )
+column(band=header.1 id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="31" y="10" height="145" width="2375" format="[general]" html.valueishtml="0"  name=type_comp_desc visible="1" edit.limit=40 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=header.1 id=5 alignment="1" tabsequence=32766 border="0" color="33554432" x="2989" y="10" height="145" width="1177" format="$#,##0.00" html.valueishtml="0"  name=value_sum visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+line(band=summary x1="2989" y1="21" x2="4166" y2="21"  name=l_1 visible="1" pen.style="0" pen.width="20" pen.color="0"  background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" )
+compute(band=summary alignment="1" expression="sum(  value_sum  for all )"border="0" color="33554432" x="2989" y="94" height="145" width="1177" format="$#,##0.00" html.valueishtml="0"  name=value_sum_total visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" nativepdf.customsize=0 nativepdf.customorientation=0 nativepdf.pdfstandard=0 nativepdf.useprintspec=no )
+export.xhtml()
+ 

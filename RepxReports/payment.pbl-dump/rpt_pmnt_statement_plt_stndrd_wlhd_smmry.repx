@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="24.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral" Name="XtraReport1" VerticalContentSplitting="Smart" Margins="25, 25, 26, 26" PaperKind="Custom" PageWidth="283" PageHeight="456" Version="24.1" DataMember="Query" DataSource="#Ref-0">
+	<Parameters>
+		<Item1 Ref="2" Name="dwra_prod_month"/>
+		<Item2 Ref="3" Name="dwra_facility_code"/>
+		<Item3 Ref="4" Name="dwra_source_nbr"/>
+		<Item4 Ref="5" Name="dwra_contract_nbr"/>
+		<Item5 Ref="6" Name="dwra_run_datetime"/>
+	</Parameters>
+	<ComponentStorage>
+		<Item1 Ref="0" ObjectType="DevExpress.DataAccess.Sql.SqlDataSource,DevExpress.DataAccess.v24.1" Name="sqlDataSource1" Base64="PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjxTcWxEYXRhU291cmNlIE5hbWU9InNxbERhdGFTb3VyY2UxIj4NCjxDb25uZWN0aW9uIE5hbWU9IlRJRVMgRGF0YSIgRnJvbUFwcENvbmZpZz0idHJ1ZSIgLz4NCjxRdWVyeSBUeXBlPSJDdXN0b21TcWxRdWVyeSIgTmFtZT0iUXVlcnkiPg0KPFNxbD4gU0VMRUNUIFN1bShJc251bGwoYi5ieV9wYXNzLDApKSBieV9wYXNzLCAgIAogICAgICAgICBTdW0oSXNudWxsKGIuZGx2cnlfdm9sLDApKSAgaW5sZXQsICAgCgkJCVN1bShJc251bGwoYi53aGRfdm9sLDApKSB3aGRfdm9sLCBTdW0oSXNOdWxsKGIuc291cmNlX21tYnR1X3ZvbCwwKSkgc291cmNlX3ZvbCwKICAgICAgICAgU3VtKElzbnVsbChjLmJ5X3Bhc3MsMCkpIG1jZl9ieV9wYXNzLCAgIAogICAgICAgICBTdW0oSXNudWxsKGMuZGx2cnlfdm9sLDApKSAgbWNmX2lubGV0LCAgIAoJCQlTdW0oSXNudWxsKGMud2hkX3ZvbCwwKSkgbWNmX3doZF92b2wsIFN1bShJc051bGwoYy5zb3VyY2VfbWNmX3ZvbCwwKSkgbWNmX3NvdXJjZV92b2wgLAoJCQlnYS5tbWJ0dV9tY2ZfcGJhc2UKICAgIEZST00gcGxhbnRfbW1idHVfc2V0dGxlbWVudCBiIGpvaW4gcGxhbnRfbWNmX3NldHRsZW1lbnQgYyBvbiAKCQkJCWIuZGVhbF9uYnIgPSBjLmRlYWxfbmJyCgkJCUFORCBiLnBhdGhfbmJyID0gYy5wYXRoX25iciAKCQkJYW5kIGIub3JkZXJfbmJyID0gYy5vcmRlcl9uYnIKCQkJYW5kIGIucmV2X25iciA9IGMucmV2X25icgoJCQkJCQkJCQkJCUpvaW4gZGJvLmdhc19hbmFseXNpcyBnYSBvbiBnYS5waXBlbGluZV9jb2RlID0gYi5zb3VyY2VfcGlwZSAKCQkJCQkJCQkJCQlhbmQgZ2Euc3RhdGlvbl9uYnIgPSBiLnNvdXJjZV9zdGEKICAgV0hFUkUgKCggYi5ydW5fZGF0ZXRpbWUgPSBAZHdyYV9ydW5fZGF0ZXRpbWUpIGFuZCAKCQkJCSggYi5wcm9jX3BpcGUgPSBAZHdyYV9mYWNpbGl0eV9jb2RlICkgYW5kIAoJCQkJKCBiLnN0YXJ0X2RhdGUgPSBAZHdyYV9wcm9kX21vbnRoICkgIGFuZAoJCQkJKCBiLnByb2NfayA9IEBkd3JhX2NvbnRyYWN0X25iciApIGFuZAoJCQkJKCBiLmRlZF9zdGFfbmJyID0gQGR3cmFfc291cmNlX25iciApKSBhbmQgCiAgCQkJKCAoYy5ydW5fZGF0ZXRpbWUgPSBAZHdyYV9ydW5fZGF0ZXRpbWUpIGFuZAoJCQkJKCBjLnByb2NfcGlwZSA9IEBkd3JhX2ZhY2lsaXR5X2NvZGUgKSBhbmQgCgkJCQkoIGMuc3RhcnRfZGF0ZSA9IEBkd3JhX3Byb2RfbW9udGggKSAgYW5kCgkJCQkgKCBjLnByb2NfayA9IEBkd3JhX2NvbnRyYWN0X25iciApIGFuZAoJCQkJKCBjLmRlZF9zdGFfbmJyID0gQGR3cmFfc291cmNlX25iciApKSBhbmQgCgkJCQkoQGR3cmFfcHJvZF9tb250aCBiZXR3ZWVuIGdhLmJlZ19lZmZfZGF0ZSBhbmQgZ2EuZW5kX2VmZl9kYXRlICkKCQkJCWFuZCBnYS5zZXFfbmJyID0gKFNlbGVjdCBNYXgoZ2FzLnNlcV9uYnIpCgkJCQkJCUZyb20gZ2FzX2FuYWx5c2lzIGdhcwoJCQkJCQl3aGVyZSBnYXMucGlwZWxpbmVfY29kZSA9IGdhLnBpcGVsaW5lX2NvZGUKCQkJCQkJYW5kIGdhcy5zdGF0aW9uX25iciA9IGdhLnN0YXRpb25fbmJyCgkJCQkJCWFuZCAoQGR3cmFfcHJvZF9tb250aCBiZXR3ZWVuIGdhcy5iZWdfZWZmX2RhdGUgYW5kIGdhcy5lbmRfZWZmX2RhdGUpKQoJZ3JvdXAgYnkgZ2EubW1idHVfbWNmX3BiYXNlIDwvU3FsPg0KPFBhcmFtZXRlciBOYW1lPSJAZHdyYV9wcm9kX21vbnRoIiBUeXBlPSJEZXZFeHByZXNzLkRhdGFBY2Nlc3MuRXhwcmVzc2lvbiI+KFN5c3RlbS5TdHJpbmcpKD9kd3JhX3Byb2RfbW9udGgpPC9QYXJhbWV0ZXI+DQo8UGFyYW1ldGVyIE5hbWU9IkBkd3JhX2ZhY2lsaXR5X2NvZGUiIFR5cGU9IkRldkV4cHJlc3MuRGF0YUFjY2Vzcy5FeHByZXNzaW9uIj4oU3lzdGVtLlN0cmluZykoP2R3cmFfZmFjaWxpdHlfY29kZSk8L1BhcmFtZXRlcj4NCjxQYXJhbWV0ZXIgTmFtZT0iQGR3cmFfc291cmNlX25iciIgVHlwZT0iRGV2RXhwcmVzcy5EYXRhQWNjZXNzLkV4cHJlc3Npb24iPihTeXN0ZW0uU3RyaW5nKSg/ZHdyYV9zb3VyY2VfbmJyKTwvUGFyYW1ldGVyPg0KPFBhcmFtZXRlciBOYW1lPSJAZHdyYV9jb250cmFjdF9uYnIiIFR5cGU9IkRldkV4cHJlc3MuRGF0YUFjY2Vzcy5FeHByZXNzaW9uIj4oU3lzdGVtLlN0cmluZykoP2R3cmFfY29udHJhY3RfbmJyKTwvUGFyYW1ldGVyPg0KPFBhcmFtZXRlciBOYW1lPSJAZHdyYV9ydW5fZGF0ZXRpbWUiIFR5cGU9IkRldkV4cHJlc3MuRGF0YUFjY2Vzcy5FeHByZXNzaW9uIj4oU3lzdGVtLlN0cmluZykoP2R3cmFfcnVuX2RhdGV0aW1lKTwvUGFyYW1ldGVyPg0KPC9RdWVyeT4NCjxSZXN1bHRTY2hlbWE+DQo8RGF0YVNldCBOYW1lID0ic3FsRGF0YVNvdXJjZTEiPg0KPFZpZXcgTmFtZT0iUXVlcnkiPg0KPEZpZWxkIE5hbWU9ImJ5X3Bhc3MiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJpbmxldCIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9IndoZF92b2wiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJzb3VyY2Vfdm9sIiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0ibWNmX2J5X3Bhc3MiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJtY2ZfaW5sZXQiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJtY2Zfd2hkX3ZvbCIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9Im1jZl9zb3VyY2Vfdm9sIiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0ibW1idHVfbWNmX3BiYXNlIiBUeXBlPSJTdHJpbmciIC8+DQo8L1ZpZXc+DQo8L0RhdGFTZXQ+DQo8L1Jlc3VsdFNjaGVtYT4NCjxDb25uZWN0aW9uT3B0aW9ucyBDbG9zZUNvbm5lY3Rpb249InRydWUiIC8+DQo8L1NxbERhdGFTb3VyY2U+DQo="/>
+	</ComponentStorage>
+	<Bands>
+		<Item1 Ref="7" ControlType="TopMarginBand" Name="TopMargin" HeightF="26"/>
+		<Item2 Ref="8" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="26"/>
+		<Item3 Ref="9" ControlType="ReportHeaderBand" Name="header" HeightF="40">
+			<Controls>
+				<Item1 Ref="10" ControlType="XRLabel" Name="t_7" TextAlignment="MiddleCenter" Multiline="true" Text="MCF" SizeF="44,12" LocationFloat="106,23" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
+				<Item2 Ref="11" ControlType="XRLabel" Name="t_8" TextAlignment="MiddleCenter" Multiline="true" Text="MMBTU" SizeF="69,12" LocationFloat="164,23" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
+				<Item3 Ref="12" ControlType="XRLabel" Name="t_4" TextAlignment="MiddleLeft" Multiline="true" Text="Wellhead Information" SizeF="163,14" LocationFloat="4,1" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
+				<Item4 Ref="13" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="231,0" LocationFloat="2,15"  LineDirection="Horizontal" Visible="True"/>
+			</Controls>
+		</Item3>
+		<Item4 Ref="14" ControlType="GroupHeaderBand" Name="summary" HeightF="1" Level="0">
+			<Controls>
+			</Controls>
+		</Item4>
+		<Item5 Ref="15" ControlType="ReportFooterBand" Name="footer" HeightF="-0" Visible="False">
+			<Controls>
+			</Controls>
+		</Item5>
+		<Item6 Ref="16" ControlType="DetailBand" Name="detail" HeightF="163">
+			<Controls>
+				<Item1 Ref="17" ControlType="XRLabel" Name="mcf_whd_vol" TextFormatString="{0:#,##0.00}" TextAlignment="MiddleRight"  Multiline="true" SizeF="55,12" LocationFloat="88,3" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="18" EventName="BeforePrint" PropertyName="Text" Expression="[mcf_whd_vol]"/>
+					</ExpressionBindings>
+				</Item1>
+				<Item2 Ref="19" ControlType="XRLabel" Name="mcf_whd_vol_1" TextFormatString="{0:#,##0.00}" TextAlignment="MiddleRight"  Multiline="true" SizeF="55,12" LocationFloat="88,38" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="20" EventName="BeforePrint" PropertyName="Text" Expression="[mcf_whd_vol]"/>
+					</ExpressionBindings>
+				</Item2>
+				<Item3 Ref="21" ControlType="XRLabel" Name="t_2" TextAlignment="MiddleLeft" Multiline="true" Text="Gross WH:" SizeF="79,13" LocationFloat="2,3" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+				<Item4 Ref="22" ControlType="XRLabel" Name="t_5" TextAlignment="MiddleLeft" Multiline="true" Text="Seller Share:" SizeF="56,13" LocationFloat="2,38" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+				<Item5 Ref="23" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleLeft" Multiline="true" Text="Allocation Decimal:" SizeF="94,12" LocationFloat="2,21" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+				<Item6 Ref="24" ControlType="XRLabel" Name="whd_vol" TextFormatString="{0:#,##0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="55,12" LocationFloat="167,3" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="25" EventName="BeforePrint" PropertyName="Text" Expression="[whd_vol]"/>
+					</ExpressionBindings>
+				</Item6>
+				<Item7 Ref="26" ControlType="XRLabel" Name="whd_vol_1" TextFormatString="{0:#,##0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="55,12" LocationFloat="167,38" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="27" EventName="BeforePrint" PropertyName="Text" Expression="[whd_vol]"/>
+					</ExpressionBindings>
+				</Item7>
+				<Item8 Ref="28" ControlType="XRLabel" Name="t_6" TextAlignment="MiddleLeft" Multiline="true" Text="Plant Inlet:" SizeF="68,13" LocationFloat="2,111" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+				<Item9 Ref="29" ControlType="XRLabel" Name="t_10" TextAlignment="MiddleLeft" Multiline="true" Text="Wellhead BTU:" SizeF="65,13" LocationFloat="2,128" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+				<Item10 Ref="30" ControlType="XRLabel" Name="compute_1_field" TextFormatString="{0:0.0000}" TextAlignment="MiddleRight"  Multiline="true" SizeF="55,13" LocationFloat="87,128" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="31" EventName="BeforePrint" PropertyName="Text" Expression="[compute_1]"/>
+					</ExpressionBindings>
+				</Item10>
+				<Item11 Ref="32" ControlType="XRLabel" Name="mcf_fll_field" TextFormatString="{0:#,##0.00}" TextAlignment="MiddleRight"  Multiline="true" SizeF="55,12" LocationFloat="88,60" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="33" EventName="BeforePrint" PropertyName="Text" Expression="[mcf_fll]"/>
+					</ExpressionBindings>
+				</Item11>
+				<Item12 Ref="34" ControlType="XRLabel" Name="t_12" TextAlignment="MiddleLeft" Multiline="true" Text="Raw Field Deducts:" SizeF="98,12" LocationFloat="2,60" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+				<Item13 Ref="35" ControlType="XRLabel" Name="fll_field" TextFormatString="{0:#,##0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="55,12" LocationFloat="167,60" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="36" EventName="BeforePrint" PropertyName="Text" Expression="[fll]"/>
+					</ExpressionBindings>
+				</Item13>
+				<Item14 Ref="37" ControlType="XRLabel" Name="t_3" TextAlignment="MiddleLeft" Multiline="true" Text="Net Delivered:" SizeF="96,12" LocationFloat="2,76" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+				<Item15 Ref="38" ControlType="XRLabel" Name="compute_3_field" TextFormatString="{0:#,##0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="55,12" LocationFloat="167,76" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="39" EventName="BeforePrint" PropertyName="Text" Expression="[compute_3]"/>
+					</ExpressionBindings>
+				</Item15>
+				<Item16 Ref="40" ControlType="XRLabel" Name="t_9" TextAlignment="MiddleLeft" Multiline="true" Text="Bypass:" SizeF="53,13" LocationFloat="2,93" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+				<Item17 Ref="41" ControlType="XRLabel" Name="inlet" TextFormatString="{0:#,##0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="55,12" LocationFloat="167,111" AnchorVertical="Both" Font="Arial, 7pt" Visible="False">
+					<ExpressionBindings>
+						<Item1 Ref="42" EventName="BeforePrint" PropertyName="Text" Expression="[inlet]"/>
+					</ExpressionBindings>
+				</Item17>
+				<Item18 Ref="43" ControlType="XRLabel" Name="mcf_inlet" TextFormatString="{0:#,##0.00}" TextAlignment="MiddleRight"  Multiline="true" SizeF="55,12" LocationFloat="88,111" AnchorVertical="Both" Font="Arial, 7pt" Visible="False">
+					<ExpressionBindings>
+						<Item1 Ref="44" EventName="BeforePrint" PropertyName="Text" Expression="[mcf_inlet]"/>
+					</ExpressionBindings>
+				</Item18>
+				<Item19 Ref="45" ControlType="XRLabel" Name="compute_4_field" TextFormatString="{0:#,##0.00}" TextAlignment="MiddleRight"  Multiline="true" SizeF="55,12" LocationFloat="88,76" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="46" EventName="BeforePrint" PropertyName="Text" Expression="[compute_4]"/>
+					</ExpressionBindings>
+				</Item19>
+				<Item20 Ref="47" ControlType="XRLabel" Name="mcf_by_pass" TextFormatString="{0:#,##0.00}" TextAlignment="MiddleRight"  Multiline="true" SizeF="55,12" LocationFloat="88,93" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="48" EventName="BeforePrint" PropertyName="Text" Expression="[mcf_by_pass]"/>
+					</ExpressionBindings>
+				</Item20>
+				<Item21 Ref="49" ControlType="XRLabel" Name="compute_5_field" TextFormatString="{0:#,##0.00}" TextAlignment="MiddleRight"  Multiline="true" SizeF="55,12" LocationFloat="88,111" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="50" EventName="BeforePrint" PropertyName="Text" Expression="[compute_5]"/>
+					</ExpressionBindings>
+				</Item21>
+				<Item22 Ref="51" ControlType="XRLabel" Name="compute_2_field" TextFormatString="{0:#,##0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="55,12" LocationFloat="167,111" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="52" EventName="BeforePrint" PropertyName="Text" Expression="[compute_2]"/>
+					</ExpressionBindings>
+				</Item22>
+				<Item23 Ref="53" ControlType="XRLabel" Name="by_pass" TextFormatString="{0:#,##0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="55,12" LocationFloat="167,93" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="54" EventName="BeforePrint" PropertyName="Text" Expression="[by_pass]"/>
+					</ExpressionBindings>
+				</Item23>
+			</Controls>
+		</Item6>
+	</Bands>
+	<CalculatedFields>
+		<Item1 Ref="55" Name="compute_1" Expression=" Round(whd_vol/mcf_whd_vol,4)" DataMember="Query" />
+		<Item2 Ref="56" Name="mcf_fll" Expression=" mcf_whd_vol-mcf_inlet" DataMember="Query" />
+		<Item3 Ref="57" Name="fll" Expression=" whd_vol-inlet" DataMember="Query" />
+		<Item4 Ref="58" Name="compute_3" Expression=" whd_vol-fll" DataMember="Query" />
+		<Item5 Ref="59" Name="compute_4" Expression=" mcf_whd_vol-mcf_fll" DataMember="Query" />
+		<Item6 Ref="60" Name="compute_5" Expression=" mcf_inlet-mcf_by_pass" DataMember="Query" />
+		<Item7 Ref="61" Name="compute_2" Expression=" inlet-by_pass" DataMember="Query" />
+	</CalculatedFields>
+</XtraReportsLayoutSerializer>

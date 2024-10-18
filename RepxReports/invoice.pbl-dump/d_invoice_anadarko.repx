@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="24.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral" Name="XtraReport1" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="848" PageHeight="874" Version="24.1" DataMember="Query" DataSource="#Ref-0">
+	<Parameters>
+		<Item1 Ref="2" Name="inv_nbr"/>
+		<Item2 Ref="3" Name="inv_rev"/>
+	</Parameters>
+	<ComponentStorage>
+		<Item1 Ref="0" ObjectType="DevExpress.DataAccess.Sql.SqlDataSource,DevExpress.DataAccess.v24.1" Name="sqlDataSource1" Base64="PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjxTcWxEYXRhU291cmNlIE5hbWU9InNxbERhdGFTb3VyY2UxIj4NCjxDb25uZWN0aW9uIE5hbWU9IlRJRVMgRGF0YSIgRnJvbUFwcENvbmZpZz0idHJ1ZSIgLz4NCjxRdWVyeSBUeXBlPSJTdG9yZWRQcm9jUXVlcnkiIE5hbWU9IlF1ZXJ5Ij4NCjxQcm9jTmFtZT5pbnZvaWNlX2FuYV9yZXBvcnRfc3A8L1Byb2NOYW1lPg0KPFBhcmFtZXRlciBOYW1lPSJAaW52X25iciIgVHlwZT0iRGV2RXhwcmVzcy5EYXRhQWNjZXNzLkV4cHJlc3Npb24iPihTeXN0ZW0uU3RyaW5nKSg/aW52X25icik8L1BhcmFtZXRlcj4NCjxQYXJhbWV0ZXIgTmFtZT0iQGludl9yZXYiIFR5cGU9IkRldkV4cHJlc3MuRGF0YUFjY2Vzcy5FeHByZXNzaW9uIj4oU3lzdGVtLlN0cmluZykoP2ludl9yZXYpPC9QYXJhbWV0ZXI+DQo8L1F1ZXJ5Pg0KPFJlc3VsdFNjaGVtYT4NCjxEYXRhU2V0IE5hbWUgPSJzcWxEYXRhU291cmNlMSI+DQo8VmlldyBOYW1lPSJRdWVyeSI+DQo8RmllbGQgTmFtZT0iaW52b2ljZV9uYnIiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJpbnZvaWNlX3JldiIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9Imludm9pY2VfbmJyX2FuZF9yZXYiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJwcmV2aW91c19hbW91bnQiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJwcmV2aW91c19hbW91bnRfdHh0IiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0idG90YWxfYW1vdW50IiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0iY29udHJhY3RfbmJyIiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0iYnV5ZXJfYmFfbmJyIiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0icG1udF90ZXJtc19kYXRlIiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0icG1udF90ZXJtc190eHQiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJpbnZvaWNlX2RhdGUiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJpbnZvaWNlX3R5cGUiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJidXlfbGluZV8xIiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0iYnV5X2xpbmVfMiIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9ImJ1eV9saW5lXzMiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJidXlfbGluZV80IiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0iYnV5X2xpbmVfNSIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9ImJ1eV9saW5lXzYiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJidXlfbGluZV83IiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0iYnV5X2xpbmVfOCIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9ImJ1eV9saW5lXzkiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJyZW1fbGluZV8xIiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0icmVtX2xpbmVfMiIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9InJlbV9saW5lXzMiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJyZW1fbGluZV80IiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0icmVtX2xpbmVfNSIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9InJlbV9saW5lXzYiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJwaXBlbGluZV9jZCIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9InN0YXRpb25fbmJyIiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0ic3RhdGlvbl9uYW1lIiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0iYWRqdXN0bWVudCIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9ImFjdHVhbF9kcnlfbW1idHUiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJjb21wb25lbnRfcHJpY2UiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJjb21wb25lbnRfdmFsIiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0iZnJvbV9kYXRlIiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0idG9fZGF0ZSIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9InVuaXRzIiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0icHJvZF9tb190eHQiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJwbW50X2RhdGVfdHh0IiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0ibWt0aW5mbyIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9Im1rdGluZm8yIiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0iaXNfb3BlbiIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9ImFjdHVhbF9tY2ZfMTQ2NSIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9Im9sZF9jb250cmFjdF9uYnIiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJhY2N0Z190cmFuc19zZXFfbmJyIiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0idG90YWxfbW1idHVfZHJ5IiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0idG90YWxfbW1idHVfc2F0IiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0idG90YWxfbWNmIiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0ic2hvd192b2wiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJyZW1fbGluZV83IiBUeXBlPSJTdHJpbmciIC8+DQo8L1ZpZXc+DQo8L0RhdGFTZXQ+DQo8L1Jlc3VsdFNjaGVtYT4NCjxDb25uZWN0aW9uT3B0aW9ucyBDbG9zZUNvbm5lY3Rpb249InRydWUiIC8+DQo8L1NxbERhdGFTb3VyY2U+DQo="/>
+	</ComponentStorage>
+	<Bands>
+		<Item1 Ref="4" ControlType="TopMarginBand" Name="TopMargin" HeightF="25"/>
+		<Item2 Ref="5" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="25"/>
+		<Item3 Ref="6" ControlType="ReportHeaderBand" Name="header" HeightF="405">
+			<Controls>
+				<Item1 Ref="7" ControlType="XRLabel" Name="buy_line_1" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="300,17" LocationFloat="6,92" AnchorVertical="Both" Font="Times New Roman, 11pt, style=Bold" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="8" EventName="BeforePrint" PropertyName="Text" Expression="[buy_line_1]"/>
+					</ExpressionBindings>
+				</Item1>
+				<Item2 Ref="9" ControlType="XRLabel" Name="buy_line_2" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="300,18" LocationFloat="4,111" AnchorVertical="Both" Font="Times New Roman, 11pt, style=Bold" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="10" EventName="BeforePrint" PropertyName="Text" Expression="[buy_line_2]"/>
+					</ExpressionBindings>
+				</Item2>
+				<Item3 Ref="11" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleLeft" Multiline="true" Text="Invoice Date:" SizeF="93,19" LocationFloat="557,95" AnchorVertical="Both" Font="Times New Roman, 11pt, style=Bold" Visible="True"/>
+				<Item4 Ref="12" ControlType="XRLabel" Name="t_2" TextAlignment="MiddleLeft" Multiline="true" Text="Customer #:" SizeF="86,19" LocationFloat="564,124" AnchorVertical="Both" Font="Times New Roman, 11pt, style=Bold" Visible="True"/>
+				<Item5 Ref="13" ControlType="XRLabel" Name="t_3" TextAlignment="MiddleRight" Multiline="true" Text="Contract #:" SizeF="123,19" LocationFloat="527,153" AnchorVertical="Both" Font="Times New Roman, 11pt, style=Bold" Visible="True"/>
+				<Item6 Ref="14" ControlType="XRLabel" Name="t_17" TextAlignment="MiddleRight" Multiline="true" Text="Alias Contract #:" SizeF="123,19" LocationFloat="527,184" AnchorVertical="Both" Font="Times New Roman, 11pt, style=Bold" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="15" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(IsNull(old_contract_nbr),false,true)"/>
+					</ExpressionBindings>
+				</Item6>
+				<Item7 Ref="16" ControlType="XRLabel" Name="contract_nbr" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="101,20" LocationFloat="657,153" AnchorVertical="Both" Font="Times New Roman, 11pt, style=Bold" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="17" EventName="BeforePrint" PropertyName="Text" Expression="[contract_nbr]"/>
+					</ExpressionBindings>
+				</Item7>
+				<Item8 Ref="18" ControlType="XRLabel" Name="old_contract_nbr" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="123,19" LocationFloat="657,184" AnchorVertical="Both" Font="Times New Roman, 11pt, style=Bold" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="19" EventName="BeforePrint" PropertyName="Text" Expression="[old_contract_nbr]"/>
+						<Item2 Ref="20" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(IsNull(old_contract_nbr),false,true)"/>
+					</ExpressionBindings>
+				</Item8>
+				<Item9 Ref="21" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="793,0" LocationFloat="4,89"  LineDirection="Horizontal" Visible="True"/>
+				<Item10 Ref="22" ControlType="XRLabel" Name="invoice_date" TextFormatString="{0:MM/dd/yyyy}" TextAlignment="MiddleLeft"  Multiline="true" SizeF="97,19" LocationFloat="657,95" AnchorVertical="Both" Font="Times New Roman, 11pt, style=Bold" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="23" EventName="BeforePrint" PropertyName="Text" Expression="[invoice_date]"/>
+					</ExpressionBindings>
+				</Item10>
+				<Item11 Ref="24" ControlType="XRLabel" Name="buyer_ba_nbr" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="140,19" LocationFloat="657,124" AnchorVertical="Both" Font="Times New Roman, 11pt, style=Bold" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="25" EventName="BeforePrint" PropertyName="Text" Expression="[buyer_ba_nbr]"/>
+					</ExpressionBindings>
+				</Item11>
+				<Item12 Ref="26" ControlType="XRLabel" Name="buy_line_3" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="300,20" LocationFloat="4,131" AnchorVertical="Both" Font="Times New Roman, 11pt, style=Bold" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="27" EventName="BeforePrint" PropertyName="Text" Expression="[buy_line_3]"/>
+					</ExpressionBindings>
+				</Item12>
+				<Item13 Ref="28" ControlType="XRLabel" Name="buy_line_4" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="300,21" LocationFloat="4,151" AnchorVertical="Both" Font="Times New Roman, 11pt, style=Bold" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="29" EventName="BeforePrint" PropertyName="Text" Expression="[buy_line_4]"/>
+					</ExpressionBindings>
+				</Item13>
+				<Item14 Ref="30" ControlType="XRLabel" Name="buy_line_5" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="300,19" LocationFloat="4,173" AnchorVertical="Both" Font="Times New Roman, 11pt, style=Bold" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="31" EventName="BeforePrint" PropertyName="Text" Expression="[buy_line_5]"/>
+					</ExpressionBindings>
+				</Item14>
+				<Item15 Ref="32" ControlType="XRLabel" Name="buy_line_6" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="300,19" LocationFloat="4,193" AnchorVertical="Both" Font="Times New Roman, 11pt, style=Bold" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="33" EventName="BeforePrint" PropertyName="Text" Expression="[buy_line_6]"/>
+					</ExpressionBindings>
+				</Item15>
+				<Item16 Ref="34" ControlType="XRLabel" Name="buy_line_7" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="300,18" LocationFloat="4,213" AnchorVertical="Both" Font="Times New Roman, 11pt, style=Bold" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="35" EventName="BeforePrint" PropertyName="Text" Expression="[buy_line_7]"/>
+					</ExpressionBindings>
+				</Item16>
+				<Item17 Ref="36" ControlType="XRLabel" Name="buy_line_8" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="300,19" LocationFloat="4,232" AnchorVertical="Both" Font="Times New Roman, 11pt, style=Bold" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="37" EventName="BeforePrint" PropertyName="Text" Expression="[buy_line_8]"/>
+					</ExpressionBindings>
+				</Item17>
+				<Item18 Ref="38" ControlType="XRLabel" Name="rem_line_4" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="262,14" LocationFloat="505,313" AnchorVertical="Both" Font="Times New Roman, 10pt, style=Bold" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="39" EventName="BeforePrint" PropertyName="Text" Expression="[rem_line_4]"/>
+					</ExpressionBindings>
+				</Item18>
+				<Item19 Ref="40" ControlType="XRLabel" Name="rem_line_3" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="262,14" LocationFloat="505,298" AnchorVertical="Both" Font="Times New Roman, 10pt, style=Bold" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="41" EventName="BeforePrint" PropertyName="Text" Expression="[rem_line_3]"/>
+					</ExpressionBindings>
+				</Item19>
+				<Item20 Ref="42" ControlType="XRLabel" Name="rem_line_2" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="262,14" LocationFloat="505,284" AnchorVertical="Both" Font="Times New Roman, 10pt, style=Bold" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="43" EventName="BeforePrint" PropertyName="Text" Expression="[rem_line_2]"/>
+					</ExpressionBindings>
+				</Item20>
+				<Item21 Ref="44" ControlType="XRLabel" Name="rem_line_1" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="262,14" LocationFloat="505,269" AnchorVertical="Both" Font="Times New Roman, 10pt, style=Bold" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="45" EventName="BeforePrint" PropertyName="Text" Expression="[rem_line_1]"/>
+					</ExpressionBindings>
+				</Item21>
+				<Item22 Ref="46" ControlType="XRLabel" Name="pmnt_terms_txt" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="262,14" LocationFloat="505,255" AnchorVertical="Both" Font="Times New Roman, 10pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="47" EventName="BeforePrint" PropertyName="Text" Expression="[pmnt_terms_txt]"/>
+					</ExpressionBindings>
+				</Item22>
+				<Item23 Ref="48" ControlType="XRLabel" Name="rem_line_5" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="262,14" LocationFloat="505,327" AnchorVertical="Both" Font="Times New Roman, 10pt, style=Bold" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="49" EventName="BeforePrint" PropertyName="Text" Expression="[rem_line_5]"/>
+					</ExpressionBindings>
+				</Item23>
+				<Item24 Ref="50" ControlType="XRLabel" Name="rem_line_6" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="262,14" LocationFloat="505,342" AnchorVertical="Both" Font="Times New Roman, 10pt, style=Bold" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="51" EventName="BeforePrint" PropertyName="Text" Expression="[rem_line_6]"/>
+					</ExpressionBindings>
+				</Item24>
+				<Item25 Ref="52" ControlType="XRLabel" Name="rem_line_7" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="262,17" LocationFloat="505,357" AnchorVertical="Both" Font="Times New Roman, 10pt, style=Bold" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="53" EventName="BeforePrint" PropertyName="Text" Expression="[rem_line_7]"/>
+					</ExpressionBindings>
+				</Item25>
+				<Item26 Ref="54" ControlType="XRLine" Name="l_2" FillColor="255,128,128,128" SizeF="793,0" LocationFloat="4,378"  LineDirection="Horizontal" Visible="True"/>
+				<Item27 Ref="55" ControlType="XRLabel" Name="t_5" TextAlignment="MiddleLeft" Multiline="true" Text="FOR NATURAL GAS SOLD DURING THE MONTH OF " SizeF="400,19" LocationFloat="6,385" AnchorVertical="Both" Font="Times New Roman, 11pt, style=Bold" Visible="True"/>
+				<Item28 Ref="56" ControlType="XRLabel" Name="prod_mo_txt" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="225,18" LocationFloat="410,385" AnchorVertical="Both" Font="Times New Roman, 11pt, style=Bold" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="57" EventName="BeforePrint" PropertyName="Text" Expression="[prod_mo_txt]"/>
+					</ExpressionBindings>
+				</Item28>
+				<Item29 Ref="58" ControlType="XRLabel" Name="invoice_nbr_and_rev" TextFormatString="" TextAlignment="MiddleCenter"  Multiline="true" SizeF="139,20" LocationFloat="295,316" AnchorVertical="Both" Font="Times New Roman, 11pt, style=Bold" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="59" EventName="BeforePrint" PropertyName="Text" Expression="[invoice_nbr_and_rev]"/>
+					</ExpressionBindings>
+				</Item29>
+				<Item30 Ref="60" ControlType="XRLabel" Name="t_4" TextAlignment="MiddleCenter" Multiline="true" Text="When paying, please
+refer to invoice #:" SizeF="130,34" LocationFloat="295,271" AnchorVertical="Both" Font="Times New Roman, 10pt" Visible="True"/>
+				<Item31 Ref="61" ControlType="XRLabel" Name="pmnt_date_txt" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="189,22" LocationFloat="33,280" AnchorVertical="Both" Font="Times New Roman, 12pt, style=Bold" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="62" EventName="BeforePrint" PropertyName="Text" Expression="[pmnt_date_txt]"/>
+					</ExpressionBindings>
+				</Item31>
+				<Item32 Ref="63" ControlType="XRLabel" Name="pmnt_terms_date" TextFormatString="{0:MM/dd/yyyy}" TextAlignment="MiddleLeft"  Multiline="true" SizeF="104,20" LocationFloat="33,313" AnchorVertical="Both" Font="Times New Roman, 11pt, style=Bold" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="64" EventName="BeforePrint" PropertyName="Text" Expression="[pmnt_terms_date]"/>
+					</ExpressionBindings>
+				</Item32>
+				<Item33 Ref="65" ControlType="XRShape" Name="r_3" FillColor="255,128,128,128" SizeF="247,123" LocationFloat="6,252" Visible="True">
+					<Shape Ref="66" ShapeName="Rectangle"/>
+				</Item33>
+				<Item34 Ref="67" ControlType="XRShape" Name="r_2" FillColor="255,128,128,128" SizeF="219,123" LocationFloat="260,252" Visible="True">
+					<Shape Ref="68" ShapeName="Rectangle"/>
+				</Item34>
+				<Item35 Ref="69" ControlType="XRShape" Name="r_1" FillColor="255,128,128,128" SizeF="291,123" LocationFloat="487,252" Visible="True">
+					<Shape Ref="70" ShapeName="Rectangle"/>
+				</Item35>
+			</Controls>
+		</Item3>
+		<Item4 Ref="71" ControlType="GroupHeaderBand" Name="summary" HeightF="-0" Visible="False" Level="2">
+			<Controls>
+			</Controls>
+		</Item4>
+		<Item5 Ref="72" ControlType="ReportFooterBand" Name="footer" HeightF="63">
+			<Controls>
+				<Item1 Ref="73" ControlType="XRPageInfo" Name="compute_1" PageInfo="Number" TextAlignment="MiddleLeft" SizeF="42,13" LocationFloat="378,44" AnchorVertical="Both" />
+				<Item2 Ref="74" ControlType="XRLabel" Name="mktinfo" TextFormatString="" TextAlignment="MiddleCenter"  Multiline="true" SizeF="779,15" LocationFloat="6,2" AnchorVertical="Both" Font="Times New Roman, 10pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="75" EventName="BeforePrint" PropertyName="Text" Expression="[mktinfo]"/>
+					</ExpressionBindings>
+				</Item2>
+				<Item3 Ref="76" ControlType="XRLabel" Name="mktinfo2" TextFormatString="" TextAlignment="MiddleCenter"  Multiline="true" SizeF="779,15" LocationFloat="4,20" AnchorVertical="Both" Font="Times New Roman, 10pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="77" EventName="BeforePrint" PropertyName="Text" Expression="[mktinfo2]"/>
+					</ExpressionBindings>
+				</Item3>
+			</Controls>
+		</Item5>
+		<Item6 Ref="78" ControlType="DetailBand" Name="detail" HeightF="16">
+			<Controls>
+				<Item1 Ref="79" ControlType="XRLabel" Name="adjustment" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="138,14" LocationFloat="249,1" AnchorVertical="Both" Font="Times New Roman, 10pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="80" EventName="BeforePrint" PropertyName="Text" Expression="[adjustment]"/>
+					</ExpressionBindings>
+				</Item1>
+				<Item2 Ref="81" ControlType="XRLabel" Name="from_date" TextFormatString="{0:dd}" TextAlignment="MiddleCenter"  Multiline="true" SizeF="28,14" LocationFloat="392,1" AnchorVertical="Both" Font="Times New Roman, 10pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="82" EventName="BeforePrint" PropertyName="Text" Expression="[from_date]"/>
+					</ExpressionBindings>
+				</Item2>
+				<Item3 Ref="83" ControlType="XRLabel" Name="to_date" TextFormatString="{0:dd}" TextAlignment="MiddleCenter"  Multiline="true" SizeF="28,14" LocationFloat="425,1" AnchorVertical="Both" Font="Times New Roman, 10pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="84" EventName="BeforePrint" PropertyName="Text" Expression="[to_date]"/>
+					</ExpressionBindings>
+				</Item3>
+				<Item4 Ref="85" ControlType="XRLabel" Name="component_price" TextFormatString="{0:#,##0.0000;(#,##0.0000)}" TextAlignment="MiddleRight"  Multiline="true" SizeF="81,14" LocationFloat="633,1" AnchorVertical="Both" Font="Times New Roman, 10pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="86" EventName="BeforePrint" PropertyName="Text" Expression="[component_price]"/>
+					</ExpressionBindings>
+				</Item4>
+				<Item5 Ref="87" ControlType="XRLabel" Name="component_val" TextFormatString="{0:$#,##0.00;($#,##0.00)}" TextAlignment="MiddleRight"  Multiline="true" SizeF="84,14" LocationFloat="714,1" AnchorVertical="Both" Font="Times New Roman, 10pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="88" EventName="BeforePrint" PropertyName="Text" Expression="[component_val]"/>
+					</ExpressionBindings>
+				</Item5>
+				<Item6 Ref="89" ControlType="XRLabel" Name="actual_dry_mmbtu" TextFormatString="{0:#,##0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="83,14" LocationFloat="457,1" AnchorVertical="Both" Font="Times New Roman, 10pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="90" EventName="BeforePrint" PropertyName="Text" Expression="[actual_dry_mmbtu]"/>
+						<Item2 Ref="91" EventName="BeforePrint" PropertyName="Visible" Expression=" show_vol"/>
+					</ExpressionBindings>
+				</Item6>
+				<Item7 Ref="92" ControlType="XRLabel" Name="actual_mcf_1465" TextFormatString="{0:#,##0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="83,14" LocationFloat="546,1" AnchorVertical="Both" Font="Times New Roman, 10pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="93" EventName="BeforePrint" PropertyName="Text" Expression="[actual_mcf_1465]"/>
+						<Item2 Ref="94" EventName="BeforePrint" PropertyName="Visible" Expression=" show_vol"/>
+					</ExpressionBindings>
+				</Item7>
+			</Controls>
+		</Item6>
+		<Item7 Ref="95" ControlType="GroupHeaderBand" Name="groupHeaderBand1" Level="1" HeightF="32">
+			<GroupFields>
+				<Item1 Ref="96" FieldName="invoice_nbr" />
+				<Item2 Ref="97" FieldName="invoice_rev" />
+			</GroupFields>
+			<Controls>
+				<Item1 Ref="98" ControlType="XRLabel" Name="t_11" TextAlignment="MiddleCenter" Multiline="true" Text="PIPELINE" SizeF="59,14" LocationFloat="4,15" AnchorVertical="Both" Font="Times New Roman, 8pt, style=Bold" Visible="True"/>
+				<Item2 Ref="99" ControlType="XRLabel" Name="t_9" TextAlignment="MiddleCenter" Multiline="true" Text="METER#" SizeF="44,14" LocationFloat="77,15" AnchorVertical="Both" Font="Times New Roman, 8pt, style=Bold" Visible="True"/>
+				<Item3 Ref="100" ControlType="XRLabel" Name="t_8" TextAlignment="MiddleRight" Multiline="true" Text="AMOUNT" SizeF="53,14" LocationFloat="744,15" AnchorVertical="Both" Font="Times New Roman, 8pt, style=Bold" Visible="True"/>
+				<Item4 Ref="101" ControlType="XRLine" Name="l_3" FillColor="255,128,128,128" SizeF="794,-1" LocationFloat="2,31"  LineDirection="Horizontal" Visible="True"/>
+				<Item5 Ref="102" ControlType="XRLabel" Name="t_10" TextAlignment="MiddleCenter" Multiline="true" Text="DELIVERY PT" SizeF="74,14" LocationFloat="192,15" AnchorVertical="Both" Font="Times New Roman, 8pt, style=Bold" Visible="True"/>
+				<Item6 Ref="103" ControlType="XRLabel" Name="t_12" TextAlignment="MiddleCenter" Multiline="true" Text="COMPONENT" SizeF="77,14" LocationFloat="270,15" AnchorVertical="Both" Font="Times New Roman, 8pt, style=Bold" Visible="True"/>
+				<Item7 Ref="104" ControlType="XRLabel" Name="t_6" TextAlignment="MiddleCenter" Multiline="true" Text="BEGIN
+DAY" SizeF="37,27" LocationFloat="388,1" AnchorVertical="Both" Font="Times New Roman, 8pt, style=Bold" Visible="True"/>
+				<Item8 Ref="105" ControlType="XRLabel" Name="t_7" TextAlignment="MiddleCenter" Multiline="true" Text="END
+DAY" SizeF="25,27" LocationFloat="426,1" AnchorVertical="Both" Font="Times New Roman, 8pt, style=Bold" Visible="True"/>
+				<Item9 Ref="106" ControlType="XRLabel" Name="t_13" TextAlignment="MiddleCenter" Multiline="true" Text="MMBTU" SizeF="51,14" LocationFloat="474,15" AnchorVertical="Both" Font="Times New Roman, 8pt, style=Bold" Visible="True"/>
+				<Item10 Ref="107" ControlType="XRLabel" Name="t_16" TextAlignment="MiddleRight" Multiline="true" Text="MCF" SizeF="51,14" LocationFloat="555,15" AnchorVertical="Both" Font="Times New Roman, 8pt, style=Bold" Visible="True"/>
+				<Item11 Ref="108" ControlType="XRLabel" Name="t_15" TextAlignment="MiddleRight" Multiline="true" Text="PRICE" SizeF="36,14" LocationFloat="655,15" AnchorVertical="Both" Font="Times New Roman, 8pt, style=Bold" Visible="True"/>
+			</Controls>
+		</Item7>
+		<Item8 Ref="109" ControlType="GroupFooterBand" Name="groupFooterBand1" Level="1" HeightF="90">
+			<Controls>
+				<Item1 Ref="110" ControlType="XRLine" Name="l_4" FillColor="255,128,128,128" SizeF="94,0" LocationFloat="702,76"  LineDirection="Horizontal" Visible="True"/>
+				<Item2 Ref="111" ControlType="XRLine" Name="l_5" FillColor="255,128,128,128" SizeF="94,0" LocationFloat="702,80"  LineDirection="Horizontal" Visible="True"/>
+				<Item3 Ref="112" ControlType="XRLabel" Name="previous_amount" TextFormatString="{0:$#,##0.00;($#,##0.00)}" TextAlignment="MiddleRight"  Multiline="true" SizeF="96,14" LocationFloat="702,32" AnchorVertical="Both" Font="Times New Roman, 10pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="113" EventName="BeforePrint" PropertyName="Text" Expression="[previous_amount]"/>
+					</ExpressionBindings>
+				</Item3>
+				<Item4 Ref="114" ControlType="XRLabel" Name="total_amount" TextFormatString="{0:$#,##0.00;($#,##0.00)}" TextAlignment="MiddleRight"  Multiline="true" SizeF="96,20" LocationFloat="702,53" AnchorVertical="Both" Font="Times New Roman, 11pt, style=Bold" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="115" EventName="BeforePrint" PropertyName="Text" Expression="[total_amount]"/>
+					</ExpressionBindings>
+				</Item4>
+				<Item5 Ref="116" ControlType="XRLabel" Name="previous_amount_txt" TextFormatString="" TextAlignment="MiddleRight"  Multiline="true" SizeF="117,15" LocationFloat="582,32" AnchorVertical="Both" Font="Times New Roman, 10pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="117" EventName="BeforePrint" PropertyName="Text" Expression="[previous_amount_txt]"/>
+					</ExpressionBindings>
+				</Item5>
+				<Item6 Ref="118" ControlType="XRLabel" Name="total_amount_t" TextAlignment="MiddleRight" Multiline="true" Text="Net Amount Due" SizeF="116,19" LocationFloat="583,55" AnchorVertical="Both" Font="Times New Roman, 11pt, style=Bold" Visible="True"/>
+				<Item7 Ref="119" ControlType="XRLine" Name="l_total_volume" FillColor="255,128,128,128" SizeF="183,0" LocationFloat="448,2"  LineDirection="Horizontal" Visible="True"/>
+				<Item8 Ref="120" ControlType="XRLabel" Name="total_mmbtu_dry" TextFormatString="{0:#,##0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="83,17" LocationFloat="457,7" AnchorVertical="Both" Font="Times New Roman, 10pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="121" EventName="BeforePrint" PropertyName="Text" Expression="[total_mmbtu_dry]"/>
+					</ExpressionBindings>
+				</Item8>
+				<Item9 Ref="122" ControlType="XRLabel" Name="total_mcf" TextFormatString="{0:#,##0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="83,17" LocationFloat="546,7" AnchorVertical="Both" Font="Times New Roman, 10pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="123" EventName="BeforePrint" PropertyName="Text" Expression="[total_mcf]"/>
+					</ExpressionBindings>
+				</Item9>
+				<Item10 Ref="124" ControlType="XRLabel" Name="t_14" TextAlignment="MiddleRight" Multiline="true" Text="Invoice Volume Totals:" SizeF="149,17" LocationFloat="300,7" AnchorVertical="Both" Font="Times New Roman, 10pt, style=Bold" Visible="True"/>
+			</Controls>
+		</Item8>
+		<Item9 Ref="125" ControlType="GroupHeaderBand" Name="groupHeaderBand2" Level="0" HeightF="17">
+			<GroupFields>
+				<Item1 Ref="126" FieldName="pipeline_cd" />
+				<Item2 Ref="127" FieldName="station_nbr" />
+			</GroupFields>
+			<Controls>
+				<Item1 Ref="128" ControlType="XRLabel" Name="station_nbr" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="110,14" LocationFloat="77,1" AnchorVertical="Both" Font="Times New Roman, 10pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="129" EventName="BeforePrint" PropertyName="Text" Expression="[station_nbr]"/>
+					</ExpressionBindings>
+				</Item1>
+				<Item2 Ref="130" ControlType="XRLabel" Name="station_name" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="295,14" LocationFloat="192,1" AnchorVertical="Both" Font="Times New Roman, 10pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="131" EventName="BeforePrint" PropertyName="Text" Expression="[station_name]"/>
+					</ExpressionBindings>
+				</Item2>
+				<Item3 Ref="132" ControlType="XRLabel" Name="pipeline_cd" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="69,14" LocationFloat="4,1" AnchorVertical="Both" Font="Times New Roman, 10pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="133" EventName="BeforePrint" PropertyName="Text" Expression="[pipeline_cd]"/>
+					</ExpressionBindings>
+				</Item3>
+			</Controls>
+		</Item9>
+		<Item10 Ref="134" ControlType="GroupFooterBand" Name="groupFooterBand2" Level="0" HeightF="1">
+			<Controls>
+			</Controls>
+		</Item10>
+	</Bands>
+	<CalculatedFields>
+	</CalculatedFields>
+</XtraReportsLayoutSerializer>

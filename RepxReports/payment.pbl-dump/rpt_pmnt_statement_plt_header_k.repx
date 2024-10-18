@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="24.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral" Name="XtraReport1" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="299" PageHeight="269" Version="24.1" DataMember="Query" DataSource="#Ref-0">
+	<Parameters>
+		<Item1 Ref="2" Name="dwra_statement_nbr"/>
+		<Item2 Ref="3" Name="dwra_statement_rev"/>
+		<Item3 Ref="4" Name="dwra_run_user_name"/>
+		<Item4 Ref="5" Name="dwra_run_date"/>
+	</Parameters>
+	<ComponentStorage>
+		<Item1 Ref="0" ObjectType="DevExpress.DataAccess.Sql.SqlDataSource,DevExpress.DataAccess.v24.1" Name="sqlDataSource1" Base64="PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjxTcWxEYXRhU291cmNlIE5hbWU9InNxbERhdGFTb3VyY2UxIj4NCjxDb25uZWN0aW9uIE5hbWU9IlRJRVMgRGF0YSIgRnJvbUFwcENvbmZpZz0idHJ1ZSIgLz4NCjxRdWVyeSBUeXBlPSJDdXN0b21TcWxRdWVyeSIgTmFtZT0iUXVlcnkiPg0KPFNxbD4gIFNFTEVDVCBkaXN0aW5jdCBDYXNlIHdoZW4gKHNlbGVjdCBjb3VudChkaXN0aW5jdCBrLmNvbnRyYWN0X25icikgZnJvbSAgcG1udF9zdGF0ZW1lbnRfdHJhbnNfdGVtcCBrIAoJCQkJCQkJCQkJCQkJCXdoZXJlIHBtbnRfc3RhdGVtZW50X3RyYW5zX3RlbXAuc3RhdGVtZW50X25iciA9IGsuc3RhdGVtZW50X25icgoJCQkJCQkJCQkJCQkJCWFuZCBwbW50X3N0YXRlbWVudF90cmFuc190ZW1wLnN0YXRlbWVudF9yZXZfbmJyPWsuc3RhdGVtZW50X3Jldl9uYnIKCQkJCQkJCQkJCQkJCQlhbmQgcG1udF9zdGF0ZW1lbnRfdHJhbnNfdGVtcC5ydW5fdXNlcl9uYW1lID0gay5ydW5fdXNlcl9uYW1lCgkJCQkJCQkJCQkJCQkJYW5kIHBtbnRfc3RhdGVtZW50X3RyYW5zX3RlbXAucnVuX2RhdGUgPSBrLnJ1bl9kYXRlCgkJCQkJCQkJCQkJCQkJZ3JvdXAgYnkgay5jb250cmFjdF9uYnIpICAmZ3Q7IDEgdGhlbiAnTVVMVElQTEUnIGVsc2UgcG1udF9zdGF0ZW1lbnRfdHJhbnNfdGVtcC5jb250cmFjdF9uYnIgZW5kIGFzICBrX25iciwKICAgICAgICBDYXNlIHdoZW4gKHNlbGVjdCBjb3VudChkaXN0aW5jdCBrMS5jb250cmFjdF9uYnIpIGZyb20gIHBtbnRfc3RhdGVtZW50X3RyYW5zX3RlbXAgazEgCgkJCQkJCQkJCQkJCQkJd2hlcmUgcG1udF9zdGF0ZW1lbnRfdHJhbnNfdGVtcC5zdGF0ZW1lbnRfbmJyID0gazEuc3RhdGVtZW50X25icgoJCQkJCQkJCQkJCQkJCWFuZCBwbW50X3N0YXRlbWVudF90cmFuc190ZW1wLnN0YXRlbWVudF9yZXZfbmJyPWsxLnN0YXRlbWVudF9yZXZfbmJyCgkJCQkJCQkJCQkJCQkJYW5kIHBtbnRfc3RhdGVtZW50X3RyYW5zX3RlbXAucnVuX3VzZXJfbmFtZSA9IGsxLnJ1bl91c2VyX25hbWUKCQkJCQkJCQkJCQkJCQlhbmQgcG1udF9zdGF0ZW1lbnRfdHJhbnNfdGVtcC5ydW5fZGF0ZSA9IGsxLnJ1bl9kYXRlCgkJCQkJCQkJCQkJCQkJZ3JvdXAgYnkgazEuY29udHJhY3RfbmJyKSAgJmd0OyAxIHRoZW4gJycgZWxzZSBJU05VTEwoY29udHJhY3RfYmEuYWxpYXNfY29udHJhY3RfbmJyLCcnKSBlbmQgYXMgIGFsaWFzX2tfbmJyCiAgICBGUk9NIHBtbnRfc3RhdGVtZW50X3RyYW5zX3RlbXAgIAogICAgTEVGVCBKT0lOIGRiby5jb250cmFjdF9iYQoJCU9OIGNvbnRyYWN0X2JhLmNvbnRyYWN0X25iciA9IHBtbnRfc3RhdGVtZW50X3RyYW5zX3RlbXAuY29udHJhY3RfbmJyCgkJQU5EIGNvbnRyYWN0X2JhLnJvbGVfY29kZSA9ICdTRUwnCgkJQU5EIChDT05WRVJUKGRhdGV0aW1lLFNVQlNUUklORyhwbW50X3N0YXRlbWVudF90cmFuc190ZW1wLmN1cnJfcHJvZF9tbywxLDIpKycvMDEvJytTVUJTVFJJTkcocG1udF9zdGF0ZW1lbnRfdHJhbnNfdGVtcC5jdXJyX3Byb2RfbW8sMyw0KSkgQkVUV0VFTiBjb250cmFjdF9iYS5iZWdfZWZmX2RhdGUgQU5EIGNvbnRyYWN0X2JhLmVuZF9lZmZfZGF0ZSkKV2hlcmUgcG1udF9zdGF0ZW1lbnRfdHJhbnNfdGVtcC5zdGF0ZW1lbnRfbmJyID0gQGR3cmFfc3RhdGVtZW50X25icgphbmQgcG1udF9zdGF0ZW1lbnRfdHJhbnNfdGVtcC5zdGF0ZW1lbnRfcmV2X25icj0gQGR3cmFfc3RhdGVtZW50X3JldgphbmQgcG1udF9zdGF0ZW1lbnRfdHJhbnNfdGVtcC5ydW5fdXNlcl9uYW1lID0gQGR3cmFfcnVuX3VzZXJfbmFtZQphbmQgcG1udF9zdGF0ZW1lbnRfdHJhbnNfdGVtcC5ydW5fZGF0ZSA9IEBkd3JhX3J1bl9kYXRlCiA8L1NxbD4NCjxQYXJhbWV0ZXIgTmFtZT0iQGR3cmFfc3RhdGVtZW50X25iciIgVHlwZT0iRGV2RXhwcmVzcy5EYXRhQWNjZXNzLkV4cHJlc3Npb24iPihTeXN0ZW0uU3RyaW5nKSg/ZHdyYV9zdGF0ZW1lbnRfbmJyKTwvUGFyYW1ldGVyPg0KPFBhcmFtZXRlciBOYW1lPSJAZHdyYV9zdGF0ZW1lbnRfcmV2IiBUeXBlPSJEZXZFeHByZXNzLkRhdGFBY2Nlc3MuRXhwcmVzc2lvbiI+KFN5c3RlbS5TdHJpbmcpKD9kd3JhX3N0YXRlbWVudF9yZXYpPC9QYXJhbWV0ZXI+DQo8UGFyYW1ldGVyIE5hbWU9IkBkd3JhX3J1bl91c2VyX25hbWUiIFR5cGU9IkRldkV4cHJlc3MuRGF0YUFjY2Vzcy5FeHByZXNzaW9uIj4oU3lzdGVtLlN0cmluZykoP2R3cmFfcnVuX3VzZXJfbmFtZSk8L1BhcmFtZXRlcj4NCjxQYXJhbWV0ZXIgTmFtZT0iQGR3cmFfcnVuX2RhdGUiIFR5cGU9IkRldkV4cHJlc3MuRGF0YUFjY2Vzcy5FeHByZXNzaW9uIj4oU3lzdGVtLlN0cmluZykoP2R3cmFfcnVuX2RhdGUpPC9QYXJhbWV0ZXI+DQo8L1F1ZXJ5Pg0KPFJlc3VsdFNjaGVtYT4NCjxEYXRhU2V0IE5hbWUgPSJzcWxEYXRhU291cmNlMSI+DQo8VmlldyBOYW1lPSJRdWVyeSI+DQo8RmllbGQgTmFtZT0ia19uYnIiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJhbGlhc19rX25iciIgVHlwZT0iU3RyaW5nIiAvPg0KPC9WaWV3Pg0KPC9EYXRhU2V0Pg0KPC9SZXN1bHRTY2hlbWE+DQo8Q29ubmVjdGlvbk9wdGlvbnMgQ2xvc2VDb25uZWN0aW9uPSJ0cnVlIiAvPg0KPC9TcWxEYXRhU291cmNlPg0K"/>
+	</ComponentStorage>
+	<Bands>
+		<Item1 Ref="6" ControlType="TopMarginBand" Name="TopMargin" HeightF="25"/>
+		<Item2 Ref="7" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="25"/>
+		<Item3 Ref="8" ControlType="ReportHeaderBand" Name="header" HeightF="-0" Visible="False">
+			<Controls>
+			</Controls>
+		</Item3>
+		<Item4 Ref="9" ControlType="GroupHeaderBand" Name="summary" HeightF="-0" Visible="False" Level="0">
+			<Controls>
+			</Controls>
+		</Item4>
+		<Item5 Ref="10" ControlType="ReportFooterBand" Name="footer" HeightF="-0" Visible="False">
+			<Controls>
+			</Controls>
+		</Item5>
+		<Item6 Ref="11" ControlType="DetailBand" Name="detail" HeightF="19">
+			<Controls>
+				<Item1 Ref="12" ControlType="XRLabel" Name="k_nbr_alias_k_nbr_field" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="245,20" LocationFloat="4,-0" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="13" EventName="BeforePrint" PropertyName="Text" Expression="[k_nbr_alias_k_nbr]"/>
+					</ExpressionBindings>
+				</Item1>
+			</Controls>
+		</Item6>
+	</Bands>
+	<CalculatedFields>
+		<Item1 Ref="14" Name="k_nbr_alias_k_nbr" Expression=" k_nbr+' / '+alias_k_nbr" DataMember="Query" />
+	</CalculatedFields>
+</XtraReportsLayoutSerializer>

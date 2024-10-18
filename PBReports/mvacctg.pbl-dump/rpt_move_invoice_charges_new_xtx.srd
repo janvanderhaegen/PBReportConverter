@@ -1,0 +1,40 @@
+﻿$PBExportHeader$rpt_move_invoice_charges_new_xtx.srd
+$PBExportComments$Crosstex Move Invoice - XM2
+release 9;
+datawindow(units=2 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 1 print.margin.left = 0 print.margin.right = 0 print.margin.top = 250 print.margin.bottom = 250 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes hidegrayline=no )
+summary(height=270 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=0 color="536870912" )
+table(column=(type=char(13) updatewhereclause=yes name=statement_nbr dbname="invoice_statement_temp.statement_nbr" )
+ column=(type=char(3) updatewhereclause=yes name=statement_rev_nbr dbname="invoice_statement_temp.statement_rev_nbr" )
+ column=(type=char(40) updatewhereclause=yes name=type_comp_desc dbname="invoice_statement_temp.type_comp_desc" )
+ column=(type=char(1) updatewhereclause=yes name=prior_month_adj_ind dbname="invoice_statement_temp.prior_month_adj_ind" )
+ column=(type=number updatewhereclause=yes name=value_sum dbname="compute_0005" )
+ retrieve="  SELECT invoice_statement_temp.statement_nbr,   
+         invoice_statement_temp.statement_rev_nbr,   
+         invoice_statement_temp.type_comp_desc,   
+         invoice_statement_temp.prior_month_adj_ind,   
+         sum( ROUND(invoice_statement_temp.value,2) )  value_sum
+    FROM invoice_statement_temp  
+   WHERE ( invoice_statement_temp.statement_nbr = :statement_nbr ) AND  
+         ( invoice_statement_temp.statement_rev_nbr = :statement_rev_nbr ) AND  
+         ( invoice_statement_temp.prior_month_adj_ind = 'N' ) AND  
+         ( invoice_statement_temp.run_user_name = :run_user_name ) AND  
+         ( invoice_statement_temp.run_date = :run_date ) AND  
+         ( invoice_statement_temp.type <> 'A' ) 
+GROUP BY invoice_statement_temp.statement_nbr,   
+         invoice_statement_temp.statement_rev_nbr,   
+         invoice_statement_temp.type_comp_desc,   
+         invoice_statement_temp.prior_month_adj_ind  
+ORDER BY invoice_statement_temp.type_comp_desc DESC   
+" arguments=(("statement_nbr", string),("statement_rev_nbr", string),("run_user_name", string),("run_date", datetime))  sort="type_comp_desc A " )
+group(level=1 header.height=187 trailer.height=0 by=("type_comp_desc" ) header.color="536870912" trailer.color="536870912" )
+column(band=header.1 id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="31" y="10" height="145" width="2375" format="[general]" html.valueishtml="0"  name=type_comp_desc visible="1" edit.limit=40 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header.1 id=5 alignment="1" tabsequence=32766 border="0" color="33554432" x="2989" y="10" height="145" width="1177" format="$#,##0.00" html.valueishtml="0"  name=value_sum visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=summary x1="2989" y1="21" x2="4166" y2="21"  name=l_1 visible="1" pen.style="0" pen.width="20" pen.color="0"  background.mode="2" background.color="16777215" )
+compute(band=summary alignment="1" expression="sum(  value_sum  for all )"border="0" color="33554432" x="2989" y="94" height="145" width="1177" format="$#,##0.00" html.valueishtml="0"  name=value_sum_total visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" )
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="24.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral" Name="XtraReport1" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="309" PageHeight="302" Version="24.1" DataMember="Query" DataSource="#Ref-0">
+	<Parameters>
+		<Item1 Ref="2" Name="dwra_ba_nbr"/>
+	</Parameters>
+	<ComponentStorage>
+		<Item1 Ref="0" ObjectType="DevExpress.DataAccess.Sql.SqlDataSource,DevExpress.DataAccess.v24.1" Name="sqlDataSource1" Base64="PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjxTcWxEYXRhU291cmNlIE5hbWU9InNxbERhdGFTb3VyY2UxIj4NCjxDb25uZWN0aW9uIE5hbWU9IlRJRVMgRGF0YSIgRnJvbUFwcENvbmZpZz0idHJ1ZSIgLz4NCjxRdWVyeSBUeXBlPSJDdXN0b21TcWxRdWVyeSIgTmFtZT0iUXVlcnkiPg0KPFNxbD5zZWxlY3QgcGhvbmUKZnJvbSBjb250YWN0X3B1cnBvc2UgYXMgY3AgSm9pbiBjb250YWN0cyBjIG9uIGNwLmJhX25iciA9IGMuYmFfbmJyCgkJCWFuZCBjcC5iYV9hZGRyZXNzX3NlcV9uYnIgPSBjLmJhX2FkZHJlc3Nfc2VxX25icgoJCQlBTkQgY3AuYmFfY29udGFjdF9zZXFfbmJyID0gYy5iYV9jb250YWN0X3NlcV9uYnIKd2hlcmUgY3AuY29udGFjdF9wdXJwb3NlX2NvZGUgPSAnUFJTJwphbmQgY3AuYmFfbmJyID0gQGR3cmFfYmFfbmJyCiA8L1NxbD4NCjxQYXJhbWV0ZXIgTmFtZT0iQGR3cmFfYmFfbmJyIiBUeXBlPSJEZXZFeHByZXNzLkRhdGFBY2Nlc3MuRXhwcmVzc2lvbiI+KFN5c3RlbS5TdHJpbmcpKD9kd3JhX2JhX25icik8L1BhcmFtZXRlcj4NCjwvUXVlcnk+DQo8UmVzdWx0U2NoZW1hPg0KPERhdGFTZXQgTmFtZSA9InNxbERhdGFTb3VyY2UxIj4NCjxWaWV3IE5hbWU9IlF1ZXJ5Ij4NCjxGaWVsZCBOYW1lPSJwaG9uZSIgVHlwZT0iU3RyaW5nIiAvPg0KPC9WaWV3Pg0KPC9EYXRhU2V0Pg0KPC9SZXN1bHRTY2hlbWE+DQo8Q29ubmVjdGlvbk9wdGlvbnMgQ2xvc2VDb25uZWN0aW9uPSJ0cnVlIiAvPg0KPC9TcWxEYXRhU291cmNlPg0K"/>
+	</ComponentStorage>
+	<Bands>
+		<Item1 Ref="3" ControlType="TopMarginBand" Name="TopMargin" HeightF="25"/>
+		<Item2 Ref="4" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="25"/>
+		<Item3 Ref="5" ControlType="ReportHeaderBand" Name="header" HeightF="19">
+			<Controls>
+				<Item1 Ref="6" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="257,0" LocationFloat="2,16"  LineDirection="Horizontal" Visible="True"/>
+				<Item2 Ref="7" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleLeft" Multiline="true" Text="Contacts" SizeF="65,15" LocationFloat="194,-0" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+			</Controls>
+		</Item3>
+		<Item4 Ref="8" ControlType="GroupHeaderBand" Name="summary" HeightF="-0" Visible="False" Level="0">
+			<Controls>
+			</Controls>
+		</Item4>
+		<Item5 Ref="9" ControlType="ReportFooterBand" Name="footer" HeightF="-0" Visible="False">
+			<Controls>
+			</Controls>
+		</Item5>
+		<Item6 Ref="10" ControlType="DetailBand" Name="detail" HeightF="33">
+			<Controls>
+				<Item1 Ref="11" ControlType="XRLabel" Name="phone_t" TextAlignment="MiddleRight" Multiline="true" Text="Gas Accounting:" SizeF="85,15" LocationFloat="12,7" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+				<Item2 Ref="12" ControlType="XRLabel" Name="phone" TextFormatString="{0:(@@@)@@@-@@@@}" TextAlignment="MiddleRight"  Multiline="true" SizeF="95,18" LocationFloat="99,7" AnchorVertical="Both" Font="Arial, 8pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="13" EventName="BeforePrint" PropertyName="Text" Expression="[phone]"/>
+					</ExpressionBindings>
+				</Item2>
+			</Controls>
+		</Item6>
+	</Bands>
+	<CalculatedFields>
+	</CalculatedFields>
+</XtraReportsLayoutSerializer>

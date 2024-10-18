@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="24.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral" Name="XtraReport1" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="441" PageHeight="288" Version="24.1" DataMember="Query" DataSource="#Ref-0">
+	<Parameters>
+		<Item1 Ref="2" Name="statement_nbr"/>
+		<Item2 Ref="3" Name="statement_rev_nbr"/>
+		<Item3 Ref="4" Name="run_user_name"/>
+		<Item4 Ref="5" Name="run_date"/>
+	</Parameters>
+	<ComponentStorage>
+		<Item1 Ref="0" ObjectType="DevExpress.DataAccess.Sql.SqlDataSource,DevExpress.DataAccess.v24.1" Name="sqlDataSource1" Base64="PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjxTcWxEYXRhU291cmNlIE5hbWU9InNxbERhdGFTb3VyY2UxIj4NCjxDb25uZWN0aW9uIE5hbWU9IlRJRVMgRGF0YSIgRnJvbUFwcENvbmZpZz0idHJ1ZSIgLz4NCjxRdWVyeSBUeXBlPSJDdXN0b21TcWxRdWVyeSIgTmFtZT0iUXVlcnkiPg0KPFNxbD5zZWxlY3Qgc29ydF9tbywKcHJvZF9tbywKdmFsdWUKZnJvbSBpbnZvaWNlX3N0YXRlbWVudF9zYXRfdGVtcAp3aGVyZSBzdGF0ZW1lbnRfbmJyID0gQHN0YXRlbWVudF9uYnIgCmFuZCBzdGF0ZW1lbnRfcmV2X25iciA9IEBzdGF0ZW1lbnRfcmV2X25iciAKYW5kIHJ1bl91c2VyX25hbWUgPSBAcnVuX3VzZXJfbmFtZSAKYW5kIHJ1bl9kYXRlID0gQHJ1bl9kYXRlIDwvU3FsPg0KPFBhcmFtZXRlciBOYW1lPSJAc3RhdGVtZW50X25iciIgVHlwZT0iRGV2RXhwcmVzcy5EYXRhQWNjZXNzLkV4cHJlc3Npb24iPihTeXN0ZW0uU3RyaW5nKSg/c3RhdGVtZW50X25icik8L1BhcmFtZXRlcj4NCjxQYXJhbWV0ZXIgTmFtZT0iQHN0YXRlbWVudF9yZXZfbmJyIiBUeXBlPSJEZXZFeHByZXNzLkRhdGFBY2Nlc3MuRXhwcmVzc2lvbiI+KFN5c3RlbS5TdHJpbmcpKD9zdGF0ZW1lbnRfcmV2X25icik8L1BhcmFtZXRlcj4NCjxQYXJhbWV0ZXIgTmFtZT0iQHJ1bl91c2VyX25hbWUiIFR5cGU9IkRldkV4cHJlc3MuRGF0YUFjY2Vzcy5FeHByZXNzaW9uIj4oU3lzdGVtLlN0cmluZykoP3J1bl91c2VyX25hbWUpPC9QYXJhbWV0ZXI+DQo8UGFyYW1ldGVyIE5hbWU9IkBydW5fZGF0ZSIgVHlwZT0iRGV2RXhwcmVzcy5EYXRhQWNjZXNzLkV4cHJlc3Npb24iPihTeXN0ZW0uU3RyaW5nKSg/cnVuX2RhdGUpPC9QYXJhbWV0ZXI+DQo8L1F1ZXJ5Pg0KPFJlc3VsdFNjaGVtYT4NCjxEYXRhU2V0IE5hbWUgPSJzcWxEYXRhU291cmNlMSI+DQo8VmlldyBOYW1lPSJRdWVyeSI+DQo8RmllbGQgTmFtZT0ic29ydF9tbyIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9InByb2RfbW8iIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJ2YWx1ZSIgVHlwZT0iU3RyaW5nIiAvPg0KPC9WaWV3Pg0KPC9EYXRhU2V0Pg0KPC9SZXN1bHRTY2hlbWE+DQo8Q29ubmVjdGlvbk9wdGlvbnMgQ2xvc2VDb25uZWN0aW9uPSJ0cnVlIiAvPg0KPC9TcWxEYXRhU291cmNlPg0K"/>
+	</ComponentStorage>
+	<Bands>
+		<Item1 Ref="6" ControlType="TopMarginBand" Name="TopMargin" HeightF="25"/>
+		<Item2 Ref="7" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="25"/>
+		<Item3 Ref="8" ControlType="ReportHeaderBand" Name="header" HeightF="20">
+			<Controls>
+				<Item1 Ref="9" ControlType="XRLabel" Name="total_charges_t" TextAlignment="MiddleLeft" Multiline="true" Text="Total Charges: " SizeF="145,15" LocationFloat="7,5" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
+			</Controls>
+		</Item3>
+		<Item4 Ref="10" ControlType="GroupHeaderBand" Name="summary" HeightF="-0" Visible="False" Level="1">
+			<Controls>
+			</Controls>
+		</Item4>
+		<Item5 Ref="11" ControlType="ReportFooterBand" Name="footer" HeightF="-0" Visible="False">
+			<Controls>
+			</Controls>
+		</Item5>
+		<Item6 Ref="12" ControlType="DetailBand" Name="detail" HeightF="-0" Visible="False">
+			<Controls>
+			</Controls>
+		</Item6>
+		<Item7 Ref="13" ControlType="GroupHeaderBand" Name="groupHeaderBand1" Level="0" HeightF="18">
+			<GroupFields>
+				<Item1 Ref="14" FieldName="sort_mo" />
+				<Item2 Ref="15" FieldName="prod_mo" />
+			</GroupFields>
+			<Controls>
+				<Item1 Ref="16" ControlType="XRLabel" Name="production_month_comp_field" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="177,15" LocationFloat="89,1" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="17" EventName="BeforePrint" PropertyName="Text" Expression="[production_month_comp]"/>
+					</ExpressionBindings>
+				</Item1>
+				<Item2 Ref="18" ControlType="XRLabel" Name="value_sum_comp_field" TextFormatString="{0:$#,##0.00}" TextAlignment="MiddleRight"  Multiline="true" SizeF="104,15" LocationFloat="287,1" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="19" EventName="BeforePrint" PropertyName="Text" Expression="[value_sum_comp]"/>
+					</ExpressionBindings>
+				</Item2>
+			</Controls>
+		</Item7>
+		<Item8 Ref="20" ControlType="GroupFooterBand" Name="groupFooterBand1" Level="0" HeightF="-0" Visible="False">
+			<Controls>
+			</Controls>
+		</Item8>
+	</Bands>
+	<CalculatedFields>
+		<Item1 Ref="21" Name="production_month_comp" Expression="'Production Month: '+Substring(prod_mo,0,2)+'-'+Reverse(Substring(Reverse(prod_mo),0,4))" DataMember="Query" />
+		<Item2 Ref="22" Name="value_sum_comp" Expression="[].Sum(value)" DataMember="Query" />
+	</CalculatedFields>
+</XtraReportsLayoutSerializer>

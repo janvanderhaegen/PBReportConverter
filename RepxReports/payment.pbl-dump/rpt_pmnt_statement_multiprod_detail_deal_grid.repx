@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="24.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral" Name="XtraReport1" VerticalContentSplitting="Smart" Margins="-0, -0, 25, 25" PaperKind="Custom" PageWidth="846" PageHeight="311" Version="24.1" DataMember="Query" DataSource="#Ref-0">
+	<Parameters>
+		<Item1 Ref="2" Name="statement_nbr"/>
+		<Item2 Ref="3" Name="statement_rev_nbr"/>
+		<Item3 Ref="4" Name="run_user_name"/>
+		<Item4 Ref="5" Name="run_date"/>
+		<Item5 Ref="6" Name="deal_nbr"/>
+		<Item6 Ref="7" Name="order_nbr"/>
+		<Item7 Ref="8" Name="order_rev_nbr"/>
+	</Parameters>
+	<ComponentStorage>
+		<Item1 Ref="0" ObjectType="DevExpress.DataAccess.Sql.SqlDataSource,DevExpress.DataAccess.v24.1" Name="sqlDataSource1" Base64="PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjxTcWxEYXRhU291cmNlIE5hbWU9InNxbERhdGFTb3VyY2UxIj4NCjxDb25uZWN0aW9uIE5hbWU9IlRJRVMgRGF0YSIgRnJvbUFwcENvbmZpZz0idHJ1ZSIgLz4NCjxRdWVyeSBUeXBlPSJTdG9yZWRQcm9jUXVlcnkiIE5hbWU9IlF1ZXJ5Ij4NCjxQcm9jTmFtZT5kYm8ucnB0X3BtbnRfc3RhdGVtZW50X211bHRpcHJvZF9kZXRhaWxfZGVhbF9ncmlkPC9Qcm9jTmFtZT4NCjxQYXJhbWV0ZXIgTmFtZT0iQHN0YXRlbWVudF9uYnIiIFR5cGU9IkRldkV4cHJlc3MuRGF0YUFjY2Vzcy5FeHByZXNzaW9uIj4oU3lzdGVtLlN0cmluZykoP3N0YXRlbWVudF9uYnIpPC9QYXJhbWV0ZXI+DQo8UGFyYW1ldGVyIE5hbWU9IkBzdGF0ZW1lbnRfcmV2X25iciIgVHlwZT0iRGV2RXhwcmVzcy5EYXRhQWNjZXNzLkV4cHJlc3Npb24iPihTeXN0ZW0uU3RyaW5nKSg/c3RhdGVtZW50X3Jldl9uYnIpPC9QYXJhbWV0ZXI+DQo8UGFyYW1ldGVyIE5hbWU9IkBydW5fdXNlcl9uYW1lIiBUeXBlPSJEZXZFeHByZXNzLkRhdGFBY2Nlc3MuRXhwcmVzc2lvbiI+KFN5c3RlbS5TdHJpbmcpKD9ydW5fdXNlcl9uYW1lKTwvUGFyYW1ldGVyPg0KPFBhcmFtZXRlciBOYW1lPSJAcnVuX2RhdGUiIFR5cGU9IkRldkV4cHJlc3MuRGF0YUFjY2Vzcy5FeHByZXNzaW9uIj4oU3lzdGVtLlN0cmluZykoP3J1bl9kYXRlKTwvUGFyYW1ldGVyPg0KPFBhcmFtZXRlciBOYW1lPSJAZGVhbF9uYnIiIFR5cGU9IkRldkV4cHJlc3MuRGF0YUFjY2Vzcy5FeHByZXNzaW9uIj4oU3lzdGVtLlN0cmluZykoP2RlYWxfbmJyKTwvUGFyYW1ldGVyPg0KPFBhcmFtZXRlciBOYW1lPSJAb3JkZXJfbmJyIiBUeXBlPSJEZXZFeHByZXNzLkRhdGFBY2Nlc3MuRXhwcmVzc2lvbiI+KFN5c3RlbS5TdHJpbmcpKD9vcmRlcl9uYnIpPC9QYXJhbWV0ZXI+DQo8UGFyYW1ldGVyIE5hbWU9IkBvcmRlcl9yZXZfbmJyIiBUeXBlPSJEZXZFeHByZXNzLkRhdGFBY2Nlc3MuRXhwcmVzc2lvbiI+KFN5c3RlbS5TdHJpbmcpKD9vcmRlcl9yZXZfbmJyKTwvUGFyYW1ldGVyPg0KPC9RdWVyeT4NCjxSZXN1bHRTY2hlbWE+DQo8RGF0YVNldCBOYW1lID0ic3FsRGF0YVNvdXJjZTEiPg0KPFZpZXcgTmFtZT0iUXVlcnkiPg0KPEZpZWxkIE5hbWU9InN0YXRlbWVudF9uYnIiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJzdGF0ZW1lbnRfcmV2X25iciIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9InByaW1hcnlfYmFfbmJyIiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0icHJpbWFyeV9uYW1lIiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0icGF5ZWVfYmFfbmJyIiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0icGF5ZWVfbmFtZSIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9ImJvb2tfbW8iIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJwcm9kX21vIiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0iY29udHJhY3RfbmJyIiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0iZmFjaWxpdHlfY29kZSIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9ImZhY2lsaXR5X25hbWUiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJkZWFsX25iciIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9Im9yZGVyX25iciIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9Im9yZGVyX3Jldl9uYnIiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJ0eXBlX2NvbXBvbmVudCIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9InR5cGVfY29tcF9kZXNjIiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0iY29tcG9uZW50X3ByaWNlIiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0iY29tcG9uZW50X3ZhbCIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9InR5cGVfcHJpY2luZyIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9InByaWNlX3JlZiIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9InByaWNpbmdfdW5pdHMiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJlbmVyZ3lfdW5pdHNfY29uZCIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9InZvbF91bml0c19wcmVzc19iYXNlIiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0iYmFzZWRfb24iIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJ2b2x1bWVfZGF0ZSIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9InZvbHVtZV91c2VkIiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0iZHJ5X21tYnR1IiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0ic2F0X21tYnR1IiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0ibWNmIiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0ibW9udGhfZHJ5X21tYnR1IiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0ibW9udGhfc2F0X21tYnR1IiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0ibW9udGhfbWNmIiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0iZGF5X29yZGVyX3ZhbF90b3RhbCIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9Im1vbnRoX29yZGVyX3ZhbF90b3RhbCIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9InZvbHVtZV9kZXNjcmlwdGlvbiIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9ImFjY3RnX3RyYW5zX3NlcV9uYnIiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJwcmljZV9kZXNjcmlwdGlvbiIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9InByb2R1Y3RfY2xhc3MiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJwcm9kdWN0X3R5cGUiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJtb250aF92b2x1bWVfdXNlZCIgVHlwZT0iU3RyaW5nIiAvPg0KPC9WaWV3Pg0KPC9EYXRhU2V0Pg0KPC9SZXN1bHRTY2hlbWE+DQo8Q29ubmVjdGlvbk9wdGlvbnMgQ2xvc2VDb25uZWN0aW9uPSJ0cnVlIiAvPg0KPC9TcWxEYXRhU291cmNlPg0K"/>
+	</ComponentStorage>
+	<Bands>
+		<Item1 Ref="9" ControlType="TopMarginBand" Name="TopMargin" HeightF="25"/>
+		<Item2 Ref="10" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="25"/>
+		<Item3 Ref="11" ControlType="ReportHeaderBand" Name="header" HeightF="42">
+			<Controls>
+				<Item1 Ref="12" ControlType="XRLabel" Name="date_t" TextAlignment="MiddleLeft" Multiline="true" Text="Date" SizeF="53,15" LocationFloat="2,3" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+				<Item2 Ref="13" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleRight" Multiline="true" Text="Volume" SizeF="60,15" LocationFloat="62,3" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+				<Item3 Ref="14" ControlType="XRLabel" Name="t_4" TextAlignment="MiddleLeft" Multiline="true" Text="Price Component" SizeF="101,15" LocationFloat="249,3" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+				<Item4 Ref="15" ControlType="XRLabel" Name="t_6" TextAlignment="MiddleLeft" Multiline="true" Text="Price" SizeF="49,15" LocationFloat="637,3" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+				<Item5 Ref="16" ControlType="XRLabel" Name="t_7" TextAlignment="MiddleLeft" Multiline="true" Text="Value" SizeF="34,15" LocationFloat="700,3" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+				<Item6 Ref="17" ControlType="XRLabel" Name="t_8" TextAlignment="MiddleLeft" Multiline="true" Text="Daily Total" SizeF="63,15" LocationFloat="775,3" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
+				<Item7 Ref="18" ControlType="XRLabel" Name="t_5" TextAlignment="MiddleLeft" Multiline="true" Text="Units" SizeF="62,15" LocationFloat="566,3" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+				<Item8 Ref="19" ControlType="XRLabel" Name="t_10" TextAlignment="MiddleLeft" Multiline="true" Text="Price Description" SizeF="101,15" LocationFloat="398,3" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+				<Item9 Ref="20" ControlType="XRLabel" Name="t_9" TextAlignment="MiddleLeft" Multiline="true" Text="Totals:" SizeF="50,15" LocationFloat="-0,24" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
+				<Item10 Ref="21" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="789,0" LocationFloat="57,21"  LineDirection="Horizontal" Visible="True"/>
+				<Item11 Ref="22" ControlType="XRLine" Name="l_2" FillColor="255,128,128,128" SizeF="789,0" LocationFloat="57,40"  LineDirection="Horizontal" Visible="True"/>
+				<Item12 Ref="23" ControlType="XRLabel" Name="month_order_val_total" TextFormatString="{0:$#,##0.00}" TextAlignment="MiddleRight"  Multiline="true" SizeF="83,15" LocationFloat="684,24" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="24" EventName="BeforePrint" PropertyName="Text" Expression="[month_order_val_total]"/>
+					</ExpressionBindings>
+				</Item12>
+				<Item13 Ref="25" ControlType="XRLabel" Name="month_volume_used" TextFormatString="{0:#,##0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="84,15" LocationFloat="62,24" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="26" EventName="BeforePrint" PropertyName="Text" Expression="[month_volume_used]"/>
+					</ExpressionBindings>
+				</Item13>
+				<Item14 Ref="27" ControlType="XRShape" Name="r_2" FillColor="255,128,128,128" SizeF="846,45" LocationFloat="-0,-0" Visible="True">
+					<Shape Ref="28" ShapeName="Rectangle"/>
+				</Item14>
+			</Controls>
+		</Item3>
+		<Item4 Ref="29" ControlType="GroupHeaderBand" Name="summary" HeightF="-0" Visible="False" Level="0">
+			<Controls>
+				<Item1 Ref="30" ControlType="XRShape" Name="r_3" FillColor="255,128,128,128" SizeF="246,45" LocationFloat="-0,-0" Visible="False">
+					<Shape Ref="31" ShapeName="Rectangle"/>
+				</Item1>
+			</Controls>
+		</Item4>
+		<Item5 Ref="32" ControlType="ReportFooterBand" Name="footer" HeightF="-0" Visible="False">
+			<Controls>
+			</Controls>
+		</Item5>
+		<Item6 Ref="33" ControlType="DetailBand" Name="detail" HeightF="19">
+			<Controls>
+				<Item1 Ref="34" ControlType="XRLabel" Name="volume_date" TextFormatString="{0:MM/dd/yyyy}" TextAlignment="MiddleLeft"  Multiline="true" SizeF="58,17" LocationFloat="2,-0" AnchorVertical="Both" Font="Arial, 8pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="35" EventName="BeforePrint" PropertyName="Text" Expression="[volume_date]"/>
+					</ExpressionBindings>
+				</Item1>
+				<Item2 Ref="36" ControlType="XRLabel" Name="comp_day_price_field" TextFormatString="{0:$#,##0.00###}" TextAlignment="MiddleRight"  Multiline="true" SizeF="49,17" LocationFloat="637,-0" AnchorVertical="Both" Font="Arial, 8pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="37" EventName="BeforePrint" PropertyName="Text" Expression="[comp_day_price]"/>
+					</ExpressionBindings>
+				</Item2>
+				<Item3 Ref="38" ControlType="XRLabel" Name="day_order_val_total" TextFormatString="{0:$#,##0.00}" TextAlignment="MiddleRight"  Multiline="true" SizeF="79,17" LocationFloat="767,-0" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="39" EventName="BeforePrint" PropertyName="Text" Expression="[day_order_val_total]"/>
+						<Item2 Ref="40" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(acctg_trans_seq_nbr==1,true,false)"/>
+					</ExpressionBindings>
+				</Item3>
+				<Item4 Ref="41" ControlType="XRLabel" Name="volume_description" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="68,17" LocationFloat="566,-0" AnchorVertical="Both" Font="Arial, 8pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="42" EventName="BeforePrint" PropertyName="Text" Expression="[volume_description]"/>
+					</ExpressionBindings>
+				</Item4>
+				<Item5 Ref="43" ControlType="XRLabel" Name="type_comp_desc" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="140,17" LocationFloat="250,-0" AnchorVertical="Both" Font="Arial, 8pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="44" EventName="BeforePrint" PropertyName="Text" Expression="[type_comp_desc]"/>
+					</ExpressionBindings>
+				</Item5>
+				<Item6 Ref="45" ControlType="XRLabel" Name="price_description" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="167,17" LocationFloat="395,-0" AnchorVertical="Both" Font="Arial, 8pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="46" EventName="BeforePrint" PropertyName="Text" Expression="[price_description]"/>
+					</ExpressionBindings>
+				</Item6>
+				<Item7 Ref="47" ControlType="XRLabel" Name="component_val" TextFormatString="{0:$#,##0.00}" TextAlignment="MiddleRight"  Multiline="true" SizeF="79,17" LocationFloat="687,-0" AnchorVertical="Both" Font="Arial, 8pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="48" EventName="BeforePrint" PropertyName="Text" Expression="[component_val]"/>
+					</ExpressionBindings>
+				</Item7>
+				<Item8 Ref="49" ControlType="XRLabel" Name="volume_used" TextFormatString="{0:#,##0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="85,15" LocationFloat="62,-0" AnchorVertical="Both" Font="Arial, 8pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="50" EventName="BeforePrint" PropertyName="Text" Expression="[volume_used]"/>
+					</ExpressionBindings>
+				</Item8>
+				<Item9 Ref="51" ControlType="XRShape" Name="r_1" FillColor="255,128,128,128" SizeF="246,45" LocationFloat="-0,-0" Visible="True">
+					<Shape Ref="52" ShapeName="Rectangle"/>
+				</Item9>
+			</Controls>
+		</Item6>
+	</Bands>
+	<CalculatedFields>
+		<Item1 Ref="53" Name="comp_day_price" Expression="Iif((IsNull(volume_used) || volume_used==0),0.00,component_val/volume_used)" DataMember="Query" />
+	</CalculatedFields>
+</XtraReportsLayoutSerializer>

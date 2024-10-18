@@ -1,0 +1,44 @@
+﻿$PBExportHeader$rpt_pmnt_statement_plt_header_k.srd
+$PBExportComments$Purchase Statement with Plants 20240108
+release 19;
+datawindow(units=0 timer_interval=0 color=1073741824 brushmode=0 transparency=0 gradient.angle=0 gradient.color=8421504 gradient.focus=0 gradient.repetition.count=0 gradient.repetition.length=100 gradient.repetition.mode=0 gradient.scale=100 gradient.spread=100 gradient.transparency=0 picture.blur=0 picture.clip.bottom=0 picture.clip.left=0 picture.clip.right=0 picture.clip.top=0 picture.mode=0 picture.scale.x=100 picture.scale.y=100 picture.transparency=0 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.background=no print.preview.background=no print.preview.outline=yes hidegrayline=no showbackcoloronxp=no picture.file="" )
+header(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+summary(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+footer(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+detail(height=72 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+table(column=(type=char(8) updatewhereclause=yes name=k_nbr dbname="k_nbr" )
+ column=(type=char(20) updatewhereclause=yes name=alias_k_nbr dbname="alias_k_nbr" )
+ retrieve="  SELECT distinct Case when (select count(distinct k.contract_nbr) from  pmnt_statement_trans_temp k 
+														where pmnt_statement_trans_temp.statement_nbr = k.statement_nbr
+														and pmnt_statement_trans_temp.statement_rev_nbr=k.statement_rev_nbr
+														and pmnt_statement_trans_temp.run_user_name = k.run_user_name
+														and pmnt_statement_trans_temp.run_date = k.run_date
+														group by k.contract_nbr)  > 1 then 'MULTIPLE' else pmnt_statement_trans_temp.contract_nbr end as  k_nbr,
+        Case when (select count(distinct k1.contract_nbr) from  pmnt_statement_trans_temp k1 
+														where pmnt_statement_trans_temp.statement_nbr = k1.statement_nbr
+														and pmnt_statement_trans_temp.statement_rev_nbr=k1.statement_rev_nbr
+														and pmnt_statement_trans_temp.run_user_name = k1.run_user_name
+														and pmnt_statement_trans_temp.run_date = k1.run_date
+														group by k1.contract_nbr)  > 1 then '' else ISNULL(contract_ba.alias_contract_nbr,'') end as  alias_k_nbr
+    FROM pmnt_statement_trans_temp  
+    LEFT JOIN dbo.contract_ba
+		ON contract_ba.contract_nbr = pmnt_statement_trans_temp.contract_nbr
+		AND contract_ba.role_code = 'SEL'
+		AND (CONVERT(datetime,SUBSTRING(pmnt_statement_trans_temp.curr_prod_mo,1,2)+'/01/'+SUBSTRING(pmnt_statement_trans_temp.curr_prod_mo,3,4)) BETWEEN contract_ba.beg_eff_date AND contract_ba.end_eff_date)
+Where pmnt_statement_trans_temp.statement_nbr = :dwra_statement_nbr
+and pmnt_statement_trans_temp.statement_rev_nbr= :dwra_statement_rev
+and pmnt_statement_trans_temp.run_user_name = :dwra_run_user_name
+and pmnt_statement_trans_temp.run_date = :dwra_run_date
+" arguments=(("dwra_statement_nbr", string),("dwra_statement_rev", string),("dwra_run_user_name", string),("dwra_run_date", datetime)) )
+compute(band=detail alignment="0" expression=" k_nbr  + ' / ' +  alias_k_nbr "border="0" color="33554432" x="14" y="0" height="76" width="1074" format="[GENERAL]" html.valueishtml="0"  name=k_nbr_alias_k_nbr visible="1"  font.face="Calibri" font.height="-11" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" nativepdf.customsize=0 nativepdf.customorientation=0 nativepdf.pdfstandard=0 nativepdf.useprintspec=no )
+export.xhtml()
+ 

@@ -1,0 +1,666 @@
+﻿$PBExportHeader$d_pop_smmry.srd
+release 12;
+datawindow(units=0 timer_interval=0 color=16777215 brushmode=0 transparency=0 gradient.angle=0 gradient.color=8421504 gradient.focus=0 gradient.repetition.count=0 gradient.repetition.length=100 gradient.repetition.mode=0 gradient.scale=100 gradient.spread=100 gradient.transparency=0 picture.blur=0 picture.clip.bottom=0 picture.clip.left=0 picture.clip.right=0 picture.clip.top=0 picture.mode=0 picture.scale.x=100 picture.scale.y=100 picture.transparency=0 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.background=no print.preview.background=no print.preview.outline=yes hidegrayline=no showbackcoloronxp=no picture.file="" )
+header(height=180 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+summary(height=116 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+footer(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+detail(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+table(column=(type=number updatewhereclause=yes name=cust_gal dbname="cust_gal" )
+ column=(type=number updatewhereclause=yes name=price dbname="plant_mcf_settlement.price" dbalias=".price" )
+ column=(type=char(3) updatewhereclause=yes name=type dbname="type" )
+ retrieve="  SELECT sum(IsNull(mcf.prp_c2_vol,0)) cust_gal,
+			dtp.price price,
+			'NGL' type
+    FROM plant_mcf_settlement mcf
+Join plant_mmbtu_settlement mmbtu on (mcf.run_datetime = mmbtu.run_datetime) and 
+( mcf.deal_nbr = mmbtu.deal_nbr ) and  
+         ( mcf.path_nbr = mmbtu.path_nbr ) and  
+         ( mcf.order_nbr = mmbtu.order_nbr ) and  
+         ( mcf.rev_nbr = mmbtu.rev_nbr )
+Join facility_proc_parameter f on ( mcf.proc_pipe = f.pipeline_code )
+Join product_settlement_disp p on ( mcf.related_k = p.contract_nbr )
+	and mcf.eff_date = p.eff_Date
+	and mcf.prov_seq_nbr = p.prov_seq_nbr
+Join valid_product_type pt on pt.product_type_code = 'C2'
+Join valid_gas_units vgu on pt.volume_unit = vgu.unit_code 
+Join valid_disposition d on d.disposition_code = f.disposition_code 
+			JOIN (SELECT dt.product_type,Sum( Case  when var_charge_direction = '+' then  var_net_amt else  -1  * var_net_amt end) price
+				From deals_trans dt,
+						deals_trans_pricing dtp,
+					plant_mcf_settlement mcf
+				Where ( mcf.deal_nbr = dt.from_deal_nbr ) and
+						( mcf.path_nbr = dt.from_path_nbr ) and
+						( mcf.order_nbr = dt.from_leg_nbr) and
+						( mcf.rev_nbr = dt.from_leg_rev_nbr ) and
+						( dt.product_type = 'C2' ) and  
+						( dt.trn_knbr = :dwra_contract_nbr) and 
+						( dt.deal_nbr = dtp.deal_nbr ) and 
+						( dt.path_seq_nbr = dtp.path_seq_nbr ) and
+						( dt.leg_nbr = dtp.leg_nbr ) and
+						( dt.leg_rev_nbr = dtp.leg_rev_nbr) and
+							((mcf.run_datetime = :dwra_run_datetime) and  
+							( mcf.proc_pipe = :dwra_facility_cd ) and
+							( mcf.start_date = :dwra_prod_month ) and 
+							( mcf.proc_k = :dwra_contract_nbr ) and
+							( mcf.ded_sta_nbr = :dwra_source_nbr ) and 
+							( mcf.ded_pipe = :dwra_ded_pipe) )
+				group by dt.product_type) as dtp on dtp.product_type = d.product_type_code
+   WHERE ( f.disposition_code = ~"C2~" ) and
+			( f.fractionation = 'Y' ) and
+			( f.beg_eff_date = (SELECT max(beg_eff_date)
+								FROM facility_proc_parameter p
+								WHERE f.pipeline_code = p.pipeline_code
+								and beg_eff_date <= :dwra_prod_month) ) and
+			( p.disposition_code = ~"C2~" ) and 
+        ( (mcf.run_datetime = :dwra_run_datetime) and  
+							( mcf.proc_pipe = :dwra_facility_cd ) and
+							( mcf.start_date = :dwra_prod_month ) and 
+							( mcf.proc_k = :dwra_contract_nbr ) and
+							( mcf.ded_sta_nbr = :dwra_source_nbr ) and 
+							( mcf.ded_pipe = :dwra_ded_pipe)  ) 
+group by dtp.price    
+Union 
+  SELECT sum(IsNull(mcf.prp_c3_vol,0)) cust_gal,
+			dtp.price price,
+			'NGL' type
+       FROM plant_mcf_settlement mcf
+Join plant_mmbtu_settlement mmbtu on (mcf.run_datetime = mmbtu.run_datetime) and 
+( mcf.deal_nbr = mmbtu.deal_nbr ) and  
+         ( mcf.path_nbr = mmbtu.path_nbr ) and  
+         ( mcf.order_nbr = mmbtu.order_nbr ) and  
+         ( mcf.rev_nbr = mmbtu.rev_nbr )
+Join facility_proc_parameter f on ( mcf.proc_pipe = f.pipeline_code )
+Join product_settlement_disp p on ( mcf.related_k = p.contract_nbr )
+	and mcf.eff_date = p.eff_Date
+	and mcf.prov_seq_nbr = p.prov_seq_nbr
+Join valid_product_type pt on pt.product_type_code = 'C3'
+Join valid_gas_units vgu on pt.volume_unit = vgu.unit_code 
+Join valid_disposition d on d.disposition_code = f.disposition_code 
+			JOIN (SELECT dt.product_type,Sum( Case  when var_charge_direction = '+' then  var_net_amt else  -1  * var_net_amt end) price
+				From deals_trans dt,
+						deals_trans_pricing dtp,
+					plant_mcf_settlement mcf
+				Where ( mcf.deal_nbr = dt.from_deal_nbr ) and
+						( mcf.path_nbr = dt.from_path_nbr ) and
+						( mcf.order_nbr = dt.from_leg_nbr) and
+						( mcf.rev_nbr = dt.from_leg_rev_nbr ) and
+						( dt.product_type = 'C3' ) and  
+						( dt.trn_knbr = :dwra_contract_nbr) and 
+						( dt.deal_nbr = dtp.deal_nbr ) and 
+						( dt.path_seq_nbr = dtp.path_seq_nbr ) and
+						( dt.leg_nbr = dtp.leg_nbr ) and
+						( dt.leg_rev_nbr = dtp.leg_rev_nbr) and
+							( (mcf.run_datetime = :dwra_run_datetime) and  
+							( mcf.proc_pipe = :dwra_facility_cd ) and
+							( mcf.start_date = :dwra_prod_month ) and 
+							( mcf.proc_k = :dwra_contract_nbr ) and
+							( mcf.ded_sta_nbr = :dwra_source_nbr ) and 
+							( mcf.ded_pipe = :dwra_ded_pipe)  )
+				group by dt.product_type) as dtp on dtp.product_type = d.product_type_code
+ WHERE ( f.disposition_code = ~"C3~" ) and
+			( f.fractionation = 'Y' ) and
+			( f.beg_eff_date = (SELECT max(beg_eff_date)
+								FROM facility_proc_parameter p
+								WHERE f.pipeline_code = p.pipeline_code
+								and beg_eff_date <= :dwra_prod_month) ) and
+			 
+			( p.disposition_code = ~"C3~" ) and 
+         ( (mcf.run_datetime = :dwra_run_datetime) and  
+							( mcf.proc_pipe = :dwra_facility_cd ) and
+							( mcf.start_date = :dwra_prod_month ) and 
+							( mcf.proc_k = :dwra_contract_nbr ) and
+							( mcf.ded_sta_nbr = :dwra_source_nbr ) and 
+							( mcf.ded_pipe = :dwra_ded_pipe)  ) 
+group by dtp.price 
+Union 
+  SELECT sum(IsNull(mcf.prp_ic4_vol,0)) cust_gal,
+			dtp.price price,
+			'NGL' type
+  FROM plant_mcf_settlement mcf
+Join plant_mmbtu_settlement mmbtu on (mcf.run_datetime = mmbtu.run_datetime) and 
+( mcf.deal_nbr = mmbtu.deal_nbr ) and  
+         ( mcf.path_nbr = mmbtu.path_nbr ) and  
+         ( mcf.order_nbr = mmbtu.order_nbr ) and  
+         ( mcf.rev_nbr = mmbtu.rev_nbr )
+Join facility_proc_parameter f on ( mcf.proc_pipe = f.pipeline_code )
+Join product_settlement_disp p on ( mcf.related_k = p.contract_nbr )
+	and mcf.eff_date = p.eff_Date
+	and mcf.prov_seq_nbr = p.prov_seq_nbr
+Join valid_product_type pt on pt.product_type_code = 'C4i'
+Join valid_gas_units vgu on pt.volume_unit = vgu.unit_code 
+Join valid_disposition d on d.disposition_code = f.disposition_code 
+			JOIN (SELECT dt.product_type,Sum( Case  when var_charge_direction = '+' then  var_net_amt else  -1  * var_net_amt end) price
+				From deals_trans dt,
+						deals_trans_pricing dtp,
+					plant_mcf_settlement mcf
+				Where ( mcf.deal_nbr = dt.from_deal_nbr ) and
+						( mcf.path_nbr = dt.from_path_nbr ) and
+						( mcf.order_nbr = dt.from_leg_nbr) and
+						( mcf.rev_nbr = dt.from_leg_rev_nbr ) and
+						( dt.product_type = 'C4I' ) and  
+						( dt.trn_knbr = :dwra_contract_nbr) and 
+						( dt.deal_nbr = dtp.deal_nbr ) and 
+						( dt.path_seq_nbr = dtp.path_seq_nbr ) and
+						( dt.leg_nbr = dtp.leg_nbr ) and
+						( dt.leg_rev_nbr = dtp.leg_rev_nbr) and
+							( (mcf.run_datetime = :dwra_run_datetime) and  
+							( mcf.proc_pipe = :dwra_facility_cd ) and
+							( mcf.start_date = :dwra_prod_month ) and 
+							( mcf.proc_k = :dwra_contract_nbr ) and
+							( mcf.ded_sta_nbr = :dwra_source_nbr ) and 
+							( mcf.ded_pipe = :dwra_ded_pipe) )
+				group by dt.product_type) as dtp on dtp.product_type = d.product_type_code
+ WHERE ( f.disposition_code = ~"IC4~" ) and
+			( f.fractionation = 'Y' ) and
+			( f.beg_eff_date = (SELECT max(beg_eff_date)
+								FROM facility_proc_parameter p
+								WHERE f.pipeline_code = p.pipeline_code
+								and beg_eff_date <= :dwra_prod_month) ) and
+			 
+			( p.disposition_code = ~"IC4~" ) and 
+         ( (mcf.run_datetime = :dwra_run_datetime) and  
+							( mcf.proc_pipe = :dwra_facility_cd ) and
+							( mcf.start_date = :dwra_prod_month ) and 
+							( mcf.proc_k = :dwra_contract_nbr ) and
+							( mcf.ded_sta_nbr = :dwra_source_nbr ) and 
+							( mcf.ded_pipe = :dwra_ded_pipe)  )  
+group by dtp.price     
+Union 
+Select 	sum(IsNull(mcf.prp_nc4_vol,0)) cust_gal,
+			dtp.price price      ,
+			'NGL' type  
+ FROM plant_mcf_settlement mcf
+Join plant_mmbtu_settlement mmbtu on (mcf.run_datetime = mmbtu.run_datetime) and 
+( mcf.deal_nbr = mmbtu.deal_nbr ) and  
+         ( mcf.path_nbr = mmbtu.path_nbr ) and  
+         ( mcf.order_nbr = mmbtu.order_nbr ) and  
+         ( mcf.rev_nbr = mmbtu.rev_nbr )
+Join facility_proc_parameter f on ( mcf.proc_pipe = f.pipeline_code )
+Join product_settlement_disp p on ( mcf.related_k = p.contract_nbr )
+	and mcf.eff_date = p.eff_Date
+	and mcf.prov_seq_nbr = p.prov_seq_nbr
+Join valid_product_type pt on pt.product_type_code = 'C4N'
+Join valid_gas_units vgu on pt.volume_unit = vgu.unit_code 
+Join valid_disposition d on d.disposition_code = f.disposition_code 
+			JOIN (SELECT dt.product_type,Sum( Case  when var_charge_direction = '+' then  var_net_amt else  -1  * var_net_amt end) price
+				From deals_trans dt,
+						deals_trans_pricing dtp,
+					plant_mcf_settlement mcf
+				Where ( mcf.deal_nbr = dt.from_deal_nbr ) and
+						( mcf.path_nbr = dt.from_path_nbr ) and
+						( mcf.order_nbr = dt.from_leg_nbr) and
+						( mcf.rev_nbr = dt.from_leg_rev_nbr ) and
+						( dt.product_type = 'C4N' ) and  
+						( dt.trn_knbr = :dwra_contract_nbr) and 
+						( dt.deal_nbr = dtp.deal_nbr ) and 
+						( dt.path_seq_nbr = dtp.path_seq_nbr ) and
+						( dt.leg_nbr = dtp.leg_nbr ) and
+						( dt.leg_rev_nbr = dtp.leg_rev_nbr) and
+							( (mcf.run_datetime = :dwra_run_datetime) and  
+							( mcf.proc_pipe = :dwra_facility_cd ) and
+							( mcf.start_date = :dwra_prod_month ) and 
+							( mcf.proc_k = :dwra_contract_nbr ) and
+							( mcf.ded_sta_nbr = :dwra_source_nbr ) and 
+							( mcf.ded_pipe = :dwra_ded_pipe)  )
+				group by dt.product_type) as dtp on dtp.product_type = d.product_type_code
+ WHERE ( f.disposition_code = ~"NC4~" ) and
+			( f.fractionation = 'Y' ) and
+			( f.beg_eff_date = (SELECT max(beg_eff_date)
+								FROM facility_proc_parameter p
+								WHERE f.pipeline_code = p.pipeline_code
+								and beg_eff_date <= :dwra_prod_month) ) and
+			( p.disposition_code = ~"NC4~" ) and 
+		   ((mcf.run_datetime = :dwra_run_datetime) and  
+							( mcf.proc_pipe = :dwra_facility_cd ) and
+							( mcf.start_date = :dwra_prod_month ) and 
+							( mcf.proc_k = :dwra_contract_nbr ) and
+							( mcf.ded_sta_nbr = :dwra_source_nbr ) and 
+							( mcf.ded_pipe = :dwra_ded_pipe)  ) 
+group by dtp.price      
+Union 
+  SELECT sum(IsNull(mcf.prp_c5_vol,0)) cust_gal,
+			dtp.price price    ,
+			'NGL' type
+ FROM plant_mcf_settlement mcf
+Join plant_mmbtu_settlement mmbtu on (mcf.run_datetime = mmbtu.run_datetime) and 
+( mcf.deal_nbr = mmbtu.deal_nbr ) and  
+         ( mcf.path_nbr = mmbtu.path_nbr ) and  
+         ( mcf.order_nbr = mmbtu.order_nbr ) and  
+         ( mcf.rev_nbr = mmbtu.rev_nbr )
+Join facility_proc_parameter f on ( mcf.proc_pipe = f.pipeline_code )
+Join product_settlement_disp p on ( mcf.related_k = p.contract_nbr )
+	and mcf.eff_date = p.eff_Date
+	and mcf.prov_seq_nbr = p.prov_seq_nbr
+Join valid_product_type pt on pt.product_type_code = 'C5+'
+Join valid_gas_units vgu on pt.volume_unit = vgu.unit_code 
+Join valid_disposition d on d.disposition_code = f.disposition_code 
+			JOIN (SELECT dt.product_type,Sum( Case  when var_charge_direction = '+' then  var_net_amt else  -1  * var_net_amt end) price
+				From deals_trans dt,
+						deals_trans_pricing dtp,
+					plant_mcf_settlement mcf
+				Where ( mcf.deal_nbr = dt.from_deal_nbr ) and
+						( mcf.path_nbr = dt.from_path_nbr ) and
+						( mcf.order_nbr = dt.from_leg_nbr) and
+						( mcf.rev_nbr = dt.from_leg_rev_nbr ) and
+						( dt.product_type = 'C5+' ) and  
+						( dt.trn_knbr = :dwra_contract_nbr) and 
+						( dt.deal_nbr = dtp.deal_nbr ) and 
+						( dt.path_seq_nbr = dtp.path_seq_nbr ) and
+						( dt.leg_nbr = dtp.leg_nbr ) and
+						( dt.leg_rev_nbr = dtp.leg_rev_nbr) and
+							((mcf.run_datetime = :dwra_run_datetime) and  
+							( mcf.proc_pipe = :dwra_facility_cd ) and
+							( mcf.start_date = :dwra_prod_month ) and 
+							( mcf.proc_k = :dwra_contract_nbr ) and
+							( mcf.ded_sta_nbr = :dwra_source_nbr ) and 
+							( mcf.ded_pipe = :dwra_ded_pipe)  )
+				group by dt.product_type) as dtp on dtp.product_type = d.product_type_code
+ WHERE ( f.disposition_code = ~"C5+~" ) and
+			( f.fractionation = 'Y' ) and
+			( f.beg_eff_date = (SELECT max(beg_eff_date)
+								FROM facility_proc_parameter p
+								WHERE f.pipeline_code = p.pipeline_code
+								and beg_eff_date <= :dwra_prod_month) ) and
+			( p.disposition_code = ~"C5+~" ) and 
+         ((mcf.run_datetime = :dwra_run_datetime) and  
+							( mcf.proc_pipe = :dwra_facility_cd ) and
+							( mcf.start_date = :dwra_prod_month ) and 
+							( mcf.proc_k = :dwra_contract_nbr ) and
+							( mcf.ded_sta_nbr = :dwra_source_nbr ) and 
+							( mcf.ded_pipe = :dwra_ded_pipe) )
+group by dtp.price      
+Union 
+  SELECT	sum(IsNull(mcf.prp_ic5_vol,0)) cust_gal,
+			dtp.price price ,
+			'NGL'  type   
+   FROM plant_mcf_settlement mcf
+Join plant_mmbtu_settlement mmbtu on (mcf.run_datetime = mmbtu.run_datetime) and 
+( mcf.deal_nbr = mmbtu.deal_nbr ) and  
+         ( mcf.path_nbr = mmbtu.path_nbr ) and  
+         ( mcf.order_nbr = mmbtu.order_nbr ) and  
+         ( mcf.rev_nbr = mmbtu.rev_nbr )
+Join facility_proc_parameter f on ( mcf.proc_pipe = f.pipeline_code )
+Join product_settlement_disp p on ( mcf.related_k = p.contract_nbr )
+	and mcf.eff_date = p.eff_Date
+	and mcf.prov_seq_nbr = p.prov_seq_nbr
+Join valid_product_type pt on pt.product_type_code = 'C5I'
+Join valid_gas_units vgu on pt.volume_unit = vgu.unit_code 
+Join valid_disposition d on d.disposition_code = f.disposition_code 
+			JOIN (SELECT dt.product_type,Sum( Case  when var_charge_direction = '+' then  var_net_amt else  -1  * var_net_amt end) price
+				From deals_trans dt,
+						deals_trans_pricing dtp,
+					plant_mcf_settlement mcf
+				Where ( mcf.deal_nbr = dt.from_deal_nbr ) and
+						( mcf.path_nbr = dt.from_path_nbr ) and
+						( mcf.order_nbr = dt.from_leg_nbr) and
+						( mcf.rev_nbr = dt.from_leg_rev_nbr ) and
+						( dt.product_type = 'C5I' ) and  
+						( dt.trn_knbr = :dwra_contract_nbr) and 
+						( dt.deal_nbr = dtp.deal_nbr ) and 
+						( dt.path_seq_nbr = dtp.path_seq_nbr ) and
+						( dt.leg_nbr = dtp.leg_nbr ) and
+						( dt.leg_rev_nbr = dtp.leg_rev_nbr) and
+							( (mcf.run_datetime = :dwra_run_datetime) and  
+							( mcf.proc_pipe = :dwra_facility_cd ) and
+							( mcf.start_date = :dwra_prod_month ) and 
+							( mcf.proc_k = :dwra_contract_nbr ) and
+							( mcf.ded_sta_nbr = :dwra_source_nbr ) and 
+							( mcf.ded_pipe = :dwra_ded_pipe)  )
+				group by dt.product_type) as dtp on dtp.product_type = d.product_type_code
+ WHERE ( f.disposition_code = ~"IC5~" ) and
+			( f.fractionation = 'Y' ) and
+			( f.beg_eff_date = (SELECT max(beg_eff_date)
+								FROM facility_proc_parameter p
+								WHERE f.pipeline_code = p.pipeline_code
+								and beg_eff_date <= :dwra_prod_month) ) and
+			 
+			( p.disposition_code = ~"IC5~" ) and 
+			( (mcf.run_datetime = :dwra_run_datetime) and  
+							( mcf.proc_pipe = :dwra_facility_cd ) and
+							( mcf.start_date = :dwra_prod_month ) and 
+							( mcf.proc_k = :dwra_contract_nbr ) and
+							( mcf.ded_sta_nbr = :dwra_source_nbr ) and 
+							( mcf.ded_pipe = :dwra_ded_pipe)  )  
+group by dtp.price     
+Union 
+Select 	sum(IsNull(mcf.prp_nc5_vol,0)) cust_gal,
+			dtp.price price  ,
+			'NGL' type  
+   FROM plant_mcf_settlement mcf
+Join plant_mmbtu_settlement mmbtu on (mcf.run_datetime = mmbtu.run_datetime) and 
+( mcf.deal_nbr = mmbtu.deal_nbr ) and  
+         ( mcf.path_nbr = mmbtu.path_nbr ) and  
+         ( mcf.order_nbr = mmbtu.order_nbr ) and  
+         ( mcf.rev_nbr = mmbtu.rev_nbr )
+Join facility_proc_parameter f on ( mcf.proc_pipe = f.pipeline_code )
+Join product_settlement_disp p on ( mcf.related_k = p.contract_nbr )
+	and mcf.eff_date = p.eff_Date
+	and mcf.prov_seq_nbr = p.prov_seq_nbr
+Join valid_product_type pt on pt.product_type_code = 'C5N'
+Join valid_gas_units vgu on pt.volume_unit = vgu.unit_code 
+Join valid_disposition d on d.disposition_code = f.disposition_code 
+			JOIN (SELECT dt.product_type,Sum( Case  when var_charge_direction = '+' then  var_net_amt else  -1  * var_net_amt end) price
+				From deals_trans dt,
+						deals_trans_pricing dtp,
+					plant_mcf_settlement mcf
+				Where ( mcf.deal_nbr = dt.from_deal_nbr ) and
+						( mcf.path_nbr = dt.from_path_nbr ) and
+						( mcf.order_nbr = dt.from_leg_nbr) and
+						( mcf.rev_nbr = dt.from_leg_rev_nbr ) and
+						( dt.product_type = 'C5N' ) and  
+						( dt.trn_knbr = :dwra_contract_nbr) and 
+						( dt.deal_nbr = dtp.deal_nbr ) and 
+						( dt.path_seq_nbr = dtp.path_seq_nbr ) and
+						( dt.leg_nbr = dtp.leg_nbr ) and
+						( dt.leg_rev_nbr = dtp.leg_rev_nbr) and
+							( (mcf.run_datetime = :dwra_run_datetime) and  
+							( mcf.proc_pipe = :dwra_facility_cd ) and
+							( mcf.start_date = :dwra_prod_month ) and 
+							( mcf.proc_k = :dwra_contract_nbr ) and
+							( mcf.ded_sta_nbr = :dwra_source_nbr ) and 
+							( mcf.ded_pipe = :dwra_ded_pipe)  )
+				group by dt.product_type) as dtp on dtp.product_type = d.product_type_code
+ WHERE ( f.disposition_code = ~"NC5~" ) and
+			( f.fractionation = 'Y' ) and
+			( f.beg_eff_date = (SELECT max(beg_eff_date)
+								FROM facility_proc_parameter p
+								WHERE f.pipeline_code = p.pipeline_code
+								and beg_eff_date <= :dwra_prod_month) ) and
+			 
+			( p.disposition_code = ~"NC5~" ) and 
+	      ( (mcf.run_datetime = :dwra_run_datetime) and  
+							( mcf.proc_pipe = :dwra_facility_cd ) and
+							( mcf.start_date = :dwra_prod_month ) and 
+							( mcf.proc_k = :dwra_contract_nbr ) and
+							( mcf.ded_sta_nbr = :dwra_source_nbr ) and 
+							( mcf.ded_pipe = :dwra_ded_pipe)  ) 
+group by dtp.price     
+Union 
+  SELECT sum(IsNull(mcf.prp_c6_vol,0)) cust_gal,
+			dtp.price price ,
+			'NGL' type    
+   FROM plant_mcf_settlement mcf
+Join plant_mmbtu_settlement mmbtu on (mcf.run_datetime = mmbtu.run_datetime) and 
+		( mcf.deal_nbr = mmbtu.deal_nbr ) and  
+         ( mcf.path_nbr = mmbtu.path_nbr ) and  
+         ( mcf.order_nbr = mmbtu.order_nbr ) and  
+         ( mcf.rev_nbr = mmbtu.rev_nbr )
+Join facility_proc_parameter f on ( mcf.proc_pipe = f.pipeline_code )
+Join product_settlement_disp p on ( mcf.related_k = p.contract_nbr )
+	and mcf.eff_date = p.eff_Date
+	and mcf.prov_seq_nbr = p.prov_seq_nbr
+Join valid_product_type pt on pt.product_type_code = 'C6+'
+Join valid_gas_units vgu on pt.volume_unit = vgu.unit_code 
+Join valid_disposition d on d.disposition_code = f.disposition_code 
+			JOIN (SELECT dt.product_type,Sum( Case  when var_charge_direction = '+' then  var_net_amt else  -1  * var_net_amt end) price
+				From deals_trans dt,
+						deals_trans_pricing dtp,
+					plant_mcf_settlement mcf
+				Where ( mcf.deal_nbr = dt.from_deal_nbr ) and
+						( mcf.path_nbr = dt.from_path_nbr ) and
+						( mcf.order_nbr = dt.from_leg_nbr) and
+						( mcf.rev_nbr = dt.from_leg_rev_nbr ) and
+						( dt.product_type = 'C6+' ) and  
+						( dt.trn_knbr = :dwra_contract_nbr) and 
+						( dt.deal_nbr = dtp.deal_nbr ) and 
+						( dt.path_seq_nbr = dtp.path_seq_nbr ) and
+						( dt.leg_nbr = dtp.leg_nbr ) and
+						( dt.leg_rev_nbr = dtp.leg_rev_nbr) and
+							((mcf.run_datetime = :dwra_run_datetime) and  
+							( mcf.proc_pipe = :dwra_facility_cd ) and
+							( mcf.start_date = :dwra_prod_month ) and 
+							( mcf.proc_k = :dwra_contract_nbr ) and
+							( mcf.ded_sta_nbr = :dwra_source_nbr ) and 
+							( mcf.ded_pipe = :dwra_ded_pipe)  )
+				group by dt.product_type) as dtp on dtp.product_type = d.product_type_code
+ WHERE ( f.disposition_code = ~"C6+~" ) and
+			( f.fractionation = 'Y' ) and
+			( f.beg_eff_date = (SELECT max(beg_eff_date)
+								FROM facility_proc_parameter p
+								WHERE f.pipeline_code = p.pipeline_code
+								and beg_eff_date <= :dwra_prod_month) ) and
+			( p.disposition_code = ~"C6+~" ) and 
+			 ( (mcf.run_datetime = :dwra_run_datetime) and  
+							( mcf.proc_pipe = :dwra_facility_cd ) and
+							( mcf.start_date = :dwra_prod_month ) and 
+							( mcf.proc_k = :dwra_contract_nbr ) and
+							( mcf.ded_sta_nbr = :dwra_source_nbr ) and 
+							( mcf.ded_pipe = :dwra_ded_pipe)  )  
+group by dtp.price    
+union
+ SELECT sum(IsNull(mcf.prp_cng_vol,0)) cust_gal,
+			dtp.price price ,
+			'NGL' type
+ FROM plant_mcf_settlement mcf
+Join plant_mmbtu_settlement mmbtu on (mcf.run_datetime = mmbtu.run_datetime) and 
+		( mcf.deal_nbr = mmbtu.deal_nbr ) and  
+         ( mcf.path_nbr = mmbtu.path_nbr ) and  
+         ( mcf.order_nbr = mmbtu.order_nbr ) and  
+         ( mcf.rev_nbr = mmbtu.rev_nbr )
+Join facility_proc_parameter f on ( mcf.proc_pipe = f.pipeline_code )
+Join product_settlement_disp p on ( mcf.related_k = p.contract_nbr )
+	and mcf.eff_date = p.eff_Date
+	and mcf.prov_seq_nbr = p.prov_seq_nbr
+Join valid_product_type pt on pt.product_type_code = 'CNG'
+Join valid_gas_units vgu on pt.volume_unit = vgu.unit_code 
+Join valid_disposition d on d.disposition_code = f.disposition_code 
+			JOIN (SELECT dt.product_type,Sum( Case  when var_charge_direction = '+' then  var_net_amt else  -1  * var_net_amt end) price
+				From deals_trans dt,
+						deals_trans_pricing dtp,
+					plant_mcf_settlement mcf
+				Where ( mcf.deal_nbr = dt.from_deal_nbr ) and
+						( mcf.path_nbr = dt.from_path_nbr ) and
+						( mcf.order_nbr = dt.from_leg_nbr) and
+						( mcf.rev_nbr = dt.from_leg_rev_nbr ) and
+						( dt.product_type = 'CNG' ) and  
+						( dt.trn_knbr = :dwra_contract_nbr) and 
+						( dt.deal_nbr = dtp.deal_nbr ) and 
+						( dt.path_seq_nbr = dtp.path_seq_nbr ) and
+						( dt.leg_nbr = dtp.leg_nbr ) and
+						( dt.leg_rev_nbr = dtp.leg_rev_nbr) and
+							( (mcf.run_datetime = :dwra_run_datetime) and  
+							( mcf.proc_pipe = :dwra_facility_cd ) and
+							( mcf.start_date = :dwra_prod_month ) and 
+							( mcf.proc_k = :dwra_contract_nbr ) and
+							( mcf.ded_sta_nbr = :dwra_source_nbr ) and 
+							( mcf.ded_pipe = :dwra_ded_pipe)  )
+				group by dt.product_type) as dtp on dtp.product_type = d.product_type_code
+ WHERE ( f.disposition_code = ~"CNG~" ) and
+			( f.fractionation = 'Y' ) and
+			( f.beg_eff_date = (SELECT max(beg_eff_date)
+								FROM facility_proc_parameter p
+								WHERE f.pipeline_code = p.pipeline_code
+								and beg_eff_date <= :dwra_prod_month) ) and
+			( p.disposition_code = ~"CNG~" ) and 
+             ( (mcf.run_datetime = :dwra_run_datetime) and  
+							( mcf.proc_pipe = :dwra_facility_cd ) and
+							( mcf.start_date = :dwra_prod_month ) and 
+							( mcf.proc_k = :dwra_contract_nbr ) and
+							( mcf.ded_sta_nbr = :dwra_source_nbr ) and 
+							( mcf.ded_pipe = :dwra_ded_pipe)  ) 
+group by dtp.price  
+Union 
+  SELECT sum(IsNull(mmbtu.prp_residue,0)) cust_gal,
+			(IsNull(pr.tot_value_actual,pr.tot_value_estimate)) price ,
+			'RES' type
+    FROM plant_mcf_settlement mcf,   
+         plant_mmbtu_settlement mmbtu,
+			facility_proc_parameter f,
+			product_settlement_disp p,
+			valid_disposition d ,
+			valid_product_type pt,
+			valid_gas_units vgu ,
+			price_ref_entries pr
+   WHERE (mcf.run_datetime = mmbtu.run_datetime) and 
+		( mcf.deal_nbr = mmbtu.deal_nbr ) and  
+         ( mcf.path_nbr = mmbtu.path_nbr ) and  
+         ( mcf.order_nbr = mmbtu.order_nbr ) and  
+         ( mcf.rev_nbr = mmbtu.rev_nbr ) and
+			( mcf.proc_pipe = f.pipeline_code ) and  
+			( f.disposition_code = ~"RES~" ) and
+			( f.fractionation = 'Y' ) and
+			( f.beg_eff_date = (SELECT max(beg_eff_date)
+								FROM facility_proc_parameter p
+								WHERE f.pipeline_code = p.pipeline_code
+								and beg_eff_date <= :dwra_prod_month) ) and
+			( mcf.related_k = p.contract_nbr ) and 
+			( mcf.eff_date = p.eff_Date ) and
+			( mcf.prov_seq_nbr = p.prov_seq_nbr) and
+			( p.disposition_code = ~"RES~" ) and 
+			d.disposition_code = f.disposition_code and
+         ( (mcf.run_datetime = :dwra_run_datetime) and  
+							( mcf.proc_pipe = :dwra_facility_cd ) and
+							( mcf.start_date = :dwra_prod_month ) and 
+							( mcf.proc_k = :dwra_contract_nbr ) and
+							( mcf.ded_sta_nbr = :dwra_source_nbr ) and 
+							( mcf.ded_pipe = :dwra_ded_pipe)  ) and
+			pt.product_type_code = 'RES' and 
+			pt.volume_unit = vgu.unit_code  and
+		p.tik_price_ref = pr.reference_code and
+		p.tik_price_ref_prod_type = pr.product_type_code and 
+		p.tik_price_ref_date = pr.reference_date and
+		:dwra_prod_month between pr.from_date and pr.to_date   
+group by (IsNull(pr.tot_value_actual,pr.tot_value_estimate))  
+Union
+SELECT Sum(IsNull(Case vol_basis when 'C' then Case rcpt_or_dlvry 
+			when 'R' then act_vol_rcpt_1465_mcf 
+			else  act_vol_dlvry_1465_mcf end 
+	Else
+    		Case rcpt_or_dlvry 
+			When  'R' then act_vol_rcpt_dry_mmbtu
+		else  act_vol_dlvry_dry_mmbtu end
+	end,0)), 
+ avg(dp.var_net_amt) price,
+ 'ZDP' type
+ FROM valid_rates_charge_types r,
+			plant_mmbtu_settlement mcf,
+			deals_trans_pricing dp,
+			deals_move_order_vol_detail d		
+  	wHERE 	( mcf.deal_nbr = d.deal_nbr) and 
+		(mcf.path_nbr = d.path_seq_nbr) and
+		(mcf.order_nbr	= d.leg_nbr) and
+		(mcf.rev_nbr	= d.leg_rev_nbr) and
+		(d.vol_date = mcf.start_date) and
+		( mcf.deal_nbr = dp.deal_nbr) and 
+		(mcf.path_nbr = dp.path_seq_nbr) and
+		(mcf.order_nbr	= dp.leg_nbr) and
+		(mcf.rev_nbr	= dp.leg_rev_nbr) and 
+		(dp.valid_charge_type = r.valid_charge_type) and
+ 		(( mcf.run_datetime = :dwra_run_datetime) and 
+		( mcf.proc_pipe = :dwra_facility_cd ) and
+		( mcf.start_date = :dwra_prod_month ) and
+		( mcf.proc_k = :dwra_contract_nbr ) and
+		( mcf.ded_sta_nbr = :dwra_source_nbr ))  and
+		( dp.var_net_amt <> 0 ) 
+group by dp.valid_charge_type,dp.vol_basis,r.valid_charge_desc
+Union
+SELECT Sum(Isnull(b.whd_vol,0)),sum(Isnull(c.whd_vol,0)),~"WHD~" type       
+    FROM plant_mmbtu_settlement b join plant_mcf_settlement c on 
+				(b.run_datetime = c.run_datetime) and 
+				b.deal_nbr = c.deal_nbr
+			AND b.path_nbr = c.path_nbr 
+			and b.order_nbr = c.order_nbr
+			and b.rev_nbr = c.rev_nbr
+   WHERE ( (b.run_datetime = :dwra_run_datetime) and 
+				( b.proc_pipe = :dwra_facility_cd ) and 
+				( b.start_date = :dwra_prod_month )  AND 
+				( b.proc_k = :dwra_contract_nbr ) and
+				( b.ded_sta_nbr = :dwra_source_nbr ) )  and
+				( b.ded_pipe = :dwra_ded_pipe) and 
+  			( (c.run_datetime = :dwra_run_datetime) and 
+				( c.proc_pipe = :dwra_facility_cd ) and 
+				( c.start_date = :dwra_prod_month ) and
+				( c.proc_k = :dwra_contract_nbr ) and
+				( c.ded_sta_nbr = :dwra_source_nbr ) ) and
+				( c.ded_pipe = :dwra_ded_pipe) 
+union
+SELECT sum(d.component_val),0,'TAX' type
+FROM plant_mmbtu_settlement mmbtu Join deals_trans dt on mmbtu.deal_nbr = dt.deal_nbr
+											Join deals_order do on dt.from_deal_nbr = do.deal_nbr
+													and dt.from_order_nbr = do.order_nbr
+													and dt.from_order_rev_nbr = do.order_rev_nbr
+											Join acctg_trans a on a.deal_nbr = do.deal_nbr
+									            AND a.order_nbr = do.order_nbr
+										         AND a.order_rev_nbr = do.order_rev_nbr
+											JOIN acctg_payee_trans_detail as d ON a.acctg_trans_id = d.acctg_trans_id
+
+JOIN station AS s
+
+            ON a.station_nbr = s.station_nbr
+
+            AND a.pipeline_cd = s.pipeline_code
+
+LEFT JOIN state_tax_table AS stt
+
+            ON s.state_abbr = stt.state
+
+            AND d.type_component = stt.tax_type
+
+            AND (a.bs_order_beg_date BETWEEN stt.eff_date and stt.end_eff_date)
+
+WHERE (mmbtu.run_datetime =:dwra_run_datetime) and 
+		   ( mmbtu.proc_pipe = :dwra_facility_cd ) and 
+		( mmbtu.start_date = :dwra_prod_month ) AND  
+         ( mmbtu.proc_k = :dwra_contract_nbr ) AND  
+      		( mmbtu.ded_sta_nbr = :dwra_source_nbr ) and
+			( mmbtu.ded_pipe = :dwra_ded_pipe ) and
+			stt.tax_type IS NOT NULL and 
+			 dt.leg_nbr = '0001' and
+			dt.revised = 'N' and 
+			stt.withold_tax_yn = 'N'" arguments=(("dwra_prod_month", datetime),("dwra_facility_cd", string),("dwra_source_nbr", string),("dwra_contract_nbr", string),("dwra_ded_pipe", string),("dwra_run_datetime", datetime)) )
+text(band=header alignment="0" text="Settlement Summary" border="0" color="0" x="1312" y="0" height="56" width="448" html.valueishtml="0"  name=t_10 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+line(band=header x1="777" y1="60" x2="777" y2="244"  name=l_7 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" )
+line(band=header x1="1915" y1="60" x2="1915" y2="244"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" )
+line(band=header x1="0" y1="56" x2="3803" y2="56"  name=l_8 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" )
+line(band=header x1="2295" y1="60" x2="2295" y2="244"  name=l_4 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" )
+text(band=header alignment="2" text="Component
+Value" border="0" color="0" x="832" y="64" height="112" width="389" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=header alignment="2" text="Residue
+Value" border="0" color="0" x="1285" y="64" height="112" width="251" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=header alignment="2" text="Fees & 
+Adjustments" border="0" color="0" x="1609" y="64" height="112" width="274" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=header alignment="2" text="Gross
+Value" border="0" color="0" x="2039" y="64" height="112" width="165" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=header alignment="2" text="Total
+Tax" border="0" color="0" x="2386" y="64" height="112" width="197" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=header alignment="2" text="Net
+Value" border="0" color="0" x="2784" y="64" height="112" width="183" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+line(band=header x1="2656" y1="60" x2="2656" y2="244"  name=l_9 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" )
+line(band=header x1="2656" y1="60" x2="2656" y2="244"  name=l_11 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" )
+line(band=header x1="3049" y1="60" x2="3049" y2="244"  name=l_13 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" )
+compute(band=detail alignment="0" expression="IF (type = 'WHD', price ,0)"border="0" color="0" x="370" y="8" height="56" width="183" format="[GENERAL]" html.valueishtml="0"  name=mcf_whd_vol visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+compute(band=detail alignment="1" expression="IF (type = 'NGL', cust_gal *  price ,0)"border="0" color="0" x="823" y="8" height="52" width="297" format="$#,##0.00" html.valueishtml="0"  name=value visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+compute(band=detail alignment="1" expression="IF (type = 'RES', cust_gal *  price ,0)"border="0" color="0" x="1285" y="8" height="56" width="238" format="[GENERAL]" html.valueishtml="0"  name=residue_value visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+compute(band=detail alignment="0" expression="IF (type = 'ZDP',round(cust_gal *  price,2) ,0)"border="0" color="0" x="1673" y="8" height="56" width="183" format="[GENERAL]" html.valueishtml="0"  name=fees visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+compute(band=detail alignment="0" expression="IF (type = 'WHD',  cust_gal  ,0)"border="0" color="0" x="576" y="8" height="56" width="183" format="[GENERAL]" html.valueishtml="0"  name=whd_vol visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="2962" y="8" height="56" width="334" format="[general]" html.valueishtml="0"  name=price visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="0" x="3387" y="8" height="56" width="283" format="[general]" html.valueishtml="0"  name=cust_gal visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+compute(band=detail alignment="0" expression="IF (type = 'TAX', cust_gal ,0)"border="0" color="0" x="2395" y="4" height="56" width="183" format="[GENERAL]" html.valueishtml="0"  name=tax visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="3803" y="0" height="56" width="69" format="[general]" html.valueishtml="0"  name=type visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+line(band=summary x1="777" y1="0" x2="777" y2="160"  name=l_6 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" )
+compute(band=summary alignment="1" expression=" gross_value / sum( whd_vol for all)"border="0" color="0" x="494" y="64" height="56" width="265" format="#0.00000" html.valueishtml="0"  name=rate_mmbtu visible="1"  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+compute(band=summary alignment="1" expression=" gross_value / sum( mcf_whd_vol for all)"border="0" color="0" x="494" y="0" height="56" width="265" format="#0.00000" html.valueishtml="0"  name=rate_mcf visible="1"  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=summary alignment="1" text="Rate Per MCF:" border="0" color="0" x="14" y="0" height="56" width="311" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=summary alignment="1" text="Rate per MMBTU:" border="0" color="0" x="14" y="60" height="56" width="379" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+line(band=summary x1="1915" y1="12" x2="1915" y2="204"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" )
+line(band=summary x1="800" y1="4" x2="3794" y2="4"  name=l_3 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" )
+line(band=summary x1="2295" y1="12" x2="2295" y2="204"  name=l_5 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" )
+compute(band=summary alignment="1" expression="sum(value for all)"border="0" color="0" x="809" y="28" height="52" width="343" format="$#,##0.00" html.valueishtml="0"  name=ngl_value visible="1"  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+compute(band=summary alignment="1" expression="sum(  residue_value  for all )"border="0" color="0" x="1189" y="28" height="52" width="334" format="$#,##0.00" html.valueishtml="0"  name=total_residue_value visible="1"  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+compute(band=summary alignment="1" expression="sum(  fees  for all )"border="0" color="0" x="1550" y="28" height="52" width="325" format="$#,##0.00" html.valueishtml="0"  name=total_fees visible="1"  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+compute(band=summary alignment="1" expression=" (ngl_value  +  total_residue_value ) -  total_fees "border="0" color="0" x="1938" y="28" height="52" width="293" format="$#,##0.00" html.valueishtml="0"  name=gross_value visible="1"  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+compute(band=summary alignment="1" expression="sum(  tax for all ) * -1"border="0" color="0" x="2313" y="28" height="52" width="261" format="$#,##0.00" html.valueishtml="0"  name=total_tax visible="1"  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+compute(band=summary alignment="1" expression="gross_value -  total_tax "border="0" color="0" x="2688" y="28" height="52" width="302" format="$#,##0.00" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+line(band=summary x1="2656" y1="12" x2="2656" y2="204"  name=l_10 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" )
+line(band=summary x1="2656" y1="12" x2="2656" y2="204"  name=l_12 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" )
+line(band=summary x1="3049" y1="12" x2="3049" y2="204"  name=l_14 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()

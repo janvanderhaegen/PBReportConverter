@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="24.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral" Name="XtraReport1" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="410" PageHeight="265" Version="24.1" DataMember="Query" DataSource="#Ref-0">
+	<Parameters>
+		<Item1 Ref="2" Name="facility_code"/>
+	</Parameters>
+	<ComponentStorage>
+		<Item1 Ref="0" ObjectType="DevExpress.DataAccess.Sql.SqlDataSource,DevExpress.DataAccess.v24.1" Name="sqlDataSource1" Base64="PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjxTcWxEYXRhU291cmNlIE5hbWU9InNxbERhdGFTb3VyY2UxIj4NCjxDb25uZWN0aW9uIE5hbWU9IlRJRVMgRGF0YSIgRnJvbUFwcENvbmZpZz0idHJ1ZSIgLz4NCjxRdWVyeSBUeXBlPSJDdXN0b21TcWxRdWVyeSIgTmFtZT0iUXVlcnkiPg0KPFNxbD5TRUxFQ1QJTFRSSU0ocy5lbXBfbmFtZSkgKyAKCQknICAgKCcgKyBMRUZUKHMucGhvbmVfbmJyLDMpICsgJyknICsgCgkJU1VCU1RSSU5HKHMucGhvbmVfbmJyLDQsMykgKyAnLScgKwoJCVJJR0hUKHMucGhvbmVfbmJyLDQpICsgCgkJQ0FTRSBJU05VTEwocGhvbmVfZXh0LCcnKSBXSEVOICcnIFRIRU4gJycgRUxTRSAnIEV4dC4nICsgcGhvbmVfZXh0IEVORCBjb250YWN0X2luZm8KRlJPTSBwaXBlbGluZSBwIEpPSU4gc3RhZmYgQVMgcwpPTiBwLmNvbnRhY3Rfc3RhZmZfdHRzb19uYnIgPSBzLnR0c29fbmJyCkFORCBwaXBlbGluZV9jb2RlID0gQGZhY2lsaXR5X2NvZGUgPC9TcWw+DQo8UGFyYW1ldGVyIE5hbWU9IkBmYWNpbGl0eV9jb2RlIiBUeXBlPSJEZXZFeHByZXNzLkRhdGFBY2Nlc3MuRXhwcmVzc2lvbiI+KFN5c3RlbS5TdHJpbmcpKD9mYWNpbGl0eV9jb2RlKTwvUGFyYW1ldGVyPg0KPC9RdWVyeT4NCjxSZXN1bHRTY2hlbWE+DQo8RGF0YVNldCBOYW1lID0ic3FsRGF0YVNvdXJjZTEiPg0KPFZpZXcgTmFtZT0iUXVlcnkiPg0KPEZpZWxkIE5hbWU9ImNvbnRhY3RfaW5mbyIgVHlwZT0iU3RyaW5nIiAvPg0KPC9WaWV3Pg0KPC9EYXRhU2V0Pg0KPC9SZXN1bHRTY2hlbWE+DQo8Q29ubmVjdGlvbk9wdGlvbnMgQ2xvc2VDb25uZWN0aW9uPSJ0cnVlIiAvPg0KPC9TcWxEYXRhU291cmNlPg0K"/>
+	</ComponentStorage>
+	<Bands>
+		<Item1 Ref="3" ControlType="TopMarginBand" Name="TopMargin" HeightF="25"/>
+		<Item2 Ref="4" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="25"/>
+		<Item3 Ref="5" ControlType="GroupHeaderBand" Name="summary" HeightF="-0" Visible="False" Level="0">
+			<Controls>
+			</Controls>
+		</Item3>
+		<Item4 Ref="6" ControlType="ReportFooterBand" Name="footer" HeightF="-0" Visible="False">
+			<Controls>
+			</Controls>
+		</Item4>
+		<Item5 Ref="7" ControlType="DetailBand" Name="detail" HeightF="15">
+			<Controls>
+				<Item1 Ref="8" ControlType="XRLabel" Name="contact_info" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="360,14" LocationFloat="-0,1" AnchorVertical="Both" Font="Arial, 8pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="9" EventName="BeforePrint" PropertyName="Text" Expression="[contact_info]"/>
+					</ExpressionBindings>
+				</Item1>
+			</Controls>
+		</Item5>
+	</Bands>
+	<CalculatedFields>
+	</CalculatedFields>
+</XtraReportsLayoutSerializer>

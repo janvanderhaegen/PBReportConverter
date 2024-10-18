@@ -1,5 +1,4 @@
 ﻿using PBReportConverter.Converters;
-using System;
 using static PBReportConverter.Converters.PblToSrdConverter;
 
 Console.WriteLine("Enter path of directory with .pbl, .srd or .repx files");
@@ -21,7 +20,7 @@ var repxFiles = Directory.GetFiles(inputPath!, "*.repx", SearchOption.AllDirecto
 Console.WriteLine($"Found {pebbleFiles.Length} .pbl, {srdFiles.Length} .pbl, {repxFiles.Length} .repx");
 
 //if there are any pbl files, unpack them
-if (pebbleFiles.Any())
+if (pebbleFiles.Length != 0)
 {
     Console.WriteLine("Unpackng pbl files...");
     foreach (var pebble in pebbleFiles)
@@ -32,7 +31,7 @@ if (pebbleFiles.Any())
 }
 
 //else if there are any srd files, convert them to repx
-else if (srdFiles.Any())
+else if (srdFiles.Length != 0)
 {
     Console.WriteLine($"Converting .srd files");
     Console.WriteLine("Enter path of target directory");
@@ -52,7 +51,7 @@ else if (srdFiles.Any())
     Console.WriteLine($"Converted {srdFiles.Length} srd files to repx");
 }
 //else if there are any repx files, convert them to json
-else if (repxFiles.Any())
+else if (repxFiles.Length != 0)
 {
     Console.WriteLine($"Converting .srd files");
     Console.WriteLine("Enter path of target directory");

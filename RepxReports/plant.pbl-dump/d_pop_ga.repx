@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="24.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral" Name="XtraReport1" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="324" PageHeight="520" Version="24.1" DataMember="Query" DataSource="#Ref-0">
+	<Parameters>
+		<Item1 Ref="2" Name="dwra_prod_month"/>
+		<Item2 Ref="3" Name="dwra_facility_code"/>
+		<Item3 Ref="4" Name="dwra_source_nbr"/>
+		<Item4 Ref="5" Name="dwra_contract_nbr"/>
+		<Item5 Ref="6" Name="dwra_run_datetime"/>
+	</Parameters>
+	<ComponentStorage>
+		<Item1 Ref="0" ObjectType="DevExpress.DataAccess.Sql.SqlDataSource,DevExpress.DataAccess.v24.1" Name="sqlDataSource1" Base64="PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjxTcWxEYXRhU291cmNlIE5hbWU9InNxbERhdGFTb3VyY2UxIj4NCjxDb25uZWN0aW9uIE5hbWU9IlRJRVMgRGF0YSIgRnJvbUFwcENvbmZpZz0idHJ1ZSIgLz4NCjxRdWVyeSBUeXBlPSJDdXN0b21TcWxRdWVyeSIgTmFtZT0iUXVlcnkiPg0KPFNxbD4gU0VMRUNUIGRiby5nYXNfYW5hbHlzaXMuaGVsaXVtX3BjdCwgICAKICAgICAgICAgZGJvLmdhc19hbmFseXNpcy5uaXRyb19wY3QsICAgCiAgICAgICAgIGRiby5nYXNfYW5hbHlzaXMuYzAyX3BjdCwgICAKICAgICAgICAgZGJvLmdhc19hbmFseXNpcy5veHlfcGN0LCAgIAogICAgICAgICBkYm8uZ2FzX2FuYWx5c2lzLmgyc19wY3QsICAgCiAgICAgICAgIGRiby5nYXNfYW5hbHlzaXMubWV0aGFuZV9wY3QsIAoJCQlkYm8uZ2FzX2FuYWx5c2lzLm1ldGhhbmVfZ3BtLCAgCiAgICAgICAgIGRiby5nYXNfYW5hbHlzaXMuZXRoYW5lX3BjdCwgICAKICAgICAgICAgZGJvLmdhc19hbmFseXNpcy5ldGhhbmVfZ3BtLCAgIAogICAgICAgICBkYm8uZ2FzX2FuYWx5c2lzLnByb3BhbmVfcGN0LCAgIAogICAgICAgICBkYm8uZ2FzX2FuYWx5c2lzLnByb3BhbmVfZ3BtLCAgIAogICAgICAgICBkYm8uZ2FzX2FuYWx5c2lzLmlzb19idXRhbmVfcGN0LCAgIAogICAgICAgICBkYm8uZ2FzX2FuYWx5c2lzLmlzb19idXRhbmVfZ3BtLCAgIAogICAgICAgICBkYm8uZ2FzX2FuYWx5c2lzLm5vcl9idXRhbmVfcGN0LCAgIAogICAgICAgICBkYm8uZ2FzX2FuYWx5c2lzLm5vcl9idXRhbmVfZ3BtLCAgIAogICAgICAgICBkYm8uZ2FzX2FuYWx5c2lzLmlzb19wZW50YW5lX3BjdCwgICAKICAgICAgICAgZGJvLmdhc19hbmFseXNpcy5pc29fcGVudGFuZV9ncG0sICAgCiAgICAgICAgIGRiby5nYXNfYW5hbHlzaXMubm9yX3BlbnRhbmVfcGN0LCAgIAogICAgICAgICBkYm8uZ2FzX2FuYWx5c2lzLm5vcl9wZW50YW5lX2dwbSwgICAKICAgICAgICAgZGJvLmdhc19hbmFseXNpcy5oZXhhbmVfcGN0LCAgIAogICAgICAgICBkYm8uZ2FzX2FuYWx5c2lzLmhleGFuZV9ncG0gICAgICAgICAKICAgIEZST00gcGxhbnRfbW1idHVfc2V0dGxlbWVudCBiIEpvaW4gZGJvLmdhc19hbmFseXNpcyBvbiBkYm8uZ2FzX2FuYWx5c2lzLnBpcGVsaW5lX2NvZGUgPSBiLmdhX3BpcGUgCgkJCQkJCQkJCQkJYW5kIGRiby5nYXNfYW5hbHlzaXMuc3RhdGlvbl9uYnIgPSBiLmdhX3N0YV9uYnIKICAgV0hFUkUgKCAoYi5ydW5fZGF0ZXRpbWUgPSBAZHdyYV9ydW5fZGF0ZXRpbWUpIGFuZAoJCQkJKCBiLnByb2NfcGlwZSA9IEBkd3JhX2ZhY2lsaXR5X2NvZGUgKSBhbmQgCgkJCQkoIGIuc3RhcnRfZGF0ZSA9IEBkd3JhX3Byb2RfbW9udGggKSAgYW5kCgkJCQkoIGIucHJvY19rID0gQGR3cmFfY29udHJhY3RfbmJyICkgYW5kCgkJCQkoIGIuZGVkX3N0YV9uYnIgPSBAZHdyYV9zb3VyY2VfbmJyICkpIGFuZCAKCQkJCSggQGR3cmFfcHJvZF9tb250aCBiZXR3ZWVuIGRiby5nYXNfYW5hbHlzaXMuYmVnX2VmZl9kYXRlIGFuZCBkYm8uZ2FzX2FuYWx5c2lzLmVuZF9lZmZfZGF0ZSApIAoJCQkJYW5kIGRiby5nYXNfYW5hbHlzaXMuc2VxX25iciA9IChTZWxlY3QgTWF4KGdhcy5zZXFfbmJyKQoJCQkJCQlGcm9tIGdhc19hbmFseXNpcyBnYXMKCQkJCQkJd2hlcmUgZ2FzLnBpcGVsaW5lX2NvZGUgPSBkYm8uZ2FzX2FuYWx5c2lzLnBpcGVsaW5lX2NvZGUKCQkJCQkJYW5kIGdhcy5zdGF0aW9uX25iciA9IGRiby5nYXNfYW5hbHlzaXMuc3RhdGlvbl9uYnIKCQkJCQkJYW5kIChAZHdyYV9wcm9kX21vbnRoIGJldHdlZW4gZ2FzLmJlZ19lZmZfZGF0ZSBhbmQgZ2FzLmVuZF9lZmZfZGF0ZSkpIDwvU3FsPg0KPFBhcmFtZXRlciBOYW1lPSJAZHdyYV9wcm9kX21vbnRoIiBUeXBlPSJEZXZFeHByZXNzLkRhdGFBY2Nlc3MuRXhwcmVzc2lvbiI+KFN5c3RlbS5TdHJpbmcpKD9kd3JhX3Byb2RfbW9udGgpPC9QYXJhbWV0ZXI+DQo8UGFyYW1ldGVyIE5hbWU9IkBkd3JhX2ZhY2lsaXR5X2NvZGUiIFR5cGU9IkRldkV4cHJlc3MuRGF0YUFjY2Vzcy5FeHByZXNzaW9uIj4oU3lzdGVtLlN0cmluZykoP2R3cmFfZmFjaWxpdHlfY29kZSk8L1BhcmFtZXRlcj4NCjxQYXJhbWV0ZXIgTmFtZT0iQGR3cmFfc291cmNlX25iciIgVHlwZT0iRGV2RXhwcmVzcy5EYXRhQWNjZXNzLkV4cHJlc3Npb24iPihTeXN0ZW0uU3RyaW5nKSg/ZHdyYV9zb3VyY2VfbmJyKTwvUGFyYW1ldGVyPg0KPFBhcmFtZXRlciBOYW1lPSJAZHdyYV9jb250cmFjdF9uYnIiIFR5cGU9IkRldkV4cHJlc3MuRGF0YUFjY2Vzcy5FeHByZXNzaW9uIj4oU3lzdGVtLlN0cmluZykoP2R3cmFfY29udHJhY3RfbmJyKTwvUGFyYW1ldGVyPg0KPFBhcmFtZXRlciBOYW1lPSJAZHdyYV9ydW5fZGF0ZXRpbWUiIFR5cGU9IkRldkV4cHJlc3MuRGF0YUFjY2Vzcy5FeHByZXNzaW9uIj4oU3lzdGVtLlN0cmluZykoP2R3cmFfcnVuX2RhdGV0aW1lKTwvUGFyYW1ldGVyPg0KPC9RdWVyeT4NCjxSZXN1bHRTY2hlbWE+DQo8RGF0YVNldCBOYW1lID0ic3FsRGF0YVNvdXJjZTEiPg0KPFZpZXcgTmFtZT0iUXVlcnkiPg0KPEZpZWxkIE5hbWU9ImhlbGl1bV9wY3QiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJuaXRyb19wY3QiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJjMDJfcGN0IiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0ib3h5X3BjdCIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9Imgyc19wY3QiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJtZXRoYW5lX3BjdCIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9Im1ldGhhbmVfZ3BtIiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0iZXRoYW5lX3BjdCIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9ImV0aGFuZV9ncG0iIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJwcm9wYW5lX3BjdCIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9InByb3BhbmVfZ3BtIiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0iaXNvX2J1dGFuZV9wY3QiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJpc29fYnV0YW5lX2dwbSIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9Im5vcl9idXRhbmVfcGN0IiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0ibm9yX2J1dGFuZV9ncG0iIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJpc29fcGVudGFuZV9wY3QiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJpc29fcGVudGFuZV9ncG0iIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJub3JfcGVudGFuZV9wY3QiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJub3JfcGVudGFuZV9ncG0iIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJoZXhhbmVfcGN0IiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0iaGV4YW5lX2dwbSIgVHlwZT0iU3RyaW5nIiAvPg0KPC9WaWV3Pg0KPC9EYXRhU2V0Pg0KPC9SZXN1bHRTY2hlbWE+DQo8Q29ubmVjdGlvbk9wdGlvbnMgQ2xvc2VDb25uZWN0aW9uPSJ0cnVlIiAvPg0KPC9TcWxEYXRhU291cmNlPg0K"/>
+	</ComponentStorage>
+	<Bands>
+		<Item1 Ref="7" ControlType="TopMarginBand" Name="TopMargin" HeightF="25"/>
+		<Item2 Ref="8" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="25"/>
+		<Item3 Ref="9" ControlType="ReportHeaderBand" Name="header" HeightF="37">
+			<Controls>
+				<Item1 Ref="10" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleLeft" Multiline="true" Text="Analysis" SizeF="61,15" LocationFloat="111,1" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
+				<Item2 Ref="11" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="274,0" LocationFloat="-0,16"  LineDirection="Horizontal" Visible="True"/>
+				<Item3 Ref="12" ControlType="XRLabel" Name="t_2" TextAlignment="MiddleLeft" Multiline="true" Text="Components" SizeF="75,15" LocationFloat="33,19" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+				<Item4 Ref="13" ControlType="XRLabel" Name="t_4" TextAlignment="MiddleLeft" Multiline="true" Text="GPM" SizeF="23,15" LocationFloat="177,19" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+				<Item5 Ref="14" ControlType="XRLabel" Name="t_3" TextAlignment="MiddleRight" Multiline="true" Text="Mole %" SizeF="37,15" LocationFloat="236,19" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+			</Controls>
+		</Item3>
+		<Item4 Ref="15" ControlType="GroupHeaderBand" Name="summary" HeightF="-0" Visible="False" Level="0">
+			<Controls>
+			</Controls>
+		</Item4>
+		<Item5 Ref="16" ControlType="ReportFooterBand" Name="footer" HeightF="-0" Visible="False">
+			<Controls>
+			</Controls>
+		</Item5>
+		<Item6 Ref="17" ControlType="DetailBand" Name="detail" HeightF="233">
+			<Controls>
+				<Item1 Ref="18" ControlType="XRLabel" Name="iso_butane_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Iso Butane" SizeF="91,13" LocationFloat="28,143" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+				<Item2 Ref="19" ControlType="XRLabel" Name="nor_butane_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Nor Butane" SizeF="91,13" LocationFloat="28,161" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+				<Item3 Ref="20" ControlType="XRLabel" Name="iso_pentane_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Iso Pentane" SizeF="91,13" LocationFloat="28,178" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+				<Item4 Ref="21" ControlType="XRLabel" Name="nor_pentane_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Nor Pentane" SizeF="91,13" LocationFloat="28,196" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+				<Item5 Ref="22" ControlType="XRLabel" Name="hexane_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Hexane" SizeF="91,13" LocationFloat="28,214" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+				<Item6 Ref="23" ControlType="XRLabel" Name="helium_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Helium" SizeF="53,13" LocationFloat="28,1" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+				<Item7 Ref="24" ControlType="XRLabel" Name="nitro_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Nitrogen" SizeF="91,13" LocationFloat="28,19" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+				<Item8 Ref="25" ControlType="XRLabel" Name="c02_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Carbon Dioxide" SizeF="91,13" LocationFloat="28,37" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+				<Item9 Ref="26" ControlType="XRLabel" Name="h2s_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="H2S" SizeF="91,13" LocationFloat="28,55" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+				<Item10 Ref="27" ControlType="XRLabel" Name="t_5" TextAlignment="MiddleLeft" Multiline="true" Text="Other Inerts" SizeF="60,13" LocationFloat="28,72" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+				<Item11 Ref="28" ControlType="XRLabel" Name="methane_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Methane" SizeF="91,13" LocationFloat="28,90" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+				<Item12 Ref="29" ControlType="XRLabel" Name="ethane_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Ethane" SizeF="91,13" LocationFloat="28,108" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+				<Item13 Ref="30" ControlType="XRLabel" Name="propane_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Propane" SizeF="91,13" LocationFloat="28,125" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+				<Item14 Ref="31" ControlType="XRLabel" Name="iso_butane_pct" TextFormatString="{0:#0.0000}" TextAlignment="MiddleRight"  Multiline="true" SizeF="63,16" LocationFloat="211,143" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="32" EventName="BeforePrint" PropertyName="Text" Expression="[iso_butane_pct]"/>
+					</ExpressionBindings>
+				</Item14>
+				<Item15 Ref="33" ControlType="XRLabel" Name="nor_butane_pct" TextFormatString="{0:#0.0000}" TextAlignment="MiddleRight"  Multiline="true" SizeF="63,16" LocationFloat="211,161" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="34" EventName="BeforePrint" PropertyName="Text" Expression="[nor_butane_pct]"/>
+					</ExpressionBindings>
+				</Item15>
+				<Item16 Ref="35" ControlType="XRLabel" Name="iso_pentane_pct" TextFormatString="{0:#0.0000}" TextAlignment="MiddleRight"  Multiline="true" SizeF="63,16" LocationFloat="211,178" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="36" EventName="BeforePrint" PropertyName="Text" Expression="[iso_pentane_pct]"/>
+					</ExpressionBindings>
+				</Item16>
+				<Item17 Ref="37" ControlType="XRLabel" Name="nor_pentane_pct" TextFormatString="{0:#0.0000}" TextAlignment="MiddleRight"  Multiline="true" SizeF="63,16" LocationFloat="211,196" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="38" EventName="BeforePrint" PropertyName="Text" Expression="[nor_pentane_pct]"/>
+					</ExpressionBindings>
+				</Item17>
+				<Item18 Ref="39" ControlType="XRLabel" Name="hexane_pct" TextFormatString="{0:#0.0000}" TextAlignment="MiddleRight"  Multiline="true" SizeF="63,16" LocationFloat="211,214" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="40" EventName="BeforePrint" PropertyName="Text" Expression="[hexane_pct]"/>
+					</ExpressionBindings>
+				</Item18>
+				<Item19 Ref="41" ControlType="XRLabel" Name="helium_pct" TextFormatString="{0:#0.0000}" TextAlignment="MiddleRight"  Multiline="true" SizeF="63,16" LocationFloat="211,1" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="42" EventName="BeforePrint" PropertyName="Text" Expression="[helium_pct]"/>
+					</ExpressionBindings>
+				</Item19>
+				<Item20 Ref="43" ControlType="XRLabel" Name="nitro_pct" TextFormatString="{0:#0.0000}" TextAlignment="MiddleRight"  Multiline="true" SizeF="63,16" LocationFloat="211,19" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="44" EventName="BeforePrint" PropertyName="Text" Expression="[nitro_pct]"/>
+					</ExpressionBindings>
+				</Item20>
+				<Item21 Ref="45" ControlType="XRLabel" Name="c02_pct" TextFormatString="{0:#0.0000}" TextAlignment="MiddleRight"  Multiline="true" SizeF="63,16" LocationFloat="211,37" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="46" EventName="BeforePrint" PropertyName="Text" Expression="[c02_pct]"/>
+					</ExpressionBindings>
+				</Item21>
+				<Item22 Ref="47" ControlType="XRLabel" Name="h2s_pct" TextFormatString="{0:#0.0000}" TextAlignment="MiddleRight"  Multiline="true" SizeF="63,16" LocationFloat="211,55" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="48" EventName="BeforePrint" PropertyName="Text" Expression="[h2s_pct]"/>
+					</ExpressionBindings>
+				</Item22>
+				<Item23 Ref="49" ControlType="XRLabel" Name="oxy_pct" TextFormatString="{0:#0.0000}" TextAlignment="MiddleRight"  Multiline="true" SizeF="63,16" LocationFloat="211,72" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="50" EventName="BeforePrint" PropertyName="Text" Expression="[oxy_pct]"/>
+					</ExpressionBindings>
+				</Item23>
+				<Item24 Ref="51" ControlType="XRLabel" Name="propane_pct" TextFormatString="{0:#0.0000}" TextAlignment="MiddleRight"  Multiline="true" SizeF="63,16" LocationFloat="211,125" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="52" EventName="BeforePrint" PropertyName="Text" Expression="[propane_pct]"/>
+					</ExpressionBindings>
+				</Item24>
+				<Item25 Ref="53" ControlType="XRLabel" Name="methane_pct" TextFormatString="{0:#0.0000}" TextAlignment="MiddleRight"  Multiline="true" SizeF="63,16" LocationFloat="211,90" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="54" EventName="BeforePrint" PropertyName="Text" Expression="[methane_pct]"/>
+					</ExpressionBindings>
+				</Item25>
+				<Item26 Ref="55" ControlType="XRLabel" Name="ethane_pct" TextFormatString="{0:#0.0000}" TextAlignment="MiddleRight"  Multiline="true" SizeF="63,16" LocationFloat="211,108" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="56" EventName="BeforePrint" PropertyName="Text" Expression="[ethane_pct]"/>
+					</ExpressionBindings>
+				</Item26>
+				<Item27 Ref="57" ControlType="XRLabel" Name="methane_gpm" TextFormatString="{0:#0.0000}" TextAlignment="MiddleRight"  Multiline="true" SizeF="63,16" LocationFloat="140,90" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="58" EventName="BeforePrint" PropertyName="Text" Expression="[methane_gpm]"/>
+					</ExpressionBindings>
+				</Item27>
+				<Item28 Ref="59" ControlType="XRLabel" Name="ethane_gpm" TextFormatString="{0:#0.0000}" TextAlignment="MiddleRight"  Multiline="true" SizeF="63,16" LocationFloat="140,108" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="60" EventName="BeforePrint" PropertyName="Text" Expression="[ethane_gpm]"/>
+					</ExpressionBindings>
+				</Item28>
+				<Item29 Ref="61" ControlType="XRLabel" Name="propane_gpm" TextFormatString="{0:#0.0000}" TextAlignment="MiddleRight"  Multiline="true" SizeF="63,16" LocationFloat="140,125" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="62" EventName="BeforePrint" PropertyName="Text" Expression="[propane_gpm]"/>
+					</ExpressionBindings>
+				</Item29>
+				<Item30 Ref="63" ControlType="XRLabel" Name="iso_butane_gpm" TextFormatString="{0:#0.0000}" TextAlignment="MiddleRight"  Multiline="true" SizeF="63,16" LocationFloat="140,143" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="64" EventName="BeforePrint" PropertyName="Text" Expression="[iso_butane_gpm]"/>
+					</ExpressionBindings>
+				</Item30>
+				<Item31 Ref="65" ControlType="XRLabel" Name="nor_butane_gpm" TextFormatString="{0:#0.0000}" TextAlignment="MiddleRight"  Multiline="true" SizeF="63,16" LocationFloat="140,161" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="66" EventName="BeforePrint" PropertyName="Text" Expression="[nor_butane_gpm]"/>
+					</ExpressionBindings>
+				</Item31>
+				<Item32 Ref="67" ControlType="XRLabel" Name="iso_pentane_gpm" TextFormatString="{0:#0.0000}" TextAlignment="MiddleRight"  Multiline="true" SizeF="63,16" LocationFloat="140,178" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="68" EventName="BeforePrint" PropertyName="Text" Expression="[iso_pentane_gpm]"/>
+					</ExpressionBindings>
+				</Item32>
+				<Item33 Ref="69" ControlType="XRLabel" Name="nor_pentane_gpm" TextFormatString="{0:#0.0000}" TextAlignment="MiddleRight"  Multiline="true" SizeF="63,16" LocationFloat="140,196" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="70" EventName="BeforePrint" PropertyName="Text" Expression="[nor_pentane_gpm]"/>
+					</ExpressionBindings>
+				</Item33>
+				<Item34 Ref="71" ControlType="XRLabel" Name="hexane_gpm" TextFormatString="{0:#0.0000}" TextAlignment="MiddleRight"  Multiline="true" SizeF="63,16" LocationFloat="140,214" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="72" EventName="BeforePrint" PropertyName="Text" Expression="[hexane_gpm]"/>
+					</ExpressionBindings>
+				</Item34>
+			</Controls>
+		</Item6>
+	</Bands>
+	<CalculatedFields>
+	</CalculatedFields>
+</XtraReportsLayoutSerializer>

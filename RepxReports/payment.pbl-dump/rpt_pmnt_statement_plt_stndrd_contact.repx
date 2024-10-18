@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="24.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral" Name="XtraReport1" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="521" PageHeight="295" Version="24.1" DataMember="Query" DataSource="#Ref-0">
+	<Parameters>
+		<Item1 Ref="2" Name="dwra_ba_nbr"/>
+	</Parameters>
+	<ComponentStorage>
+		<Item1 Ref="0" ObjectType="DevExpress.DataAccess.Sql.SqlDataSource,DevExpress.DataAccess.v24.1" Name="sqlDataSource1" Base64="PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjxTcWxEYXRhU291cmNlIE5hbWU9InNxbERhdGFTb3VyY2UxIj4NCjxDb25uZWN0aW9uIE5hbWU9IlRJRVMgRGF0YSIgRnJvbUFwcENvbmZpZz0idHJ1ZSIgLz4NCjxRdWVyeSBUeXBlPSJDdXN0b21TcWxRdWVyeSIgTmFtZT0iUXVlcnkiPg0KPFNxbD5zZWxlY3Qgdi5kZXNjcmlwdGlvbiwgbmFtZSwgcGhvbmUsIGludGVybmV0X2FkZHJlc3MKZnJvbSBjb250YWN0X3B1cnBvc2UgYXMgY3AgSm9pbiBjb250YWN0cyBjIG9uIGNwLmJhX25iciA9IGMuYmFfbmJyCgkJCWFuZCBjcC5iYV9hZGRyZXNzX3NlcV9uYnIgPSBjLmJhX2FkZHJlc3Nfc2VxX25icgoJCQlBTkQgY3AuYmFfY29udGFjdF9zZXFfbmJyID0gYy5iYV9jb250YWN0X3NlcV9uYnIKSm9pbiB2YWxpZF9hZGRyZXNzX3B1cnBvc2VfY29kZSB2IG9uIHYuYWRkcmVzc19wdXJwb3NlX2NvZGUgPSBjcC5jb250YWN0X3B1cnBvc2VfY29kZQp3aGVyZSBjcC5jb250YWN0X3B1cnBvc2VfY29kZSBpbiAoJ0FjYycsJ01TTScpCmFuZCBjcC5iYV9uYnIgPSBAZHdyYV9iYV9uYnIKb3JkZXIgYnkgY29udGFjdF9wdXJwb3NlX2NvZGUgPC9TcWw+DQo8UGFyYW1ldGVyIE5hbWU9IkBkd3JhX2JhX25iciIgVHlwZT0iRGV2RXhwcmVzcy5EYXRhQWNjZXNzLkV4cHJlc3Npb24iPihTeXN0ZW0uU3RyaW5nKSg/ZHdyYV9iYV9uYnIpPC9QYXJhbWV0ZXI+DQo8L1F1ZXJ5Pg0KPFJlc3VsdFNjaGVtYT4NCjxEYXRhU2V0IE5hbWUgPSJzcWxEYXRhU291cmNlMSI+DQo8VmlldyBOYW1lPSJRdWVyeSI+DQo8RmllbGQgTmFtZT0iZGVzY3JpcHRpb24iIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJuYW1lIiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0icGhvbmUiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJpbnRlcm5ldF9hZGRyZXNzIiBUeXBlPSJTdHJpbmciIC8+DQo8L1ZpZXc+DQo8L0RhdGFTZXQ+DQo8L1Jlc3VsdFNjaGVtYT4NCjxDb25uZWN0aW9uT3B0aW9ucyBDbG9zZUNvbm5lY3Rpb249InRydWUiIC8+DQo8L1NxbERhdGFTb3VyY2U+DQo="/>
+	</ComponentStorage>
+	<Bands>
+		<Item1 Ref="3" ControlType="TopMarginBand" Name="TopMargin" HeightF="25"/>
+		<Item2 Ref="4" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="25"/>
+		<Item3 Ref="5" ControlType="ReportHeaderBand" Name="header" HeightF="19">
+			<Controls>
+				<Item1 Ref="6" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="471,0" LocationFloat="-0,16"  LineDirection="Horizontal" Visible="True"/>
+				<Item2 Ref="7" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleLeft" Multiline="true" Text="Contacts" SizeF="65,15" LocationFloat="226,-0" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+			</Controls>
+		</Item3>
+		<Item4 Ref="8" ControlType="GroupHeaderBand" Name="summary" HeightF="-0" Visible="False" Level="0">
+			<Controls>
+			</Controls>
+		</Item4>
+		<Item5 Ref="9" ControlType="ReportFooterBand" Name="footer" HeightF="-0" Visible="False">
+			<Controls>
+			</Controls>
+		</Item5>
+		<Item6 Ref="10" ControlType="DetailBand" Name="detail" HeightF="26">
+			<Controls>
+				<Item1 Ref="11" ControlType="XRLabel" Name="description" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="101,16" LocationFloat="4,7" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="12" EventName="BeforePrint" PropertyName="Text" Expression="[description]"/>
+					</ExpressionBindings>
+				</Item1>
+				<Item2 Ref="13" ControlType="XRLabel" Name="name" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="96,16" LocationFloat="111,7" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="14" EventName="BeforePrint" PropertyName="Text" Expression="[name]"/>
+					</ExpressionBindings>
+				</Item2>
+				<Item3 Ref="15" ControlType="XRLabel" Name="phone" TextFormatString="{0:@@@-@@@-@@@@}" TextAlignment="MiddleLeft"  Multiline="true" SizeF="95,16" LocationFloat="214,7" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="16" EventName="BeforePrint" PropertyName="Text" Expression="[phone]"/>
+					</ExpressionBindings>
+				</Item3>
+				<Item4 Ref="17" ControlType="XRLabel" Name="internet_address" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="158,16" LocationFloat="313,7" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="18" EventName="BeforePrint" PropertyName="Text" Expression="[internet_address]"/>
+					</ExpressionBindings>
+				</Item4>
+			</Controls>
+		</Item6>
+	</Bands>
+	<CalculatedFields>
+	</CalculatedFields>
+</XtraReportsLayoutSerializer>

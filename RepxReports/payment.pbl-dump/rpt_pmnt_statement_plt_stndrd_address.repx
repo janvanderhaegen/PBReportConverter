@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="24.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral" Name="XtraReport1" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="538" PageHeight="311" Version="24.1" DataMember="Query" DataSource="#Ref-0">
+	<Parameters>
+		<Item1 Ref="2" Name="dwra_ba_nbr"/>
+		<Item2 Ref="3" Name="dwra_contract_nbr"/>
+		<Item3 Ref="4" Name="dwra_prod_month"/>
+	</Parameters>
+	<ComponentStorage>
+		<Item1 Ref="0" ObjectType="DevExpress.DataAccess.Sql.SqlDataSource,DevExpress.DataAccess.v24.1" Name="sqlDataSource1" Base64="PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjxTcWxEYXRhU291cmNlIE5hbWU9InNxbERhdGFTb3VyY2UxIj4NCjxDb25uZWN0aW9uIE5hbWU9IlRJRVMgRGF0YSIgRnJvbUFwcENvbmZpZz0idHJ1ZSIgLz4NCjxRdWVyeSBUeXBlPSJDdXN0b21TcWxRdWVyeSIgTmFtZT0iUXVlcnkiPg0KPFNxbD5TZWxlY3QgYmEuYmFfc29ydF9uYW1lLCBhLmFkZHJlc3NfMSxjLm5hbWUsIGMuaW50ZXJuZXRfYWRkcmVzcyAsCmEuY2l0eSxhLnN0YXRlX2FiYnIsYS56aXAKICBGUk9NIGJpbGxpbmdfYWNjb3VudHMgYiBKb2luIGJ1c2Fzc29jIGJhIG9uIGJhLmJhX25iciA9IEBkd3JhX2JhX25icgogSm9pbiBhZGRyZXNzIGEgb24gYS5iYV9uYnIgPSBAZHdyYV9iYV9uYnIgCglhbmQgYS5iYV9hZGRyZXNzX3NlcV9uYnIgPSBiLnBheWVlX2FkZHJfc2VxX3NldHRsZQpKb2luIGNvbnRhY3RzIGMgb24gYy5iYV9uYnIgPSBAZHdyYV9iYV9uYnIKYW5kIGMuYmFfYWRkcmVzc19zZXFfbmJyID0gIGIuY29udGFjdF9hZGRyX3NlcV9zZXR0bGUKYW5kIGMuYmFfY29udGFjdF9zZXFfbmJyID0gIGIucGF5ZWVfY29udGFjdF9zZXFfc2V0dGxlCndoZXJlIGIuY29udHJhY3RfbmJyID0gQGR3cmFfY29udHJhY3RfbmJyCmFuZCBiLnByb3ZfYmVnX2RhdGUgPSAoU2VsZWN0IG1heChrYi5wcm92X2JlZ19kYXRlKQoJCQkJCQkJCWZyb20gYmlsbGluZ19hY2NvdW50cyBrYgoJCQkJCQkJCXdoZXJlIGtiLmNvbnRyYWN0X25iciA9IGIuY29udHJhY3RfbmJyCgkJCQkJCQkJYW5kIGtiLnBheWVlX2JhX25iciA9IGIucGF5ZWVfYmFfbmJyCgkJCQkJCQkJYW5kIGtiLnByb3ZfYmVnX2RhdGUgJmx0OyBAZHdyYV9wcm9kX21vbnRoKQogPC9TcWw+DQo8UGFyYW1ldGVyIE5hbWU9IkBkd3JhX2JhX25iciIgVHlwZT0iRGV2RXhwcmVzcy5EYXRhQWNjZXNzLkV4cHJlc3Npb24iPihTeXN0ZW0uU3RyaW5nKSg/ZHdyYV9iYV9uYnIpPC9QYXJhbWV0ZXI+DQo8UGFyYW1ldGVyIE5hbWU9IkBkd3JhX2NvbnRyYWN0X25iciIgVHlwZT0iRGV2RXhwcmVzcy5EYXRhQWNjZXNzLkV4cHJlc3Npb24iPihTeXN0ZW0uU3RyaW5nKSg/ZHdyYV9jb250cmFjdF9uYnIpPC9QYXJhbWV0ZXI+DQo8UGFyYW1ldGVyIE5hbWU9IkBkd3JhX3Byb2RfbW9udGgiIFR5cGU9IkRldkV4cHJlc3MuRGF0YUFjY2Vzcy5FeHByZXNzaW9uIj4oU3lzdGVtLlN0cmluZykoP2R3cmFfcHJvZF9tb250aCk8L1BhcmFtZXRlcj4NCjwvUXVlcnk+DQo8UmVzdWx0U2NoZW1hPg0KPERhdGFTZXQgTmFtZSA9InNxbERhdGFTb3VyY2UxIj4NCjxWaWV3IE5hbWU9IlF1ZXJ5Ij4NCjxGaWVsZCBOYW1lPSJiYV9zb3J0X25hbWUiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJhZGRyZXNzXzEiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJuYW1lIiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0iaW50ZXJuZXRfYWRkcmVzcyIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9ImNpdHkiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJzdGF0ZV9hYmJyIiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0iemlwIiBUeXBlPSJTdHJpbmciIC8+DQo8L1ZpZXc+DQo8L0RhdGFTZXQ+DQo8L1Jlc3VsdFNjaGVtYT4NCjxDb25uZWN0aW9uT3B0aW9ucyBDbG9zZUNvbm5lY3Rpb249InRydWUiIC8+DQo8L1NxbERhdGFTb3VyY2U+DQo="/>
+	</ComponentStorage>
+	<Bands>
+		<Item1 Ref="5" ControlType="TopMarginBand" Name="TopMargin" HeightF="25"/>
+		<Item2 Ref="6" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="25"/>
+		<Item3 Ref="7" ControlType="ReportHeaderBand" Name="header" HeightF="19">
+			<Controls>
+			</Controls>
+		</Item3>
+		<Item4 Ref="8" ControlType="GroupHeaderBand" Name="summary" HeightF="-0" Visible="False" Level="0">
+			<Controls>
+			</Controls>
+		</Item4>
+		<Item5 Ref="9" ControlType="ReportFooterBand" Name="footer" HeightF="-0" Visible="False">
+			<Controls>
+			</Controls>
+		</Item5>
+		<Item6 Ref="10" ControlType="DetailBand" Name="detail" HeightF="42">
+			<Controls>
+				<Item1 Ref="11" ControlType="XRLabel" Name="city" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="94,13" LocationFloat="336,6" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="12" EventName="BeforePrint" PropertyName="Text" Expression="[city]"/>
+					</ExpressionBindings>
+				</Item1>
+				<Item2 Ref="13" ControlType="XRLabel" Name="state_abbr" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="17,13" LocationFloat="432,6" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="14" EventName="BeforePrint" PropertyName="Text" Expression="[state_abbr]"/>
+					</ExpressionBindings>
+				</Item2>
+				<Item3 Ref="15" ControlType="XRLabel" Name="zip" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="37,13" LocationFloat="451,6" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="16" EventName="BeforePrint" PropertyName="Text" Expression="[zip]"/>
+					</ExpressionBindings>
+				</Item3>
+				<Item4 Ref="17" ControlType="XRLabel" Name="ba_sort_name" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="154,13" LocationFloat="4,6" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="18" EventName="BeforePrint" PropertyName="Text" Expression="[ba_sort_name]"/>
+					</ExpressionBindings>
+				</Item4>
+				<Item5 Ref="19" ControlType="XRLabel" Name="address_1" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="172,13" LocationFloat="161,6" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="20" EventName="BeforePrint" PropertyName="Text" Expression="[address_1]"/>
+					</ExpressionBindings>
+				</Item5>
+				<Item6 Ref="21" ControlType="XRLabel" Name="name" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="96,13" LocationFloat="4,25" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="22" EventName="BeforePrint" PropertyName="Text" Expression="[name]"/>
+					</ExpressionBindings>
+				</Item6>
+				<Item7 Ref="23" ControlType="XRLabel" Name="internet_address" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="158,13" LocationFloat="161,25" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="24" EventName="BeforePrint" PropertyName="Text" Expression="[internet_address]"/>
+					</ExpressionBindings>
+				</Item7>
+			</Controls>
+		</Item6>
+	</Bands>
+	<CalculatedFields>
+	</CalculatedFields>
+</XtraReportsLayoutSerializer>

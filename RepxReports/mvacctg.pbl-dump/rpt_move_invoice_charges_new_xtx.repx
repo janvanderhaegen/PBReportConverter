@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="24.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral" Name="XtraReport1" VerticalContentSplitting="Smart" Margins="0, 0, 25, 25" PaperKind="Custom" PageWidth="417" PageHeight="296" Version="24.1" DataMember="Query" DataSource="#Ref-0">
+	<Parameters>
+		<Item1 Ref="2" Name="statement_nbr"/>
+		<Item2 Ref="3" Name="statement_rev_nbr"/>
+		<Item3 Ref="4" Name="run_user_name"/>
+		<Item4 Ref="5" Name="run_date"/>
+	</Parameters>
+	<ComponentStorage>
+		<Item1 Ref="0" ObjectType="DevExpress.DataAccess.Sql.SqlDataSource,DevExpress.DataAccess.v24.1" Name="sqlDataSource1" Base64="PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjxTcWxEYXRhU291cmNlIE5hbWU9InNxbERhdGFTb3VyY2UxIj4NCjxDb25uZWN0aW9uIE5hbWU9IlRJRVMgRGF0YSIgRnJvbUFwcENvbmZpZz0idHJ1ZSIgLz4NCjxRdWVyeSBUeXBlPSJDdXN0b21TcWxRdWVyeSIgTmFtZT0iUXVlcnkiPg0KPFNxbD4gIFNFTEVDVCBpbnZvaWNlX3N0YXRlbWVudF90ZW1wLnN0YXRlbWVudF9uYnIsICAgCiAgICAgICAgIGludm9pY2Vfc3RhdGVtZW50X3RlbXAuc3RhdGVtZW50X3Jldl9uYnIsICAgCiAgICAgICAgIGludm9pY2Vfc3RhdGVtZW50X3RlbXAudHlwZV9jb21wX2Rlc2MsICAgCiAgICAgICAgIGludm9pY2Vfc3RhdGVtZW50X3RlbXAucHJpb3JfbW9udGhfYWRqX2luZCwgICAKICAgICAgICAgc3VtKCBST1VORChpbnZvaWNlX3N0YXRlbWVudF90ZW1wLnZhbHVlLDIpICkgIHZhbHVlX3N1bQogICAgRlJPTSBpbnZvaWNlX3N0YXRlbWVudF90ZW1wICAKICAgV0hFUkUgKCBpbnZvaWNlX3N0YXRlbWVudF90ZW1wLnN0YXRlbWVudF9uYnIgPSBAc3RhdGVtZW50X25iciApIEFORCAgCiAgICAgICAgICggaW52b2ljZV9zdGF0ZW1lbnRfdGVtcC5zdGF0ZW1lbnRfcmV2X25iciA9IEBzdGF0ZW1lbnRfcmV2X25iciApIEFORCAgCiAgICAgICAgICggaW52b2ljZV9zdGF0ZW1lbnRfdGVtcC5wcmlvcl9tb250aF9hZGpfaW5kID0gJ04nICkgQU5EICAKICAgICAgICAgKCBpbnZvaWNlX3N0YXRlbWVudF90ZW1wLnJ1bl91c2VyX25hbWUgPSBAcnVuX3VzZXJfbmFtZSApIEFORCAgCiAgICAgICAgICggaW52b2ljZV9zdGF0ZW1lbnRfdGVtcC5ydW5fZGF0ZSA9IEBydW5fZGF0ZSApIEFORCAgCiAgICAgICAgICggaW52b2ljZV9zdGF0ZW1lbnRfdGVtcC50eXBlICZsdDsmZ3Q7ICdBJyApIApHUk9VUCBCWSBpbnZvaWNlX3N0YXRlbWVudF90ZW1wLnN0YXRlbWVudF9uYnIsICAgCiAgICAgICAgIGludm9pY2Vfc3RhdGVtZW50X3RlbXAuc3RhdGVtZW50X3Jldl9uYnIsICAgCiAgICAgICAgIGludm9pY2Vfc3RhdGVtZW50X3RlbXAudHlwZV9jb21wX2Rlc2MsICAgCiAgICAgICAgIGludm9pY2Vfc3RhdGVtZW50X3RlbXAucHJpb3JfbW9udGhfYWRqX2luZCAgCk9SREVSIEJZIGludm9pY2Vfc3RhdGVtZW50X3RlbXAudHlwZV9jb21wX2Rlc2MgREVTQyAgIAogPC9TcWw+DQo8UGFyYW1ldGVyIE5hbWU9IkBzdGF0ZW1lbnRfbmJyIiBUeXBlPSJEZXZFeHByZXNzLkRhdGFBY2Nlc3MuRXhwcmVzc2lvbiI+KFN5c3RlbS5TdHJpbmcpKD9zdGF0ZW1lbnRfbmJyKTwvUGFyYW1ldGVyPg0KPFBhcmFtZXRlciBOYW1lPSJAc3RhdGVtZW50X3Jldl9uYnIiIFR5cGU9IkRldkV4cHJlc3MuRGF0YUFjY2Vzcy5FeHByZXNzaW9uIj4oU3lzdGVtLlN0cmluZykoP3N0YXRlbWVudF9yZXZfbmJyKTwvUGFyYW1ldGVyPg0KPFBhcmFtZXRlciBOYW1lPSJAcnVuX3VzZXJfbmFtZSIgVHlwZT0iRGV2RXhwcmVzcy5EYXRhQWNjZXNzLkV4cHJlc3Npb24iPihTeXN0ZW0uU3RyaW5nKSg/cnVuX3VzZXJfbmFtZSk8L1BhcmFtZXRlcj4NCjxQYXJhbWV0ZXIgTmFtZT0iQHJ1bl9kYXRlIiBUeXBlPSJEZXZFeHByZXNzLkRhdGFBY2Nlc3MuRXhwcmVzc2lvbiI+KFN5c3RlbS5TdHJpbmcpKD9ydW5fZGF0ZSk8L1BhcmFtZXRlcj4NCjwvUXVlcnk+DQo8UmVzdWx0U2NoZW1hPg0KPERhdGFTZXQgTmFtZSA9InNxbERhdGFTb3VyY2UxIj4NCjxWaWV3IE5hbWU9IlF1ZXJ5Ij4NCjxGaWVsZCBOYW1lPSJzdGF0ZW1lbnRfbmJyIiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0ic3RhdGVtZW50X3Jldl9uYnIiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJ0eXBlX2NvbXBfZGVzYyIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9InByaW9yX21vbnRoX2Fkal9pbmQiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJ2YWx1ZV9zdW0iIFR5cGU9IlN0cmluZyIgLz4NCjwvVmlldz4NCjwvRGF0YVNldD4NCjwvUmVzdWx0U2NoZW1hPg0KPENvbm5lY3Rpb25PcHRpb25zIENsb3NlQ29ubmVjdGlvbj0idHJ1ZSIgLz4NCjwvU3FsRGF0YVNvdXJjZT4NCg=="/>
+	</ComponentStorage>
+	<Bands>
+		<Item1 Ref="6" ControlType="TopMarginBand" Name="TopMargin" HeightF="25"/>
+		<Item2 Ref="7" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="25"/>
+		<Item3 Ref="8" ControlType="GroupHeaderBand" Name="summary" HeightF="27" Level="1">
+			<Controls>
+				<Item1 Ref="9" ControlType="XRLine" Name="l_1" FillColor="Black" SizeF="118,0" LocationFloat="299,3"  LineDirection="Horizontal" Visible="True"/>
+				<Item2 Ref="10" ControlType="XRLabel" Name="value_sum_total_field" TextFormatString="{0:$#,##0.00}" TextAlignment="MiddleRight"  Multiline="true" SizeF="118,15" LocationFloat="299,10" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="11" EventName="BeforePrint" PropertyName="Text" Expression="[value_sum_total]"/>
+					</ExpressionBindings>
+				</Item2>
+			</Controls>
+		</Item3>
+		<Item4 Ref="12" ControlType="ReportFooterBand" Name="footer" HeightF="0" Visible="False">
+			<Controls>
+			</Controls>
+		</Item4>
+		<Item5 Ref="13" ControlType="DetailBand" Name="detail" HeightF="0" Visible="False">
+			<Controls>
+			</Controls>
+		</Item5>
+		<Item6 Ref="14" ControlType="GroupHeaderBand" Name="groupHeaderBand1" Level="0" HeightF="19">
+			<GroupFields>
+				<Item1 Ref="15" FieldName="type_comp_desc" />
+			</GroupFields>
+			<Controls>
+				<Item1 Ref="16" ControlType="XRLabel" Name="type_comp_desc" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="238,15" LocationFloat="4,1" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="17" EventName="BeforePrint" PropertyName="Text" Expression="[type_comp_desc]"/>
+					</ExpressionBindings>
+				</Item1>
+				<Item2 Ref="18" ControlType="XRLabel" Name="value_sum" TextFormatString="{0:$#,##0.00}" TextAlignment="MiddleRight"  Multiline="true" SizeF="118,15" LocationFloat="299,1" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="19" EventName="BeforePrint" PropertyName="Text" Expression="[value_sum]"/>
+					</ExpressionBindings>
+				</Item2>
+			</Controls>
+		</Item6>
+		<Item7 Ref="20" ControlType="GroupFooterBand" Name="groupFooterBand1" Level="0" HeightF="0" Visible="False">
+			<Controls>
+			</Controls>
+		</Item7>
+	</Bands>
+	<CalculatedFields>
+		<Item1 Ref="21" Name="value_sum_total" Expression="[].Sum(value_sum)" DataMember="Query" />
+	</CalculatedFields>
+</XtraReportsLayoutSerializer>

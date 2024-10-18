@@ -1,0 +1,695 @@
+﻿$PBExportHeader$d_pop_product_smmry.srd
+release 11;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no showbackcoloronxp=no )
+header(height=196 color="536870912" )
+summary(height=128 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=56 color="536870912" )
+table(column=(type=number updatewhereclause=yes name=all_gal dbname="all_gal" )
+ column=(type=number updatewhereclause=yes name=mcf_shr dbname="mcf_shr" )
+ column=(type=number updatewhereclause=yes name=mmbtu_shr dbname="mmbtu_shr" )
+ column=(type=number updatewhereclause=yes name=cust_gal dbname="cust_gal" )
+ column=(type=char(6) updatewhereclause=yes name=disposition_code dbname="facility_proc_parameter.disposition_code" )
+ column=(type=char(40) updatewhereclause=yes name=description dbname="valid_disposition.description" )
+ column=(type=number updatewhereclause=yes name=efficiency dbname="facility_proc_parameter.efficiency" )
+ column=(type=number updatewhereclause=yes name=per_share dbname="per_share" )
+ column=(type=number updatewhereclause=yes name=inlet_theo dbname="inlet_theo" )
+ column=(type=char(3) updatewhereclause=yes name=product_type_code dbname="valid_disposition.product_type_code" )
+ column=(type=char(20) updatewhereclause=yes name=units dbname="valid_gas_units.units" )
+ column=(type=number updatewhereclause=yes name=price dbname="plant_mcf_settlement.price" )
+ retrieve="  SELECT Sum(IsNull(mcf.c2_vol,0)) +   
+         Sum(IsNull(mcf.prp_c2_vol,0)) all_gal,   
+         sum(IsNull(mcf.c2_shrink,0)) +   
+         sum(IsNull(mcf.prp_c2_shrink,0)) mcf_shr,   
+         sum(IsNull(mmbtu.c2_shrink,0)) +   
+         sum(IsNull(mmbtu.prp_c2_shrink,0)) mmbtu_shr,
+			sum(IsNull(mcf.prp_c2_vol,0)) cust_gal,
+			f.disposition_code,
+			d.description,
+			f.efficiency,
+			p.prp_percent/100 per_share,
+			Sum(IsNull(mcf.c2_theo_vol,0)) inlet_theo ,
+			d.product_type_code,
+			vgu.units,
+			dtp.price
+			   
+    FROM plant_mcf_settlement mcf
+Join plant_mmbtu_settlement mmbtu on (mcf.run_datetime = mmbtu.run_datetime) and 
+		( mcf.deal_nbr = mmbtu.deal_nbr ) and  
+         ( mcf.path_nbr = mmbtu.path_nbr ) and  
+         ( mcf.order_nbr = mmbtu.order_nbr ) and  
+         ( mcf.rev_nbr = mmbtu.rev_nbr )
+Join facility_proc_parameter f on ( mcf.proc_pipe = f.pipeline_code )
+Join plant_settlement_disp p on (mcf.deal_nbr = p.deal_nbr ) and
+			( mcf.path_nbr = p.path_seq_nbr ) and 
+			( mcf.order_nbr = p.leg_nbr ) and 
+			( mcf.rev_nbr = p.leg_rev_nbr )  
+Join valid_product_type pt on pt.product_type_code = 'C2'
+Join valid_gas_units vgu on pt.volume_unit = vgu.unit_code 
+Join valid_disposition d on d.disposition_code = f.disposition_code 
+			Left Outer JOIN (SELECT dt.product_type,Sum( Case  when var_charge_direction = '+' then  var_net_amt else  -1  * var_net_amt end) price
+				From deals_trans dt,
+						deals_trans_pricing dtp,
+					plant_mcf_settlement mcf
+				Where ( mcf.deal_nbr = dt.from_deal_nbr ) and
+						( mcf.path_nbr = dt.from_path_nbr ) and
+						( mcf.order_nbr = dt.from_leg_nbr) and
+						( mcf.rev_nbr = dt.from_leg_rev_nbr ) and
+						( dt.product_type = 'C2' ) and  
+						( dt.trn_knbr = :dwra_contract_nbr) and 
+						( dt.deal_nbr = dtp.deal_nbr ) and 
+						( dt.path_seq_nbr = dtp.path_seq_nbr ) and
+						( dt.leg_nbr = dtp.leg_nbr ) and
+						( dt.leg_rev_nbr = dtp.leg_rev_nbr) and
+							((mcf.run_datetime = :dwra_run_datetime) and
+							( mcf.proc_pipe = :dwra_facility_cd ) and
+							( mcf.start_date = :dwra_prod_month ) and 
+							 ( mcf.proc_k = :dwra_contract_nbr ) and
+							( mcf.ded_pipe = :dwra_ded_pipe) and 
+							( mcf.ded_sta_nbr = :dwra_source_nbr ) )
+				group by dt.product_type) as dtp on dtp.product_type = d.product_type_code
+   WHERE ( f.disposition_code = ~"C2~" ) and
+			( f.fractionation = 'Y' ) and
+			( f.beg_eff_date = (SELECT max(beg_eff_date)
+								FROM facility_proc_parameter p
+								WHERE f.pipeline_code = p.pipeline_code
+								and beg_eff_date <= :dwra_prod_month) ) and
+			 
+			( p.disposition_code = ~"C2~" ) and 
+			
+         ( (mcf.run_datetime = :dwra_run_datetime) and
+							( mcf.proc_pipe = :dwra_facility_cd ) and
+							( mcf.start_date = :dwra_prod_month ) and 
+							 ( mcf.proc_k = :dwra_contract_nbr ) and
+							( mcf.ded_pipe = :dwra_ded_pipe) and 
+							( mcf.ded_sta_nbr = :dwra_source_nbr )) 
+			
+group by d.product_type_code   ,f.disposition_code,d.description,f.efficiency, p.prp_percent ,
+			vgu.units  ,dtp.price    
+Union 
+  SELECT Sum(IsNull(mcf.c3_vol,0)) +   
+         Sum(IsNull(mcf.prp_c3_vol,0)) all_gal,   
+         sum(IsNull(mcf.c3_shrink,0)) +   
+         sum(IsNull(mcf.prp_c3_shrink,0)) mcf_shr,   
+         sum(IsNull(mmbtu.c3_shrink,0)) +   
+         sum(IsNull(mmbtu.prp_c3_shrink,0)) mmbtu_shr,
+			sum(IsNull(mcf.prp_c3_vol,0)) cust_gal,
+			f.disposition_code,
+			d.description,
+			f.efficiency,
+			p.prp_percent/100 per_share,
+			Sum(IsNull(mcf.c3_theo_vol,0))  inlet_theo  ,
+			d.product_type_code ,
+			vgu.units ,
+			dtp.price
+   FROM plant_mcf_settlement mcf
+Join plant_mmbtu_settlement mmbtu on (mcf.run_datetime = mmbtu.run_datetime) and 
+		( mcf.deal_nbr = mmbtu.deal_nbr ) and  
+         ( mcf.path_nbr = mmbtu.path_nbr ) and  
+         ( mcf.order_nbr = mmbtu.order_nbr ) and  
+         ( mcf.rev_nbr = mmbtu.rev_nbr )
+Join facility_proc_parameter f on ( mcf.proc_pipe = f.pipeline_code )
+Join plant_settlement_disp p on (mcf.deal_nbr = p.deal_nbr ) and
+			( mcf.path_nbr = p.path_seq_nbr ) and 
+			( mcf.order_nbr = p.leg_nbr ) and 
+			( mcf.rev_nbr = p.leg_rev_nbr )  
+Join valid_product_type pt on pt.product_type_code = 'C3'
+Join valid_gas_units vgu on pt.volume_unit = vgu.unit_code 
+Join valid_disposition d on d.disposition_code = f.disposition_code 
+			Left Outer JOIN (SELECT dt.product_type,Sum( Case  when var_charge_direction = '+' then  var_net_amt else  -1  * var_net_amt end) price
+				From deals_trans dt,
+						deals_trans_pricing dtp,
+					plant_mcf_settlement mcf
+				Where ( mcf.deal_nbr = dt.from_deal_nbr ) and
+						( mcf.path_nbr = dt.from_path_nbr ) and
+						( mcf.order_nbr = dt.from_leg_nbr) and
+						( mcf.rev_nbr = dt.from_leg_rev_nbr ) and
+						( dt.product_type = 'C3' ) and  
+						( dt.trn_knbr = :dwra_contract_nbr) and 
+						( dt.deal_nbr = dtp.deal_nbr ) and 
+						( dt.path_seq_nbr = dtp.path_seq_nbr ) and
+						( dt.leg_nbr = dtp.leg_nbr ) and
+						( dt.leg_rev_nbr = dtp.leg_rev_nbr) and
+							( (mcf.run_datetime = :dwra_run_datetime) and
+							( mcf.proc_pipe = :dwra_facility_cd ) and
+							( mcf.start_date = :dwra_prod_month ) and 
+							 ( mcf.proc_k = :dwra_contract_nbr ) and
+							( mcf.ded_pipe = :dwra_ded_pipe) and 
+							( mcf.ded_sta_nbr = :dwra_source_nbr ) )
+				group by dt.product_type) as dtp on dtp.product_type = d.product_type_code
+ WHERE ( f.disposition_code = ~"C3~" ) and
+			( f.fractionation = 'Y' ) and
+			( f.beg_eff_date = (SELECT max(beg_eff_date)
+								FROM facility_proc_parameter p
+								WHERE f.pipeline_code = p.pipeline_code
+								and beg_eff_date <= :dwra_prod_month) ) and
+			 
+			( p.disposition_code = ~"C3~" ) and 
+						
+         ( (mcf.run_datetime = :dwra_run_datetime) and
+							( mcf.proc_pipe = :dwra_facility_cd ) and
+							( mcf.start_date = :dwra_prod_month ) and 
+							 ( mcf.proc_k = :dwra_contract_nbr ) and
+							( mcf.ded_pipe = :dwra_ded_pipe) and 
+							( mcf.ded_sta_nbr = :dwra_source_nbr )) 
+			
+		
+group by d.product_type_code   ,f.disposition_code,d.description,f.efficiency, p.prp_percent,
+			vgu.units  ,
+			dtp.price   
+Union 
+  SELECT Sum(IsNull(mcf.ic4_vol,0)) +   
+         Sum(IsNull(mcf.prp_ic4_vol,0)) all_gal,   
+         sum(IsNull(mcf.ic4_shrink,0)) +   
+         sum(IsNull(mcf.prp_ic4_shrink,0)) mcf_shr,   
+         sum(IsNull(mmbtu.ic4_shrink,0)) +   
+         sum(IsNull(mmbtu.prp_ic4_shrink,0)) mmbtu_shr,
+			sum(IsNull(mcf.prp_ic4_vol,0)) cust_gal,
+			f.disposition_code,
+			d.description,
+			f.efficiency,
+			p.prp_percent/100 per_share ,
+			Sum(IsNull(mcf.ic4_theo_vol,0)) inlet_theo   ,
+			d.product_type_code ,
+			vgu.units  ,
+			dtp.price
+  FROM plant_mcf_settlement mcf
+Join plant_mmbtu_settlement mmbtu on (mcf.run_datetime = mmbtu.run_datetime) and 
+		( mcf.deal_nbr = mmbtu.deal_nbr ) and  
+         ( mcf.path_nbr = mmbtu.path_nbr ) and  
+         ( mcf.order_nbr = mmbtu.order_nbr ) and  
+         ( mcf.rev_nbr = mmbtu.rev_nbr )
+Join facility_proc_parameter f on ( mcf.proc_pipe = f.pipeline_code )
+Join plant_settlement_disp p on (mcf.deal_nbr = p.deal_nbr ) and
+			( mcf.path_nbr = p.path_seq_nbr ) and 
+			( mcf.order_nbr = p.leg_nbr ) and 
+			( mcf.rev_nbr = p.leg_rev_nbr )  
+Join valid_product_type pt on pt.product_type_code = 'C4i'
+Join valid_gas_units vgu on pt.volume_unit = vgu.unit_code 
+Join valid_disposition d on d.disposition_code = f.disposition_code 
+			Left Outer JOIN (SELECT dt.product_type,Sum( Case  when var_charge_direction = '+' then  var_net_amt else  -1  * var_net_amt end) price
+				From deals_trans dt,
+						deals_trans_pricing dtp,
+					plant_mcf_settlement mcf
+				Where ( mcf.deal_nbr = dt.from_deal_nbr ) and
+						( mcf.path_nbr = dt.from_path_nbr ) and
+						( mcf.order_nbr = dt.from_leg_nbr) and
+						( mcf.rev_nbr = dt.from_leg_rev_nbr ) and
+						( dt.product_type = 'C4I' ) and  
+						( dt.trn_knbr = :dwra_contract_nbr) and 
+						( dt.deal_nbr = dtp.deal_nbr ) and 
+						( dt.path_seq_nbr = dtp.path_seq_nbr ) and
+						( dt.leg_nbr = dtp.leg_nbr ) and
+						( dt.leg_rev_nbr = dtp.leg_rev_nbr) and
+							( (mcf.run_datetime = :dwra_run_datetime) and
+							( mcf.proc_pipe = :dwra_facility_cd ) and
+							( mcf.start_date = :dwra_prod_month ) and 
+							 ( mcf.proc_k = :dwra_contract_nbr ) and
+							( mcf.ded_pipe = :dwra_ded_pipe) and 
+							( mcf.ded_sta_nbr = :dwra_source_nbr ) )
+				group by dt.product_type) as dtp on dtp.product_type = d.product_type_code
+ WHERE ( f.disposition_code = ~"IC4~" ) and
+			( f.fractionation = 'Y' ) and
+			( f.beg_eff_date = (SELECT max(beg_eff_date)
+								FROM facility_proc_parameter p
+								WHERE f.pipeline_code = p.pipeline_code
+								and beg_eff_date <= :dwra_prod_month) ) and
+			 
+			( p.disposition_code = ~"IC4~" ) and 
+			
+			
+         ( (mcf.run_datetime = :dwra_run_datetime) and
+							( mcf.proc_pipe = :dwra_facility_cd ) and
+							( mcf.start_date = :dwra_prod_month ) and 
+							 ( mcf.proc_k = :dwra_contract_nbr ) and
+							( mcf.ded_pipe = :dwra_ded_pipe) and 
+							( mcf.ded_sta_nbr = :dwra_source_nbr ) ) 
+			
+group by d.product_type_code   ,f.disposition_code,d.description,f.efficiency, p.prp_percent ,
+			vgu.units,
+			dtp.price    
+Union 
+Select Sum(IsNull(mcf.nc4_vol,0)) +   
+         Sum(IsNull(mcf.prp_nc4_vol,0)) all_gal,   
+         sum(IsNull(mcf.nc4_shrink,0)) +   
+         sum(IsNull(mcf.prp_nc4_shrink,0)) mcf_shr,   
+         sum(IsNull(mmbtu.nc4_shrink,0)) +   
+         sum(IsNull(mmbtu.prp_nc4_shrink,0)) mmbtu_shr,
+			sum(IsNull(mcf.prp_nc4_vol,0)) cust_gal,
+			f.disposition_code,
+			d.description,
+			f.efficiency,
+			p.prp_percent/100 per_share,
+			Sum(IsNull(mcf.nc4_theo_vol,0)) inlet_theo   ,
+			d.product_type_code ,
+			vgu.units,
+			dtp.price
+ FROM plant_mcf_settlement mcf
+Join plant_mmbtu_settlement mmbtu on (mcf.run_datetime = mmbtu.run_datetime) and 
+		( mcf.deal_nbr = mmbtu.deal_nbr ) and  
+         ( mcf.path_nbr = mmbtu.path_nbr ) and  
+         ( mcf.order_nbr = mmbtu.order_nbr ) and  
+         ( mcf.rev_nbr = mmbtu.rev_nbr )
+Join facility_proc_parameter f on ( mcf.proc_pipe = f.pipeline_code )
+Join plant_settlement_disp p on (mcf.deal_nbr = p.deal_nbr ) and
+			( mcf.path_nbr = p.path_seq_nbr ) and 
+			( mcf.order_nbr = p.leg_nbr ) and 
+			( mcf.rev_nbr = p.leg_rev_nbr )  
+Join valid_product_type pt on pt.product_type_code = 'C4N'
+Join valid_gas_units vgu on pt.volume_unit = vgu.unit_code 
+Join valid_disposition d on d.disposition_code = f.disposition_code 
+			Left Outer JOIN (SELECT dt.product_type,Sum( Case  when var_charge_direction = '+' then  var_net_amt else  -1  * var_net_amt end) price
+				From deals_trans dt,
+						deals_trans_pricing dtp,
+					plant_mcf_settlement mcf
+				Where ( mcf.deal_nbr = dt.from_deal_nbr ) and
+						( mcf.path_nbr = dt.from_path_nbr ) and
+						( mcf.order_nbr = dt.from_leg_nbr) and
+						( mcf.rev_nbr = dt.from_leg_rev_nbr ) and
+						( dt.product_type = 'C4N' ) and  
+						( dt.trn_knbr = :dwra_contract_nbr) and 
+						( dt.deal_nbr = dtp.deal_nbr ) and 
+						( dt.path_seq_nbr = dtp.path_seq_nbr ) and
+						( dt.leg_nbr = dtp.leg_nbr ) and
+						( dt.leg_rev_nbr = dtp.leg_rev_nbr) and
+							( (mcf.run_datetime = :dwra_run_datetime) and
+							( mcf.proc_pipe = :dwra_facility_cd ) and
+							( mcf.start_date = :dwra_prod_month ) and 
+							 ( mcf.proc_k = :dwra_contract_nbr ) and
+							( mcf.ded_pipe = :dwra_ded_pipe) and 
+							( mcf.ded_sta_nbr = :dwra_source_nbr ))
+				group by dt.product_type) as dtp on dtp.product_type = d.product_type_code
+ WHERE ( f.disposition_code = ~"NC4~" ) and
+			( f.fractionation = 'Y' ) and
+			( f.beg_eff_date = (SELECT max(beg_eff_date)
+								FROM facility_proc_parameter p
+								WHERE f.pipeline_code = p.pipeline_code
+								and beg_eff_date <= :dwra_prod_month) ) and
+			 
+			( p.disposition_code = ~"NC4~" ) and 
+		
+			
+         ( (mcf.run_datetime = :dwra_run_datetime) and
+							( mcf.proc_pipe = :dwra_facility_cd ) and
+							( mcf.start_date = :dwra_prod_month ) and 
+							 ( mcf.proc_k = :dwra_contract_nbr ) and
+							( mcf.ded_pipe = :dwra_ded_pipe) and 
+							( mcf.ded_sta_nbr = :dwra_source_nbr ) ) 
+			
+group by d.product_type_code   ,f.disposition_code,d.description,f.efficiency, p.prp_percent ,
+			vgu.units,
+			dtp.price 
+Union 
+  SELECT Sum(IsNull(mcf.c5_vol,0)) +   
+         Sum(IsNull(mcf.prp_c5_vol,0)) all_gal,   
+         sum(IsNull(mcf.c5_shrink,0)) +   
+         sum(IsNull(mcf.prp_c5_shrink,0)) mcf_shr,   
+         sum(IsNull(mmbtu.c5_shrink,0)) +   
+         sum(IsNull(mmbtu.prp_c5_shrink,0)) mmbtu_shr,
+			sum(IsNull(mcf.prp_c5_vol,0)) cust_gal,
+			f.disposition_code,
+			d.description,
+			f.efficiency,
+			p.prp_percent/100 per_share,
+			Sum(IsNull(mcf.c5_theo_vol,0)) inlet_theo  ,
+			d.product_type_code ,
+			vgu.units ,
+			dtp.price   
+FROM plant_mcf_settlement mcf
+Join plant_mmbtu_settlement mmbtu on (mcf.run_datetime = mmbtu.run_datetime) and 
+		( mcf.deal_nbr = mmbtu.deal_nbr ) and  
+         ( mcf.path_nbr = mmbtu.path_nbr ) and  
+         ( mcf.order_nbr = mmbtu.order_nbr ) and  
+         ( mcf.rev_nbr = mmbtu.rev_nbr )
+Join facility_proc_parameter f on ( mcf.proc_pipe = f.pipeline_code )
+Join plant_settlement_disp p on (mcf.deal_nbr = p.deal_nbr ) and
+			( mcf.path_nbr = p.path_seq_nbr ) and 
+			( mcf.order_nbr = p.leg_nbr ) and 
+			( mcf.rev_nbr = p.leg_rev_nbr )  
+Join valid_product_type pt on pt.product_type_code = 'C5+'
+Join valid_gas_units vgu on pt.volume_unit = vgu.unit_code 
+Join valid_disposition d on d.disposition_code = f.disposition_code 
+			Left Outer JOIN (SELECT dt.product_type,Sum( Case  when var_charge_direction = '+' then  var_net_amt else  -1  * var_net_amt end) price
+				From deals_trans dt,
+						deals_trans_pricing dtp,
+					plant_mcf_settlement mcf
+				Where ( mcf.deal_nbr = dt.from_deal_nbr ) and
+						( mcf.path_nbr = dt.from_path_nbr ) and
+						( mcf.order_nbr = dt.from_leg_nbr) and
+						( mcf.rev_nbr = dt.from_leg_rev_nbr ) and
+						( dt.product_type = 'C5+' ) and  
+						( dt.trn_knbr = :dwra_contract_nbr) and 
+						( dt.deal_nbr = dtp.deal_nbr ) and 
+						( dt.path_seq_nbr = dtp.path_seq_nbr ) and
+						( dt.leg_nbr = dtp.leg_nbr ) and
+						( dt.leg_rev_nbr = dtp.leg_rev_nbr) and
+							( (mcf.run_datetime = :dwra_run_datetime) and
+							( mcf.proc_pipe = :dwra_facility_cd ) and
+							( mcf.start_date = :dwra_prod_month ) and 
+							 ( mcf.proc_k = :dwra_contract_nbr ) and
+							( mcf.ded_pipe = :dwra_ded_pipe) and 
+							( mcf.ded_sta_nbr = :dwra_source_nbr ))
+				group by dt.product_type) as dtp on dtp.product_type = d.product_type_code
+ WHERE ( f.disposition_code = ~"C5+~" ) and
+			( f.fractionation = 'Y' ) and
+			( f.beg_eff_date = (SELECT max(beg_eff_date)
+								FROM facility_proc_parameter p
+								WHERE f.pipeline_code = p.pipeline_code
+								and beg_eff_date <= :dwra_prod_month) ) and
+			 
+			( p.disposition_code = ~"C5+~" ) and 
+			
+			
+         ( (mcf.run_datetime = :dwra_run_datetime) and
+							( mcf.proc_pipe = :dwra_facility_cd ) and
+							( mcf.start_date = :dwra_prod_month ) and 
+							 ( mcf.proc_k = :dwra_contract_nbr ) and
+							( mcf.ded_pipe = :dwra_ded_pipe) and 
+							( mcf.ded_sta_nbr = :dwra_source_nbr )) 
+			
+group by d.product_type_code   ,f.disposition_code,d.description,f.efficiency, p.prp_percent ,
+			vgu.units   ,
+			dtp.price 
+Union 
+  SELECT Sum(IsNull(mcf.ic5_vol,0)) +   
+         Sum(IsNull(mcf.prp_ic5_vol,0)) all_gal,   
+         sum(IsNull(mcf.ic5_shrink,0)) +   
+         sum(IsNull(mcf.prp_ic5_shrink,0)) mcf_shr,   
+         sum(IsNull(mmbtu.ic5_shrink,0)) +   
+         sum(IsNull(mmbtu.prp_ic5_shrink,0)) mmbtu_shr,
+			sum(IsNull(mcf.prp_ic5_vol,0)) cust_gal,
+			f.disposition_code,
+			d.description,
+			f.efficiency,
+			p.prp_percent/100 per_share ,
+			Sum(IsNull(mcf.ic5_theo_vol,0))  inlet_theo  ,
+			d.product_type_code ,
+			vgu.units ,
+			dtp.price    
+    FROM plant_mcf_settlement mcf
+Join plant_mmbtu_settlement mmbtu on (mcf.run_datetime = mmbtu.run_datetime) and 
+		( mcf.deal_nbr = mmbtu.deal_nbr ) and  
+         ( mcf.path_nbr = mmbtu.path_nbr ) and  
+         ( mcf.order_nbr = mmbtu.order_nbr ) and  
+         ( mcf.rev_nbr = mmbtu.rev_nbr )
+Join facility_proc_parameter f on ( mcf.proc_pipe = f.pipeline_code )
+Join plant_settlement_disp p on (mcf.deal_nbr = p.deal_nbr ) and
+			( mcf.path_nbr = p.path_seq_nbr ) and 
+			( mcf.order_nbr = p.leg_nbr ) and 
+			( mcf.rev_nbr = p.leg_rev_nbr )  
+Join valid_product_type pt on pt.product_type_code = 'C5I'
+Join valid_gas_units vgu on pt.volume_unit = vgu.unit_code 
+Join valid_disposition d on d.disposition_code = f.disposition_code 
+			Left Outer JOIN (SELECT dt.product_type,Sum( Case  when var_charge_direction = '+' then  var_net_amt else  -1  * var_net_amt end) price
+				From deals_trans dt,
+						deals_trans_pricing dtp,
+					plant_mcf_settlement mcf
+				Where ( mcf.deal_nbr = dt.from_deal_nbr ) and
+						( mcf.path_nbr = dt.from_path_nbr ) and
+						( mcf.order_nbr = dt.from_leg_nbr) and
+						( mcf.rev_nbr = dt.from_leg_rev_nbr ) and
+						( dt.product_type = 'C5I' ) and  
+						( dt.trn_knbr = :dwra_contract_nbr) and 
+						( dt.deal_nbr = dtp.deal_nbr ) and 
+						( dt.path_seq_nbr = dtp.path_seq_nbr ) and
+						( dt.leg_nbr = dtp.leg_nbr ) and
+						( dt.leg_rev_nbr = dtp.leg_rev_nbr) and
+							( (mcf.run_datetime = :dwra_run_datetime) and
+							( mcf.proc_pipe = :dwra_facility_cd ) and
+							( mcf.start_date = :dwra_prod_month ) and 
+							 ( mcf.proc_k = :dwra_contract_nbr ) and
+							( mcf.ded_pipe = :dwra_ded_pipe) and 
+							( mcf.ded_sta_nbr = :dwra_source_nbr ))
+				group by dt.product_type) as dtp on dtp.product_type = d.product_type_code
+ WHERE ( f.disposition_code = ~"IC5~" ) and
+			( f.fractionation = 'Y' ) and
+			( f.beg_eff_date = (SELECT max(beg_eff_date)
+								FROM facility_proc_parameter p
+								WHERE f.pipeline_code = p.pipeline_code
+								and beg_eff_date <= :dwra_prod_month) ) and
+			 
+			( p.disposition_code = ~"IC5~" ) and 
+			
+			
+         ((mcf.run_datetime = :dwra_run_datetime) and
+							( mcf.proc_pipe = :dwra_facility_cd ) and
+							( mcf.start_date = :dwra_prod_month ) and 
+							 ( mcf.proc_k = :dwra_contract_nbr ) and
+							( mcf.ded_pipe = :dwra_ded_pipe) and 
+							( mcf.ded_sta_nbr = :dwra_source_nbr ) ) 
+			
+group by d.product_type_code   ,f.disposition_code,d.description,f.efficiency, p.prp_percent,
+			vgu.units  ,
+			dtp.price
+Union 
+Select Sum(IsNull(mcf.nc5_vol,0)) +   
+         Sum(IsNull(mcf.prp_nc5_vol,0)) all_gal,   
+         sum(IsNull(mcf.nc5_shrink,0)) +   
+         sum(IsNull(mcf.prp_nc5_shrink,0)) mcf_shr,   
+         sum(IsNull(mmbtu.nc5_shrink,0)) +   
+         sum(IsNull(mmbtu.prp_nc5_shrink,0)) mmbtu_shr,
+			sum(IsNull(mcf.prp_nc5_vol,0)) cust_gal,
+			f.disposition_code,
+			d.description,
+			f.efficiency,
+			p.prp_percent/100 per_share,
+			Sum(IsNull(mcf.nc5_theo_vol,0)) inlet_theo   ,
+			d.product_type_code ,
+			vgu.units  ,
+			dtp.price
+FROM plant_mcf_settlement mcf
+Join plant_mmbtu_settlement mmbtu on (mcf.run_datetime = mmbtu.run_datetime) and 
+		( mcf.deal_nbr = mmbtu.deal_nbr ) and  
+         ( mcf.path_nbr = mmbtu.path_nbr ) and  
+         ( mcf.order_nbr = mmbtu.order_nbr ) and  
+         ( mcf.rev_nbr = mmbtu.rev_nbr )
+Join facility_proc_parameter f on ( mcf.proc_pipe = f.pipeline_code )
+Join plant_settlement_disp p on (mcf.deal_nbr = p.deal_nbr ) and
+			( mcf.path_nbr = p.path_seq_nbr ) and 
+			( mcf.order_nbr = p.leg_nbr ) and 
+			( mcf.rev_nbr = p.leg_rev_nbr )  
+Join valid_product_type pt on pt.product_type_code = 'C5N'
+Join valid_gas_units vgu on pt.volume_unit = vgu.unit_code 
+Join valid_disposition d on d.disposition_code = f.disposition_code 
+			Left Outer JOIN (SELECT dt.product_type,Sum( Case  when var_charge_direction = '+' then  var_net_amt else  -1  * var_net_amt end) price
+				From deals_trans dt,
+						deals_trans_pricing dtp,
+					plant_mcf_settlement mcf
+				Where ( mcf.deal_nbr = dt.from_deal_nbr ) and
+						( mcf.path_nbr = dt.from_path_nbr ) and
+						( mcf.order_nbr = dt.from_leg_nbr) and
+						( mcf.rev_nbr = dt.from_leg_rev_nbr ) and
+						( dt.product_type = 'C5N' ) and  
+						( dt.trn_knbr = :dwra_contract_nbr) and 
+						( dt.deal_nbr = dtp.deal_nbr ) and 
+						( dt.path_seq_nbr = dtp.path_seq_nbr ) and
+						( dt.leg_nbr = dtp.leg_nbr ) and
+						( dt.leg_rev_nbr = dtp.leg_rev_nbr) and
+							( (mcf.run_datetime = :dwra_run_datetime) and
+							( mcf.proc_pipe = :dwra_facility_cd ) and
+							( mcf.start_date = :dwra_prod_month ) and 
+							 ( mcf.proc_k = :dwra_contract_nbr ) and
+							( mcf.ded_pipe = :dwra_ded_pipe) and 
+							( mcf.ded_sta_nbr = :dwra_source_nbr ))
+				group by dt.product_type) as dtp on dtp.product_type = d.product_type_code
+ WHERE ( f.disposition_code = ~"NC5~" ) and
+			( f.fractionation = 'Y' ) and
+			( f.beg_eff_date = (SELECT max(beg_eff_date)
+								FROM facility_proc_parameter p
+								WHERE f.pipeline_code = p.pipeline_code
+								and beg_eff_date <= :dwra_prod_month) ) and
+			 
+			( p.disposition_code = ~"NC5~" ) and 
+		
+			
+         ( (mcf.run_datetime = :dwra_run_datetime) and
+							( mcf.proc_pipe = :dwra_facility_cd ) and
+							( mcf.start_date = :dwra_prod_month ) and 
+							 ( mcf.proc_k = :dwra_contract_nbr ) and
+							( mcf.ded_pipe = :dwra_ded_pipe) and 
+							( mcf.ded_sta_nbr = :dwra_source_nbr )) 
+			
+group by d.product_type_code   ,f.disposition_code,d.description,f.efficiency, p.prp_percent,
+			vgu.units  ,
+			dtp.price
+Union 
+  SELECT Sum(IsNull(mcf.c6_vol,0)) +   
+         Sum(IsNull(mcf.prp_c6_vol,0)) all_gal,   
+         sum(IsNull(mcf.c6_shrink,0)) +   
+         sum(IsNull(mcf.prp_c6_shrink,0)) mcf_shr,   
+         sum(IsNull(mmbtu.c6_shrink,0)) +   
+         sum(IsNull(mmbtu.prp_c6_shrink,0)) mmbtu_shr,
+			sum(IsNull(mcf.prp_c6_vol,0)) cust_gal,
+			f.disposition_code,
+			d.description,
+			f.efficiency,
+			p.prp_percent/100 per_share,
+			Sum(IsNull(mcf.c6_theo_vol,0)) inlet_theo  ,
+			d.product_type_code ,
+			vgu.units ,
+			dtp.price    
+FROM plant_mcf_settlement mcf
+Join plant_mmbtu_settlement mmbtu on (mcf.run_datetime = mmbtu.run_datetime) and 
+		( mcf.deal_nbr = mmbtu.deal_nbr ) and  
+         ( mcf.path_nbr = mmbtu.path_nbr ) and  
+         ( mcf.order_nbr = mmbtu.order_nbr ) and  
+         ( mcf.rev_nbr = mmbtu.rev_nbr )
+Join facility_proc_parameter f on ( mcf.proc_pipe = f.pipeline_code )
+Join plant_settlement_disp p on (mcf.deal_nbr = p.deal_nbr ) and
+			( mcf.path_nbr = p.path_seq_nbr ) and 
+			( mcf.order_nbr = p.leg_nbr ) and 
+			( mcf.rev_nbr = p.leg_rev_nbr )  
+Join valid_product_type pt on pt.product_type_code = 'C6+'
+Join valid_gas_units vgu on pt.volume_unit = vgu.unit_code 
+Join valid_disposition d on d.disposition_code = f.disposition_code 
+			Left Outer JOIN (SELECT dt.product_type,Sum( Case  when var_charge_direction = '+' then  var_net_amt else  -1  * var_net_amt end) price
+				From deals_trans dt,
+						deals_trans_pricing dtp,
+					plant_mcf_settlement mcf
+				Where ( mcf.deal_nbr = dt.from_deal_nbr ) and
+						( mcf.path_nbr = dt.from_path_nbr ) and
+						( mcf.order_nbr = dt.from_leg_nbr) and
+						( mcf.rev_nbr = dt.from_leg_rev_nbr ) and
+						( dt.product_type = 'C6+' ) and  
+						( dt.trn_knbr = :dwra_contract_nbr) and 
+						( dt.deal_nbr = dtp.deal_nbr ) and 
+						( dt.path_seq_nbr = dtp.path_seq_nbr ) and
+						( dt.leg_nbr = dtp.leg_nbr ) and
+						( dt.leg_rev_nbr = dtp.leg_rev_nbr) and
+							( (mcf.run_datetime = :dwra_run_datetime) and
+							( mcf.proc_pipe = :dwra_facility_cd ) and
+							( mcf.start_date = :dwra_prod_month ) and 
+							 ( mcf.proc_k = :dwra_contract_nbr ) and
+							( mcf.ded_pipe = :dwra_ded_pipe) and 
+							( mcf.ded_sta_nbr = :dwra_source_nbr ))
+				group by dt.product_type) as dtp on dtp.product_type = d.product_type_code
+ WHERE ( f.disposition_code = ~"C6+~" ) and
+			( f.fractionation = 'Y' ) and
+			( f.beg_eff_date = (SELECT max(beg_eff_date)
+								FROM facility_proc_parameter p
+								WHERE f.pipeline_code = p.pipeline_code
+								and beg_eff_date <= :dwra_prod_month) ) and
+			 
+			( p.disposition_code = ~"C6+~" ) and 
+			
+			
+         ( (mcf.run_datetime = :dwra_run_datetime) and
+							( mcf.proc_pipe = :dwra_facility_cd ) and
+							( mcf.start_date = :dwra_prod_month ) and 
+							 ( mcf.proc_k = :dwra_contract_nbr ) and
+							( mcf.ded_pipe = :dwra_ded_pipe) and 
+							( mcf.ded_sta_nbr = :dwra_source_nbr )) 
+			
+group by d.product_type_code   ,f.disposition_code,d.description,f.efficiency, p.prp_percent ,
+			vgu.units  ,
+			dtp.price  
+union
+ SELECT Sum(IsNull(mcf.cng_vol,0)) +   
+         Sum(IsNull(mcf.prp_cng_vol,0)) all_gal,   
+         sum(IsNull(mcf.cng_shrink,0)) +   
+         sum(IsNull(mcf.prp_cng_shrink,0)) mcf_shr,   
+         sum(IsNull(mmbtu.cng_shrink,0)) +   
+         sum(IsNull(mmbtu.prp_cng_shrink,0)) mmbtu_shr,
+			sum(IsNull(mcf.prp_cng_vol,0)) cust_gal,
+			f.disposition_code,
+			d.description,
+			f.efficiency,
+			p.prp_percent/100 per_share,
+			Sum(IsNull(mcf.cng_theo_vol,0)) inlet_theo  ,
+			d.product_type_code,
+			vgu.units,
+			dtp.price 
+ FROM plant_mcf_settlement mcf
+Join plant_mmbtu_settlement mmbtu on (mcf.run_datetime = mmbtu.run_datetime) and 
+		( mcf.deal_nbr = mmbtu.deal_nbr ) and  
+         ( mcf.path_nbr = mmbtu.path_nbr ) and  
+         ( mcf.order_nbr = mmbtu.order_nbr ) and  
+         ( mcf.rev_nbr = mmbtu.rev_nbr )
+Join facility_proc_parameter f on ( mcf.proc_pipe = f.pipeline_code )
+Join plant_settlement_disp p on (mcf.deal_nbr = p.deal_nbr ) and
+			( mcf.path_nbr = p.path_seq_nbr ) and 
+			( mcf.order_nbr = p.leg_nbr ) and 
+			( mcf.rev_nbr = p.leg_rev_nbr )  
+Join valid_product_type pt on pt.product_type_code = 'CNG'
+Join valid_gas_units vgu on pt.volume_unit = vgu.unit_code 
+Join valid_disposition d on d.disposition_code = f.disposition_code 
+			Left Outer JOIN (SELECT dt.product_type,Sum( Case  when var_charge_direction = '+' then  var_net_amt else  -1  * var_net_amt end) price
+				From deals_trans dt,
+						deals_trans_pricing dtp,
+					plant_mcf_settlement mcf
+				Where ( mcf.deal_nbr = dt.from_deal_nbr ) and
+						( mcf.path_nbr = dt.from_path_nbr ) and
+						( mcf.order_nbr = dt.from_leg_nbr) and
+						( mcf.rev_nbr = dt.from_leg_rev_nbr ) and
+						( dt.product_type = 'CNG' ) and  
+						( dt.trn_knbr = :dwra_contract_nbr) and 
+						( dt.deal_nbr = dtp.deal_nbr ) and 
+						( dt.path_seq_nbr = dtp.path_seq_nbr ) and
+						( dt.leg_nbr = dtp.leg_nbr ) and
+						( dt.leg_rev_nbr = dtp.leg_rev_nbr) and
+							( (mcf.run_datetime = :dwra_run_datetime) and
+							( mcf.proc_pipe = :dwra_facility_cd ) and
+							( mcf.start_date = :dwra_prod_month ) and 
+							 ( mcf.proc_k = :dwra_contract_nbr ) and
+							( mcf.ded_pipe = :dwra_ded_pipe) and 
+							( mcf.ded_sta_nbr = :dwra_source_nbr ))
+				group by dt.product_type) as dtp on dtp.product_type = d.product_type_code
+ WHERE ( f.disposition_code = ~"CNG~" ) and
+			( f.fractionation = 'Y' ) and
+			( f.beg_eff_date = (SELECT max(beg_eff_date)
+								FROM facility_proc_parameter p
+								WHERE f.pipeline_code = p.pipeline_code
+								and beg_eff_date <= :dwra_prod_month) ) and
+			 
+			( p.disposition_code = ~"CNG~" ) and 
+						
+         ( (mcf.run_datetime = :dwra_run_datetime) and
+							( mcf.proc_pipe = :dwra_facility_cd ) and
+							( mcf.start_date = :dwra_prod_month ) and 
+							 ( mcf.proc_k = :dwra_contract_nbr ) and
+							( mcf.ded_pipe = :dwra_ded_pipe) and 
+							( mcf.ded_sta_nbr = :dwra_source_nbr )) 
+			
+group by d.product_type_code   ,f.disposition_code,d.description,f.efficiency, p.prp_percent ,
+			vgu.units,
+			dtp.price" arguments=(("dwra_prod_month", datetime),("dwra_facility_cd", string),("dwra_source_nbr", string),("dwra_contract_nbr", string),("dwra_ded_pipe", string),("dwra_run_datetime", datetime))  sort="product_type_code A disposition_code A " )
+text(band=header alignment="2" text="Component Settlement" border="0" color="0" x="1275" y="0" height="56" width="672" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=header x1="567" y1="184" x2="3634" y2="188"  name=l_2 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Units of Measure" border="0" color="0" x="603" y="96" height="56" width="439" html.valueishtml="0"  name=t_13 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=header x1="0" y1="52" x2="3634" y2="52"  name=l_5 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=header alignment="2" text="Contract %" border="0" color="0" x="2075" y="96" height="56" width="306" html.valueishtml="0"  name=t_10 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Settlement" border="0" color="0" x="2405" y="96" height="56" width="306" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Price" border="0" color="0" x="2875" y="96" height="56" width="110" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Value" border="0" color="0" x="3273" y="96" height="56" width="128" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Theoretical" border="0" color="0" x="1061" y="96" height="56" width="270" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Allocated" border="0" color="0" x="1431" y="96" height="56" width="247" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Shrink" border="0" color="0" x="1778" y="96" height="56" width="242" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="0" x="73" y="4" height="48" width="494" format="[general]" html.valueishtml="0"  name=description visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="0" tabsequence=32766 border="0" color="0" x="649" y="4" height="44" width="347" format="[general]" html.valueishtml="0"  name=units visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=12 alignment="1" tabsequence=32766 border="0" color="0" x="2715" y="4" height="44" width="293" format="#0.0000000" html.valueishtml="0"  name=price visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="1" expression="price *  cust_gal "border="0" color="0" x="3045" y="4" height="44" width="384" format="$#,##0.00" html.valueishtml="0"  name=value visible="1"  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="0" x="1362" y="4" height="44" width="315" format="#,##0" html.valueishtml="0"  name=all_gal visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="1" tabsequence=32766 border="0" color="0" x="1705" y="4" height="44" width="315" format="#,##0" html.valueishtml="0"  name=mmbtu_shr visible="0" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="1" tabsequence=32766 border="0" color="0" x="1033" y="4" height="44" width="315" format="#,##0" html.valueishtml="0"  name=inlet_theo visible="0" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="1" tabsequence=32766 border="0" color="0" x="2432" y="4" height="44" width="265" format="#,##0" html.valueishtml="0"  name=cust_gal visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="1" tabsequence=32766 border="0" color="0" x="2080" y="4" height="48" width="265" format="##0.00%" html.valueishtml="0"  name=per_share visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=summary alignment="0" text="Subtotal - Liquids" border="0" color="0" x="14" y="64" height="56" width="379" html.valueishtml="0"  name=t_12 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=summary x1="992" y1="48" x2="2085" y2="48"  name=l_4 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="1" background.color="536870912" )
+line(band=summary x1="2386" y1="48" x2="2725" y2="48"  name=l_1 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="1" background.color="536870912" )
+line(band=summary x1="3095" y1="48" x2="3479" y2="48"  name=l_3 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="1" background.color="536870912" )
+compute(band=summary alignment="1" expression="sum(cust_gal for all)"border="0" color="0" x="2432" y="68" height="64" width="265" format="#,##0" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="1" expression="sum(value for all)"border="0" color="0" x="3017" y="68" height="52" width="407" format="$#,##0.00" html.valueishtml="0"  name=compute_5 visible="1"  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="1" expression="sum(inlet_theo for all) "border="0" color="0" x="1019" y="68" height="56" width="311" format="#,##0" html.valueishtml="0"  name=compute_4 visible="0"  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="1" expression="sum(all_gal for all)"border="0" color="0" x="1367" y="68" height="64" width="311" format="#,##0" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="1" expression="sum(mmbtu_shr for all)"border="0" color="0" x="1710" y="68" height="64" width="311" format="#,##0" html.valueishtml="0"  name=compute_2 visible="0"  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

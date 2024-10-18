@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="24.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral" Name="XtraReport1" VerticalContentSplitting="Smart" Margins="25, 25, 26, 26" PaperKind="Custom" PageWidth="1061" PageHeight="320" Version="24.1" DataMember="Query" DataSource="#Ref-0">
+	<Parameters>
+		<Item1 Ref="2" Name="dwra_prod_month"/>
+		<Item2 Ref="3" Name="dwra_facility_code"/>
+		<Item3 Ref="4" Name="dwra_source_nbr"/>
+		<Item4 Ref="5" Name="dwra_contract_nbr"/>
+		<Item5 Ref="6" Name="dwra_run_datetime"/>
+	</Parameters>
+	<ComponentStorage>
+		<Item1 Ref="0" ObjectType="DevExpress.DataAccess.Sql.SqlDataSource,DevExpress.DataAccess.v24.1" Name="sqlDataSource1" Base64="PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjxTcWxEYXRhU291cmNlIE5hbWU9InNxbERhdGFTb3VyY2UxIj4NCjxDb25uZWN0aW9uIE5hbWU9IlRJRVMgRGF0YSIgRnJvbUFwcENvbmZpZz0idHJ1ZSIgLz4NCjxRdWVyeSBUeXBlPSJDdXN0b21TcWxRdWVyeSIgTmFtZT0iUXVlcnkiPg0KPFNxbD4gIFNFTEVDVCAgICAgU3VtKElzbnVsbChiLnNvdXJjZV9tbWJ0dV92b2wsMCkpIC0gU3VtKElzbnVsbChiLmJ5X3Bhc3MsMCkpIGlubGV0LCAgIAogICAgICAgICBTdW0oSXNudWxsKGIucGxhbnRfdXNlLDApKSArIFN1bShJc251bGwoYi5wcnBfdXNlLDApKSBmdWVsLCAgIAogICAgICAgICBTdW0oSXNudWxsKGIuYzJfc2hyaW5rLDApKSArICAgCiAgICAgICAgIFN1bShJc251bGwoYi5wcnBfYzJfc2hyaW5rLDApKSArICAgCiAgICAgICAgIFN1bShJc251bGwoYi5jM19zaHJpbmssMCkpICsgICAKICAgICAgICAgU3VtKElzbnVsbChiLnBycF9jM19zaHJpbmssMCkpICsKICAgICAgICAgU3VtKElzbnVsbChiLmljNF9zaHJpbmssMCkpICsgICAKICAgICAgICAgU3VtKElzbnVsbChiLnBycF9pYzRfc2hyaW5rLDApKSArCiAgICAgICAgIFN1bShJc251bGwoYi5uYzRfc2hyaW5rLDApKSArCiAgICAgICAgIFN1bShJc251bGwoYi5wcnBfbmM0X3NocmluaywwKSkgKwogICAgICAgICBTdW0oSXNudWxsKGIuYzVfc2hyaW5rLDApKSArCiAgICAgICAgIFN1bShJc251bGwoYi5wcnBfYzVfc2hyaW5rLDApKSArCiAgICAgICAgIFN1bShJc251bGwoYi5pYzVfc2hyaW5rLDApKSArICAgCiAgICAgICAgIFN1bShJc251bGwoYi5wcnBfaWM1X3NocmluaywwKSkgKwogICAgICAgICBTdW0oSXNudWxsKGIubmM1X3NocmluaywwKSkgKwogICAgICAgICBTdW0oSXNudWxsKGIucHJwX25jNV9zaHJpbmssMCkpICsKICAgICAgICAgU3VtKElzbnVsbChiLmM2X3NocmluaywwKSkgKwogICAgICAgICBTdW0oSXNudWxsKGIucHJwX2M2X3NocmluaywwKSkrCgkJCVN1bShJc251bGwoYi5jbmdfc2hyaW5rLDApKSArCiAgICAgICAgIFN1bShJc251bGwoYi5wcnBfY25nX3NocmluaywwKSkgc2hyaW5rLAogICAgICAgICAgICBTdW0oSXNudWxsKGIucmVzaWR1ZSwwKSkgKyBTdW0oSXNudWxsKGIucHJwX3Jlc2lkdWUsMCkpIHJlc2lkdWUsCgkJCQogICAgICAgICBTdW0oSXNudWxsKGIuZmxhcmUsMCkpICsgU3VtKElzbnVsbChiLnBycF9mbGFyZSwwKSkgZmxhcmUgLAoJCQlzdW0oaXNOdWxsKGIucnRsMV9zaHJpbmssMCkpICsKCQkJU3VtKElzTnVsbChiLnBycF9ydGwxX3NocmluaywwKSkgKwoJCQlTdW0oSXNOdWxsKGIucnRsMl9zaHJpbmssMCkpICsKCQkJU3VtKElzTnVsbChiLnBycF9ydGwyX3NocmluaywwKSkgKwoJCQlTdW0oSXNOdWxsKGIucnRsM19zaHJpbmssMCkpICsKCQkJU3VtKElzTnVsbChiLnBycF9ydGwzX3NocmluaywwKSkgKwoJCQlTdW0oSXNOdWxsKGIucnRsNF9zaHJpbmssMCkpICsKCQkJU3VtKElzTnVsbChiLnBycF9ydGw0X3NocmluaywwKSkgKwoJCQlTdW0oSXNOdWxsKGIucnRsNV9zaHJpbmssMCkpICsKCQkJU3VtKElzTnVsbChiLnBycF9ydGw1X3NocmluaywwKSkgKwoJCQlTdW0oSXNOdWxsKGIucnRsNl9zaHJpbmssMCkpICsKCQkJU3VtKElzTnVsbChiLnBycF9ydGw2X3NocmluaywwKSkgKwoJCQlTdW0oSXNOdWxsKGIucnRsN19zaHJpbmssMCkpICsKCQkJU3VtKElzTnVsbChiLnBycF9ydGw3X3NocmluaywwKSkgKwoJCQlTdW0oSXNOdWxsKGIucnRsOF9zaHJpbmssMCkpICsKCQkJU3VtKElzTnVsbChiLnBycF9ydGw4X3NocmluaywwKSkgcnRsICwKCQkJU3VtKElzTnVsbChiLnJlc2lkdWVfdGhlb192b2wsMCkpIHJlc2lkdWVfdGhlbyAsCgkJCVN1bShJc051bGwobS5yZXNpZHVlLDApKSArIFN1bShJc251bGwobS5wcnBfcmVzaWR1ZSwwKSkgbWNmX3Jlc2lkdWUsCgkJCXAucHJwX3BlcmNlbnQvMTAwIHBycF9wZXJjZW50ICwKCQkJKElzTnVsbChwci50b3RfdmFsdWVfYWN0dWFsLHByLnRvdF92YWx1ZV9lc3RpbWF0ZSkpIHByaWNlCiAgICBGUk9NIHBsYW50X21tYnR1X3NldHRsZW1lbnQgYiBKb2luIHBsYW50X21jZl9zZXR0bGVtZW50IG0gb24gYi5ydW5fZGF0ZXRpbWUgPSBtLnJ1bl9kYXRldGltZQoJCQkJCQkJCQkJCWFuZCBiLmRlYWxfbmJyID0gbS5kZWFsX25icgoJCQkJCQkJCQkJCWFuZCBiLnBhdGhfbmJyID0gbS5wYXRoX25icgoJCQkJCQkJCQkJCWFuZCBiLm9yZGVyX25iciA9IG0ub3JkZXJfbmJyCgkJCQkJCQkJCQkJYW5kIGIucmV2X25iciA9IG0ucmV2X25icgoJCQkJCQkJCQkJSm9pbiBwbGFudF9zZXR0bGVtZW50X2Rpc3AgcCBvbiAobS5kZWFsX25iciA9IHAuZGVhbF9uYnIgKSBhbmQKCQkJCQkJCQkJCQkoIG0ucGF0aF9uYnIgPSBwLnBhdGhfc2VxX25iciApIGFuZCAKCQkJCQkJCQkJCQkoIG0ub3JkZXJfbmJyID0gcC5sZWdfbmJyICkgYW5kIAoJCQkJCQkJCQkJCSggbS5yZXZfbmJyID0gcC5sZWdfcmV2X25iciApICAKCQkJCQkJCQkJCUpvaW4gcHJvZHVjdF9zZXR0bGVtZW50X2Rpc3AgcHNkIG9uICBiLnJlbGF0ZWRfayA9IHBzZC5jb250cmFjdF9uYnIKCQkJCQkJCQkJCQkJYW5kIHBzZC5lZmZfZGF0ZSA9IGIuZWZmX0RhdGUKCQkJCQkJCQkJCQkJYW5kIHBzZC5wcm92X3NlcV9uYnIgPWIucHJvdl9zZXFfbmJyCgkJCQkJCQkJCQlMZWZ0IE91dGVyIEpvaW4gcHJpY2VfcmVmX2VudHJpZXMgcHIgb24gcHNkLnRpa19wcmljZV9yZWYgPSBwci5yZWZlcmVuY2VfY29kZSBhbmQKCQkJCQkJCQkJCQlwc2QudGlrX3ByaWNlX3JlZl9wcm9kX3R5cGUgPSBwci5wcm9kdWN0X3R5cGVfY29kZSBhbmQgCgkJCQkJCQkJCQkJcHNkLnRpa19wcmljZV9yZWZfZGF0ZSA9IHByLnJlZmVyZW5jZV9kYXRlIAlhbmQKCQkJCQkJCQkJCQlAZHdyYV9wcm9kX21vbnRoIGJldHdlZW4gcHIuZnJvbV9kYXRlIGFuZCBwci50b19kYXRlCiAgIFdIRVJFICggKGIucnVuX2RhdGV0aW1lID0gQGR3cmFfcnVuX2RhdGV0aW1lKSBhbmQgCgkJCQkoIGIucHJvY19waXBlID0gQGR3cmFfZmFjaWxpdHlfY29kZSApIGFuZCAKCQkJCSggYi5zdGFydF9kYXRlID0gQGR3cmFfcHJvZF9tb250aCApIGFuZCAKCQkJCSggYi5wcm9jX2sgPSBAZHdyYV9jb250cmFjdF9uYnIgKSBhbmQKCQkJCSggYi5kZWRfc3RhX25iciA9IEBkd3JhX3NvdXJjZV9uYnIgKSApIGFuZCAKCQkJCSggcC5kaXNwb3NpdGlvbl9jb2RlID0gJ1JFUycpIGFuZCAKCQkJCSggcHNkLmRpc3Bvc2l0aW9uX2NvZGUgPSAnUkVTJyApIApHcm91cCBieSBwLnBycF9wZXJjZW50LChJc051bGwocHIudG90X3ZhbHVlX2FjdHVhbCxwci50b3RfdmFsdWVfZXN0aW1hdGUpKSAKIDwvU3FsPg0KPFBhcmFtZXRlciBOYW1lPSJAZHdyYV9wcm9kX21vbnRoIiBUeXBlPSJEZXZFeHByZXNzLkRhdGFBY2Nlc3MuRXhwcmVzc2lvbiI+KFN5c3RlbS5TdHJpbmcpKD9kd3JhX3Byb2RfbW9udGgpPC9QYXJhbWV0ZXI+DQo8UGFyYW1ldGVyIE5hbWU9IkBkd3JhX2ZhY2lsaXR5X2NvZGUiIFR5cGU9IkRldkV4cHJlc3MuRGF0YUFjY2Vzcy5FeHByZXNzaW9uIj4oU3lzdGVtLlN0cmluZykoP2R3cmFfZmFjaWxpdHlfY29kZSk8L1BhcmFtZXRlcj4NCjxQYXJhbWV0ZXIgTmFtZT0iQGR3cmFfc291cmNlX25iciIgVHlwZT0iRGV2RXhwcmVzcy5EYXRhQWNjZXNzLkV4cHJlc3Npb24iPihTeXN0ZW0uU3RyaW5nKSg/ZHdyYV9zb3VyY2VfbmJyKTwvUGFyYW1ldGVyPg0KPFBhcmFtZXRlciBOYW1lPSJAZHdyYV9jb250cmFjdF9uYnIiIFR5cGU9IkRldkV4cHJlc3MuRGF0YUFjY2Vzcy5FeHByZXNzaW9uIj4oU3lzdGVtLlN0cmluZykoP2R3cmFfY29udHJhY3RfbmJyKTwvUGFyYW1ldGVyPg0KPFBhcmFtZXRlciBOYW1lPSJAZHdyYV9ydW5fZGF0ZXRpbWUiIFR5cGU9IkRldkV4cHJlc3MuRGF0YUFjY2Vzcy5FeHByZXNzaW9uIj4oU3lzdGVtLlN0cmluZykoP2R3cmFfcnVuX2RhdGV0aW1lKTwvUGFyYW1ldGVyPg0KPC9RdWVyeT4NCjxSZXN1bHRTY2hlbWE+DQo8RGF0YVNldCBOYW1lID0ic3FsRGF0YVNvdXJjZTEiPg0KPFZpZXcgTmFtZT0iUXVlcnkiPg0KPEZpZWxkIE5hbWU9ImlubGV0IiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0iZnVlbCIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9InNocmluayIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9InJlc2lkdWUiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJmbGFyZSIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9InJ0bCIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9InJlc2lkdWVfdGhlbyIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9Im1jZl9yZXNpZHVlIiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0icHJwX3BlcmNlbnQiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJwcmljZSIgVHlwZT0iU3RyaW5nIiAvPg0KPC9WaWV3Pg0KPC9EYXRhU2V0Pg0KPC9SZXN1bHRTY2hlbWE+DQo8Q29ubmVjdGlvbk9wdGlvbnMgQ2xvc2VDb25uZWN0aW9uPSJ0cnVlIiAvPg0KPC9TcWxEYXRhU291cmNlPg0K"/>
+	</ComponentStorage>
+	<Bands>
+		<Item1 Ref="7" ControlType="TopMarginBand" Name="TopMargin" HeightF="26"/>
+		<Item2 Ref="8" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="26"/>
+		<Item3 Ref="9" ControlType="ReportHeaderBand" Name="header" HeightF="53">
+			<Controls>
+				<Item1 Ref="10" ControlType="XRLabel" Name="t_4" TextAlignment="MiddleLeft" Multiline="true" Text="Residue Settlement" SizeF="163,15" LocationFloat="460,3" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
+				<Item2 Ref="11" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="1011,0" LocationFloat="-0,51"  LineDirection="Horizontal" Visible="True"/>
+				<Item3 Ref="12" ControlType="XRLabel" Name="t_14" TextAlignment="MiddleRight" Multiline="true" Text="Residue Returned" SizeF="90,13" LocationFloat="422,24" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+				<Item4 Ref="13" ControlType="XRLabel" Name="t_3" TextAlignment="MiddleCenter" Multiline="true" Text="Net Delivered
+MMBTU" SizeF="76,25" LocationFloat="4,24" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+				<Item5 Ref="14" ControlType="XRLabel" Name="t_7" TextAlignment="MiddleRight" Multiline="true" Text="Shrink" SizeF="43,13" LocationFloat="87,37" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+				<Item6 Ref="15" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleRight" Multiline="true" Text="Fuel/Flare" SizeF="50,13" LocationFloat="152,37" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+				<Item7 Ref="16" ControlType="XRLabel" Name="t_9" TextAlignment="MiddleCenter" Multiline="true" Text="Theoretical
+Residue" SizeF="61,25" LocationFloat="230,24" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+				<Item8 Ref="17" ControlType="XRLabel" Name="t_2" TextAlignment="MiddleCenter" Multiline="true" Text="Allocated
+ Residue" SizeF="72,25" LocationFloat="317,24" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+				<Item9 Ref="18" ControlType="XRLabel" Name="t_15" TextAlignment="MiddleCenter" Multiline="true" Text="Net Residue
+MCF" SizeF="67,25" LocationFloat="556,24" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+				<Item10 Ref="19" ControlType="XRLabel" Name="t_16" TextAlignment="MiddleCenter" Multiline="true" Text="Contract
+%" SizeF="57,25" LocationFloat="716,24" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+				<Item11 Ref="20" ControlType="XRLabel" Name="t_17" TextAlignment="MiddleCenter" Multiline="true" Text="Settlement
+Residue" SizeF="59,25" LocationFloat="792,24" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+				<Item12 Ref="21" ControlType="XRLabel" Name="t_18" TextAlignment="MiddleRight" Multiline="true" Text="Price" SizeF="25,13" LocationFloat="899,37" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+				<Item13 Ref="22" ControlType="XRLabel" Name="t_19" TextAlignment="MiddleCenter" Multiline="true" Text="Residue
+Value" SizeF="47,25" LocationFloat="962,24" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+				<Item14 Ref="23" ControlType="XRLabel" Name="t_5" TextAlignment="MiddleCenter" Multiline="true" Text="Net Residue
+ MMBTU" SizeF="67,25" LocationFloat="635,24" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+				<Item15 Ref="24" ControlType="XRLine" Name="l_2" FillColor="255,128,128,128" SizeF="1011,0" LocationFloat="-0,19"  LineDirection="Horizontal" Visible="True"/>
+			</Controls>
+		</Item3>
+		<Item4 Ref="25" ControlType="GroupHeaderBand" Name="summary" HeightF="-0" Visible="False" Level="0">
+			<Controls>
+			</Controls>
+		</Item4>
+		<Item5 Ref="26" ControlType="ReportFooterBand" Name="footer" HeightF="-0" Visible="False">
+			<Controls>
+			</Controls>
+		</Item5>
+		<Item6 Ref="27" ControlType="DetailBand" Name="detail" HeightF="15">
+			<Controls>
+				<Item1 Ref="28" ControlType="XRLabel" Name="inlet" TextFormatString="{0:#,##0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="64,13" LocationFloat="6,1" AnchorVertical="Both" Font="Arial, 7pt" Visible="False">
+					<ExpressionBindings>
+						<Item1 Ref="29" EventName="BeforePrint" PropertyName="Text" Expression="[inlet]"/>
+					</ExpressionBindings>
+				</Item1>
+				<Item2 Ref="30" ControlType="XRLabel" Name="prp_percent" TextFormatString="{0:0.00%}" TextAlignment="MiddleRight"  Multiline="true" SizeF="69,13" LocationFloat="698,1" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="31" EventName="BeforePrint" PropertyName="Text" Expression="[prp_percent]"/>
+					</ExpressionBindings>
+				</Item2>
+				<Item3 Ref="32" ControlType="XRLabel" Name="settlement_field" TextFormatString="{0:#,##0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="77,13" LocationFloat="771,1" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="33" EventName="BeforePrint" PropertyName="Text" Expression="[settlement]"/>
+					</ExpressionBindings>
+				</Item3>
+				<Item4 Ref="34" ControlType="XRLabel" Name="price" TextFormatString="{0:#0.000000}" TextAlignment="MiddleRight"  Multiline="true" SizeF="65,13" LocationFloat="861,1" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="35" EventName="BeforePrint" PropertyName="Text" Expression="[price]"/>
+					</ExpressionBindings>
+				</Item4>
+				<Item5 Ref="36" ControlType="XRLabel" Name="value_field" TextFormatString="{0:$#,##0.00}" TextAlignment="MiddleRight"  Multiline="true" SizeF="74,13" LocationFloat="937,1" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="37" EventName="BeforePrint" PropertyName="Text" Expression="[value]"/>
+					</ExpressionBindings>
+				</Item5>
+				<Item6 Ref="38" ControlType="XRLabel" Name="shrink" TextFormatString="{0:#,##0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="46,13" LocationFloat="84,1" AnchorVertical="Both" Font="Arial, 7pt" Visible="False">
+					<ExpressionBindings>
+						<Item1 Ref="39" EventName="BeforePrint" PropertyName="Text" Expression="[shrink]"/>
+					</ExpressionBindings>
+				</Item6>
+				<Item7 Ref="40" ControlType="XRLabel" Name="compute_4_field" TextFormatString="{0:#,##0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="59,13" LocationFloat="143,-0" AnchorVertical="Both" Font="Arial, 7pt" Visible="False">
+					<ExpressionBindings>
+						<Item1 Ref="41" EventName="BeforePrint" PropertyName="Text" Expression="[compute_4]"/>
+					</ExpressionBindings>
+				</Item7>
+				<Item8 Ref="42" ControlType="XRLabel" Name="residue_theo" TextFormatString="{0:#,##0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="70,13" LocationFloat="216,1" AnchorVertical="Both" Font="Arial, 7pt" Visible="False">
+					<ExpressionBindings>
+						<Item1 Ref="43" EventName="BeforePrint" PropertyName="Text" Expression="[residue_theo]"/>
+					</ExpressionBindings>
+				</Item8>
+				<Item9 Ref="44" ControlType="XRLabel" Name="allocated_residue_field" TextFormatString="{0:#,##0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="85,13" LocationFloat="291,1" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="45" EventName="BeforePrint" PropertyName="Text" Expression="[allocated_residue]"/>
+					</ExpressionBindings>
+				</Item9>
+				<Item10 Ref="46" ControlType="XRLabel" Name="rtl" TextFormatString="{0:#,##0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="75,13" LocationFloat="436,1" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="47" EventName="BeforePrint" PropertyName="Text" Expression="[rtl]"/>
+					</ExpressionBindings>
+				</Item10>
+				<Item11 Ref="48" ControlType="XRLabel" Name="mcf_residue" TextFormatString="{0:#,##0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="77,13" LocationFloat="538,1" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="49" EventName="BeforePrint" PropertyName="Text" Expression="[mcf_residue]"/>
+					</ExpressionBindings>
+				</Item11>
+				<Item12 Ref="50" ControlType="XRLabel" Name="residue" TextFormatString="{0:#,##0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="77,13" LocationFloat="618,1" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="51" EventName="BeforePrint" PropertyName="Text" Expression="[residue]"/>
+					</ExpressionBindings>
+				</Item12>
+			</Controls>
+		</Item6>
+	</Bands>
+	<CalculatedFields>
+		<Item1 Ref="52" Name="settlement" Expression=" Round(residue*prp_percent,0)" DataMember="Query" />
+		<Item2 Ref="53" Name="value" Expression=" settlement*price" DataMember="Query" />
+		<Item3 Ref="54" Name="compute_4" Expression="Iif(flare==0,fuel,fuel/flare)" DataMember="Query" />
+		<Item4 Ref="55" Name="allocated_residue" Expression=" residue+rtl" DataMember="Query" />
+	</CalculatedFields>
+</XtraReportsLayoutSerializer>
