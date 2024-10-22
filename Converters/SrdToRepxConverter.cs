@@ -21,6 +21,8 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
     private List<(string name, string expression)> _currentComputes = [];
     private List<string> _currentColumns = [];
     private static readonly List<string> _expressionableAttributes = ["visible", "height", "width"];
+    // Offset is added to account for font options that are not present in DevExpress, causing some text to not fit into the usual dimensions by a couple of pixels
+    private static readonly int _labelWidthOffset = 3;
 
     public void GenerateRepxFile(string fileName)
     {
@@ -120,7 +122,7 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
                     }
                 default:
                     {
-                        GenerateElement(container, ref itemCounter);
+                        GenerateBand(container, ref itemCounter);
                         break;
                     }
             }
@@ -142,6 +144,11 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
     {
         var objType = ConvertElementType(subreport._objectType);
         var attributes = subreport._attributes;
+
+        if (attributes.TryGetValue("border", out var borderStr) && int.TryParse(borderStr, out var border) && border > 0)
+        {
+            GenerateBorder(attributes, border, ref itemCounter);
+        }
 
         var tmpHeight = _globalHeight;
         var tmpWidth = _globalWidth;
@@ -221,6 +228,13 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
         _currentColumns = tmpColumns;
     }
 
+    private void GenerateBorder(Dictionary<string, string> attributes, int border, ref int itemCounter)
+    {
+        WriteStartObject($"<Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"XRShape\" Name=\"border_{itemCounter}\" LineWidth=\"2\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\">");
+        WriteSingleLine($"<Shape Ref=\"{_ref++}\" ShapeName=\"Rectangle\" />");
+        WriteEndObject($"</Item{itemCounter++}>");
+    }
+
     private void GenerateParameters(List<string> arguments)
     {
         WriteStartObject("<Parameters>");
@@ -233,7 +247,7 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
         WriteEndObject("</Parameters>");
     }
 
-    public void GenerateElement(ContainerModel container, ref int itemCounter)
+    public void GenerateBand(ContainerModel container, ref int itemCounter)
     {
         var objType = ConvertElementType(container._objectType);
         if (objType == null)
@@ -258,12 +272,12 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
             }
             else
             {
-                GenerateSubElement(element, ref subItemCounter, container);
+                GenerateElement(element, ref subItemCounter, container);
             }
         }
         foreach (var element in backgroundShapes)
         {
-            GenerateSubElement(element, ref subItemCounter, container);
+            GenerateElement(element, ref subItemCounter, container);
         }
         WriteEndObject("</Controls>");
         WriteEndObject($"</Item{itemCounter++}>");
@@ -312,12 +326,12 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
             }
             else
             {
-                GenerateSubElement(element, ref subItemCounter, container);
+                GenerateElement(element, ref subItemCounter, container);
             }
         }
         foreach (var element in backgroundShapes)
         {
-            GenerateSubElement(element, ref subItemCounter, container);
+            GenerateElement(element, ref subItemCounter, container);
         }
         WriteEndObject("</Controls>");
         WriteEndObject($"</Item{itemCounter++}>");
@@ -336,18 +350,18 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
             }
             else
             {
-                GenerateSubElement(element, ref subItemCounter, container);
+                GenerateElement(element, ref subItemCounter, container);
             }
         }
         foreach (var element in backgroundShapes)
         {
-            GenerateSubElement(element, ref subItemCounter, container);
+            GenerateElement(element, ref subItemCounter, container);
         }
         WriteEndObject("</Controls>");
         WriteEndObject($"</Item{itemCounter++}>");
     }
 
-    public void GenerateSubElement(ObjectModel element, ref int itemCounter, ContainerModel container)
+    public void GenerateElement(ObjectModel element, ref int itemCounter, ContainerModel container)
     {
         var objType = ConvertElementType(element._objectType);
         if (objType == null)
@@ -458,7 +472,7 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
                 {
                     var text = attributes["text"].Replace('&', '-');
 
-                    var textItemDef = $"Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"{objType}\" {nameAttr} TextAlignment=\"{ConvertAlignment(attributes["alignment"])}\" Multiline=\"true\" Text=\"{text.Split("~t")[0]}\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\" AnchorVertical=\"Both\" Font=\"{attributes["font.face"]}, {attributes["font.height"][1..]}pt{CheckBold(attributes["font.weight"])}\" Visible=\"{visibility}\"";
+                    var textItemDef = $"Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"{objType}\" {nameAttr} TextAlignment=\"{ConvertAlignment(attributes["alignment"])}\" Multiline=\"true\" Text=\"{text.Split("~t")[0]}\" SizeF=\"{X(attributes["width"]) + _labelWidthOffset},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\" AnchorVertical=\"Both\" Font=\"{attributes["font.face"]}, {attributes["font.height"][1..]}pt{CheckBold(attributes["font.weight"])}\" Visible=\"{visibility}\"";
 
                     var (printEvent, fixedExpression) = CheckForExpressionString(text);
                     if (attrExpressions.Count > 0 || fixedExpression != string.Empty)

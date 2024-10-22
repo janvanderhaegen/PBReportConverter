@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<XtraReportsLayoutSerializer SerializerVersion="24.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral" Name="XtraReport1" VerticalContentSplitting="Smart" Margins="-0, -0, -0, -0" PaperKind="Custom" PageWidth="1048" PageHeight="414" Version="24.1" DataMember="Query" DataSource="#Ref-0">
+<XtraReportsLayoutSerializer SerializerVersion="24.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral" Name="XtraReport1" VerticalContentSplitting="Smart" Margins="-0, -0, -0, -0" PaperKind="Custom" PageWidth="1053" PageHeight="414" Version="24.1" DataMember="Query" DataSource="#Ref-0">
 	<Parameters>
 		<Item1 Ref="2" Name="statement_nbr"/>
 		<Item2 Ref="3" Name="statement_rev_nbr"/>
@@ -26,7 +26,7 @@
 						<Item2 Ref="11" EventName="PrintOnPage" PropertyName="Visible" Expression="Iif([Arguments.PageIndex]==1,false,true)"/>
 					</ExpressionBindings>
 				</Item1>
-				<Item2 Ref="12" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleRight" Multiline="true" Text="Statement #:" SizeF="93,19" LocationFloat="9,3" AnchorVertical="Both" Font="Calibri, 11pt, style=Bold" Visible="True">
+				<Item2 Ref="12" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleRight" Multiline="true" Text="Statement #:" SizeF="96,19" LocationFloat="9,3" AnchorVertical="Both" Font="Calibri, 11pt, style=Bold" Visible="True">
 					<ExpressionBindings>
 						<Item1 Ref="13" EventName="PrintOnPage" PropertyName="Visible" Expression="Iif([Arguments.PageIndex]==1,false,true)"/>
 					</ExpressionBindings>
@@ -42,7 +42,7 @@
 		<Item6 Ref="17" ControlType="DetailBand" Name="detail" HeightF="188">
 			<Controls>
 				<Item1 Ref="18" ControlType="XRSubreport" Name="rpt_pmnt_statement_plt_plant_drv" SizeF="1046,36" LocationFloat="2,152">
-					<ReportSource Ref="20" Name="rpt_pmnt_statement_plt_plant_drv" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_plant_drv, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="1052" PageHeight="40" Version="24.1" DataMember="Query" DataSource="#Ref-19">
+					<ReportSource Ref="20" Name="rpt_pmnt_statement_plt_plant_drv" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_plant_drv, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="1057" PageHeight="40" Version="24.1" DataMember="Query" DataSource="#Ref-19">
 						<Parameters>
 							<Item1 Ref="21" Name="statement_nbr"/>
 							<Item2 Ref="22" Name="statement_rev_nbr"/>
@@ -70,7 +70,7 @@
 							<Item6 Ref="30" ControlType="DetailBand" Name="detail" HeightF="40">
 								<Controls>
 									<Item1 Ref="31" ControlType="XRSubreport" Name="rpt_pmnt_statement_plt_stndrd_stmt" SizeF="1052,36" LocationFloat="-0,3">
-										<ReportSource Ref="33" Name="rpt_pmnt_statement_plt_stndrd_stmt" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_stndrd_stmt, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="23, 23, 25, 25" PaperKind="Custom" PageWidth="1050" PageHeight="792" Version="24.1" DataMember="Query" DataSource="#Ref-32">
+										<ReportSource Ref="33" Name="rpt_pmnt_statement_plt_stndrd_stmt" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_stndrd_stmt, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="23, 23, 25, 25" PaperKind="Custom" PageWidth="1055" PageHeight="792" Version="24.1" DataMember="Query" DataSource="#Ref-32">
 											<Parameters>
 												<Item1 Ref="34" Name="dwra_prod_month"/>
 												<Item2 Ref="35" Name="dwra_facility_code"/>
@@ -98,7 +98,7 @@
 												<Item6 Ref="43" ControlType="DetailBand" Name="detail" HeightF="610">
 													<Controls>
 														<Item1 Ref="44" ControlType="XRSubreport" Name="rpt_pmnt_statement_plt_stndrd_stmt_fees" SizeF="267,138" LocationFloat="6,276">
-															<ReportSource Ref="46" Name="rpt_pmnt_statement_plt_stndrd_stmt_fees" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_stndrd_stmt_fees, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="264" PageHeight="50" Version="24.1" DataMember="Query" DataSource="#Ref-45">
+															<ReportSource Ref="46" Name="rpt_pmnt_statement_plt_stndrd_stmt_fees" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_stndrd_stmt_fees, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="269" PageHeight="50" Version="24.1" DataMember="Query" DataSource="#Ref-45">
 																<Parameters>
 																	<Item1 Ref="47" Name="dwra_prod_month"/>
 																	<Item2 Ref="48" Name="dwra_facility_cd"/>
@@ -114,15 +114,15 @@
 																	<Item2 Ref="53" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="25"/>
 																	<Item3 Ref="54" ControlType="ReportHeaderBand" Name="header" HeightF="18">
 																		<Controls>
-																			<Item1 Ref="55" ControlType="XRLabel" Name="valid_charge_type_t" TextAlignment="MiddleRight" Multiline="true" Text="Fees / Adjustments" SizeF="97,15" LocationFloat="7,27" AnchorVertical="Both" Font="Arial, 8pt" Visible="False"/>
-																			<Item2 Ref="56" ControlType="XRLabel" Name="price_t" TextAlignment="MiddleRight" Multiline="true" Text="Fee Rate" SizeF="82,15" LocationFloat="92,27" AnchorVertical="Both" Font="Arial, 8pt" Visible="False"/>
-																			<Item3 Ref="57" ControlType="XRLabel" Name="compute_0003_t" TextAlignment="MiddleRight" Multiline="true" Text="Value" SizeF="72,15" LocationFloat="179,27" AnchorVertical="Both" Font="Arial, 8pt" Visible="False"/>
+																			<Item1 Ref="55" ControlType="XRLabel" Name="valid_charge_type_t" TextAlignment="MiddleRight" Multiline="true" Text="Fees / Adjustments" SizeF="100,15" LocationFloat="7,27" AnchorVertical="Both" Font="Arial, 8pt" Visible="False"/>
+																			<Item2 Ref="56" ControlType="XRLabel" Name="price_t" TextAlignment="MiddleRight" Multiline="true" Text="Fee Rate" SizeF="85,15" LocationFloat="92,27" AnchorVertical="Both" Font="Arial, 8pt" Visible="False"/>
+																			<Item3 Ref="57" ControlType="XRLabel" Name="compute_0003_t" TextAlignment="MiddleRight" Multiline="true" Text="Value" SizeF="75,15" LocationFloat="179,27" AnchorVertical="Both" Font="Arial, 8pt" Visible="False"/>
 																			<Item4 Ref="58" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="256,-23" LocationFloat="-0,41"  LineDirection="Horizontal" Visible="False"/>
 																		</Controls>
 																	</Item3>
 																	<Item4 Ref="59" ControlType="GroupHeaderBand" Name="summary" HeightF="17" Level="0">
 																		<Controls>
-																			<Item1 Ref="60" ControlType="XRLine" Name="l_2" FillColor="255,128,128,128" SizeF="68,0" LocationFloat="196,-0"  LineDirection="Horizontal" Visible="True"/>
+																			<Item1 Ref="60" ControlType="XRLine" Name="l_2" FillColor="255,128,128,128" SizeF="72,0" LocationFloat="196,-0"  LineDirection="Horizontal" Visible="True"/>
 																			<Item2 Ref="61" ControlType="XRLabel" Name="compute_1_field" TextFormatString="{0:$#,##0.00}" TextAlignment="MiddleRight"  Multiline="true" SizeF="95,13" LocationFloat="169,3" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
 																				<ExpressionBindings>
 																					<Item1 Ref="62" EventName="BeforePrint" PropertyName="Text" Expression="[compute_1]"/>
@@ -173,7 +173,7 @@
 															</ParameterBindings>
 														</Item1>
 														<Item2 Ref="80" ControlType="XRSubreport" Name="rpt_pmnt_statement_plt_stndrd_address" SizeF="497,76" LocationFloat="553,464">
-															<ReportSource Ref="82" Name="rpt_pmnt_statement_plt_stndrd_address" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_stndrd_address, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="488" PageHeight="61" Version="24.1" DataMember="Query" DataSource="#Ref-81">
+															<ReportSource Ref="82" Name="rpt_pmnt_statement_plt_stndrd_address" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_stndrd_address, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="493" PageHeight="61" Version="24.1" DataMember="Query" DataSource="#Ref-81">
 																<Parameters>
 																	<Item1 Ref="83" Name="dwra_ba_nbr"/>
 																	<Item2 Ref="84" Name="dwra_contract_nbr"/>
@@ -247,7 +247,7 @@
 															</ParameterBindings>
 														</Item2>
 														<Item3 Ref="109" ControlType="XRSubreport" Name="rpt_pmnt_statement_plt_stndrd_contact" SizeF="495,73" LocationFloat="553,278">
-															<ReportSource Ref="111" Name="rpt_pmnt_statement_plt_stndrd_contact" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_stndrd_contact, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="471" PageHeight="45" Version="24.1" DataMember="Query" DataSource="#Ref-110">
+															<ReportSource Ref="111" Name="rpt_pmnt_statement_plt_stndrd_contact" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_stndrd_contact, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="476" PageHeight="45" Version="24.1" DataMember="Query" DataSource="#Ref-110">
 																<Parameters>
 																	<Item1 Ref="112" Name="dwra_ba_nbr"/>
 																</Parameters>
@@ -259,8 +259,8 @@
 																	<Item2 Ref="114" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="25"/>
 																	<Item3 Ref="115" ControlType="ReportHeaderBand" Name="header" HeightF="19">
 																		<Controls>
-																			<Item1 Ref="116" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="471,0" LocationFloat="-0,16"  LineDirection="Horizontal" Visible="True"/>
-																			<Item2 Ref="117" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleLeft" Multiline="true" Text="Contacts" SizeF="65,15" LocationFloat="226,-0" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+																			<Item1 Ref="116" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="476,0" LocationFloat="-0,16"  LineDirection="Horizontal" Visible="True"/>
+																			<Item2 Ref="117" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleLeft" Multiline="true" Text="Contacts" SizeF="68,15" LocationFloat="226,-0" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
 																		</Controls>
 																	</Item3>
 																	<Item4 Ref="118" ControlType="GroupHeaderBand" Name="summary" HeightF="-0" Visible="False" Level="0">
@@ -309,7 +309,7 @@
 															</ExpressionBindings>
 														</Item4>
 														<Item5 Ref="132" ControlType="XRSubreport" Name="rpt_pmnt_statement_plt_stndrd_plant_smmry" SizeF="267,145" LocationFloat="6,417">
-															<ReportSource Ref="134" Name="rpt_pmnt_statement_plt_stndrd_plant_smmry" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_stndrd_plant_smmry, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 26, 26" PaperKind="Custom" PageWidth="261" PageHeight="52" Version="24.1" DataMember="Query" DataSource="#Ref-133">
+															<ReportSource Ref="134" Name="rpt_pmnt_statement_plt_stndrd_plant_smmry" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_stndrd_plant_smmry, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 26, 26" PaperKind="Custom" PageWidth="266" PageHeight="52" Version="24.1" DataMember="Query" DataSource="#Ref-133">
 																<Parameters>
 																	<Item1 Ref="135" Name="dwra_prod_month"/>
 																	<Item2 Ref="136" Name="dwra_facility_cd"/>
@@ -324,10 +324,10 @@
 																	<Item2 Ref="140" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="26"/>
 																	<Item3 Ref="141" ControlType="ReportHeaderBand" Name="header" HeightF="36">
 																		<Controls>
-																			<Item1 Ref="142" ControlType="XRLabel" Name="t_3" TextAlignment="MiddleCenter" Multiline="true" Text="Plant Product Volumes" SizeF="154,15" LocationFloat="68,-0" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
-																			<Item2 Ref="143" ControlType="XRLine" Name="l_2" FillColor="255,128,128,128" SizeF="261,1" LocationFloat="-0,15"  LineDirection="Horizontal" Visible="True"/>
-																			<Item3 Ref="144" ControlType="XRLabel" Name="t_7" TextAlignment="MiddleRight" Multiline="true" Text="Allocated" SizeF="57,15" LocationFloat="203,19" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
-																			<Item4 Ref="145" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleRight" Multiline="true" Text="Theoretical" SizeF="62,15" LocationFloat="119,19" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+																			<Item1 Ref="142" ControlType="XRLabel" Name="t_3" TextAlignment="MiddleCenter" Multiline="true" Text="Plant Product Volumes" SizeF="157,15" LocationFloat="68,-0" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
+																			<Item2 Ref="143" ControlType="XRLine" Name="l_2" FillColor="255,128,128,128" SizeF="265,1" LocationFloat="-0,15"  LineDirection="Horizontal" Visible="True"/>
+																			<Item3 Ref="144" ControlType="XRLabel" Name="t_7" TextAlignment="MiddleRight" Multiline="true" Text="Allocated" SizeF="60,15" LocationFloat="203,19" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+																			<Item4 Ref="145" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleRight" Multiline="true" Text="Theoretical" SizeF="65,15" LocationFloat="119,19" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
 																		</Controls>
 																	</Item3>
 																	<Item4 Ref="146" ControlType="GroupHeaderBand" Name="summary" HeightF="-0" Visible="False" Level="0">
@@ -373,14 +373,14 @@
 																<Item1 Ref="160" EventName="BeforePrint" PropertyName="Text" Expression="[sellers_wi]"/>
 															</ExpressionBindings>
 														</Item6>
-														<Item7 Ref="161" ControlType="XRLabel" Name="t_16" TextAlignment="MiddleRight" Multiline="true" Text="Comments" SizeF="53,15" LocationFloat="773,358" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+														<Item7 Ref="161" ControlType="XRLabel" Name="t_16" TextAlignment="MiddleRight" Multiline="true" Text="Comments" SizeF="56,15" LocationFloat="773,358" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
 														<Item8 Ref="162" ControlType="XRLine" Name="l_6" FillColor="255,128,128,128" SizeF="497,0" LocationFloat="551,483"  LineDirection="Horizontal" Visible="True"/>
-														<Item9 Ref="163" ControlType="XRLabel" Name="valid_charge_type_t" TextAlignment="MiddleRight" Multiline="true" Text="Fees / Adjustments" SizeF="97,13" LocationFloat="10,278" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
-														<Item10 Ref="164" ControlType="XRLabel" Name="t_18" TextAlignment="MiddleRight" Multiline="true" Text="Vol" SizeF="19,13" LocationFloat="125,278" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
-														<Item11 Ref="165" ControlType="XRLabel" Name="price_t" TextAlignment="MiddleRight" Multiline="true" Text="Fee Rate" SizeF="50,13" LocationFloat="152,278" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+														<Item9 Ref="163" ControlType="XRLabel" Name="valid_charge_type_t" TextAlignment="MiddleRight" Multiline="true" Text="Fees / Adjustments" SizeF="100,13" LocationFloat="10,278" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+														<Item10 Ref="164" ControlType="XRLabel" Name="t_18" TextAlignment="MiddleRight" Multiline="true" Text="Vol" SizeF="22,13" LocationFloat="125,278" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+														<Item11 Ref="165" ControlType="XRLabel" Name="price_t" TextAlignment="MiddleRight" Multiline="true" Text="Fee Rate" SizeF="53,13" LocationFloat="152,278" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
 														<Item12 Ref="166" ControlType="XRLine" Name="l_3" FillColor="255,128,128,128" SizeF="265,0" LocationFloat="6,292"  LineDirection="Horizontal" Visible="True"/>
 														<Item13 Ref="167" ControlType="XRSubreport" Name="rpt_pmnt_statement_plt_stndrd_stmt_ga" SizeF="273,285" LocationFloat="276,277">
-															<ReportSource Ref="169" Name="rpt_pmnt_statement_plt_stndrd_stmt_ga" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_stndrd_stmt_ga, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="261" PageHeight="270" Version="24.1" DataMember="Query" DataSource="#Ref-168">
+															<ReportSource Ref="169" Name="rpt_pmnt_statement_plt_stndrd_stmt_ga" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_stndrd_stmt_ga, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="266" PageHeight="270" Version="24.1" DataMember="Query" DataSource="#Ref-168">
 																<Parameters>
 																	<Item1 Ref="170" Name="dwra_prod_month"/>
 																	<Item2 Ref="171" Name="dwra_facility_code"/>
@@ -396,11 +396,11 @@
 																	<Item2 Ref="176" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="25"/>
 																	<Item3 Ref="177" ControlType="ReportHeaderBand" Name="header" HeightF="37">
 																		<Controls>
-																			<Item1 Ref="178" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleLeft" Multiline="true" Text="Analysis" SizeF="61,15" LocationFloat="101,1" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
-																			<Item2 Ref="179" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="261,0" LocationFloat="-0,16"  LineDirection="Horizontal" Visible="True"/>
-																			<Item3 Ref="180" ControlType="XRLabel" Name="t_2" TextAlignment="MiddleLeft" Multiline="true" Text="Components" SizeF="75,15" LocationFloat="28,19" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
-																			<Item4 Ref="181" ControlType="XRLabel" Name="t_4" TextAlignment="MiddleLeft" Multiline="true" Text="GPM" SizeF="23,15" LocationFloat="161,19" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
-																			<Item5 Ref="182" ControlType="XRLabel" Name="t_3" TextAlignment="MiddleRight" Multiline="true" Text="Mole %" SizeF="37,15" LocationFloat="223,19" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+																			<Item1 Ref="178" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleLeft" Multiline="true" Text="Analysis" SizeF="64,15" LocationFloat="101,1" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
+																			<Item2 Ref="179" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="266,0" LocationFloat="-0,16"  LineDirection="Horizontal" Visible="True"/>
+																			<Item3 Ref="180" ControlType="XRLabel" Name="t_2" TextAlignment="MiddleLeft" Multiline="true" Text="Components" SizeF="78,15" LocationFloat="28,19" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+																			<Item4 Ref="181" ControlType="XRLabel" Name="t_4" TextAlignment="MiddleLeft" Multiline="true" Text="GPM" SizeF="26,15" LocationFloat="161,19" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+																			<Item5 Ref="182" ControlType="XRLabel" Name="t_3" TextAlignment="MiddleRight" Multiline="true" Text="Mole %" SizeF="40,15" LocationFloat="223,19" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
 																		</Controls>
 																	</Item3>
 																	<Item4 Ref="183" ControlType="GroupHeaderBand" Name="summary" HeightF="-0" Visible="False" Level="0">
@@ -413,19 +413,19 @@
 																	</Item5>
 																	<Item6 Ref="185" ControlType="DetailBand" Name="detail" HeightF="233">
 																		<Controls>
-																			<Item1 Ref="186" ControlType="XRLabel" Name="iso_butane_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Iso Butane" SizeF="91,13" LocationFloat="10,143" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
-																			<Item2 Ref="187" ControlType="XRLabel" Name="nor_butane_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Nor Butane" SizeF="91,13" LocationFloat="10,161" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
-																			<Item3 Ref="188" ControlType="XRLabel" Name="iso_pentane_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Iso Pentane" SizeF="91,13" LocationFloat="10,178" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
-																			<Item4 Ref="189" ControlType="XRLabel" Name="nor_pentane_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Nor Pentane" SizeF="91,13" LocationFloat="10,196" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
-																			<Item5 Ref="190" ControlType="XRLabel" Name="hexane_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Hexane" SizeF="91,13" LocationFloat="10,214" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
-																			<Item6 Ref="191" ControlType="XRLabel" Name="helium_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Helium" SizeF="53,13" LocationFloat="10,1" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
-																			<Item7 Ref="192" ControlType="XRLabel" Name="nitro_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Nitrogen" SizeF="91,13" LocationFloat="10,19" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
-																			<Item8 Ref="193" ControlType="XRLabel" Name="c02_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Carbon Dioxide" SizeF="91,13" LocationFloat="10,37" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
-																			<Item9 Ref="194" ControlType="XRLabel" Name="h2s_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="H2S" SizeF="91,13" LocationFloat="10,55" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
-																			<Item10 Ref="195" ControlType="XRLabel" Name="t_5" TextAlignment="MiddleLeft" Multiline="true" Text="Other Inerts" SizeF="60,13" LocationFloat="10,72" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
-																			<Item11 Ref="196" ControlType="XRLabel" Name="methane_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Methane" SizeF="91,13" LocationFloat="10,90" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
-																			<Item12 Ref="197" ControlType="XRLabel" Name="ethane_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Ethane" SizeF="91,13" LocationFloat="10,108" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
-																			<Item13 Ref="198" ControlType="XRLabel" Name="propane_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Propane" SizeF="91,13" LocationFloat="10,125" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+																			<Item1 Ref="186" ControlType="XRLabel" Name="iso_butane_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Iso Butane" SizeF="94,13" LocationFloat="10,143" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+																			<Item2 Ref="187" ControlType="XRLabel" Name="nor_butane_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Nor Butane" SizeF="94,13" LocationFloat="10,161" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+																			<Item3 Ref="188" ControlType="XRLabel" Name="iso_pentane_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Iso Pentane" SizeF="94,13" LocationFloat="10,178" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+																			<Item4 Ref="189" ControlType="XRLabel" Name="nor_pentane_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Nor Pentane" SizeF="94,13" LocationFloat="10,196" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+																			<Item5 Ref="190" ControlType="XRLabel" Name="hexane_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Hexane" SizeF="94,13" LocationFloat="10,214" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+																			<Item6 Ref="191" ControlType="XRLabel" Name="helium_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Helium" SizeF="56,13" LocationFloat="10,1" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+																			<Item7 Ref="192" ControlType="XRLabel" Name="nitro_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Nitrogen" SizeF="94,13" LocationFloat="10,19" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+																			<Item8 Ref="193" ControlType="XRLabel" Name="c02_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Carbon Dioxide" SizeF="94,13" LocationFloat="10,37" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+																			<Item9 Ref="194" ControlType="XRLabel" Name="h2s_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="H2S" SizeF="94,13" LocationFloat="10,55" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+																			<Item10 Ref="195" ControlType="XRLabel" Name="t_5" TextAlignment="MiddleLeft" Multiline="true" Text="Other Inerts" SizeF="63,13" LocationFloat="10,72" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+																			<Item11 Ref="196" ControlType="XRLabel" Name="methane_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Methane" SizeF="94,13" LocationFloat="10,90" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+																			<Item12 Ref="197" ControlType="XRLabel" Name="ethane_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Ethane" SizeF="94,13" LocationFloat="10,108" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+																			<Item13 Ref="198" ControlType="XRLabel" Name="propane_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Propane" SizeF="94,13" LocationFloat="10,125" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
 																			<Item14 Ref="199" ControlType="XRLabel" Name="methane_gpm" TextFormatString="{0:#0.0000}" TextAlignment="MiddleRight"  Multiline="true" SizeF="63,16" LocationFloat="124,90" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
 																				<ExpressionBindings>
 																					<Item1 Ref="200" EventName="BeforePrint" PropertyName="Text" Expression="[methane_gpm]"/>
@@ -545,10 +545,10 @@
 																<Item5 Ref="245" ParameterName="dwra_run_datetime" Parameter="#Ref-37" />
 															</ParameterBindings>
 														</Item13>
-														<Item14 Ref="246" ControlType="XRLabel" Name="compute_0003_t" TextAlignment="MiddleRight" Multiline="true" Text="Value" SizeF="44,13" LocationFloat="221,278" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
-														<Item15 Ref="247" ControlType="XRLabel" Name="t_2" TextAlignment="MiddleLeft" Multiline="true" Text="Address" SizeF="65,14" LocationFloat="774,468" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+														<Item14 Ref="246" ControlType="XRLabel" Name="compute_0003_t" TextAlignment="MiddleRight" Multiline="true" Text="Value" SizeF="47,13" LocationFloat="221,278" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+														<Item15 Ref="247" ControlType="XRLabel" Name="t_2" TextAlignment="MiddleLeft" Multiline="true" Text="Address" SizeF="68,14" LocationFloat="774,468" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
 														<Item16 Ref="248" ControlType="XRSubreport" Name="rpt_pmnt_statement_plt_stndrd_residue" SizeF="1043,74" LocationFloat="6,200">
-															<ReportSource Ref="250" Name="rpt_pmnt_statement_plt_stndrd_residue" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_stndrd_residue, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 26, 26" PaperKind="Custom" PageWidth="1009" PageHeight="71" Version="24.1" DataMember="Query" DataSource="#Ref-249">
+															<ReportSource Ref="250" Name="rpt_pmnt_statement_plt_stndrd_residue" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_stndrd_residue, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 26, 26" PaperKind="Custom" PageWidth="1014" PageHeight="71" Version="24.1" DataMember="Query" DataSource="#Ref-249">
 																<Parameters>
 																	<Item1 Ref="251" Name="dwra_prod_month"/>
 																	<Item2 Ref="252" Name="dwra_facility_code"/>
@@ -564,29 +564,29 @@
 																	<Item2 Ref="257" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="26"/>
 																	<Item3 Ref="258" ControlType="ReportHeaderBand" Name="header" HeightF="53">
 																		<Controls>
-																			<Item1 Ref="259" ControlType="XRLabel" Name="t_4" TextAlignment="MiddleLeft" Multiline="true" Text="Residue Settlement" SizeF="163,15" LocationFloat="460,3" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
+																			<Item1 Ref="259" ControlType="XRLabel" Name="t_4" TextAlignment="MiddleLeft" Multiline="true" Text="Residue Settlement" SizeF="166,15" LocationFloat="460,3" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
 																			<Item2 Ref="260" ControlType="XRLabel" Name="t_3" TextAlignment="MiddleCenter" Multiline="true" Text="Net Delivered
-MMBTU" SizeF="76,25" LocationFloat="4,24" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
-																			<Item3 Ref="261" ControlType="XRLabel" Name="t_7" TextAlignment="MiddleRight" Multiline="true" Text="Shrink" SizeF="43,13" LocationFloat="87,37" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
-																			<Item4 Ref="262" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleRight" Multiline="true" Text="Fuel/Flare" SizeF="50,13" LocationFloat="152,37" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+MMBTU" SizeF="79,25" LocationFloat="4,24" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+																			<Item3 Ref="261" ControlType="XRLabel" Name="t_7" TextAlignment="MiddleRight" Multiline="true" Text="Shrink" SizeF="46,13" LocationFloat="87,37" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+																			<Item4 Ref="262" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleRight" Multiline="true" Text="Fuel/Flare" SizeF="53,13" LocationFloat="152,37" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
 																			<Item5 Ref="263" ControlType="XRLabel" Name="t_19" TextAlignment="MiddleCenter" Multiline="true" Text="Residue
-Value" SizeF="47,25" LocationFloat="962,24" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+Value" SizeF="50,25" LocationFloat="962,24" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
 																			<Item6 Ref="264" ControlType="XRLabel" Name="t_17" TextAlignment="MiddleCenter" Multiline="true" Text="Settlement
-Residue" SizeF="59,25" LocationFloat="792,24" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
-																			<Item7 Ref="265" ControlType="XRLine" Name="l_2" FillColor="255,128,128,128" SizeF="1009,1" LocationFloat="-0,19"  LineDirection="Horizontal" Visible="True"/>
-																			<Item8 Ref="266" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="1009,1" LocationFloat="-0,51"  LineDirection="Horizontal" Visible="True"/>
+Residue" SizeF="62,25" LocationFloat="792,24" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+																			<Item7 Ref="265" ControlType="XRLine" Name="l_2" FillColor="255,128,128,128" SizeF="1014,1" LocationFloat="-0,19"  LineDirection="Horizontal" Visible="True"/>
+																			<Item8 Ref="266" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="1014,1" LocationFloat="-0,51"  LineDirection="Horizontal" Visible="True"/>
 																			<Item9 Ref="267" ControlType="XRLabel" Name="t_9" TextAlignment="MiddleCenter" Multiline="true" Text="Theoretical
-Residue" SizeF="61,25" LocationFloat="236,24" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+Residue" SizeF="64,25" LocationFloat="236,24" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
 																			<Item10 Ref="268" ControlType="XRLabel" Name="t_2" TextAlignment="MiddleCenter" Multiline="true" Text="Allocated
- Residue" SizeF="66,25" LocationFloat="329,24" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+ Residue" SizeF="69,25" LocationFloat="329,24" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
 																			<Item11 Ref="269" ControlType="XRLabel" Name="t_6" TextAlignment="MiddleCenter" Multiline="true" Text="Residue
-Returned" SizeF="70,25" LocationFloat="422,24" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+Returned" SizeF="73,25" LocationFloat="422,24" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
 																			<Item12 Ref="270" ControlType="XRLabel" Name="t_15" TextAlignment="MiddleCenter" Multiline="true" Text="Net Residue
-MCF" SizeF="67,25" LocationFloat="502,24" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+MCF" SizeF="70,25" LocationFloat="502,24" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
 																			<Item13 Ref="271" ControlType="XRLabel" Name="t_5" TextAlignment="MiddleCenter" Multiline="true" Text="Net Residue
- MMBTU" SizeF="67,25" LocationFloat="598,24" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
-																			<Item14 Ref="272" ControlType="XRLabel" Name="t_18" TextAlignment="MiddleRight" Multiline="true" Text="Price" SizeF="25,13" LocationFloat="882,36" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
-																			<Item15 Ref="273" ControlType="XRLabel" Name="t_k_percent" TextAlignment="MiddleCenter" Multiline="true" Text="Contract %" SizeF="74,13" LocationFloat="699,36" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+ MMBTU" SizeF="70,25" LocationFloat="598,24" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+																			<Item14 Ref="272" ControlType="XRLabel" Name="t_18" TextAlignment="MiddleRight" Multiline="true" Text="Price" SizeF="28,13" LocationFloat="882,36" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+																			<Item15 Ref="273" ControlType="XRLabel" Name="t_k_percent" TextAlignment="MiddleCenter" Multiline="true" Text="Contract %" SizeF="77,13" LocationFloat="699,36" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
 																		</Controls>
 																	</Item3>
 																	<Item4 Ref="274" ControlType="GroupHeaderBand" Name="summary" HeightF="-0" Visible="False" Level="0">
@@ -680,7 +680,7 @@ MCF" SizeF="67,25" LocationFloat="502,24" AnchorVertical="Both" Font="Arial, 7pt
 															</ParameterBindings>
 														</Item16>
 														<Item17 Ref="312" ControlType="XRSubreport" Name="rpt_pmnt_statement_plt_stndrd_wlhd_smmry" SizeF="231,195" LocationFloat="6,2">
-															<ReportSource Ref="314" Name="rpt_pmnt_statement_plt_stndrd_wlhd_smmry" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_stndrd_wlhd_smmry, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 26, 26" PaperKind="Custom" PageWidth="233" PageHeight="204" Version="24.1" DataMember="Query" DataSource="#Ref-313">
+															<ReportSource Ref="314" Name="rpt_pmnt_statement_plt_stndrd_wlhd_smmry" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_stndrd_wlhd_smmry, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 26, 26" PaperKind="Custom" PageWidth="238" PageHeight="204" Version="24.1" DataMember="Query" DataSource="#Ref-313">
 																<Parameters>
 																	<Item1 Ref="315" Name="dwra_prod_month"/>
 																	<Item2 Ref="316" Name="dwra_facility_code"/>
@@ -696,10 +696,10 @@ MCF" SizeF="67,25" LocationFloat="502,24" AnchorVertical="Both" Font="Arial, 7pt
 																	<Item2 Ref="321" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="26"/>
 																	<Item3 Ref="322" ControlType="ReportHeaderBand" Name="header" HeightF="40">
 																		<Controls>
-																			<Item1 Ref="323" ControlType="XRLabel" Name="t_7" TextAlignment="MiddleCenter" Multiline="true" Text="MCF" SizeF="44,12" LocationFloat="106,23" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
-																			<Item2 Ref="324" ControlType="XRLabel" Name="t_8" TextAlignment="MiddleCenter" Multiline="true" Text="MMBTU" SizeF="69,12" LocationFloat="164,23" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
-																			<Item3 Ref="325" ControlType="XRLabel" Name="t_4" TextAlignment="MiddleLeft" Multiline="true" Text="Wellhead Information" SizeF="163,14" LocationFloat="4,1" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
-																			<Item4 Ref="326" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="231,0" LocationFloat="2,15"  LineDirection="Horizontal" Visible="True"/>
+																			<Item1 Ref="323" ControlType="XRLabel" Name="t_7" TextAlignment="MiddleCenter" Multiline="true" Text="MCF" SizeF="47,12" LocationFloat="106,23" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
+																			<Item2 Ref="324" ControlType="XRLabel" Name="t_8" TextAlignment="MiddleCenter" Multiline="true" Text="MMBTU" SizeF="72,12" LocationFloat="164,23" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
+																			<Item3 Ref="325" ControlType="XRLabel" Name="t_4" TextAlignment="MiddleLeft" Multiline="true" Text="Wellhead Information" SizeF="166,14" LocationFloat="4,1" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
+																			<Item4 Ref="326" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="236,0" LocationFloat="2,15"  LineDirection="Horizontal" Visible="True"/>
 																		</Controls>
 																	</Item3>
 																	<Item4 Ref="327" ControlType="GroupHeaderBand" Name="summary" HeightF="1" Level="0">
@@ -722,9 +722,9 @@ MCF" SizeF="67,25" LocationFloat="502,24" AnchorVertical="Both" Font="Arial, 7pt
 																					<Item1 Ref="333" EventName="BeforePrint" PropertyName="Text" Expression="[mcf_whd_vol]"/>
 																				</ExpressionBindings>
 																			</Item2>
-																			<Item3 Ref="334" ControlType="XRLabel" Name="t_2" TextAlignment="MiddleLeft" Multiline="true" Text="Gross WH:" SizeF="79,13" LocationFloat="2,3" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
-																			<Item4 Ref="335" ControlType="XRLabel" Name="t_5" TextAlignment="MiddleLeft" Multiline="true" Text="Seller Share:" SizeF="56,13" LocationFloat="2,38" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
-																			<Item5 Ref="336" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleLeft" Multiline="true" Text="Allocation Decimal:" SizeF="94,12" LocationFloat="2,21" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+																			<Item3 Ref="334" ControlType="XRLabel" Name="t_2" TextAlignment="MiddleLeft" Multiline="true" Text="Gross WH:" SizeF="82,13" LocationFloat="2,3" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+																			<Item4 Ref="335" ControlType="XRLabel" Name="t_5" TextAlignment="MiddleLeft" Multiline="true" Text="Seller Share:" SizeF="59,13" LocationFloat="2,38" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+																			<Item5 Ref="336" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleLeft" Multiline="true" Text="Allocation Decimal:" SizeF="97,12" LocationFloat="2,21" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
 																			<Item6 Ref="337" ControlType="XRLabel" Name="whd_vol" TextFormatString="{0:#,##0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="55,12" LocationFloat="167,3" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
 																				<ExpressionBindings>
 																					<Item1 Ref="338" EventName="BeforePrint" PropertyName="Text" Expression="[whd_vol]"/>
@@ -735,8 +735,8 @@ MCF" SizeF="67,25" LocationFloat="502,24" AnchorVertical="Both" Font="Arial, 7pt
 																					<Item1 Ref="340" EventName="BeforePrint" PropertyName="Text" Expression="[whd_vol]"/>
 																				</ExpressionBindings>
 																			</Item7>
-																			<Item8 Ref="341" ControlType="XRLabel" Name="t_6" TextAlignment="MiddleLeft" Multiline="true" Text="Plant Inlet:" SizeF="68,13" LocationFloat="2,111" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
-																			<Item9 Ref="342" ControlType="XRLabel" Name="t_10" TextAlignment="MiddleLeft" Multiline="true" Text="Wellhead BTU:" SizeF="65,13" LocationFloat="2,128" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+																			<Item8 Ref="341" ControlType="XRLabel" Name="t_6" TextAlignment="MiddleLeft" Multiline="true" Text="Plant Inlet:" SizeF="71,13" LocationFloat="2,111" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+																			<Item9 Ref="342" ControlType="XRLabel" Name="t_10" TextAlignment="MiddleLeft" Multiline="true" Text="Wellhead BTU:" SizeF="68,13" LocationFloat="2,128" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
 																			<Item10 Ref="343" ControlType="XRLabel" Name="compute_1_field" TextFormatString="{0:0.0000}" TextAlignment="MiddleRight"  Multiline="true" SizeF="55,13" LocationFloat="87,128" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
 																				<ExpressionBindings>
 																					<Item1 Ref="344" EventName="BeforePrint" PropertyName="Text" Expression="[compute_1]"/>
@@ -747,19 +747,19 @@ MCF" SizeF="67,25" LocationFloat="502,24" AnchorVertical="Both" Font="Arial, 7pt
 																					<Item1 Ref="346" EventName="BeforePrint" PropertyName="Text" Expression="[mcf_fll]"/>
 																				</ExpressionBindings>
 																			</Item11>
-																			<Item12 Ref="347" ControlType="XRLabel" Name="t_12" TextAlignment="MiddleLeft" Multiline="true" Text="Raw Field Deducts:" SizeF="98,12" LocationFloat="2,60" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+																			<Item12 Ref="347" ControlType="XRLabel" Name="t_12" TextAlignment="MiddleLeft" Multiline="true" Text="Raw Field Deducts:" SizeF="101,12" LocationFloat="2,60" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
 																			<Item13 Ref="348" ControlType="XRLabel" Name="fll_field" TextFormatString="{0:#,##0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="55,12" LocationFloat="167,60" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
 																				<ExpressionBindings>
 																					<Item1 Ref="349" EventName="BeforePrint" PropertyName="Text" Expression="[fll]"/>
 																				</ExpressionBindings>
 																			</Item13>
-																			<Item14 Ref="350" ControlType="XRLabel" Name="t_3" TextAlignment="MiddleLeft" Multiline="true" Text="Net Delivered:" SizeF="96,12" LocationFloat="2,76" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+																			<Item14 Ref="350" ControlType="XRLabel" Name="t_3" TextAlignment="MiddleLeft" Multiline="true" Text="Net Delivered:" SizeF="99,12" LocationFloat="2,76" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
 																			<Item15 Ref="351" ControlType="XRLabel" Name="compute_3_field" TextFormatString="{0:#,##0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="55,12" LocationFloat="167,76" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
 																				<ExpressionBindings>
 																					<Item1 Ref="352" EventName="BeforePrint" PropertyName="Text" Expression="[compute_3]"/>
 																				</ExpressionBindings>
 																			</Item15>
-																			<Item16 Ref="353" ControlType="XRLabel" Name="t_9" TextAlignment="MiddleLeft" Multiline="true" Text="Bypass:" SizeF="53,13" LocationFloat="2,93" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+																			<Item16 Ref="353" ControlType="XRLabel" Name="t_9" TextAlignment="MiddleLeft" Multiline="true" Text="Bypass:" SizeF="56,13" LocationFloat="2,93" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
 																			<Item17 Ref="354" ControlType="XRLabel" Name="inlet" TextFormatString="{0:#,##0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="55,12" LocationFloat="167,111" AnchorVertical="Both" Font="Arial, 7pt" Visible="False">
 																				<ExpressionBindings>
 																					<Item1 Ref="355" EventName="BeforePrint" PropertyName="Text" Expression="[inlet]"/>
@@ -817,7 +817,7 @@ MCF" SizeF="67,25" LocationFloat="502,24" AnchorVertical="Both" Font="Arial, 7pt
 															</ParameterBindings>
 														</Item17>
 														<Item18 Ref="380" ControlType="XRSubreport" Name="rpt_pmnt_statement_plt_stndrd_product_smmry" SizeF="810,195" LocationFloat="239,2">
-															<ReportSource Ref="382" Name="rpt_pmnt_statement_plt_stndrd_product_smmry" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_stndrd_product_smmry, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 26, 26" PaperKind="Custom" PageWidth="777" PageHeight="100" Version="24.1" DataMember="Query" DataSource="#Ref-381">
+															<ReportSource Ref="382" Name="rpt_pmnt_statement_plt_stndrd_product_smmry" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_stndrd_product_smmry, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 26, 26" PaperKind="Custom" PageWidth="782" PageHeight="100" Version="24.1" DataMember="Query" DataSource="#Ref-381">
 																<Parameters>
 																	<Item1 Ref="383" Name="dwra_prod_month"/>
 																	<Item2 Ref="384" Name="dwra_facility_cd"/>
@@ -834,25 +834,25 @@ MCF" SizeF="67,25" LocationFloat="502,24" AnchorVertical="Both" Font="Arial, 7pt
 																	<Item2 Ref="390" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="26"/>
 																	<Item3 Ref="391" ControlType="ReportHeaderBand" Name="header" HeightF="51">
 																		<Controls>
-																			<Item1 Ref="392" ControlType="XRLabel" Name="t_3" TextAlignment="MiddleCenter" Multiline="true" Text="Component Settlement" SizeF="154,15" LocationFloat="294,-0" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
-																			<Item2 Ref="393" ControlType="XRLabel" Name="t_13" TextAlignment="MiddleLeft" Multiline="true" Text="Units of Measure" SizeF="100,15" LocationFloat="133,25" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
-																			<Item3 Ref="394" ControlType="XRLabel" Name="t_10" TextAlignment="MiddleCenter" Multiline="true" Text="Contract %" SizeF="70,15" LocationFloat="468,25" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
-																			<Item4 Ref="395" ControlType="XRLabel" Name="t_4" TextAlignment="MiddleCenter" Multiline="true" Text="Settlement" SizeF="70,15" LocationFloat="548,25" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
-																			<Item5 Ref="396" ControlType="XRLabel" Name="t_2" TextAlignment="MiddleLeft" Multiline="true" Text="Price" SizeF="25,15" LocationFloat="650,25" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
-																			<Item6 Ref="397" ControlType="XRLabel" Name="t_5" TextAlignment="MiddleLeft" Multiline="true" Text="Value" SizeF="30,15" LocationFloat="741,25" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
-																			<Item7 Ref="398" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleRight" Multiline="true" Text="Theoretical" SizeF="62,15" LocationFloat="237,25" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
-																			<Item8 Ref="399" ControlType="XRLabel" Name="t_7" TextAlignment="MiddleRight" Multiline="true" Text="Allocated" SizeF="57,15" LocationFloat="321,25" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
-																			<Item9 Ref="400" ControlType="XRLabel" Name="t_8" TextAlignment="MiddleRight" Multiline="true" Text="Shrink" SizeF="56,15" LocationFloat="400,25" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
-																			<Item10 Ref="401" ControlType="XRLine" Name="l_5" FillColor="255,128,128,128" SizeF="777,0" LocationFloat="-0,15"  LineDirection="Horizontal" Visible="True"/>
-																			<Item11 Ref="402" ControlType="XRLine" Name="l_2" FillColor="255,128,128,128" SizeF="653,1" LocationFloat="124,48"  LineDirection="Horizontal" Visible="True"/>
+																			<Item1 Ref="392" ControlType="XRLabel" Name="t_3" TextAlignment="MiddleCenter" Multiline="true" Text="Component Settlement" SizeF="157,15" LocationFloat="294,-0" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
+																			<Item2 Ref="393" ControlType="XRLabel" Name="t_13" TextAlignment="MiddleLeft" Multiline="true" Text="Units of Measure" SizeF="103,15" LocationFloat="133,25" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+																			<Item3 Ref="394" ControlType="XRLabel" Name="t_10" TextAlignment="MiddleCenter" Multiline="true" Text="Contract %" SizeF="73,15" LocationFloat="468,25" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+																			<Item4 Ref="395" ControlType="XRLabel" Name="t_4" TextAlignment="MiddleCenter" Multiline="true" Text="Settlement" SizeF="73,15" LocationFloat="548,25" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+																			<Item5 Ref="396" ControlType="XRLabel" Name="t_2" TextAlignment="MiddleLeft" Multiline="true" Text="Price" SizeF="28,15" LocationFloat="650,25" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+																			<Item6 Ref="397" ControlType="XRLabel" Name="t_5" TextAlignment="MiddleLeft" Multiline="true" Text="Value" SizeF="33,15" LocationFloat="741,25" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+																			<Item7 Ref="398" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleRight" Multiline="true" Text="Theoretical" SizeF="65,15" LocationFloat="237,25" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+																			<Item8 Ref="399" ControlType="XRLabel" Name="t_7" TextAlignment="MiddleRight" Multiline="true" Text="Allocated" SizeF="60,15" LocationFloat="321,25" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+																			<Item9 Ref="400" ControlType="XRLabel" Name="t_8" TextAlignment="MiddleRight" Multiline="true" Text="Shrink" SizeF="59,15" LocationFloat="400,25" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+																			<Item10 Ref="401" ControlType="XRLine" Name="l_5" FillColor="255,128,128,128" SizeF="782,0" LocationFloat="-0,15"  LineDirection="Horizontal" Visible="True"/>
+																			<Item11 Ref="402" ControlType="XRLine" Name="l_2" FillColor="255,128,128,128" SizeF="658,1" LocationFloat="124,48"  LineDirection="Horizontal" Visible="True"/>
 																		</Controls>
 																	</Item3>
 																	<Item4 Ref="403" ControlType="GroupHeaderBand" Name="summary" HeightF="34" Level="0">
 																		<Controls>
-																			<Item1 Ref="404" ControlType="XRLabel" Name="t_12" TextAlignment="MiddleLeft" Multiline="true" Text="Subtotal - Liquids" SizeF="87,15" LocationFloat="4,17" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+																			<Item1 Ref="404" ControlType="XRLabel" Name="t_12" TextAlignment="MiddleLeft" Multiline="true" Text="Subtotal - Liquids" SizeF="90,15" LocationFloat="4,17" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
 																			<Item2 Ref="405" ControlType="XRLine" Name="l_4" FillColor="255,128,128,128" SizeF="249,0" LocationFloat="221,13"  LineDirection="Horizontal" Visible="True"/>
 																			<Item3 Ref="406" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="77,0" LocationFloat="539,13"  LineDirection="Horizontal" Visible="True"/>
-																			<Item4 Ref="407" ControlType="XRLine" Name="l_3" FillColor="255,128,128,128" SizeF="77,0" LocationFloat="700,13"  LineDirection="Horizontal" Visible="True"/>
+																			<Item4 Ref="407" ControlType="XRLine" Name="l_3" FillColor="255,128,128,128" SizeF="82,0" LocationFloat="700,13"  LineDirection="Horizontal" Visible="True"/>
 																			<Item5 Ref="408" ControlType="XRLabel" Name="compute_1_field" TextFormatString="{0:#,##0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="61,17" LocationFloat="549,18" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
 																				<ExpressionBindings>
 																					<Item1 Ref="409" EventName="BeforePrint" PropertyName="Text" Expression="[compute_1]"/>
@@ -953,7 +953,7 @@ MCF" SizeF="67,25" LocationFloat="502,24" AnchorVertical="Both" Font="Arial, 7pt
 															</ParameterBindings>
 														</Item18>
 														<Item19 Ref="450" ControlType="XRLine" Name="l_4" FillColor="255,128,128,128" SizeF="497,0" LocationFloat="551,377"  LineDirection="Horizontal" Visible="True"/>
-														<Item20 Ref="451" ControlType="XRLabel" Name="t_17" TextAlignment="MiddleLeft" Multiline="true" Text="Station Comments:" SizeF="93,15" LocationFloat="556,387" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+														<Item20 Ref="451" ControlType="XRLabel" Name="t_17" TextAlignment="MiddleLeft" Multiline="true" Text="Station Comments:" SizeF="96,15" LocationFloat="556,387" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
 														<Item21 Ref="452" ControlType="XRLabel" Name="station_notes" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="375,64" LocationFloat="655,388" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
 															<ExpressionBindings>
 																<Item1 Ref="453" EventName="BeforePrint" PropertyName="Text" Expression="[station_notes]"/>
@@ -980,7 +980,7 @@ MCF" SizeF="67,25" LocationFloat="502,24" AnchorVertical="Both" Font="Arial, 7pt
 														<Item6 Ref="466" FieldName="sta_oper_ba_nbr" />
 													</GroupFields>
 													<Controls>
-														<Item1 Ref="467" ControlType="XRLabel" Name="t_10" TextAlignment="MiddleLeft" Multiline="true" Text="Accounting Month:" SizeF="82,13" LocationFloat="11,121" AnchorVertical="Both" Font="Arial, 7pt" Visible="False"/>
+														<Item1 Ref="467" ControlType="XRLabel" Name="t_10" TextAlignment="MiddleLeft" Multiline="true" Text="Accounting Month:" SizeF="85,13" LocationFloat="11,121" AnchorVertical="Both" Font="Arial, 7pt" Visible="False"/>
 														<Item2 Ref="468" ControlType="XRLabel" Name="compute_1_field" TextFormatString="{0:MMMM yyyy}" TextAlignment="MiddleLeft"  Multiline="true" SizeF="88,13" LocationFloat="105,121" AnchorVertical="Both" Font="Arial, 7pt" Visible="False">
 															<ExpressionBindings>
 																<Item1 Ref="469" EventName="BeforePrint" PropertyName="Text" Expression="[compute_1]"/>
@@ -991,8 +991,8 @@ MCF" SizeF="67,25" LocationFloat="502,24" AnchorVertical="Both" Font="Arial, 7pt
 																<Item1 Ref="471" EventName="BeforePrint" PropertyName="Text" Expression="[compute_4]"/>
 															</ExpressionBindings>
 														</Item3>
-														<Item4 Ref="472" ControlType="XRLabel" Name="t_7" TextAlignment="MiddleLeft" Multiline="true" Text="Statement Date:" SizeF="79,13" LocationFloat="11,93" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
-														<Item5 Ref="473" ControlType="XRLabel" Name="contract_nbr_t" TextAlignment="MiddleLeft" Multiline="true" Text="Production Month:" SizeF="90,13" LocationFloat="11,65" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+														<Item4 Ref="472" ControlType="XRLabel" Name="t_7" TextAlignment="MiddleLeft" Multiline="true" Text="Statement Date:" SizeF="82,13" LocationFloat="11,93" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+														<Item5 Ref="473" ControlType="XRLabel" Name="contract_nbr_t" TextAlignment="MiddleLeft" Multiline="true" Text="Production Month:" SizeF="93,13" LocationFloat="11,65" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
 														<Item6 Ref="474" ControlType="XRLabel" Name="compute_3_field" TextFormatString="{0:MMMM yyyy}" TextAlignment="MiddleLeft"  Multiline="true" SizeF="88,13" LocationFloat="105,65" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
 															<ExpressionBindings>
 																<Item1 Ref="475" EventName="BeforePrint" PropertyName="Text" Expression="[compute_3]"/>
@@ -1003,13 +1003,13 @@ MCF" SizeF="67,25" LocationFloat="502,24" AnchorVertical="Both" Font="Arial, 7pt
 																<Item1 Ref="477" EventName="BeforePrint" PropertyName="Text" Expression="[settle_id]"/>
 															</ExpressionBindings>
 														</Item7>
-														<Item8 Ref="478" ControlType="XRLabel" Name="t_6" TextAlignment="MiddleLeft" Multiline="true" Text="Settle ID" SizeF="43,12" LocationFloat="203,52" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+														<Item8 Ref="478" ControlType="XRLabel" Name="t_6" TextAlignment="MiddleLeft" Multiline="true" Text="Settle ID" SizeF="46,12" LocationFloat="203,52" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
 														<Item9 Ref="479" ControlType="XRLabel" Name="description" TextFormatString="" TextAlignment="MiddleCenter"  Multiline="true" SizeF="308,17" LocationFloat="312,6" AnchorVertical="Both" Font="Arial, 10pt" Visible="True">
 															<ExpressionBindings>
 																<Item1 Ref="480" EventName="BeforePrint" PropertyName="Text" Expression="[description]"/>
 															</ExpressionBindings>
 														</Item9>
-														<Item10 Ref="481" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleRight" Multiline="true" Text="Recipient:" SizeF="82,15" LocationFloat="623,7" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+														<Item10 Ref="481" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleRight" Multiline="true" Text="Recipient:" SizeF="85,15" LocationFloat="623,7" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
 														<Item11 Ref="482" ControlType="XRLabel" Name="processor_name" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="259,20" LocationFloat="6,5" AnchorVertical="Both" Font="Arial, 10pt" Visible="True">
 															<ExpressionBindings>
 																<Item1 Ref="483" EventName="BeforePrint" PropertyName="Text" Expression="[processor_name]"/>
@@ -1025,33 +1025,33 @@ MCF" SizeF="67,25" LocationFloat="502,24" AnchorVertical="Both" Font="Arial, 7pt
 																<Item1 Ref="487" EventName="BeforePrint" PropertyName="Text" Expression="[customer_name]"/>
 															</ExpressionBindings>
 														</Item13>
-														<Item14 Ref="488" ControlType="XRLabel" Name="t_3" TextAlignment="MiddleRight" Multiline="true" Text="Lease Information" SizeF="90,14" LocationFloat="518,36" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
-														<Item15 Ref="489" ControlType="XRLabel" Name="t_13" TextAlignment="MiddleLeft" Multiline="true" Text="Contract ID" SizeF="57,12" LocationFloat="646,52" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
-														<Item16 Ref="490" ControlType="XRLabel" Name="t_14" TextAlignment="MiddleLeft" Multiline="true" Text="Operator Name/ID" SizeF="92,12" LocationFloat="728,52" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+														<Item14 Ref="488" ControlType="XRLabel" Name="t_3" TextAlignment="MiddleRight" Multiline="true" Text="Lease Information" SizeF="93,14" LocationFloat="518,36" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+														<Item15 Ref="489" ControlType="XRLabel" Name="t_13" TextAlignment="MiddleLeft" Multiline="true" Text="Contract ID" SizeF="60,12" LocationFloat="646,52" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+														<Item16 Ref="490" ControlType="XRLabel" Name="t_14" TextAlignment="MiddleLeft" Multiline="true" Text="Operator Name/ID" SizeF="95,12" LocationFloat="728,52" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
 														<Item17 Ref="491" ControlType="XRLabel" Name="ba_sort_name" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="238,13" LocationFloat="728,68" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
 															<ExpressionBindings>
 																<Item1 Ref="492" EventName="BeforePrint" PropertyName="Text" Expression="[ba_sort_name]"/>
 															</ExpressionBindings>
 														</Item17>
-														<Item18 Ref="493" ControlType="XRLabel" Name="t_9" TextAlignment="MiddleLeft" Multiline="true" Text="Payment ID" SizeF="58,12" LocationFloat="272,52" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+														<Item18 Ref="493" ControlType="XRLabel" Name="t_9" TextAlignment="MiddleLeft" Multiline="true" Text="Payment ID" SizeF="61,12" LocationFloat="272,52" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
 														<Item19 Ref="494" ControlType="XRLabel" Name="ded_sta_nbr" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="65,12" LocationFloat="273,68" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
 															<ExpressionBindings>
 																<Item1 Ref="495" EventName="BeforePrint" PropertyName="Text" Expression="[ded_sta_nbr]"/>
 															</ExpressionBindings>
 														</Item19>
-														<Item20 Ref="496" ControlType="XRLabel" Name="t_8" TextAlignment="MiddleLeft" Multiline="true" Text="Lease Name" SizeF="63,12" LocationFloat="341,52" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+														<Item20 Ref="496" ControlType="XRLabel" Name="t_8" TextAlignment="MiddleLeft" Multiline="true" Text="Lease Name" SizeF="66,12" LocationFloat="341,52" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
 														<Item21 Ref="497" ControlType="XRLabel" Name="ded_sta_name" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="125,12" LocationFloat="341,68" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
 															<ExpressionBindings>
 																<Item1 Ref="498" EventName="BeforePrint" PropertyName="Text" Expression="[ded_sta_name]"/>
 															</ExpressionBindings>
 														</Item21>
-														<Item22 Ref="499" ControlType="XRLabel" Name="t_11" TextAlignment="MiddleLeft" Multiline="true" Text="Facility Name" SizeF="66,12" LocationFloat="468,52" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+														<Item22 Ref="499" ControlType="XRLabel" Name="t_11" TextAlignment="MiddleLeft" Multiline="true" Text="Facility Name" SizeF="69,12" LocationFloat="468,52" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
 														<Item23 Ref="500" ControlType="XRLabel" Name="pipeline_name" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="133,13" LocationFloat="469,68" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
 															<ExpressionBindings>
 																<Item1 Ref="501" EventName="BeforePrint" PropertyName="Text" Expression="[pipeline_name]"/>
 															</ExpressionBindings>
 														</Item23>
-														<Item24 Ref="502" ControlType="XRLabel" Name="t_12" TextAlignment="MiddleLeft" Multiline="true" Text="State" SizeF="31,12" LocationFloat="607,52" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+														<Item24 Ref="502" ControlType="XRLabel" Name="t_12" TextAlignment="MiddleLeft" Multiline="true" Text="State" SizeF="34,12" LocationFloat="607,52" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
 														<Item25 Ref="503" ControlType="XRLabel" Name="state_abbr" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="23,12" LocationFloat="608,68" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
 															<ExpressionBindings>
 																<Item1 Ref="504" EventName="BeforePrint" PropertyName="Text" Expression="[state_abbr]"/>
@@ -1072,9 +1072,9 @@ MCF" SizeF="67,25" LocationFloat="502,24" AnchorVertical="Both" Font="Arial, 7pt
 																<Item1 Ref="510" EventName="BeforePrint" PropertyName="Text" Expression="[pressure_base]"/>
 															</ExpressionBindings>
 														</Item28>
-														<Item29 Ref="511" ControlType="XRLabel" Name="t_15" TextAlignment="MiddleRight" Multiline="true" Text="Pressure Base" SizeF="75,12" LocationFloat="957,52" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+														<Item29 Ref="511" ControlType="XRLabel" Name="t_15" TextAlignment="MiddleRight" Multiline="true" Text="Pressure Base" SizeF="78,12" LocationFloat="957,52" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
 														<Item30 Ref="512" ControlType="XRSubreport" Name="rpt_pmnt_statement_plt_stndrd_stmt_smmry" SizeF="850,81" LocationFloat="198,100">
-															<ReportSource Ref="514" Name="rpt_pmnt_statement_plt_stndrd_stmt_smmry" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_stndrd_stmt_smmry, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 26, 26" PaperKind="Custom" PageWidth="682" PageHeight="79" Version="24.1" DataMember="Query" DataSource="#Ref-513">
+															<ReportSource Ref="514" Name="rpt_pmnt_statement_plt_stndrd_stmt_smmry" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_stndrd_stmt_smmry, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 26, 26" PaperKind="Custom" PageWidth="687" PageHeight="79" Version="24.1" DataMember="Query" DataSource="#Ref-513">
 																<Parameters>
 																	<Item1 Ref="515" Name="dwra_prod_month"/>
 																	<Item2 Ref="516" Name="dwra_facility_cd"/>
@@ -1091,25 +1091,25 @@ MCF" SizeF="67,25" LocationFloat="502,24" AnchorVertical="Both" Font="Arial, 7pt
 																	<Item2 Ref="522" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="26"/>
 																	<Item3 Ref="523" ControlType="ReportHeaderBand" Name="header" HeightF="47">
 																		<Controls>
-																			<Item1 Ref="524" ControlType="XRLabel" Name="t_10" TextAlignment="MiddleLeft" Multiline="true" Text="Settlement Summary" SizeF="149,15" LocationFloat="342,-0" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
+																			<Item1 Ref="524" ControlType="XRLabel" Name="t_10" TextAlignment="MiddleLeft" Multiline="true" Text="Settlement Summary" SizeF="152,15" LocationFloat="342,-0" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
 																			<Item2 Ref="525" ControlType="XRLabel" Name="t_5" TextAlignment="MiddleCenter" Multiline="true" Text="Component
-Value" SizeF="89,30" LocationFloat="190,17" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+Value" SizeF="92,30" LocationFloat="190,17" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
 																			<Item3 Ref="526" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleCenter" Multiline="true" Text="Residue
-Value" SizeF="58,30" LocationFloat="293,17" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+Value" SizeF="61,30" LocationFloat="293,17" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
 																			<Item4 Ref="527" ControlType="XRLabel" Name="t_2" TextAlignment="MiddleCenter" Multiline="true" Text="Fees / 
-Adjustments" SizeF="63,30" LocationFloat="367,17" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+Adjustments" SizeF="66,30" LocationFloat="367,17" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
 																			<Item5 Ref="528" ControlType="XRLabel" Name="t_3" TextAlignment="MiddleCenter" Multiline="true" Text="Gross
-Value" SizeF="38,30" LocationFloat="465,17" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+Value" SizeF="41,30" LocationFloat="465,17" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
 																			<Item6 Ref="529" ControlType="XRLabel" Name="t_9" TextAlignment="MiddleCenter" Multiline="true" Text="Total
-Tax" SizeF="45,30" LocationFloat="544,17" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+Tax" SizeF="48,30" LocationFloat="544,17" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
 																			<Item7 Ref="530" ControlType="XRLabel" Name="t_7" TextAlignment="MiddleCenter" Multiline="true" Text="Net
-Value" SizeF="42,30" LocationFloat="635,17" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+Value" SizeF="45,30" LocationFloat="635,17" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
 																			<Item8 Ref="531" ControlType="XRLine" Name="l_7" FillColor="255,128,128,128" SizeF="0,31" LocationFloat="177,16"  LineDirection="Vertical" Visible="True"/>
 																			<Item9 Ref="532" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="0,31" LocationFloat="437,16"  LineDirection="Vertical" Visible="True"/>
 																			<Item10 Ref="533" ControlType="XRLine" Name="l_4" FillColor="255,128,128,128" SizeF="0,31" LocationFloat="523,16"  LineDirection="Vertical" Visible="True"/>
 																			<Item11 Ref="534" ControlType="XRLine" Name="l_11" FillColor="255,128,128,128" SizeF="0,31" LocationFloat="606,16"  LineDirection="Vertical" Visible="True"/>
-																			<Item12 Ref="535" ControlType="XRLine" Name="l_13" FillColor="255,128,128,128" SizeF="-13,31" LocationFloat="695,16"  LineDirection="Horizontal" Visible="False"/>
-																			<Item13 Ref="536" ControlType="XRLine" Name="l_8" FillColor="255,128,128,128" SizeF="682,0" LocationFloat="-0,15"  LineDirection="Horizontal" Visible="True"/>
+																			<Item12 Ref="535" ControlType="XRLine" Name="l_13" FillColor="255,128,128,128" SizeF="-8,31" LocationFloat="695,16"  LineDirection="Horizontal" Visible="False"/>
+																			<Item13 Ref="536" ControlType="XRLine" Name="l_8" FillColor="255,128,128,128" SizeF="687,0" LocationFloat="-0,15"  LineDirection="Horizontal" Visible="True"/>
 																		</Controls>
 																	</Item3>
 																	<Item4 Ref="537" ControlType="GroupHeaderBand" Name="summary" HeightF="32" Level="0">
@@ -1124,7 +1124,7 @@ Value" SizeF="42,30" LocationFloat="635,17" AnchorVertical="Both" Font="Arial, 8
 																					<Item1 Ref="541" EventName="BeforePrint" PropertyName="Text" Expression="[rate_mcf]"/>
 																				</ExpressionBindings>
 																			</Item2>
-																			<Item3 Ref="542" ControlType="XRLabel" Name="t_6" TextAlignment="MiddleRight" Multiline="true" Text="Rate per MMBTU:" SizeF="87,15" LocationFloat="4,16" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+																			<Item3 Ref="542" ControlType="XRLabel" Name="t_6" TextAlignment="MiddleRight" Multiline="true" Text="Rate per MMBTU:" SizeF="90,15" LocationFloat="4,16" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
 																			<Item4 Ref="543" ControlType="XRLabel" Name="ngl_value_field" TextFormatString="{0:$#,##0.00}" TextAlignment="MiddleRight"  Multiline="true" SizeF="79,14" LocationFloat="185,8" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
 																				<ExpressionBindings>
 																					<Item1 Ref="544" EventName="BeforePrint" PropertyName="Text" Expression="[ngl_value]"/>
@@ -1155,14 +1155,14 @@ Value" SizeF="42,30" LocationFloat="635,17" AnchorVertical="Both" Font="Arial, 8
 																					<Item1 Ref="554" EventName="BeforePrint" PropertyName="Text" Expression="[compute_1]"/>
 																				</ExpressionBindings>
 																			</Item9>
-																			<Item10 Ref="555" ControlType="XRLabel" Name="t_4" TextAlignment="MiddleRight" Multiline="true" Text="Rate Per MCF:" SizeF="71,15" LocationFloat="4,-0" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+																			<Item10 Ref="555" ControlType="XRLabel" Name="t_4" TextAlignment="MiddleRight" Multiline="true" Text="Rate Per MCF:" SizeF="74,15" LocationFloat="4,-0" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
 																			<Item11 Ref="556" ControlType="XRLine" Name="l_10" FillColor="255,128,128,128" SizeF="0,32" LocationFloat="606,-0"  LineDirection="Vertical" Visible="True"/>
 																			<Item12 Ref="557" ControlType="XRLine" Name="l_6" FillColor="255,128,128,128" SizeF="0,32" LocationFloat="177,-0"  LineDirection="Vertical" Visible="True"/>
 																			<Item13 Ref="558" ControlType="XRLine" Name="l_2" FillColor="255,128,128,128" SizeF="0,32" LocationFloat="437,-0"  LineDirection="Vertical" Visible="True"/>
 																			<Item14 Ref="559" ControlType="XRLine" Name="l_5" FillColor="255,128,128,128" SizeF="0,32" LocationFloat="523,-0"  LineDirection="Vertical" Visible="True"/>
 																			<Item15 Ref="560" ControlType="XRLine" Name="l_12" FillColor="255,128,128,128" SizeF="0,32" LocationFloat="606,-0"  LineDirection="Vertical" Visible="True"/>
-																			<Item16 Ref="561" ControlType="XRLine" Name="l_14" FillColor="255,128,128,128" SizeF="-13,32" LocationFloat="695,-0"  LineDirection="Horizontal" Visible="False"/>
-																			<Item17 Ref="562" ControlType="XRLine" Name="l_3" FillColor="255,128,128,128" SizeF="505,0" LocationFloat="177,1"  LineDirection="Horizontal" Visible="True"/>
+																			<Item16 Ref="561" ControlType="XRLine" Name="l_14" FillColor="255,128,128,128" SizeF="-8,32" LocationFloat="695,-0"  LineDirection="Horizontal" Visible="False"/>
+																			<Item17 Ref="562" ControlType="XRLine" Name="l_3" FillColor="255,128,128,128" SizeF="510,0" LocationFloat="177,1"  LineDirection="Horizontal" Visible="True"/>
 																		</Controls>
 																	</Item4>
 																	<Item5 Ref="563" ControlType="ReportFooterBand" Name="footer" HeightF="-0" Visible="False">
@@ -1284,7 +1284,7 @@ Value" SizeF="42,30" LocationFloat="635,17" AnchorVertical="Both" Font="Arial, 8
 					</ParameterBindings>
 				</Item1>
 				<Item2 Ref="619" ControlType="XRSubreport" Name="rpt_pmnt_statement_plt_detail" SizeF="1046,36" LocationFloat="2,77">
-					<ReportSource Ref="621" Name="rpt_pmnt_statement_plt_detail" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_detail, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="14, 14, 14, 13" PaperKind="Custom" PageWidth="1045" PageHeight="481" Version="24.1" DataMember="Query" DataSource="#Ref-620">
+					<ReportSource Ref="621" Name="rpt_pmnt_statement_plt_detail" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_detail, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="14, 14, 14, 13" PaperKind="Custom" PageWidth="1050" PageHeight="481" Version="24.1" DataMember="Query" DataSource="#Ref-620">
 						<Parameters>
 							<Item1 Ref="622" Name="dwra_statement_nbr"/>
 							<Item2 Ref="623" Name="dwra_statement_rev"/>
@@ -1299,14 +1299,14 @@ Value" SizeF="42,30" LocationFloat="635,17" AnchorVertical="Both" Font="Arial, 8
 							<Item2 Ref="627" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="13"/>
 							<Item3 Ref="628" ControlType="ReportHeaderBand" Name="header" HeightF="82">
 								<Controls>
-									<Item1 Ref="629" ControlType="XRLabel" Name="contract_nbr_t" TextAlignment="MiddleLeft" Multiline="true" Text="Contract #:" SizeF="79,20" LocationFloat="4,57" AnchorVertical="Both" Font="Calibri, 12pt, style=Bold" Visible="True"/>
+									<Item1 Ref="629" ControlType="XRLabel" Name="contract_nbr_t" TextAlignment="MiddleLeft" Multiline="true" Text="Contract #:" SizeF="82,20" LocationFloat="4,57" AnchorVertical="Both" Font="Calibri, 12pt, style=Bold" Visible="True"/>
 									<Item2 Ref="630" ControlType="XRLabel" Name="contract_nbr" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="150,20" LocationFloat="87,57" AnchorVertical="Both" Font="Calibri, 12pt, style=Bold" Visible="True">
 										<ExpressionBindings>
 											<Item1 Ref="631" EventName="BeforePrint" PropertyName="Text" Expression="[contract_nbr]"/>
 										</ExpressionBindings>
 									</Item2>
-									<Item3 Ref="632" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleCenter" Multiline="true" Text="PURCHASE STATEMENT" SizeF="288,19" LocationFloat="376,32" AnchorVertical="Both" Font="Calibri, 11pt, style=Bold" Visible="True"/>
-									<Item4 Ref="633" ControlType="XRLabel" Name="curr_prod_mo_t" TextAlignment="MiddleCenter" Multiline="true" Text="Production Date:" SizeF="99,16" LocationFloat="443,51" AnchorVertical="Both" Font="Calibri, 10pt" Visible="True"/>
+									<Item3 Ref="632" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleCenter" Multiline="true" Text="PURCHASE STATEMENT" SizeF="291,19" LocationFloat="376,32" AnchorVertical="Both" Font="Calibri, 11pt, style=Bold" Visible="True"/>
+									<Item4 Ref="633" ControlType="XRLabel" Name="curr_prod_mo_t" TextAlignment="MiddleCenter" Multiline="true" Text="Production Date:" SizeF="102,16" LocationFloat="443,51" AnchorVertical="Both" Font="Calibri, 10pt" Visible="True"/>
 									<Item5 Ref="634" ControlType="XRLabel" Name="compute_4_field" TextFormatString="{0:MMm/yyyy}" TextAlignment="MiddleLeft"  Multiline="true" SizeF="59,16" LocationFloat="548,51" AnchorVertical="Both" Font="Calibri, 10pt" Visible="True">
 										<ExpressionBindings>
 											<Item1 Ref="635" EventName="BeforePrint" PropertyName="Text" Expression="[compute_4]"/>
@@ -1353,13 +1353,13 @@ Value" SizeF="42,30" LocationFloat="635,17" AnchorVertical="Both" Font="Arial, 8
 											<Item1 Ref="650" EventName="BeforePrint" PropertyName="Text" Expression="[contract_nbr]"/>
 										</ExpressionBindings>
 									</Item1>
-									<Item2 Ref="651" ControlType="XRLabel" Name="t_14" TextAlignment="MiddleLeft" Multiline="true" Text="TOTAL  =======>" SizeF="138,21" LocationFloat="185,8" AnchorVertical="Both" Font="Calibri, 13pt, style=Bold" Visible="True"/>
-									<Item3 Ref="652" ControlType="XRLabel" Name="t_19" TextAlignment="MiddleLeft" Multiline="true" Text="$$" SizeF="25,14" LocationFloat="609,10" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True"/>
-									<Item4 Ref="653" ControlType="XRLabel" Name="t_20" TextAlignment="MiddleLeft" Multiline="true" Text="MMBtu Dry" SizeF="76,14" LocationFloat="484,10" AnchorVertical="Both" Font="Calibri, 8pt, style=Bold" Visible="True"/>
-									<Item5 Ref="654" ControlType="XRLabel" Name="t_21" TextAlignment="MiddleLeft" Multiline="true" Text="MMBtu Sat" SizeF="76,14" LocationFloat="405,10" AnchorVertical="Both" Font="Calibri, 8pt, style=Bold" Visible="True"/>
-									<Item6 Ref="655" ControlType="XRLabel" Name="t_22" TextAlignment="MiddleCenter" Multiline="true" Text="Mcf" SizeF="69,14" LocationFloat="329,10" AnchorVertical="Both" Font="Calibri, 8pt, style=Bold" Visible="True"/>
+									<Item2 Ref="651" ControlType="XRLabel" Name="t_14" TextAlignment="MiddleLeft" Multiline="true" Text="TOTAL  =======>" SizeF="141,21" LocationFloat="185,8" AnchorVertical="Both" Font="Calibri, 13pt, style=Bold" Visible="True"/>
+									<Item3 Ref="652" ControlType="XRLabel" Name="t_19" TextAlignment="MiddleLeft" Multiline="true" Text="$$" SizeF="28,14" LocationFloat="609,10" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True"/>
+									<Item4 Ref="653" ControlType="XRLabel" Name="t_20" TextAlignment="MiddleLeft" Multiline="true" Text="MMBtu Dry" SizeF="79,14" LocationFloat="484,10" AnchorVertical="Both" Font="Calibri, 8pt, style=Bold" Visible="True"/>
+									<Item5 Ref="654" ControlType="XRLabel" Name="t_21" TextAlignment="MiddleLeft" Multiline="true" Text="MMBtu Sat" SizeF="79,14" LocationFloat="405,10" AnchorVertical="Both" Font="Calibri, 8pt, style=Bold" Visible="True"/>
+									<Item6 Ref="655" ControlType="XRLabel" Name="t_22" TextAlignment="MiddleCenter" Multiline="true" Text="Mcf" SizeF="72,14" LocationFloat="329,10" AnchorVertical="Both" Font="Calibri, 8pt, style=Bold" Visible="True"/>
 									<Item7 Ref="656" ControlType="XRLine" Name="l_7" FillColor="255,128,128,128" SizeF="0,41" LocationFloat="556,7"  LineDirection="Vertical" Visible="True"/>
-									<Item8 Ref="657" ControlType="XRLabel" Name="t_23" TextAlignment="MiddleLeft" Multiline="true" Text="$" SizeF="9,13" LocationFloat="563,30" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True"/>
+									<Item8 Ref="657" ControlType="XRLabel" Name="t_23" TextAlignment="MiddleLeft" Multiline="true" Text="$" SizeF="12,13" LocationFloat="563,30" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True"/>
 									<Item9 Ref="658" ControlType="XRLabel" Name="contract_mcf_field" TextFormatString="{0:#,##0.0}" TextAlignment="MiddleCenter"  Multiline="true" SizeF="69,14" LocationFloat="329,30" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 										<ExpressionBindings>
 											<Item1 Ref="659" EventName="BeforePrint" PropertyName="Text" Expression="[contract_mcf]"/>
@@ -1394,13 +1394,13 @@ Value" SizeF="42,30" LocationFloat="635,17" AnchorVertical="Both" Font="Arial, 8
 									<Item2 Ref="672" FieldName="prod_mo" />
 								</GroupFields>
 								<Controls>
-									<Item1 Ref="673" ControlType="XRLabel" Name="t_2" TextAlignment="MiddleLeft" Multiline="true" Text="Prior Period Adjustments" SizeF="162,16" LocationFloat="4,-0" AnchorVertical="Both" Font="Calibri, 10pt, style=Bold" Visible="True">
+									<Item1 Ref="673" ControlType="XRLabel" Name="t_2" TextAlignment="MiddleLeft" Multiline="true" Text="Prior Period Adjustments" SizeF="165,16" LocationFloat="4,-0" AnchorVertical="Both" Font="Calibri, 10pt, style=Bold" Visible="True">
 										<ExpressionBindings>
 											<Item1 Ref="674" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(is_ppa==1,true,false)"/>
 										</ExpressionBindings>
 									</Item1>
-									<Item2 Ref="675" ControlType="XRLabel" Name="facility_code_t" TextAlignment="MiddleLeft" Multiline="true" Text="Facility:  Station # / Station Name" SizeF="239,15" LocationFloat="4,20" AnchorVertical="Both" Font="Calibri, 9pt, style=Bold" Visible="True"/>
-									<Item3 Ref="676" ControlType="XRLabel" Name="prod_mo_t" TextAlignment="MiddleCenter" Multiline="true" Text="Production Month:" SizeF="121,16" LocationFloat="184,-0" AnchorVertical="Both" Font="Calibri, 10pt, style=Bold" Visible="True">
+									<Item2 Ref="675" ControlType="XRLabel" Name="facility_code_t" TextAlignment="MiddleLeft" Multiline="true" Text="Facility:  Station # / Station Name" SizeF="242,15" LocationFloat="4,20" AnchorVertical="Both" Font="Calibri, 9pt, style=Bold" Visible="True"/>
+									<Item3 Ref="676" ControlType="XRLabel" Name="prod_mo_t" TextAlignment="MiddleCenter" Multiline="true" Text="Production Month:" SizeF="124,16" LocationFloat="184,-0" AnchorVertical="Both" Font="Calibri, 10pt, style=Bold" Visible="True">
 										<ExpressionBindings>
 											<Item1 Ref="677" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(is_ppa==1,true,false)"/>
 										</ExpressionBindings>
@@ -1415,16 +1415,16 @@ Value" SizeF="42,30" LocationFloat="635,17" AnchorVertical="Both" Font="Arial, 8
 							</Item9>
 							<Item10 Ref="681" ControlType="GroupFooterBand" Name="groupFooterBand2" Level="4" HeightF="62">
 								<Controls>
-									<Item1 Ref="682" ControlType="XRLabel" Name="t_8" TextAlignment="MiddleLeft" Multiline="true" Text="$$" SizeF="25,14" LocationFloat="610,9" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True"/>
-									<Item2 Ref="683" ControlType="XRLabel" Name="t_10" TextAlignment="MiddleLeft" Multiline="true" Text="MMBtu Sat" SizeF="76,14" LocationFloat="406,9" AnchorVertical="Both" Font="Calibri, 8pt, style=Bold" Visible="True"/>
-									<Item3 Ref="684" ControlType="XRLabel" Name="t_11" TextAlignment="MiddleLeft" Multiline="true" Text="MMBtu Dry" SizeF="76,14" LocationFloat="485,9" AnchorVertical="Both" Font="Calibri, 8pt, style=Bold" Visible="True"/>
-									<Item4 Ref="685" ControlType="XRLabel" Name="t_15" TextAlignment="MiddleLeft" Multiline="true" Text="$$" SizeF="25,14" LocationFloat="610,9" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True"/>
+									<Item1 Ref="682" ControlType="XRLabel" Name="t_8" TextAlignment="MiddleLeft" Multiline="true" Text="$$" SizeF="28,14" LocationFloat="610,9" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True"/>
+									<Item2 Ref="683" ControlType="XRLabel" Name="t_10" TextAlignment="MiddleLeft" Multiline="true" Text="MMBtu Sat" SizeF="79,14" LocationFloat="406,9" AnchorVertical="Both" Font="Calibri, 8pt, style=Bold" Visible="True"/>
+									<Item3 Ref="684" ControlType="XRLabel" Name="t_11" TextAlignment="MiddleLeft" Multiline="true" Text="MMBtu Dry" SizeF="79,14" LocationFloat="485,9" AnchorVertical="Both" Font="Calibri, 8pt, style=Bold" Visible="True"/>
+									<Item4 Ref="685" ControlType="XRLabel" Name="t_15" TextAlignment="MiddleLeft" Multiline="true" Text="$$" SizeF="28,14" LocationFloat="610,9" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True"/>
 									<Item5 Ref="686" ControlType="XRLine" Name="l_4" FillColor="255,128,128,128" SizeF="0,38" LocationFloat="557,6"  LineDirection="Vertical" Visible="True"/>
 									<Item6 Ref="687" ControlType="XRLine" Name="l_5" FillColor="255,128,128,128" SizeF="0,39" LocationFloat="557,6"  LineDirection="Vertical" Visible="True"/>
 									<Item7 Ref="688" ControlType="XRLine" Name="l_6" FillColor="255,128,128,128" SizeF="0,40" LocationFloat="557,5"  LineDirection="Vertical" Visible="True"/>
-									<Item8 Ref="689" ControlType="XRLabel" Name="t_18" TextAlignment="MiddleLeft" Multiline="true" Text="MMBtu Dry" SizeF="76,14" LocationFloat="485,9" AnchorVertical="Both" Font="Calibri, 8pt, style=Bold" Visible="True"/>
-									<Item9 Ref="690" ControlType="XRLabel" Name="t_16" TextAlignment="MiddleLeft" Multiline="true" Text="MMBtu Sat" SizeF="76,14" LocationFloat="406,9" AnchorVertical="Both" Font="Calibri, 8pt, style=Bold" Visible="True"/>
-									<Item10 Ref="691" ControlType="XRLabel" Name="t_9" TextAlignment="MiddleCenter" Multiline="true" Text="MCF" SizeF="69,14" LocationFloat="330,9" AnchorVertical="Both" Font="Calibri, 8pt, style=Bold" Visible="True"/>
+									<Item8 Ref="689" ControlType="XRLabel" Name="t_18" TextAlignment="MiddleLeft" Multiline="true" Text="MMBtu Dry" SizeF="79,14" LocationFloat="485,9" AnchorVertical="Both" Font="Calibri, 8pt, style=Bold" Visible="True"/>
+									<Item9 Ref="690" ControlType="XRLabel" Name="t_16" TextAlignment="MiddleLeft" Multiline="true" Text="MMBtu Sat" SizeF="79,14" LocationFloat="406,9" AnchorVertical="Both" Font="Calibri, 8pt, style=Bold" Visible="True"/>
+									<Item10 Ref="691" ControlType="XRLabel" Name="t_9" TextAlignment="MiddleCenter" Multiline="true" Text="MCF" SizeF="72,14" LocationFloat="330,9" AnchorVertical="Both" Font="Calibri, 8pt, style=Bold" Visible="True"/>
 									<Item11 Ref="692" ControlType="XRLabel" Name="prod_mo_mcf_field" TextFormatString="{0:#,##0.0}" TextAlignment="MiddleCenter"  Multiline="true" SizeF="69,14" LocationFloat="330,26" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 										<ExpressionBindings>
 											<Item1 Ref="693" EventName="BeforePrint" PropertyName="Text" Expression="[prod_mo_mcf]"/>
@@ -1445,7 +1445,7 @@ Value" SizeF="42,30" LocationFloat="635,17" AnchorVertical="Both" Font="Arial, 8
 											<Item1 Ref="699" EventName="BeforePrint" PropertyName="Text" Expression="[prod_mo_component_val]"/>
 										</ExpressionBindings>
 									</Item14>
-									<Item15 Ref="700" ControlType="XRLabel" Name="t_7" TextAlignment="MiddleLeft" Multiline="true" Text="TOTAL FOR PRODUCTION MONTH:" SizeF="210,16" LocationFloat="22,26" AnchorVertical="Both" Font="Calibri, 10pt, style=Bold" Visible="True"/>
+									<Item15 Ref="700" ControlType="XRLabel" Name="t_7" TextAlignment="MiddleLeft" Multiline="true" Text="TOTAL FOR PRODUCTION MONTH:" SizeF="213,16" LocationFloat="22,26" AnchorVertical="Both" Font="Calibri, 10pt, style=Bold" Visible="True"/>
 									<Item16 Ref="701" ControlType="XRLabel" Name="prod_mo_1" TextFormatString="{0:@@-@@@@}" TextAlignment="MiddleCenter"  Multiline="true" SizeF="83,16" LocationFloat="233,26" AnchorVertical="Both" Font="Calibri, 10pt, style=Bold" Visible="True">
 										<ExpressionBindings>
 											<Item1 Ref="702" EventName="BeforePrint" PropertyName="Text" Expression="[prod_mo]"/>
@@ -1464,22 +1464,22 @@ Value" SizeF="42,30" LocationFloat="635,17" AnchorVertical="Both" Font="Arial, 8
 									<Item1 Ref="708" FieldName="type" />
 								</GroupFields>
 								<Controls>
-									<Item1 Ref="709" ControlType="XRLabel" Name="mcf_t" TextAlignment="MiddleLeft" Multiline="true" Text="Mcf" SizeF="47,15" LocationFloat="733,2" AnchorVertical="Both" Font="Calibri, 9pt, style=Bold" Visible="True">
+									<Item1 Ref="709" ControlType="XRLabel" Name="mcf_t" TextAlignment="MiddleLeft" Multiline="true" Text="Mcf" SizeF="50,15" LocationFloat="733,2" AnchorVertical="Both" Font="Calibri, 9pt, style=Bold" Visible="True">
 										<ExpressionBindings>
 											<Item1 Ref="710" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 										</ExpressionBindings>
 									</Item1>
-									<Item2 Ref="711" ControlType="XRLabel" Name="sat_mmbtu_t" TextAlignment="MiddleLeft" Multiline="true" Text="MMBtu Sat" SizeF="76,15" LocationFloat="786,2" AnchorVertical="Both" Font="Calibri, 9pt, style=Bold" Visible="True">
+									<Item2 Ref="711" ControlType="XRLabel" Name="sat_mmbtu_t" TextAlignment="MiddleLeft" Multiline="true" Text="MMBtu Sat" SizeF="79,15" LocationFloat="786,2" AnchorVertical="Both" Font="Calibri, 9pt, style=Bold" Visible="True">
 										<ExpressionBindings>
 											<Item1 Ref="712" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 										</ExpressionBindings>
 									</Item2>
-									<Item3 Ref="713" ControlType="XRLabel" Name="t_5" TextAlignment="MiddleLeft" Multiline="true" Text="$$" SizeF="25,15" LocationFloat="982,2" AnchorVertical="Both" Font="Calibri, 9pt" Visible="True">
+									<Item3 Ref="713" ControlType="XRLabel" Name="t_5" TextAlignment="MiddleLeft" Multiline="true" Text="$$" SizeF="28,15" LocationFloat="982,2" AnchorVertical="Both" Font="Calibri, 9pt" Visible="True">
 										<ExpressionBindings>
 											<Item1 Ref="714" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 										</ExpressionBindings>
 									</Item3>
-									<Item4 Ref="715" ControlType="XRLabel" Name="dry_mmbtu_t" TextAlignment="MiddleLeft" Multiline="true" Text="MMBtu Dry" SizeF="76,15" LocationFloat="869,2" AnchorVertical="Both" Font="Calibri, 9pt, style=Bold" Visible="True">
+									<Item4 Ref="715" ControlType="XRLabel" Name="dry_mmbtu_t" TextAlignment="MiddleLeft" Multiline="true" Text="MMBtu Dry" SizeF="79,15" LocationFloat="869,2" AnchorVertical="Both" Font="Calibri, 9pt, style=Bold" Visible="True">
 										<ExpressionBindings>
 											<Item1 Ref="716" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 										</ExpressionBindings>
@@ -1492,7 +1492,7 @@ Value" SizeF="42,30" LocationFloat="635,17" AnchorVertical="Both" Font="Arial, 8
 							<Item12 Ref="719" ControlType="GroupFooterBand" Name="groupFooterBand3" Level="3" HeightF="28">
 								<Controls>
 									<Item1 Ref="720" ControlType="XRSubreport" Name="rpt_pmnt_statement_plt_k_reserv" SizeF="1044,28" LocationFloat="-0,-0">
-										<ReportSource Ref="722" Name="rpt_pmnt_statement_plt_k_reserv" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_k_reserv, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="1035" PageHeight="82" Version="24.1" DataMember="Query" DataSource="#Ref-721">
+										<ReportSource Ref="722" Name="rpt_pmnt_statement_plt_k_reserv" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_k_reserv, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="1040" PageHeight="82" Version="24.1" DataMember="Query" DataSource="#Ref-721">
 											<Parameters>
 												<Item1 Ref="723" Name="dwra_statement_nbr"/>
 												<Item2 Ref="724" Name="dwra_statement_rev"/>
@@ -1514,22 +1514,22 @@ Value" SizeF="42,30" LocationFloat="635,17" AnchorVertical="Both" Font="Arial, 8
 												<Item2 Ref="735" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="25"/>
 												<Item3 Ref="736" ControlType="ReportHeaderBand" Name="header" HeightF="39">
 													<Controls>
-														<Item1 Ref="737" ControlType="XRLabel" Name="bs_order_beg_date_t" TextAlignment="MiddleLeft" Multiline="true" Text="Beg Date" SizeF="75,14" LocationFloat="352,26" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True"/>
-														<Item2 Ref="738" ControlType="XRLabel" Name="bs_order_end_date_t" TextAlignment="MiddleLeft" Multiline="true" Text="End Date" SizeF="66,14" LocationFloat="417,26" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True"/>
-														<Item3 Ref="739" ControlType="XRLabel" Name="document_nbr_t" TextAlignment="MiddleLeft" Multiline="true" Text="Document" SizeF="69,14" LocationFloat="478,26" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True"/>
-														<Item4 Ref="740" ControlType="XRLabel" Name="type_comp_desc_t" TextAlignment="MiddleLeft" Multiline="true" Text="Component" SizeF="212,14" LocationFloat="558,26" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True"/>
-														<Item5 Ref="741" ControlType="XRLabel" Name="volume_used_t" TextAlignment="MiddleCenter" Multiline="true" Text="Volume" SizeF="79,14" LocationFloat="781,26" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True"/>
-														<Item6 Ref="742" ControlType="XRLabel" Name="component_price_t" TextAlignment="MiddleLeft" Multiline="true" Text="Per Unit $" SizeF="75,14" LocationFloat="874,26" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True"/>
-														<Item7 Ref="743" ControlType="XRLabel" Name="based_on_t" TextAlignment="MiddleLeft" Multiline="true" Text="Based On" SizeF="79,14" LocationFloat="699,26" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True"/>
-														<Item8 Ref="744" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleLeft" Multiline="true" Text="OTHER CHARGES" SizeF="109,16" LocationFloat="2,2" AnchorVertical="Both" Font="Calibri, 10pt, style=Bold" Visible="True"/>
-														<Item9 Ref="745" ControlType="XRLabel" Name="facility_name_t" TextAlignment="MiddleLeft" Multiline="true" Text="Facility: Station # / Station Name" SizeF="258,14" LocationFloat="2,24" AnchorVertical="Both" Font="Calibri, 8pt, style=Bold" Visible="True"/>
-														<Item10 Ref="746" ControlType="XRLabel" Name="component_val_t" TextAlignment="MiddleRight" Multiline="true" Text="Total" SizeF="60,14" LocationFloat="968,26" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True"/>
+														<Item1 Ref="737" ControlType="XRLabel" Name="bs_order_beg_date_t" TextAlignment="MiddleLeft" Multiline="true" Text="Beg Date" SizeF="78,14" LocationFloat="352,26" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True"/>
+														<Item2 Ref="738" ControlType="XRLabel" Name="bs_order_end_date_t" TextAlignment="MiddleLeft" Multiline="true" Text="End Date" SizeF="69,14" LocationFloat="417,26" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True"/>
+														<Item3 Ref="739" ControlType="XRLabel" Name="document_nbr_t" TextAlignment="MiddleLeft" Multiline="true" Text="Document" SizeF="72,14" LocationFloat="478,26" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True"/>
+														<Item4 Ref="740" ControlType="XRLabel" Name="type_comp_desc_t" TextAlignment="MiddleLeft" Multiline="true" Text="Component" SizeF="215,14" LocationFloat="558,26" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True"/>
+														<Item5 Ref="741" ControlType="XRLabel" Name="volume_used_t" TextAlignment="MiddleCenter" Multiline="true" Text="Volume" SizeF="82,14" LocationFloat="781,26" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True"/>
+														<Item6 Ref="742" ControlType="XRLabel" Name="component_price_t" TextAlignment="MiddleLeft" Multiline="true" Text="Per Unit $" SizeF="78,14" LocationFloat="874,26" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True"/>
+														<Item7 Ref="743" ControlType="XRLabel" Name="based_on_t" TextAlignment="MiddleLeft" Multiline="true" Text="Based On" SizeF="82,14" LocationFloat="699,26" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True"/>
+														<Item8 Ref="744" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleLeft" Multiline="true" Text="OTHER CHARGES" SizeF="112,16" LocationFloat="2,2" AnchorVertical="Both" Font="Calibri, 10pt, style=Bold" Visible="True"/>
+														<Item9 Ref="745" ControlType="XRLabel" Name="facility_name_t" TextAlignment="MiddleLeft" Multiline="true" Text="Facility: Station # / Station Name" SizeF="261,14" LocationFloat="2,24" AnchorVertical="Both" Font="Calibri, 8pt, style=Bold" Visible="True"/>
+														<Item10 Ref="746" ControlType="XRLabel" Name="component_val_t" TextAlignment="MiddleRight" Multiline="true" Text="Total" SizeF="63,14" LocationFloat="968,26" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True"/>
 													</Controls>
 												</Item3>
 												<Item4 Ref="747" ControlType="GroupHeaderBand" Name="summary" HeightF="24" Level="1">
 													<Controls>
-														<Item1 Ref="748" ControlType="XRLabel" Name="t_2" TextAlignment="MiddleLeft" Multiline="true" Text="TOTAL OTHER CHARGES" SizeF="133,16" LocationFloat="2,-0" AnchorVertical="Both" Font="Calibri, 10pt, style=Bold" Visible="True"/>
-														<Item2 Ref="749" ControlType="XRLabel" Name="t_6" TextAlignment="MiddleLeft" Multiline="true" Text="$" SizeF="9,14" LocationFloat="1026,3" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True"/>
+														<Item1 Ref="748" ControlType="XRLabel" Name="t_2" TextAlignment="MiddleLeft" Multiline="true" Text="TOTAL OTHER CHARGES" SizeF="136,16" LocationFloat="2,-0" AnchorVertical="Both" Font="Calibri, 10pt, style=Bold" Visible="True"/>
+														<Item2 Ref="749" ControlType="XRLabel" Name="t_6" TextAlignment="MiddleLeft" Multiline="true" Text="$" SizeF="12,14" LocationFloat="1026,3" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True"/>
 														<Item3 Ref="750" ControlType="XRLine" Name="l_2" FillColor="255,128,128,128" SizeF="91,0" LocationFloat="944,-0"  LineDirection="Horizontal" Visible="True"/>
 														<Item4 Ref="751" ControlType="XRLine" Name="l_3" FillColor="255,128,128,128" SizeF="91,0" LocationFloat="944,18"  LineDirection="Horizontal" Visible="True"/>
 														<Item5 Ref="752" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="91,0" LocationFloat="944,21"  LineDirection="Horizontal" Visible="True"/>
@@ -1593,7 +1593,7 @@ Value" SizeF="42,30" LocationFloat="635,17" AnchorVertical="Both" Font="Arial, 8
 																<Item1 Ref="780" EventName="BeforePrint" PropertyName="Text" Expression="[component_price]"/>
 															</ExpressionBindings>
 														</Item6>
-														<Item7 Ref="781" ControlType="XRLabel" Name="t_4" TextAlignment="MiddleLeft" Multiline="true" Text="$" SizeF="9,13" LocationFloat="869,3" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True"/>
+														<Item7 Ref="781" ControlType="XRLabel" Name="t_4" TextAlignment="MiddleLeft" Multiline="true" Text="$" SizeF="12,13" LocationFloat="869,3" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True"/>
 														<Item8 Ref="782" ControlType="XRLabel" Name="based_on" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="82,15" LocationFloat="699,2" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 															<ExpressionBindings>
 																<Item1 Ref="783" EventName="BeforePrint" PropertyName="Text" Expression="[based_on]"/>
@@ -1604,7 +1604,7 @@ Value" SizeF="42,30" LocationFloat="635,17" AnchorVertical="Both" Font="Arial, 8
 																<Item1 Ref="785" EventName="BeforePrint" PropertyName="Text" Expression="[compute_1]"/>
 															</ExpressionBindings>
 														</Item9>
-														<Item10 Ref="786" ControlType="XRLabel" Name="t_3" TextAlignment="MiddleLeft" Multiline="true" Text="$" SizeF="9,13" LocationFloat="954,3" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True"/>
+														<Item10 Ref="786" ControlType="XRLabel" Name="t_3" TextAlignment="MiddleLeft" Multiline="true" Text="$" SizeF="12,13" LocationFloat="954,3" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True"/>
 														<Item11 Ref="787" ControlType="XRLabel" Name="component_val" TextFormatString="{0:#,##0.00;(#,##0.00)}" TextAlignment="MiddleRight"  Multiline="true" SizeF="72,15" LocationFloat="963,2" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 															<ExpressionBindings>
 																<Item1 Ref="788" EventName="BeforePrint" PropertyName="Text" Expression="[component_val]"/>
@@ -1659,7 +1659,7 @@ Value" SizeF="42,30" LocationFloat="635,17" AnchorVertical="Both" Font="Arial, 8
 								</GroupFields>
 								<Controls>
 									<Item1 Ref="812" ControlType="XRSubreport" Name="rpt_pmnt_statement_plt_total_deal_vol" SizeF="365,34" LocationFloat="680,-0">
-										<ReportSource Ref="814" Name="rpt_pmnt_statement_plt_total_deal_vol" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_total_deal_vol, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="249" PageHeight="39" Version="24.1" DataMember="Query" DataSource="#Ref-813">
+										<ReportSource Ref="814" Name="rpt_pmnt_statement_plt_total_deal_vol" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_total_deal_vol, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="254" PageHeight="39" Version="24.1" DataMember="Query" DataSource="#Ref-813">
 											<Parameters>
 												<Item1 Ref="815" Name="dwra_statement_nbr"/>
 												<Item2 Ref="816" Name="dwra_stmnt_rev_nbr"/>
@@ -1680,9 +1680,9 @@ Value" SizeF="42,30" LocationFloat="635,17" AnchorVertical="Both" Font="Arial, 8
 												</Item3>
 												<Item4 Ref="824" ControlType="GroupHeaderBand" Name="summary" HeightF="23" Level="2">
 													<Controls>
-														<Item1 Ref="825" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="249,0" LocationFloat="-0,-0"  LineDirection="Horizontal" Visible="True"/>
-														<Item2 Ref="826" ControlType="XRLine" Name="l_2" FillColor="255,128,128,128" SizeF="249,0" LocationFloat="-0,18"  LineDirection="Horizontal" Visible="True"/>
-														<Item3 Ref="827" ControlType="XRLine" Name="l_3" FillColor="255,128,128,128" SizeF="249,0" LocationFloat="-0,20"  LineDirection="Horizontal" Visible="True"/>
+														<Item1 Ref="825" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="254,0" LocationFloat="-0,-0"  LineDirection="Horizontal" Visible="True"/>
+														<Item2 Ref="826" ControlType="XRLine" Name="l_2" FillColor="255,128,128,128" SizeF="254,0" LocationFloat="-0,18"  LineDirection="Horizontal" Visible="True"/>
+														<Item3 Ref="827" ControlType="XRLine" Name="l_3" FillColor="255,128,128,128" SizeF="254,0" LocationFloat="-0,20"  LineDirection="Horizontal" Visible="True"/>
 														<Item4 Ref="828" ControlType="XRLabel" Name="total_sat_field" TextFormatString="{0:#,###}" TextAlignment="MiddleRight"  Multiline="true" SizeF="68,14" LocationFloat="86,3" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 															<ExpressionBindings>
 																<Item1 Ref="829" EventName="BeforePrint" PropertyName="Text" Expression="[total_sat]"/>
@@ -1779,7 +1779,7 @@ Value" SizeF="42,30" LocationFloat="635,17" AnchorVertical="Both" Font="Arial, 8
 										</ParameterBindings>
 									</Item1>
 									<Item2 Ref="874" ControlType="XRSubreport" Name="rpt_pmnt_statement_plt_detail_value" SizeF="1044,34" LocationFloat="-0,37">
-										<ReportSource Ref="876" Name="rpt_pmnt_statement_plt_detail_value" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_detail_value, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="20, 20, 25, 13" PaperKind="Custom" PageWidth="1027" PageHeight="98" Version="24.1" DataMember="Query" DataSource="#Ref-875">
+										<ReportSource Ref="876" Name="rpt_pmnt_statement_plt_detail_value" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_detail_value, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="20, 20, 25, 13" PaperKind="Custom" PageWidth="1032" PageHeight="98" Version="24.1" DataMember="Query" DataSource="#Ref-875">
 											<Parameters>
 												<Item1 Ref="877" Name="dwra_statement_nbr"/>
 												<Item2 Ref="878" Name="dwra_statement_rev"/>
@@ -1844,13 +1844,13 @@ Value" SizeF="42,30" LocationFloat="635,17" AnchorVertical="Both" Font="Arial, 8
 												</Item11>
 												<Item12 Ref="900" ControlType="GroupFooterBand" Name="groupFooterBand3" Level="2" HeightF="45">
 													<Controls>
-														<Item1 Ref="901" ControlType="XRLabel" Name="t_12" TextAlignment="MiddleLeft" Multiline="true" Text="Total" SizeF="47,14" LocationFloat="860,5" AnchorVertical="Both" Font="Calibri, 8pt, style=Bold" Visible="True">
+														<Item1 Ref="901" ControlType="XRLabel" Name="t_12" TextAlignment="MiddleLeft" Multiline="true" Text="Total" SizeF="50,14" LocationFloat="860,5" AnchorVertical="Both" Font="Calibri, 8pt, style=Bold" Visible="True">
 															<ExpressionBindings>
 																<Item1 Ref="902" EventName="BeforePrint" PropertyName="Text" Expression="Iif(type=='O','','Total')"/>
 																<Item2 Ref="903" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 															</ExpressionBindings>
 														</Item1>
-														<Item2 Ref="904" ControlType="XRLabel" Name="t_6" TextAlignment="MiddleLeft" Multiline="true" Text="$" SizeF="9,13" LocationFloat="920,5" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
+														<Item2 Ref="904" ControlType="XRLabel" Name="t_6" TextAlignment="MiddleLeft" Multiline="true" Text="$" SizeF="12,13" LocationFloat="920,5" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 															<ExpressionBindings>
 																<Item1 Ref="905" EventName="BeforePrint" PropertyName="Text" Expression="Iif(type=='O','','$')"/>
 																<Item2 Ref="906" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
@@ -1873,38 +1873,38 @@ Value" SizeF="42,30" LocationFloat="635,17" AnchorVertical="Both" Font="Arial, 8
 														<Item2 Ref="915" FieldName="station_name" />
 													</GroupFields>
 													<Controls>
-														<Item1 Ref="916" ControlType="XRLabel" Name="type_comp_desc_t" TextAlignment="MiddleCenter" Multiline="true" Text="Component" SizeF="67,14" LocationFloat="66,20" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
+														<Item1 Ref="916" ControlType="XRLabel" Name="type_comp_desc_t" TextAlignment="MiddleCenter" Multiline="true" Text="Component" SizeF="70,14" LocationFloat="66,20" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 															<ExpressionBindings>
 																<Item1 Ref="917" EventName="BeforePrint" PropertyName="Text" Expression="Iif(type=='O','','Component')"/>
 																<Item2 Ref="918" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 															</ExpressionBindings>
 														</Item1>
-														<Item2 Ref="919" ControlType="XRLabel" Name="based_on_t" TextAlignment="MiddleLeft" Multiline="true" Text="UOM" SizeF="67,14" LocationFloat="571,20" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
+														<Item2 Ref="919" ControlType="XRLabel" Name="based_on_t" TextAlignment="MiddleLeft" Multiline="true" Text="UOM" SizeF="70,14" LocationFloat="571,20" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 															<ExpressionBindings>
 																<Item1 Ref="920" EventName="BeforePrint" PropertyName="Text" Expression="Iif(type=='O','','Based On')"/>
 																<Item2 Ref="921" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 															</ExpressionBindings>
 														</Item2>
-														<Item3 Ref="922" ControlType="XRLabel" Name="volume_used_t" TextAlignment="MiddleLeft" Multiline="true" Text="Volume" SizeF="67,14" LocationFloat="676,20" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
+														<Item3 Ref="922" ControlType="XRLabel" Name="volume_used_t" TextAlignment="MiddleLeft" Multiline="true" Text="Volume" SizeF="70,14" LocationFloat="676,20" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 															<ExpressionBindings>
 																<Item1 Ref="923" EventName="BeforePrint" PropertyName="Text" Expression="Iif(type=='O','','Volume')"/>
 																<Item2 Ref="924" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 															</ExpressionBindings>
 														</Item3>
-														<Item4 Ref="925" ControlType="XRLabel" Name="component_price_t" TextAlignment="MiddleLeft" Multiline="true" Text="Per Unit $" SizeF="67,14" LocationFloat="759,20" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
+														<Item4 Ref="925" ControlType="XRLabel" Name="component_price_t" TextAlignment="MiddleLeft" Multiline="true" Text="Per Unit $" SizeF="70,14" LocationFloat="759,20" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 															<ExpressionBindings>
 																<Item1 Ref="926" EventName="BeforePrint" PropertyName="Text" Expression="Iif(type=='O','','Per Unit $')"/>
 																<Item2 Ref="927" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 															</ExpressionBindings>
 														</Item4>
-														<Item5 Ref="928" ControlType="XRLabel" Name="deduct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Deduct" SizeF="59,14" LocationFloat="845,20" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True"/>
-														<Item6 Ref="929" ControlType="XRLabel" Name="component_val_t" TextAlignment="MiddleLeft" Multiline="true" Text="Total" SizeF="87,14" LocationFloat="940,20" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
+														<Item5 Ref="928" ControlType="XRLabel" Name="deduct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Deduct" SizeF="62,14" LocationFloat="845,20" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True"/>
+														<Item6 Ref="929" ControlType="XRLabel" Name="component_val_t" TextAlignment="MiddleLeft" Multiline="true" Text="Total" SizeF="90,14" LocationFloat="940,20" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 															<ExpressionBindings>
 																<Item1 Ref="930" EventName="BeforePrint" PropertyName="Text" Expression="Iif(type=='O','','Total')"/>
 																<Item2 Ref="931" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 															</ExpressionBindings>
 														</Item6>
-														<Item7 Ref="932" ControlType="XRLabel" Name="prod_mo_t" TextAlignment="MiddleLeft" Multiline="true" Text="Prod Mo" SizeF="41,14" LocationFloat="15,20" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True"/>
+														<Item7 Ref="932" ControlType="XRLabel" Name="prod_mo_t" TextAlignment="MiddleLeft" Multiline="true" Text="Prod Mo" SizeF="44,14" LocationFloat="15,20" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True"/>
 														<Item8 Ref="933" ControlType="XRLabel" Name="compute_2_field" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="874,14" LocationFloat="15,5" AnchorVertical="Both" Font="Calibri, 8pt, style=Bold" Visible="True">
 															<ExpressionBindings>
 																<Item1 Ref="934" EventName="BeforePrint" PropertyName="Text" Expression="[compute_2]"/>
@@ -1952,12 +1952,12 @@ Value" SizeF="42,30" LocationFloat="635,17" AnchorVertical="Both" Font="Arial, 8
 																<Item2 Ref="953" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 															</ExpressionBindings>
 														</Item5>
-														<Item6 Ref="954" ControlType="XRLabel" Name="t_3" TextAlignment="MiddleLeft" Multiline="true" Text="$" SizeF="9,13" LocationFloat="742,-0" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
+														<Item6 Ref="954" ControlType="XRLabel" Name="t_3" TextAlignment="MiddleLeft" Multiline="true" Text="$" SizeF="12,13" LocationFloat="742,-0" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 															<ExpressionBindings>
 																<Item1 Ref="955" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 															</ExpressionBindings>
 														</Item6>
-														<Item7 Ref="956" ControlType="XRLabel" Name="t_4" TextAlignment="MiddleLeft" Multiline="true" Text="$" SizeF="9,13" LocationFloat="939,-0" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
+														<Item7 Ref="956" ControlType="XRLabel" Name="t_4" TextAlignment="MiddleLeft" Multiline="true" Text="$" SizeF="12,13" LocationFloat="939,-0" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 															<ExpressionBindings>
 																<Item1 Ref="957" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 															</ExpressionBindings>
@@ -2031,7 +2031,7 @@ Value" SizeF="42,30" LocationFloat="635,17" AnchorVertical="Both" Font="Arial, 8
 					</ParameterBindings>
 				</Item2>
 				<Item3 Ref="991" ControlType="XRSubreport" Name="rpt_pmnt_statement_detail_deal" SizeF="1046,36" LocationFloat="2,115">
-					<ReportSource Ref="993" Name="rpt_pmnt_statement_detail_deal" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_detail_deal, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="-0, -0, 25, 25" PaperKind="Custom" PageWidth="1065" PageHeight="207" Version="24.1" DataMember="Query" DataSource="#Ref-992">
+					<ReportSource Ref="993" Name="rpt_pmnt_statement_detail_deal" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_detail_deal, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="-0, -0, 25, 25" PaperKind="Custom" PageWidth="1070" PageHeight="207" Version="24.1" DataMember="Query" DataSource="#Ref-992">
 						<Parameters>
 							<Item1 Ref="994" Name="statement_nbr"/>
 							<Item2 Ref="995" Name="statement_rev_nbr"/>
@@ -2046,7 +2046,7 @@ Value" SizeF="42,30" LocationFloat="635,17" AnchorVertical="Both" Font="Arial, 8
 							<Item2 Ref="999" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="25"/>
 							<Item3 Ref="1000" ControlType="ReportHeaderBand" Name="header" HeightF="58">
 								<Controls>
-									<Item1 Ref="1001" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleCenter" Multiline="true" Text="PURCHASE STATEMENT DETAIL" SizeF="499,17" LocationFloat="236,16" AnchorVertical="Both" Font="Tahoma, 10pt, style=Bold" Visible="True"/>
+									<Item1 Ref="1001" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleCenter" Multiline="true" Text="PURCHASE STATEMENT DETAIL" SizeF="502,17" LocationFloat="236,16" AnchorVertical="Both" Font="Tahoma, 10pt, style=Bold" Visible="True"/>
 									<Item2 Ref="1002" ControlType="XRLabel" Name="payee_name" TextFormatString="" TextAlignment="MiddleCenter"  Multiline="true" SizeF="499,17" LocationFloat="236,36" AnchorVertical="Both" Font="Tahoma, 10pt, style=Bold" Visible="True">
 										<ExpressionBindings>
 											<Item1 Ref="1003" EventName="BeforePrint" PropertyName="Text" Expression="[payee_name]"/>
@@ -2075,7 +2075,7 @@ Value" SizeF="42,30" LocationFloat="635,17" AnchorVertical="Both" Font="Arial, 8
 										</ExpressionBindings>
 									</Item1>
 									<Item2 Ref="1011" ControlType="XRSubreport" Name="rpt_pmnt_statement_detail_deal_grid2" SizeF="1065,36" LocationFloat="-0,2">
-										<ReportSource Ref="1013" Name="rpt_pmnt_statement_detail_deal_grid2" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_detail_deal_grid2, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="-0, -0, 25, 25" PaperKind="Custom" PageWidth="846" PageHeight="61" Version="24.1" DataMember="Query" DataSource="#Ref-1012">
+										<ReportSource Ref="1013" Name="rpt_pmnt_statement_detail_deal_grid2" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_detail_deal_grid2, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="-0, -0, 25, 25" PaperKind="Custom" PageWidth="851" PageHeight="61" Version="24.1" DataMember="Query" DataSource="#Ref-1012">
 											<Parameters>
 												<Item1 Ref="1014" Name="statement_nbr"/>
 												<Item2 Ref="1015" Name="statement_rev_nbr"/>
@@ -2093,17 +2093,17 @@ Value" SizeF="42,30" LocationFloat="635,17" AnchorVertical="Both" Font="Arial, 8
 												<Item2 Ref="1022" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="25"/>
 												<Item3 Ref="1023" ControlType="ReportHeaderBand" Name="header" HeightF="42">
 													<Controls>
-														<Item1 Ref="1024" ControlType="XRLabel" Name="date_t" TextAlignment="MiddleLeft" Multiline="true" Text="Date" SizeF="53,15" LocationFloat="2,3" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
-														<Item2 Ref="1025" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleRight" Multiline="true" Text="MCF" SizeF="60,15" LocationFloat="62,3" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
-														<Item3 Ref="1026" ControlType="XRLabel" Name="t_2" TextAlignment="MiddleRight" Multiline="true" Text="MMBtu Sat" SizeF="60,15" LocationFloat="122,3" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
-														<Item4 Ref="1027" ControlType="XRLabel" Name="t_3" TextAlignment="MiddleRight" Multiline="true" Text="MMBtu Dry" SizeF="60,15" LocationFloat="183,3" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
-														<Item5 Ref="1028" ControlType="XRLabel" Name="t_4" TextAlignment="MiddleLeft" Multiline="true" Text="Price Component" SizeF="101,15" LocationFloat="249,3" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
-														<Item6 Ref="1029" ControlType="XRLabel" Name="t_6" TextAlignment="MiddleLeft" Multiline="true" Text="Price" SizeF="49,15" LocationFloat="637,3" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
-														<Item7 Ref="1030" ControlType="XRLabel" Name="t_7" TextAlignment="MiddleLeft" Multiline="true" Text="Value" SizeF="34,15" LocationFloat="700,3" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
-														<Item8 Ref="1031" ControlType="XRLabel" Name="t_8" TextAlignment="MiddleLeft" Multiline="true" Text="Daily Total" SizeF="63,15" LocationFloat="775,3" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
-														<Item9 Ref="1032" ControlType="XRLabel" Name="t_5" TextAlignment="MiddleLeft" Multiline="true" Text="Units" SizeF="62,15" LocationFloat="566,3" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
-														<Item10 Ref="1033" ControlType="XRLabel" Name="t_10" TextAlignment="MiddleLeft" Multiline="true" Text="Price Description" SizeF="101,15" LocationFloat="398,3" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
-														<Item11 Ref="1034" ControlType="XRLabel" Name="t_9" TextAlignment="MiddleLeft" Multiline="true" Text="Totals:" SizeF="50,15" LocationFloat="-0,24" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
+														<Item1 Ref="1024" ControlType="XRLabel" Name="date_t" TextAlignment="MiddleLeft" Multiline="true" Text="Date" SizeF="56,15" LocationFloat="2,3" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+														<Item2 Ref="1025" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleRight" Multiline="true" Text="MCF" SizeF="63,15" LocationFloat="62,3" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+														<Item3 Ref="1026" ControlType="XRLabel" Name="t_2" TextAlignment="MiddleRight" Multiline="true" Text="MMBtu Sat" SizeF="63,15" LocationFloat="122,3" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+														<Item4 Ref="1027" ControlType="XRLabel" Name="t_3" TextAlignment="MiddleRight" Multiline="true" Text="MMBtu Dry" SizeF="63,15" LocationFloat="183,3" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+														<Item5 Ref="1028" ControlType="XRLabel" Name="t_4" TextAlignment="MiddleLeft" Multiline="true" Text="Price Component" SizeF="104,15" LocationFloat="249,3" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+														<Item6 Ref="1029" ControlType="XRLabel" Name="t_6" TextAlignment="MiddleLeft" Multiline="true" Text="Price" SizeF="52,15" LocationFloat="637,3" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+														<Item7 Ref="1030" ControlType="XRLabel" Name="t_7" TextAlignment="MiddleLeft" Multiline="true" Text="Value" SizeF="37,15" LocationFloat="700,3" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+														<Item8 Ref="1031" ControlType="XRLabel" Name="t_8" TextAlignment="MiddleLeft" Multiline="true" Text="Daily Total" SizeF="66,15" LocationFloat="775,3" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
+														<Item9 Ref="1032" ControlType="XRLabel" Name="t_5" TextAlignment="MiddleLeft" Multiline="true" Text="Units" SizeF="65,15" LocationFloat="566,3" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+														<Item10 Ref="1033" ControlType="XRLabel" Name="t_10" TextAlignment="MiddleLeft" Multiline="true" Text="Price Description" SizeF="104,15" LocationFloat="398,3" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+														<Item11 Ref="1034" ControlType="XRLabel" Name="t_9" TextAlignment="MiddleLeft" Multiline="true" Text="Totals:" SizeF="53,15" LocationFloat="-0,24" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
 														<Item12 Ref="1035" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="789,0" LocationFloat="57,21"  LineDirection="Horizontal" Visible="True"/>
 														<Item13 Ref="1036" ControlType="XRLine" Name="l_2" FillColor="255,128,128,128" SizeF="789,0" LocationFloat="57,40"  LineDirection="Horizontal" Visible="True"/>
 														<Item14 Ref="1037" ControlType="XRLabel" Name="month_dry_mmbtu" TextFormatString="{0:#,##0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="60,15" LocationFloat="183,24" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True">
@@ -2228,31 +2228,31 @@ Value" SizeF="42,30" LocationFloat="635,17" AnchorVertical="Both" Font="Arial, 8
 									<Item4 Ref="1090" FieldName="order_rev_nbr" />
 								</GroupFields>
 								<Controls>
-									<Item1 Ref="1091" ControlType="XRLabel" Name="t_3" TextAlignment="MiddleLeft" Multiline="true" Text="Statement #: " SizeF="85,17" LocationFloat="-0,-0" AnchorVertical="Both" Font="Tahoma, 10pt" Visible="True"/>
+									<Item1 Ref="1091" ControlType="XRLabel" Name="t_3" TextAlignment="MiddleLeft" Multiline="true" Text="Statement #: " SizeF="88,17" LocationFloat="-0,-0" AnchorVertical="Both" Font="Tahoma, 10pt" Visible="True"/>
 									<Item2 Ref="1092" ControlType="XRLabel" Name="statement_nbr_label" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="115,17" LocationFloat="89,-0" AnchorVertical="Both" Font="Tahoma, 10pt" Visible="True">
 										<ExpressionBindings>
 											<Item1 Ref="1093" EventName="BeforePrint" PropertyName="Text" Expression="[statement_nbr]"/>
 										</ExpressionBindings>
 									</Item2>
-									<Item3 Ref="1094" ControlType="XRLabel" Name="t_4" TextAlignment="MiddleLeft" Multiline="true" Text="Facility: " SizeF="50,17" LocationFloat="213,-0" AnchorVertical="Both" Font="Tahoma, 10pt" Visible="True"/>
+									<Item3 Ref="1094" ControlType="XRLabel" Name="t_4" TextAlignment="MiddleLeft" Multiline="true" Text="Facility: " SizeF="53,17" LocationFloat="213,-0" AnchorVertical="Both" Font="Tahoma, 10pt" Visible="True"/>
 									<Item4 Ref="1095" ControlType="XRLabel" Name="facility_name" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="246,17" LocationFloat="271,-0" AnchorVertical="Both" Font="Tahoma, 10pt" Visible="True">
 										<ExpressionBindings>
 											<Item1 Ref="1096" EventName="BeforePrint" PropertyName="Text" Expression="[facility_name]"/>
 										</ExpressionBindings>
 									</Item4>
-									<Item5 Ref="1097" ControlType="XRLabel" Name="t_5" TextAlignment="MiddleLeft" Multiline="true" Text="Station: " SizeF="51,17" LocationFloat="529,-0" AnchorVertical="Both" Font="Tahoma, 10pt" Visible="True"/>
+									<Item5 Ref="1097" ControlType="XRLabel" Name="t_5" TextAlignment="MiddleLeft" Multiline="true" Text="Station: " SizeF="54,17" LocationFloat="529,-0" AnchorVertical="Both" Font="Tahoma, 10pt" Visible="True"/>
 									<Item6 Ref="1098" ControlType="XRLabel" Name="comp_station_nbr_name_field" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="348,17" LocationFloat="588,-0" AnchorVertical="Both" Font="Tahoma, 10pt" Visible="True">
 										<ExpressionBindings>
 											<Item1 Ref="1099" EventName="BeforePrint" PropertyName="Text" Expression="[comp_station_nbr_name]"/>
 										</ExpressionBindings>
 									</Item6>
-									<Item7 Ref="1100" ControlType="XRLabel" Name="t_2" TextAlignment="MiddleLeft" Multiline="true" Text="Contract #:" SizeF="73,17" LocationFloat="4,20" AnchorVertical="Both" Font="Tahoma, 10pt" Visible="True"/>
+									<Item7 Ref="1100" ControlType="XRLabel" Name="t_2" TextAlignment="MiddleLeft" Multiline="true" Text="Contract #:" SizeF="76,17" LocationFloat="4,20" AnchorVertical="Both" Font="Tahoma, 10pt" Visible="True"/>
 									<Item8 Ref="1101" ControlType="XRLabel" Name="contract_nbr" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="70,17" LocationFloat="84,20" AnchorVertical="Both" Font="Tahoma, 10pt" Visible="True">
 										<ExpressionBindings>
 											<Item1 Ref="1102" EventName="BeforePrint" PropertyName="Text" Expression="[contract_nbr]"/>
 										</ExpressionBindings>
 									</Item8>
-									<Item9 Ref="1103" ControlType="XRLabel" Name="t_6" TextAlignment="MiddleLeft" Multiline="true" Text="Deal/Order" SizeF="76,17" LocationFloat="214,20" AnchorVertical="Both" Font="Tahoma, 10pt" Visible="True"/>
+									<Item9 Ref="1103" ControlType="XRLabel" Name="t_6" TextAlignment="MiddleLeft" Multiline="true" Text="Deal/Order" SizeF="79,17" LocationFloat="214,20" AnchorVertical="Both" Font="Tahoma, 10pt" Visible="True"/>
 									<Item10 Ref="1104" ControlType="XRLabel" Name="compute_1_field" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="173,17" LocationFloat="295,20" AnchorVertical="Both" Font="Tahoma, 10pt" Visible="True">
 										<ExpressionBindings>
 											<Item1 Ref="1105" EventName="BeforePrint" PropertyName="Text" Expression="[compute_1]"/>
@@ -2280,7 +2280,7 @@ Value" SizeF="42,30" LocationFloat="635,17" AnchorVertical="Both" Font="Arial, 8
 					</ParameterBindings>
 				</Item3>
 				<Item4 Ref="1115" ControlType="XRSubreport" Name="rpt_pmnt_statement_plt_header" SizeF="1046,36" LocationFloat="2,2">
-					<ReportSource Ref="1117" Name="rpt_pmnt_statement_plt_header" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_header, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 23, 0" PaperKind="Custom" PageWidth="1051" PageHeight="773" Version="24.1" DataMember="Query" DataSource="#Ref-1116">
+					<ReportSource Ref="1117" Name="rpt_pmnt_statement_plt_header" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_header, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 23, 0" PaperKind="Custom" PageWidth="1056" PageHeight="773" Version="24.1" DataMember="Query" DataSource="#Ref-1116">
 						<Parameters>
 							<Item1 Ref="1118" Name="dwra_statement_nbr"/>
 							<Item2 Ref="1119" Name="dwra_statement_rev"/>
@@ -2327,16 +2327,16 @@ Value" SizeF="42,30" LocationFloat="635,17" AnchorVertical="Both" Font="Arial, 8
 											<Item1 Ref="1135" EventName="BeforePrint" PropertyName="Text" Expression="[primary_phone_number]"/>
 										</ExpressionBindings>
 									</Item4>
-									<Item5 Ref="1136" ControlType="XRLabel" Name="book_mo_t" TextAlignment="MiddleLeft" Multiline="true" Text="Phone:" SizeF="49,19" LocationFloat="16,109" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True"/>
-									<Item6 Ref="1137" ControlType="XRLabel" Name="contract_nbr_t" TextAlignment="MiddleRight" Multiline="true" Text="Contract #:" SizeF="105,19" LocationFloat="679,175" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True"/>
-									<Item7 Ref="1138" ControlType="XRLabel" Name="type_t" TextAlignment="MiddleRight" Multiline="true" Text="Customer #:" SizeF="105,19" LocationFloat="695,217" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True"/>
+									<Item5 Ref="1136" ControlType="XRLabel" Name="book_mo_t" TextAlignment="MiddleLeft" Multiline="true" Text="Phone:" SizeF="52,19" LocationFloat="16,109" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True"/>
+									<Item6 Ref="1137" ControlType="XRLabel" Name="contract_nbr_t" TextAlignment="MiddleRight" Multiline="true" Text="Contract #:" SizeF="108,19" LocationFloat="679,175" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True"/>
+									<Item7 Ref="1138" ControlType="XRLabel" Name="type_t" TextAlignment="MiddleRight" Multiline="true" Text="Customer #:" SizeF="108,19" LocationFloat="695,217" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True"/>
 									<Item8 Ref="1139" ControlType="XRLabel" Name="payee_ba_nbr" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="87,19" LocationFloat="809,217" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True">
 										<ExpressionBindings>
 											<Item1 Ref="1140" EventName="BeforePrint" PropertyName="Text" Expression="[payee_ba_nbr]"/>
 										</ExpressionBindings>
 									</Item8>
 									<Item9 Ref="1141" ControlType="XRSubreport" Name="rpt_pmnt_statement_plt_header_k" SizeF="230,23" LocationFloat="789,175">
-										<ReportSource Ref="1143" Name="rpt_pmnt_statement_plt_header_k" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_header_k, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="249" PageHeight="19" Version="24.1" DataMember="Query" DataSource="#Ref-1142">
+										<ReportSource Ref="1143" Name="rpt_pmnt_statement_plt_header_k" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_header_k, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="254" PageHeight="19" Version="24.1" DataMember="Query" DataSource="#Ref-1142">
 											<Parameters>
 												<Item1 Ref="1144" Name="dwra_statement_nbr"/>
 												<Item2 Ref="1145" Name="dwra_statement_rev"/>
@@ -2392,19 +2392,19 @@ Value" SizeF="42,30" LocationFloat="635,17" AnchorVertical="Both" Font="Arial, 8
 											<Item1 Ref="1164" EventName="BeforePrint" PropertyName="Text" Expression="[primary_name]"/>
 										</ExpressionBindings>
 									</Item11>
-									<Item12 Ref="1165" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleCenter" Multiline="true" Text="PURCHASE STATEMENT" SizeF="264,19" LocationFloat="651,31" AnchorVertical="Both" Font="Calibri, 11pt, style=Bold" Visible="True"/>
+									<Item12 Ref="1165" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleCenter" Multiline="true" Text="PURCHASE STATEMENT" SizeF="267,19" LocationFloat="651,31" AnchorVertical="Both" Font="Calibri, 11pt, style=Bold" Visible="True"/>
 									<Item13 Ref="1166" ControlType="XRLabel" Name="statement_date" TextFormatString="{0:[shortdate]}" TextAlignment="MiddleCenter"  Multiline="true" SizeF="114,20" LocationFloat="729,53" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True">
 										<ExpressionBindings>
 											<Item1 Ref="1167" EventName="BeforePrint" PropertyName="Text" Expression="[statement_date]"/>
 										</ExpressionBindings>
 									</Item13>
-									<Item14 Ref="1168" ControlType="XRLabel" Name="statement_nbr_t" TextAlignment="MiddleRight" Multiline="true" Text="Statement #:" SizeF="105,19" LocationFloat="669,92" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True"/>
+									<Item14 Ref="1168" ControlType="XRLabel" Name="statement_nbr_t" TextAlignment="MiddleRight" Multiline="true" Text="Statement #:" SizeF="108,19" LocationFloat="669,92" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True"/>
 									<Item15 Ref="1169" ControlType="XRLabel" Name="statement_nbr_label" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="119,20" LocationFloat="782,92" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True">
 										<ExpressionBindings>
 											<Item1 Ref="1170" EventName="BeforePrint" PropertyName="Text" Expression="[statement_nbr]"/>
 										</ExpressionBindings>
 									</Item15>
-									<Item16 Ref="1171" ControlType="XRLabel" Name="statement_due_date_t" TextAlignment="MiddleRight" Multiline="true" Text="Payment Due Date:" SizeF="138,19" LocationFloat="667,134" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True"/>
+									<Item16 Ref="1171" ControlType="XRLabel" Name="statement_due_date_t" TextAlignment="MiddleRight" Multiline="true" Text="Payment Due Date:" SizeF="141,19" LocationFloat="667,134" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True"/>
 									<Item17 Ref="1172" ControlType="XRLabel" Name="statement_due_date" TextFormatString="{0:[shortdate]}" TextAlignment="MiddleLeft"  Multiline="true" SizeF="105,20" LocationFloat="812,134" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True">
 										<ExpressionBindings>
 											<Item1 Ref="1173" EventName="BeforePrint" PropertyName="Text" Expression="[statement_due_date]"/>
@@ -2465,20 +2465,20 @@ Value" SizeF="42,30" LocationFloat="635,17" AnchorVertical="Both" Font="Arial, 8
 											<Item1 Ref="1198" EventName="BeforePrint" PropertyName="Text" Expression="[payee_name]"/>
 										</ExpressionBindings>
 									</Item27>
-									<Item28 Ref="1199" ControlType="XRLabel" Name="curr_prod_mo_t" TextAlignment="MiddleLeft" Multiline="true" Text="ATTN:" SizeF="41,19" LocationFloat="16,244" AnchorVertical="Both" Font="Calibri, 11pt, style=Bold" Visible="True"/>
+									<Item28 Ref="1199" ControlType="XRLabel" Name="curr_prod_mo_t" TextAlignment="MiddleLeft" Multiline="true" Text="ATTN:" SizeF="44,19" LocationFloat="16,244" AnchorVertical="Both" Font="Calibri, 11pt, style=Bold" Visible="True"/>
 									<Item29 Ref="1200" ControlType="XRLabel" Name="payee_attn" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="338,19" LocationFloat="59,244" AnchorVertical="Both" Font="Calibri, 11pt, style=Bold" Visible="True">
 										<ExpressionBindings>
 											<Item1 Ref="1201" EventName="BeforePrint" PropertyName="Text" Expression="[payee_attn]"/>
 										</ExpressionBindings>
 									</Item29>
-									<Item30 Ref="1202" ControlType="XRLabel" Name="t_4" TextAlignment="MiddleLeft" Multiline="true" Text="Statement Total Amount " SizeF="162,19" LocationFloat="534,262" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True"/>
+									<Item30 Ref="1202" ControlType="XRLabel" Name="t_4" TextAlignment="MiddleLeft" Multiline="true" Text="Statement Total Amount " SizeF="165,19" LocationFloat="534,262" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True"/>
 									<Item31 Ref="1203" ControlType="XRLabel" Name="currency_code" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="85,19" LocationFloat="698,262" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True">
 										<ExpressionBindings>
 											<Item1 Ref="1204" EventName="BeforePrint" PropertyName="Text" Expression="[currency_code]"/>
 										</ExpressionBindings>
 									</Item31>
-									<Item32 Ref="1205" ControlType="XRLabel" Name="t_5" TextAlignment="MiddleLeft" Multiline="true" Text="Payment Date:" SizeF="95,19" LocationFloat="534,287" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True"/>
-									<Item33 Ref="1206" ControlType="XRLabel" Name="t_6" TextAlignment="MiddleLeft" Multiline="true" Text="$" SizeF="11,18" LocationFloat="902,262" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True"/>
+									<Item32 Ref="1205" ControlType="XRLabel" Name="t_5" TextAlignment="MiddleLeft" Multiline="true" Text="Payment Date:" SizeF="98,19" LocationFloat="534,287" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True"/>
+									<Item33 Ref="1206" ControlType="XRLabel" Name="t_6" TextAlignment="MiddleLeft" Multiline="true" Text="$" SizeF="14,18" LocationFloat="902,262" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True"/>
 									<Item34 Ref="1207" ControlType="XRLabel" Name="total_val" TextFormatString="{0:#,##0.00;(#,##0.00)}" TextAlignment="MiddleRight"  Multiline="true" SizeF="95,19" LocationFloat="914,262" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True">
 										<ExpressionBindings>
 											<Item1 Ref="1208" EventName="BeforePrint" PropertyName="Text" Expression="[total_val]"/>
@@ -2500,7 +2500,7 @@ Value" SizeF="42,30" LocationFloat="635,17" AnchorVertical="Both" Font="Arial, 8
 										</ExpressionBindings>
 									</Item37>
 									<Item38 Ref="1215" ControlType="XRSubreport" Name="rpt_pmnt_statement_plt_component_summary" SizeF="1042,305" LocationFloat="9,314">
-										<ReportSource Ref="1217" Name="rpt_pmnt_statement_plt_component_summary" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_component_summary, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="14, 14, 14, 13" PaperKind="Custom" PageWidth="991" PageHeight="111" Version="24.1" DataMember="Query" DataSource="#Ref-1216">
+										<ReportSource Ref="1217" Name="rpt_pmnt_statement_plt_component_summary" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_component_summary, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="14, 14, 14, 13" PaperKind="Custom" PageWidth="996" PageHeight="111" Version="24.1" DataMember="Query" DataSource="#Ref-1216">
 											<Parameters>
 												<Item1 Ref="1218" Name="dwra_statement_nbr"/>
 												<Item2 Ref="1219" Name="dwra_statement_rev"/>
@@ -2542,7 +2542,7 @@ Value" SizeF="42,30" LocationFloat="635,17" AnchorVertical="Both" Font="Arial, 8
 													<Controls>
 														<Item1 Ref="1233" ControlType="XRLine" Name="l_7" FillColor="255,128,128,128" SizeF="97,0" LocationFloat="893,32"  LineDirection="Horizontal" Visible="True"/>
 														<Item2 Ref="1234" ControlType="XRLine" Name="l_9" FillColor="255,128,128,128" SizeF="97,0" LocationFloat="893,28"  LineDirection="Horizontal" Visible="True"/>
-														<Item3 Ref="1235" ControlType="XRLabel" Name="t_2" TextAlignment="MiddleRight" Multiline="true" Text="Statement Total" SizeF="87,14" LocationFloat="796,13" AnchorVertical="Both" Font="Calibri, 8pt, style=Bold" Visible="True">
+														<Item3 Ref="1235" ControlType="XRLabel" Name="t_2" TextAlignment="MiddleRight" Multiline="true" Text="Statement Total" SizeF="90,14" LocationFloat="796,13" AnchorVertical="Both" Font="Calibri, 8pt, style=Bold" Visible="True">
 															<ExpressionBindings>
 																<Item1 Ref="1236" EventName="BeforePrint" PropertyName="Text" Expression="Iif(type=='O','','Statement Total')"/>
 																<Item2 Ref="1237" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
@@ -2573,7 +2573,7 @@ Value" SizeF="42,30" LocationFloat="635,17" AnchorVertical="Both" Font="Arial, 8
 														<Item2 Ref="1246" FieldName="facility_name" />
 													</GroupFields>
 													<Controls>
-														<Item1 Ref="1247" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleLeft" Multiline="true" Text="Facility:" SizeF="53,14" LocationFloat="14,3" AnchorVertical="Both" Font="Calibri, 8pt, style=Bold" Visible="True"/>
+														<Item1 Ref="1247" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleLeft" Multiline="true" Text="Facility:" SizeF="56,14" LocationFloat="14,3" AnchorVertical="Both" Font="Calibri, 8pt, style=Bold" Visible="True"/>
 														<Item2 Ref="1248" ControlType="XRLabel" Name="compute_2_field" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="343,14" LocationFloat="75,3" AnchorVertical="Both" Font="Calibri, 8pt, style=Bold" Visible="True">
 															<ExpressionBindings>
 																<Item1 Ref="1249" EventName="BeforePrint" PropertyName="Text" Expression="[compute_2]"/>
@@ -2591,33 +2591,33 @@ Value" SizeF="42,30" LocationFloat="635,17" AnchorVertical="Both" Font="Arial, 8
 														<Item1 Ref="1253" FieldName="based_on" />
 													</GroupFields>
 													<Controls>
-														<Item1 Ref="1254" ControlType="XRLabel" Name="prod_mo_t" TextAlignment="MiddleLeft" Multiline="true" Text="Prod Mo" SizeF="41,14" LocationFloat="15,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True"/>
-														<Item2 Ref="1255" ControlType="XRLabel" Name="type_comp_desc_t" TextAlignment="MiddleCenter" Multiline="true" Text="Component" SizeF="67,14" LocationFloat="66,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
+														<Item1 Ref="1254" ControlType="XRLabel" Name="prod_mo_t" TextAlignment="MiddleLeft" Multiline="true" Text="Prod Mo" SizeF="44,14" LocationFloat="15,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True"/>
+														<Item2 Ref="1255" ControlType="XRLabel" Name="type_comp_desc_t" TextAlignment="MiddleCenter" Multiline="true" Text="Component" SizeF="70,14" LocationFloat="66,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 															<ExpressionBindings>
 																<Item1 Ref="1256" EventName="BeforePrint" PropertyName="Text" Expression="Iif(type=='O','','Component')"/>
 																<Item2 Ref="1257" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 															</ExpressionBindings>
 														</Item2>
-														<Item3 Ref="1258" ControlType="XRLabel" Name="based_on_t" TextAlignment="MiddleLeft" Multiline="true" Text="UOM" SizeF="67,14" LocationFloat="556,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
+														<Item3 Ref="1258" ControlType="XRLabel" Name="based_on_t" TextAlignment="MiddleLeft" Multiline="true" Text="UOM" SizeF="70,14" LocationFloat="556,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 															<ExpressionBindings>
 																<Item1 Ref="1259" EventName="BeforePrint" PropertyName="Text" Expression="Iif(type=='O','','Based On')"/>
 																<Item2 Ref="1260" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 															</ExpressionBindings>
 														</Item3>
-														<Item4 Ref="1261" ControlType="XRLabel" Name="deduct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Deduct" SizeF="59,14" LocationFloat="830,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True"/>
-														<Item5 Ref="1262" ControlType="XRLabel" Name="volume_used_t" TextAlignment="MiddleRight" Multiline="true" Text="Volume" SizeF="67,14" LocationFloat="657,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
+														<Item4 Ref="1261" ControlType="XRLabel" Name="deduct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Deduct" SizeF="62,14" LocationFloat="830,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True"/>
+														<Item5 Ref="1262" ControlType="XRLabel" Name="volume_used_t" TextAlignment="MiddleRight" Multiline="true" Text="Volume" SizeF="70,14" LocationFloat="657,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 															<ExpressionBindings>
 																<Item1 Ref="1263" EventName="BeforePrint" PropertyName="Text" Expression="Iif(type=='O','','Volume')"/>
 																<Item2 Ref="1264" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 															</ExpressionBindings>
 														</Item5>
-														<Item6 Ref="1265" ControlType="XRLabel" Name="component_price_t" TextAlignment="MiddleRight" Multiline="true" Text="Per Unit $" SizeF="90,14" LocationFloat="730,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
+														<Item6 Ref="1265" ControlType="XRLabel" Name="component_price_t" TextAlignment="MiddleRight" Multiline="true" Text="Per Unit $" SizeF="93,14" LocationFloat="730,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 															<ExpressionBindings>
 																<Item1 Ref="1266" EventName="BeforePrint" PropertyName="Text" Expression="Iif(type=='O','','Per Unit $')"/>
 																<Item2 Ref="1267" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 															</ExpressionBindings>
 														</Item6>
-														<Item7 Ref="1268" ControlType="XRLabel" Name="component_val_t" TextAlignment="MiddleRight" Multiline="true" Text="Total" SizeF="84,14" LocationFloat="907,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
+														<Item7 Ref="1268" ControlType="XRLabel" Name="component_val_t" TextAlignment="MiddleRight" Multiline="true" Text="Total" SizeF="87,14" LocationFloat="907,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 															<ExpressionBindings>
 																<Item1 Ref="1269" EventName="BeforePrint" PropertyName="Text" Expression="Iif(type=='O','','Total')"/>
 																<Item2 Ref="1270" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
@@ -2636,7 +2636,7 @@ Value" SizeF="42,30" LocationFloat="635,17" AnchorVertical="Both" Font="Arial, 8
 															</ExpressionBindings>
 														</Item3>
 														<Item4 Ref="1277" ControlType="XRLine" Name="l_4" FillColor="255,128,128,128" SizeF="97,0" LocationFloat="626,21"  LineDirection="Horizontal" Visible="True"/>
-														<Item5 Ref="1278" ControlType="XRLabel" Name="t_12" TextAlignment="MiddleRight" Multiline="true" Text="Total" SizeF="47,14" LocationFloat="836,5" AnchorVertical="Both" Font="Calibri, 8pt, style=Bold" Visible="True">
+														<Item5 Ref="1278" ControlType="XRLabel" Name="t_12" TextAlignment="MiddleRight" Multiline="true" Text="Total" SizeF="50,14" LocationFloat="836,5" AnchorVertical="Both" Font="Calibri, 8pt, style=Bold" Visible="True">
 															<ExpressionBindings>
 																<Item1 Ref="1279" EventName="BeforePrint" PropertyName="Text" Expression="Iif(type=='O','','Total')"/>
 																<Item2 Ref="1280" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
@@ -2723,7 +2723,7 @@ Value" SizeF="42,30" LocationFloat="635,17" AnchorVertical="Both" Font="Arial, 8
 											<Item2 Ref="1320" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(pay_method=='C',false,false)"/>
 										</ExpressionBindings>
 									</Item39>
-									<Item40 Ref="1321" ControlType="XRLabel" Name="t_8" TextAlignment="MiddleLeft" Multiline="true" Text="Account #:" SizeF="61,16" LocationFloat="8,659" AnchorVertical="Both" Font="Calibri, 10pt" Visible="True">
+									<Item40 Ref="1321" ControlType="XRLabel" Name="t_8" TextAlignment="MiddleLeft" Multiline="true" Text="Account #:" SizeF="64,16" LocationFloat="8,659" AnchorVertical="Both" Font="Calibri, 10pt" Visible="True">
 										<ExpressionBindings>
 											<Item1 Ref="1322" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(pay_method=='C',false,false)"/>
 										</ExpressionBindings>
@@ -2746,13 +2746,13 @@ Value" SizeF="42,30" LocationFloat="635,17" AnchorVertical="Both" Font="Arial, 8
 											<Item2 Ref="1331" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(pay_method=='C',false,false)"/>
 										</ExpressionBindings>
 									</Item43>
-									<Item44 Ref="1332" ControlType="XRLabel" Name="t_9" TextAlignment="MiddleLeft" Multiline="true" Text="ABA #:" SizeF="41,16" LocationFloat="8,676" AnchorVertical="Both" Font="Calibri, 10pt" Visible="True">
+									<Item44 Ref="1332" ControlType="XRLabel" Name="t_9" TextAlignment="MiddleLeft" Multiline="true" Text="ABA #:" SizeF="44,16" LocationFloat="8,676" AnchorVertical="Both" Font="Calibri, 10pt" Visible="True">
 										<ExpressionBindings>
 											<Item1 Ref="1333" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(pay_method=='C',false,false)"/>
 										</ExpressionBindings>
 									</Item44>
-									<Item45 Ref="1334" ControlType="XRLabel" Name="t_2" TextAlignment="MiddleLeft" Multiline="true" Text="Phone:" SizeF="49,19" LocationFloat="16,266" AnchorVertical="Both" Font="Calibri, 11pt, style=Bold" Visible="True"/>
-									<Item46 Ref="1335" ControlType="XRLabel" Name="t_3" TextAlignment="MiddleLeft" Multiline="true" Text="Email:" SizeF="49,19" LocationFloat="16,287" AnchorVertical="Both" Font="Calibri, 11pt, style=Bold" Visible="True"/>
+									<Item45 Ref="1334" ControlType="XRLabel" Name="t_2" TextAlignment="MiddleLeft" Multiline="true" Text="Phone:" SizeF="52,19" LocationFloat="16,266" AnchorVertical="Both" Font="Calibri, 11pt, style=Bold" Visible="True"/>
+									<Item46 Ref="1335" ControlType="XRLabel" Name="t_3" TextAlignment="MiddleLeft" Multiline="true" Text="Email:" SizeF="52,19" LocationFloat="16,287" AnchorVertical="Both" Font="Calibri, 11pt, style=Bold" Visible="True"/>
 									<Item47 Ref="1336" ControlType="XRLabel" Name="payee_phone_number" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="166,17" LocationFloat="69,266" AnchorVertical="Both" Font="Calibri, 11pt, style=Bold" Visible="True">
 										<ExpressionBindings>
 											<Item1 Ref="1337" EventName="BeforePrint" PropertyName="Text" Expression="[payee_phone_number]"/>
@@ -2802,7 +2802,7 @@ Value" SizeF="42,30" LocationFloat="635,17" AnchorVertical="Both" Font="Arial, 8
 					</ParameterBindings>
 				</Item4>
 				<Item5 Ref="1365" ControlType="XRSubreport" Name="rpt_pmnt_statement_plt_sum" SizeF="1046,36" LocationFloat="2,40">
-					<ReportSource Ref="1367" Name="rpt_pmnt_statement_plt_sum" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_sum, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="999" PageHeight="239" Version="24.1" DataMember="Query" DataSource="#Ref-1366">
+					<ReportSource Ref="1367" Name="rpt_pmnt_statement_plt_sum" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_sum, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="1004" PageHeight="239" Version="24.1" DataMember="Query" DataSource="#Ref-1366">
 						<Parameters>
 							<Item1 Ref="1368" Name="dwra_statement_nbr"/>
 							<Item2 Ref="1369" Name="dwra_statement_rev"/>
@@ -2817,9 +2817,9 @@ Value" SizeF="42,30" LocationFloat="635,17" AnchorVertical="Both" Font="Arial, 8
 							<Item2 Ref="1373" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="25"/>
 							<Item3 Ref="1374" ControlType="ReportHeaderBand" Name="header" HeightF="103">
 								<Controls>
-									<Item1 Ref="1375" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleCenter" Multiline="true" Text="PURCHASE STATEMENT" SizeF="461,19" LocationFloat="283,21" AnchorVertical="Both" Font="Calibri, 11pt, style=Bold" Visible="True"/>
-									<Item2 Ref="1376" ControlType="XRLabel" Name="t_2" TextAlignment="MiddleCenter" Multiline="true" Text="Activity Summary for Contracts" SizeF="461,20" LocationFloat="283,67" AnchorVertical="Both" Font="Calibri, 12pt, style=Bold" Visible="True"/>
-									<Item3 Ref="1377" ControlType="XRLabel" Name="curr_prod_mo_t" TextAlignment="MiddleCenter" Multiline="true" Text="Production Date:" SizeF="99,16" LocationFloat="431,44" AnchorVertical="Both" Font="Calibri, 10pt" Visible="True"/>
+									<Item1 Ref="1375" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleCenter" Multiline="true" Text="PURCHASE STATEMENT" SizeF="464,19" LocationFloat="283,21" AnchorVertical="Both" Font="Calibri, 11pt, style=Bold" Visible="True"/>
+									<Item2 Ref="1376" ControlType="XRLabel" Name="t_2" TextAlignment="MiddleCenter" Multiline="true" Text="Activity Summary for Contracts" SizeF="464,20" LocationFloat="283,67" AnchorVertical="Both" Font="Calibri, 12pt, style=Bold" Visible="True"/>
+									<Item3 Ref="1377" ControlType="XRLabel" Name="curr_prod_mo_t" TextAlignment="MiddleCenter" Multiline="true" Text="Production Date:" SizeF="102,16" LocationFloat="431,44" AnchorVertical="Both" Font="Calibri, 10pt" Visible="True"/>
 									<Item4 Ref="1378" ControlType="XRLabel" Name="compute_10_field" TextFormatString="{0:MMm yyyy}" TextAlignment="MiddleLeft"  Multiline="true" SizeF="59,16" LocationFloat="533,44" AnchorVertical="Both" Font="Calibri, 10pt" Visible="True">
 										<ExpressionBindings>
 											<Item1 Ref="1379" EventName="BeforePrint" PropertyName="Text" Expression="[compute_10]"/>
@@ -2855,16 +2855,16 @@ Value" SizeF="42,30" LocationFloat="635,17" AnchorVertical="Both" Font="Arial, 8
 											<Item1 Ref="1391" EventName="BeforePrint" PropertyName="Text" Expression="[compute_13]"/>
 										</ExpressionBindings>
 									</Item4>
-									<Item5 Ref="1392" ControlType="XRLabel" Name="t_6" TextAlignment="MiddleRight" Multiline="true" Text="Statement Total:" SizeF="108,19" LocationFloat="348,33" AnchorVertical="Both" Font="Calibri, 11pt, style=Bold" Visible="True"/>
-									<Item6 Ref="1393" ControlType="XRLabel" Name="t_5" TextAlignment="MiddleLeft" Multiline="true" Text="$" SizeF="9,19" LocationFloat="467,33" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True"/>
+									<Item5 Ref="1392" ControlType="XRLabel" Name="t_6" TextAlignment="MiddleRight" Multiline="true" Text="Statement Total:" SizeF="111,19" LocationFloat="348,33" AnchorVertical="Both" Font="Calibri, 11pt, style=Bold" Visible="True"/>
+									<Item6 Ref="1393" ControlType="XRLabel" Name="t_5" TextAlignment="MiddleLeft" Multiline="true" Text="$" SizeF="12,19" LocationFloat="467,33" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True"/>
 									<Item7 Ref="1394" ControlType="XRLabel" Name="compute_1_field" TextFormatString="{0:#,##0.00;(#,##0.00)}" TextAlignment="MiddleRight"  Multiline="true" SizeF="99,19" LocationFloat="476,33" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True">
 										<ExpressionBindings>
 											<Item1 Ref="1395" EventName="BeforePrint" PropertyName="Text" Expression="[compute_1]"/>
 										</ExpressionBindings>
 									</Item7>
-									<Item8 Ref="1396" ControlType="XRLabel" Name="t_8" TextAlignment="MiddleRight" Multiline="true" Text="MMBtu Sat" SizeF="83,19" LocationFloat="695,13" AnchorVertical="Both" Font="Calibri, 11pt, style=Bold" Visible="True"/>
-									<Item9 Ref="1397" ControlType="XRLabel" Name="t_7" TextAlignment="MiddleRight" Multiline="true" Text="MCF" SizeF="50,19" LocationFloat="629,13" AnchorVertical="Both" Font="Calibri, 11pt, style=Bold" Visible="True"/>
-									<Item10 Ref="1398" ControlType="XRLabel" Name="t_9" TextAlignment="MiddleRight" Multiline="true" Text="MMBtu Dry" SizeF="79,19" LocationFloat="791,13" AnchorVertical="Both" Font="Calibri, 11pt, style=Bold" Visible="True"/>
+									<Item8 Ref="1396" ControlType="XRLabel" Name="t_8" TextAlignment="MiddleRight" Multiline="true" Text="MMBtu Sat" SizeF="86,19" LocationFloat="695,13" AnchorVertical="Both" Font="Calibri, 11pt, style=Bold" Visible="True"/>
+									<Item9 Ref="1397" ControlType="XRLabel" Name="t_7" TextAlignment="MiddleRight" Multiline="true" Text="MCF" SizeF="53,19" LocationFloat="629,13" AnchorVertical="Both" Font="Calibri, 11pt, style=Bold" Visible="True"/>
+									<Item10 Ref="1398" ControlType="XRLabel" Name="t_9" TextAlignment="MiddleRight" Multiline="true" Text="MMBtu Dry" SizeF="82,19" LocationFloat="791,13" AnchorVertical="Both" Font="Calibri, 11pt, style=Bold" Visible="True"/>
 									<Item11 Ref="1399" ControlType="XRShape" Name="r_1" FillColor="255,128,128,128" SizeF="410,21" LocationFloat="462,33" Visible="True">
 										<Shape Ref="1400" ShapeName="Rectangle"/>
 									</Item11>
@@ -2883,13 +2883,13 @@ Value" SizeF="42,30" LocationFloat="635,17" AnchorVertical="Both" Font="Arial, 8
 									<Item1 Ref="1404" FieldName="contract_nbr" />
 								</GroupFields>
 								<Controls>
-									<Item1 Ref="1405" ControlType="XRLabel" Name="contract_nbr_t" TextAlignment="MiddleLeft" Multiline="true" Text="Contract" SizeF="79,19" LocationFloat="4,-0" AnchorVertical="Both" Font="Calibri, 11pt, style=Bold" Visible="True"/>
-									<Item2 Ref="1406" ControlType="XRLabel" Name="facility_code_t" TextAlignment="MiddleLeft" Multiline="true" Text="Facility" SizeF="143,19" LocationFloat="117,-0" AnchorVertical="Both" Font="Calibri, 11pt, style=Bold" Visible="True"/>
-									<Item3 Ref="1407" ControlType="XRLabel" Name="prod_mo_t" TextAlignment="MiddleRight" Multiline="true" Text="Prod Month" SizeF="93,19" LocationFloat="364,-0" AnchorVertical="Both" Font="Calibri, 11pt, style=Bold" Visible="True"/>
-									<Item4 Ref="1408" ControlType="XRLabel" Name="total_val_t" TextAlignment="MiddleRight" Multiline="true" Text="Amount" SizeF="83,19" LocationFloat="490,-0" AnchorVertical="Both" Font="Calibri, 11pt, style=Bold" Visible="True"/>
-									<Item5 Ref="1409" ControlType="XRLabel" Name="total_mcf_t" TextAlignment="MiddleRight" Multiline="true" Text="MCF" SizeF="50,19" LocationFloat="625,-0" AnchorVertical="Both" Font="Calibri, 11pt, style=Bold" Visible="True"/>
-									<Item6 Ref="1410" ControlType="XRLabel" Name="total_sat_t" TextAlignment="MiddleRight" Multiline="true" Text="MMBtu Sat" SizeF="83,19" LocationFloat="692,-0" AnchorVertical="Both" Font="Calibri, 11pt, style=Bold" Visible="True"/>
-									<Item7 Ref="1411" ControlType="XRLabel" Name="total_dry_t" TextAlignment="MiddleRight" Multiline="true" Text="MMBtu Dry" SizeF="79,19" LocationFloat="788,-0" AnchorVertical="Both" Font="Calibri, 11pt, style=Bold" Visible="True"/>
+									<Item1 Ref="1405" ControlType="XRLabel" Name="contract_nbr_t" TextAlignment="MiddleLeft" Multiline="true" Text="Contract" SizeF="82,19" LocationFloat="4,-0" AnchorVertical="Both" Font="Calibri, 11pt, style=Bold" Visible="True"/>
+									<Item2 Ref="1406" ControlType="XRLabel" Name="facility_code_t" TextAlignment="MiddleLeft" Multiline="true" Text="Facility" SizeF="146,19" LocationFloat="117,-0" AnchorVertical="Both" Font="Calibri, 11pt, style=Bold" Visible="True"/>
+									<Item3 Ref="1407" ControlType="XRLabel" Name="prod_mo_t" TextAlignment="MiddleRight" Multiline="true" Text="Prod Month" SizeF="96,19" LocationFloat="364,-0" AnchorVertical="Both" Font="Calibri, 11pt, style=Bold" Visible="True"/>
+									<Item4 Ref="1408" ControlType="XRLabel" Name="total_val_t" TextAlignment="MiddleRight" Multiline="true" Text="Amount" SizeF="86,19" LocationFloat="490,-0" AnchorVertical="Both" Font="Calibri, 11pt, style=Bold" Visible="True"/>
+									<Item5 Ref="1409" ControlType="XRLabel" Name="total_mcf_t" TextAlignment="MiddleRight" Multiline="true" Text="MCF" SizeF="53,19" LocationFloat="625,-0" AnchorVertical="Both" Font="Calibri, 11pt, style=Bold" Visible="True"/>
+									<Item6 Ref="1410" ControlType="XRLabel" Name="total_sat_t" TextAlignment="MiddleRight" Multiline="true" Text="MMBtu Sat" SizeF="86,19" LocationFloat="692,-0" AnchorVertical="Both" Font="Calibri, 11pt, style=Bold" Visible="True"/>
+									<Item7 Ref="1411" ControlType="XRLabel" Name="total_dry_t" TextAlignment="MiddleRight" Multiline="true" Text="MMBtu Dry" SizeF="82,19" LocationFloat="788,-0" AnchorVertical="Both" Font="Calibri, 11pt, style=Bold" Visible="True"/>
 								</Controls>
 							</Item7>
 							<Item8 Ref="1412" ControlType="GroupFooterBand" Name="groupFooterBand1" Level="1" HeightF="25">
@@ -2915,7 +2915,7 @@ Value" SizeF="42,30" LocationFloat="635,17" AnchorVertical="Both" Font="Arial, 8
 											<Item1 Ref="1421" EventName="BeforePrint" PropertyName="Text" Expression="[compute_9]"/>
 										</ExpressionBindings>
 									</Item5>
-									<Item6 Ref="1422" ControlType="XRLabel" Name="t_3" TextAlignment="MiddleLeft" Multiline="true" Text="$" SizeF="9,19" LocationFloat="467,3" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True"/>
+									<Item6 Ref="1422" ControlType="XRLabel" Name="t_3" TextAlignment="MiddleLeft" Multiline="true" Text="$" SizeF="12,19" LocationFloat="467,3" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True"/>
 									<Item7 Ref="1423" ControlType="XRLabel" Name="compute_2_field" TextFormatString="{0:#,##0.00;(#,##0.00)}" TextAlignment="MiddleRight"  Multiline="true" SizeF="99,19" LocationFloat="476,3" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True">
 										<ExpressionBindings>
 											<Item1 Ref="1424" EventName="BeforePrint" PropertyName="Text" Expression="[compute_2]"/>

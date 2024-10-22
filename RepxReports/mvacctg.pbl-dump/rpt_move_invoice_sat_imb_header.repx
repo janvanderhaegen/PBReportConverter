@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<XtraReportsLayoutSerializer SerializerVersion="24.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral" Name="XtraReport1" VerticalContentSplitting="Smart" Margins="-0, -0, -0, -0" PaperKind="Custom" PageWidth="955" PageHeight="947" Version="24.1" DataMember="Query" DataSource="#Ref-0">
+<XtraReportsLayoutSerializer SerializerVersion="24.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral" Name="XtraReport1" VerticalContentSplitting="Smart" Margins="-0, -0, -0, -0" PaperKind="Custom" PageWidth="960" PageHeight="947" Version="24.1" DataMember="Query" DataSource="#Ref-0">
 	<Parameters>
 		<Item1 Ref="2" Name="statement_nbr"/>
 		<Item2 Ref="3" Name="statement_rev_nbr"/>
@@ -23,8 +23,8 @@
 		</Item4>
 		<Item5 Ref="11" ControlType="ReportFooterBand" Name="footer" HeightF="97">
 			<Controls>
-				<Item1 Ref="12" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleLeft" Multiline="true" Text="Please Wire Transactions To:" SizeF="166,14" LocationFloat="11,5" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
-				<Item2 Ref="13" ControlType="XRLabel" Name="t_3" TextAlignment="MiddleLeft" Multiline="true" Text="Please Send Correspondence To:" SizeF="169,14" LocationFloat="720,5" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+				<Item1 Ref="12" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleLeft" Multiline="true" Text="Please Wire Transactions To:" SizeF="169,14" LocationFloat="11,5" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+				<Item2 Ref="13" ControlType="XRLabel" Name="t_3" TextAlignment="MiddleLeft" Multiline="true" Text="Please Send Correspondence To:" SizeF="172,14" LocationFloat="720,5" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
 				<Item3 Ref="14" ControlType="XRLabel" Name="cor_address_1_1" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="235,15" LocationFloat="720,22" AnchorVertical="Both" Font="Arial, 8pt" Visible="True">
 					<ExpressionBindings>
 						<Item1 Ref="15" EventName="BeforePrint" PropertyName="Text" Expression="[cor_address_1]"/>
@@ -75,7 +75,7 @@
 						<Item1 Ref="33" EventName="BeforePrint" PropertyName="Text" Expression="[compute_20]"/>
 					</ExpressionBindings>
 				</Item12>
-				<Item13 Ref="34" ControlType="XRLabel" Name="t_2" TextAlignment="MiddleLeft" Multiline="true" Text="Please Remit Check To:" SizeF="117,14" LocationFloat="356,5" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+				<Item13 Ref="34" ControlType="XRLabel" Name="t_2" TextAlignment="MiddleLeft" Multiline="true" Text="Please Remit Check To:" SizeF="120,14" LocationFloat="356,5" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
 				<Item14 Ref="35" ControlType="XRLabel" Name="ck_address_1" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="235,15" LocationFloat="356,22" AnchorVertical="Both" Font="Arial, 8pt" Visible="True">
 					<ExpressionBindings>
 						<Item1 Ref="36" EventName="BeforePrint" PropertyName="Text" Expression="[ck_address_1]"/>
@@ -90,10 +90,10 @@
 						<Item1 Ref="39" EventName="BeforePrint" PropertyName="Text" Expression="[compute_15]"/>
 					</ExpressionBindings>
 				</Item1>
-				<Item2 Ref="40" ControlType="XRLabel" Name="t_17" TextAlignment="MiddleCenter" Multiline="true" Text="Total Commodity Charges:" SizeF="156,15" LocationFloat="482,342" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="False"/>
-				<Item3 Ref="41" ControlType="XRLabel" Name="t_18" TextAlignment="MiddleCenter" Multiline="true" Text="Total Reservation Charges:" SizeF="156,15" LocationFloat="482,360" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="False"/>
+				<Item2 Ref="40" ControlType="XRLabel" Name="t_17" TextAlignment="MiddleCenter" Multiline="true" Text="Total Commodity Charges:" SizeF="159,15" LocationFloat="482,342" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="False"/>
+				<Item3 Ref="41" ControlType="XRLabel" Name="t_18" TextAlignment="MiddleCenter" Multiline="true" Text="Total Reservation Charges:" SizeF="159,15" LocationFloat="482,360" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="False"/>
 				<Item4 Ref="42" ControlType="XRSubreport" Name="rpt_move_invoice_sat_imb_prod_month_totals" SizeF="422,199" LocationFloat="480,340">
-					<ReportSource Ref="44" Name="rpt_move_invoice_sat_imb_prod_month_totals" ControlType="ReportMigration.XtraReports.rpt_move_invoice_sat_imb_prod_month_totals, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="391" PageHeight="38" Version="24.1" DataMember="Query" DataSource="#Ref-43">
+					<ReportSource Ref="44" Name="rpt_move_invoice_sat_imb_prod_month_totals" ControlType="ReportMigration.XtraReports.rpt_move_invoice_sat_imb_prod_month_totals, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="396" PageHeight="38" Version="24.1" DataMember="Query" DataSource="#Ref-43">
 						<Parameters>
 							<Item1 Ref="45" Name="statement_nbr"/>
 							<Item2 Ref="46" Name="statement_rev_nbr"/>
@@ -108,7 +108,7 @@
 							<Item2 Ref="50" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="25"/>
 							<Item3 Ref="51" ControlType="ReportHeaderBand" Name="header" HeightF="20">
 								<Controls>
-									<Item1 Ref="52" ControlType="XRLabel" Name="total_charges_t" TextAlignment="MiddleLeft" Multiline="true" Text="Total Charges: " SizeF="145,15" LocationFloat="7,5" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
+									<Item1 Ref="52" ControlType="XRLabel" Name="total_charges_t" TextAlignment="MiddleLeft" Multiline="true" Text="Total Charges: " SizeF="148,15" LocationFloat="7,5" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
 								</Controls>
 							</Item3>
 							<Item4 Ref="53" ControlType="GroupHeaderBand" Name="summary" HeightF="-0" Visible="False" Level="1">
@@ -158,7 +158,7 @@
 						<Item4 Ref="69" ParameterName="run_date" Parameter="#Ref-5" />
 					</ParameterBindings>
 				</Item4>
-				<Item5 Ref="70" ControlType="XRLabel" Name="net_due_date_t" TextAlignment="MiddleLeft" Multiline="true" Text="Net Due Date:" SizeF="124,15" LocationFloat="482,565" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
+				<Item5 Ref="70" ControlType="XRLabel" Name="net_due_date_t" TextAlignment="MiddleLeft" Multiline="true" Text="Net Due Date:" SizeF="127,15" LocationFloat="482,565" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
 				<Item6 Ref="71" ControlType="XRLabel" Name="currency_ind" TextFormatString="" TextAlignment="MiddleRight"  Multiline="true" SizeF="35,15" LocationFloat="690,544" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True">
 					<ExpressionBindings>
 						<Item1 Ref="72" EventName="BeforePrint" PropertyName="Text" Expression="[currency_ind]"/>
@@ -239,7 +239,7 @@
 						<Item1 Ref="102" EventName="BeforePrint" PropertyName="Text" Expression="[transporter_sort_name]"/>
 					</ExpressionBindings>
 				</Item21>
-				<Item22 Ref="103" ControlType="XRLabel" Name="invoice_date_t" TextAlignment="MiddleCenter" Multiline="true" Text="GATHERING AR INVOICE" SizeF="427,17" LocationFloat="473,30" AnchorVertical="Both" Font="Arial, 10pt, style=Bold" Visible="True"/>
+				<Item22 Ref="103" ControlType="XRLabel" Name="invoice_date_t" TextAlignment="MiddleCenter" Multiline="true" Text="GATHERING AR INVOICE" SizeF="430,17" LocationFloat="473,30" AnchorVertical="Both" Font="Arial, 10pt, style=Bold" Visible="True"/>
 				<Item23 Ref="104" ControlType="XRLabel" Name="compute_32_field" TextFormatString="" TextAlignment="MiddleCenter"  Multiline="true" SizeF="897,19" LocationFloat="12,315" AnchorVertical="Both" Font="Arial, 10pt, style=Bold" Visible="True">
 					<ExpressionBindings>
 						<Item1 Ref="105" EventName="BeforePrint" PropertyName="Text" Expression="[compute_32]"/>
@@ -250,35 +250,35 @@
 						<Item1 Ref="107" EventName="BeforePrint" PropertyName="Text" Expression="[compute_primary_production_month]"/>
 					</ExpressionBindings>
 				</Item24>
-				<Item25 Ref="108" ControlType="XRLabel" Name="t_26" TextAlignment="MiddleLeft" Multiline="true" Text="Invoice Total Amount:" SizeF="124,15" LocationFloat="482,544" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
-				<Item26 Ref="109" ControlType="XRLabel" Name="t_9" TextAlignment="MiddleLeft" Multiline="true" Text="Total Gross Receipt Quantity:" SizeF="166,15" LocationFloat="12,376" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
+				<Item25 Ref="108" ControlType="XRLabel" Name="t_26" TextAlignment="MiddleLeft" Multiline="true" Text="Invoice Total Amount:" SizeF="127,15" LocationFloat="482,544" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
+				<Item26 Ref="109" ControlType="XRLabel" Name="t_9" TextAlignment="MiddleLeft" Multiline="true" Text="Total Gross Receipt Quantity:" SizeF="169,15" LocationFloat="12,376" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
 				<Item27 Ref="110" ControlType="XRLabel" Name="total_receipt_quantity" TextFormatString="{0:#,##0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="139,15" LocationFloat="284,376" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True">
 					<ExpressionBindings>
 						<Item1 Ref="111" EventName="BeforePrint" PropertyName="Text" Expression="[total_receipt_quantity]"/>
 					</ExpressionBindings>
 				</Item27>
-				<Item28 Ref="112" ControlType="XRLabel" Name="t_10" TextAlignment="MiddleLeft" Multiline="true" Text="Total Fuel:" SizeF="161,15" LocationFloat="12,394" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
+				<Item28 Ref="112" ControlType="XRLabel" Name="t_10" TextAlignment="MiddleLeft" Multiline="true" Text="Total Fuel:" SizeF="164,15" LocationFloat="12,394" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
 				<Item29 Ref="113" ControlType="XRLabel" Name="total_fuel_quantity" TextFormatString="{0:#,##0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="139,15" LocationFloat="284,394" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True">
 					<ExpressionBindings>
 						<Item1 Ref="114" EventName="BeforePrint" PropertyName="Text" Expression="[total_fuel_quantity]"/>
 					</ExpressionBindings>
 				</Item29>
-				<Item30 Ref="115" ControlType="XRLabel" Name="t_4" TextAlignment="MiddleLeft" Multiline="true" Text="Total Delivery Quantity:" SizeF="161,15" LocationFloat="12,412" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
+				<Item30 Ref="115" ControlType="XRLabel" Name="t_4" TextAlignment="MiddleLeft" Multiline="true" Text="Total Delivery Quantity:" SizeF="164,15" LocationFloat="12,412" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
 				<Item31 Ref="116" ControlType="XRLabel" Name="total_delivery_quantity" TextFormatString="{0:#,##0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="139,15" LocationFloat="284,412" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True">
 					<ExpressionBindings>
 						<Item1 Ref="117" EventName="BeforePrint" PropertyName="Text" Expression="[total_delivery_quantity]"/>
 					</ExpressionBindings>
 				</Item31>
-				<Item32 Ref="118" ControlType="XRLabel" Name="t_12" TextAlignment="MiddleLeft" Multiline="true" Text="Current Month Imbalance:" SizeF="179,14" LocationFloat="12,430" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
+				<Item32 Ref="118" ControlType="XRLabel" Name="t_12" TextAlignment="MiddleLeft" Multiline="true" Text="Current Month Imbalance:" SizeF="182,14" LocationFloat="12,430" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
 				<Item33 Ref="119" ControlType="XRLabel" Name="current_month_imbalance" TextFormatString="{0:#,##0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="139,14" LocationFloat="284,430" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True">
 					<ExpressionBindings>
 						<Item1 Ref="120" EventName="BeforePrint" PropertyName="Text" Expression="[current_month_imbalance]"/>
 					</ExpressionBindings>
 				</Item33>
-				<Item34 Ref="121" ControlType="XRLabel" Name="t_5" TextAlignment="MiddleLeft" Multiline="true" Text="Net Prior Month Adjustments: " SizeF="174,15" LocationFloat="12,469" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
-				<Item35 Ref="122" ControlType="XRLabel" Name="t_6" TextAlignment="MiddleLeft" Multiline="true" Text="Current Cashout Quantity: " SizeF="152,15" LocationFloat="12,487" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
-				<Item36 Ref="123" ControlType="XRLabel" Name="t_7" TextAlignment="MiddleLeft" Multiline="true" Text="Prior Month Accumulated Imbalance: " SizeF="214,15" LocationFloat="12,505" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
-				<Item37 Ref="124" ControlType="XRLabel" Name="t_8" TextAlignment="MiddleLeft" Multiline="true" Text="Accumulated Imbalance: " SizeF="143,15" LocationFloat="12,522" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
+				<Item34 Ref="121" ControlType="XRLabel" Name="t_5" TextAlignment="MiddleLeft" Multiline="true" Text="Net Prior Month Adjustments: " SizeF="177,15" LocationFloat="12,469" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
+				<Item35 Ref="122" ControlType="XRLabel" Name="t_6" TextAlignment="MiddleLeft" Multiline="true" Text="Current Cashout Quantity: " SizeF="155,15" LocationFloat="12,487" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
+				<Item36 Ref="123" ControlType="XRLabel" Name="t_7" TextAlignment="MiddleLeft" Multiline="true" Text="Prior Month Accumulated Imbalance: " SizeF="217,15" LocationFloat="12,505" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
+				<Item37 Ref="124" ControlType="XRLabel" Name="t_8" TextAlignment="MiddleLeft" Multiline="true" Text="Accumulated Imbalance: " SizeF="146,15" LocationFloat="12,522" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
 				<Item38 Ref="125" ControlType="XRLabel" Name="net_prior_month_adjustment" TextFormatString="{0:#,##0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="139,15" LocationFloat="284,469" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True">
 					<ExpressionBindings>
 						<Item1 Ref="126" EventName="BeforePrint" PropertyName="Text" Expression="[net_prior_month_adjustment]"/>

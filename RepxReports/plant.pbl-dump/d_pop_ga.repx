@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<XtraReportsLayoutSerializer SerializerVersion="24.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral" Name="XtraReport1" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="324" PageHeight="520" Version="24.1" DataMember="Query" DataSource="#Ref-0">
+<XtraReportsLayoutSerializer SerializerVersion="24.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral" Name="XtraReport1" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="327" PageHeight="520" Version="24.1" DataMember="Query" DataSource="#Ref-0">
 	<Parameters>
 		<Item1 Ref="2" Name="dwra_prod_month"/>
 		<Item2 Ref="3" Name="dwra_facility_code"/>
@@ -15,11 +15,11 @@
 		<Item2 Ref="8" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="25"/>
 		<Item3 Ref="9" ControlType="ReportHeaderBand" Name="header" HeightF="37">
 			<Controls>
-				<Item1 Ref="10" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleLeft" Multiline="true" Text="Analysis" SizeF="61,15" LocationFloat="111,1" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
-				<Item2 Ref="11" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="274,0" LocationFloat="-0,16"  LineDirection="Horizontal" Visible="True"/>
-				<Item3 Ref="12" ControlType="XRLabel" Name="t_2" TextAlignment="MiddleLeft" Multiline="true" Text="Components" SizeF="75,15" LocationFloat="33,19" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
-				<Item4 Ref="13" ControlType="XRLabel" Name="t_4" TextAlignment="MiddleLeft" Multiline="true" Text="GPM" SizeF="23,15" LocationFloat="177,19" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
-				<Item5 Ref="14" ControlType="XRLabel" Name="t_3" TextAlignment="MiddleRight" Multiline="true" Text="Mole %" SizeF="37,15" LocationFloat="236,19" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+				<Item1 Ref="10" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleLeft" Multiline="true" Text="Analysis" SizeF="64,15" LocationFloat="111,1" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
+				<Item2 Ref="11" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="277,0" LocationFloat="-0,16"  LineDirection="Horizontal" Visible="True"/>
+				<Item3 Ref="12" ControlType="XRLabel" Name="t_2" TextAlignment="MiddleLeft" Multiline="true" Text="Components" SizeF="78,15" LocationFloat="33,19" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+				<Item4 Ref="13" ControlType="XRLabel" Name="t_4" TextAlignment="MiddleLeft" Multiline="true" Text="GPM" SizeF="26,15" LocationFloat="177,19" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+				<Item5 Ref="14" ControlType="XRLabel" Name="t_3" TextAlignment="MiddleRight" Multiline="true" Text="Mole %" SizeF="40,15" LocationFloat="236,19" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
 			</Controls>
 		</Item3>
 		<Item4 Ref="15" ControlType="GroupHeaderBand" Name="summary" HeightF="-0" Visible="False" Level="0">
@@ -32,19 +32,19 @@
 		</Item5>
 		<Item6 Ref="17" ControlType="DetailBand" Name="detail" HeightF="233">
 			<Controls>
-				<Item1 Ref="18" ControlType="XRLabel" Name="iso_butane_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Iso Butane" SizeF="91,13" LocationFloat="28,143" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
-				<Item2 Ref="19" ControlType="XRLabel" Name="nor_butane_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Nor Butane" SizeF="91,13" LocationFloat="28,161" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
-				<Item3 Ref="20" ControlType="XRLabel" Name="iso_pentane_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Iso Pentane" SizeF="91,13" LocationFloat="28,178" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
-				<Item4 Ref="21" ControlType="XRLabel" Name="nor_pentane_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Nor Pentane" SizeF="91,13" LocationFloat="28,196" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
-				<Item5 Ref="22" ControlType="XRLabel" Name="hexane_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Hexane" SizeF="91,13" LocationFloat="28,214" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
-				<Item6 Ref="23" ControlType="XRLabel" Name="helium_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Helium" SizeF="53,13" LocationFloat="28,1" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
-				<Item7 Ref="24" ControlType="XRLabel" Name="nitro_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Nitrogen" SizeF="91,13" LocationFloat="28,19" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
-				<Item8 Ref="25" ControlType="XRLabel" Name="c02_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Carbon Dioxide" SizeF="91,13" LocationFloat="28,37" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
-				<Item9 Ref="26" ControlType="XRLabel" Name="h2s_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="H2S" SizeF="91,13" LocationFloat="28,55" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
-				<Item10 Ref="27" ControlType="XRLabel" Name="t_5" TextAlignment="MiddleLeft" Multiline="true" Text="Other Inerts" SizeF="60,13" LocationFloat="28,72" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
-				<Item11 Ref="28" ControlType="XRLabel" Name="methane_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Methane" SizeF="91,13" LocationFloat="28,90" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
-				<Item12 Ref="29" ControlType="XRLabel" Name="ethane_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Ethane" SizeF="91,13" LocationFloat="28,108" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
-				<Item13 Ref="30" ControlType="XRLabel" Name="propane_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Propane" SizeF="91,13" LocationFloat="28,125" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+				<Item1 Ref="18" ControlType="XRLabel" Name="iso_butane_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Iso Butane" SizeF="94,13" LocationFloat="28,143" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+				<Item2 Ref="19" ControlType="XRLabel" Name="nor_butane_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Nor Butane" SizeF="94,13" LocationFloat="28,161" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+				<Item3 Ref="20" ControlType="XRLabel" Name="iso_pentane_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Iso Pentane" SizeF="94,13" LocationFloat="28,178" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+				<Item4 Ref="21" ControlType="XRLabel" Name="nor_pentane_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Nor Pentane" SizeF="94,13" LocationFloat="28,196" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+				<Item5 Ref="22" ControlType="XRLabel" Name="hexane_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Hexane" SizeF="94,13" LocationFloat="28,214" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+				<Item6 Ref="23" ControlType="XRLabel" Name="helium_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Helium" SizeF="56,13" LocationFloat="28,1" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+				<Item7 Ref="24" ControlType="XRLabel" Name="nitro_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Nitrogen" SizeF="94,13" LocationFloat="28,19" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+				<Item8 Ref="25" ControlType="XRLabel" Name="c02_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Carbon Dioxide" SizeF="94,13" LocationFloat="28,37" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+				<Item9 Ref="26" ControlType="XRLabel" Name="h2s_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="H2S" SizeF="94,13" LocationFloat="28,55" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+				<Item10 Ref="27" ControlType="XRLabel" Name="t_5" TextAlignment="MiddleLeft" Multiline="true" Text="Other Inerts" SizeF="63,13" LocationFloat="28,72" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+				<Item11 Ref="28" ControlType="XRLabel" Name="methane_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Methane" SizeF="94,13" LocationFloat="28,90" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+				<Item12 Ref="29" ControlType="XRLabel" Name="ethane_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Ethane" SizeF="94,13" LocationFloat="28,108" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
+				<Item13 Ref="30" ControlType="XRLabel" Name="propane_pct_t" TextAlignment="MiddleLeft" Multiline="true" Text="Propane" SizeF="94,13" LocationFloat="28,125" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
 				<Item14 Ref="31" ControlType="XRLabel" Name="iso_butane_pct" TextFormatString="{0:#0.0000}" TextAlignment="MiddleRight"  Multiline="true" SizeF="63,16" LocationFloat="211,143" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
 					<ExpressionBindings>
 						<Item1 Ref="32" EventName="BeforePrint" PropertyName="Text" Expression="[iso_butane_pct]"/>

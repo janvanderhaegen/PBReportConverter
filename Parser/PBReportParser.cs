@@ -118,9 +118,9 @@ internal class PBReportParser(string path)
             {
                 var xnum = X(x);
                 var width = X(attributes["width"]);
-                if (xnum + width > ReportWidth)
+                if (xnum + width + 3 > ReportWidth)
                 {
-                    ReportWidth = xnum + width;
+                    ReportWidth = xnum + width + 3;
                 }
             }
         }

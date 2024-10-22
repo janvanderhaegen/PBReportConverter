@@ -73,7 +73,6 @@ internal static class DataSourceXmlGenerator
     {
         var startIndex = query.IndexOf(';')+1;
         var subString = query[startIndex..];
-        Regex paramPattern = new(@"@([_a-zA-Z]+)");
 
         var matches = Regex.Matches(subString, @"@([_a-zA-Z]+)");
         return matches.Select(x => x.Groups[1].Value).ToList();

@@ -17,7 +17,7 @@ var pebbleFiles = Directory.GetFiles(inputPath!, "*.pbl", SearchOption.AllDirect
 var srdFiles = new[] { "*.srd", "*.p" }.SelectMany(pattern => Directory.GetFiles(inputPath!, pattern, SearchOption.AllDirectories)).Where(file => !file.Contains("_frf")).ToArray();
 var repxFiles = Directory.GetFiles(inputPath!, "*.repx", SearchOption.AllDirectories).ToArray();
 
-Console.WriteLine($"Found {pebbleFiles.Length} .pbl, {srdFiles.Length} .pbl, {repxFiles.Length} .repx");
+Console.WriteLine($"Found {pebbleFiles.Length} .pbl, {srdFiles.Length} .srd, {repxFiles.Length} .repx");
 
 //if there are any pbl files, unpack them
 if (pebbleFiles.Length != 0)

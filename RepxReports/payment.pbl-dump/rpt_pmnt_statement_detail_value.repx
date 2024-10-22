@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<XtraReportsLayoutSerializer SerializerVersion="24.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral" Name="XtraReport1" VerticalContentSplitting="Smart" Margins="20, 20, 25, 13" PaperKind="Custom" PageWidth="1085" PageHeight="378" Version="24.1" DataMember="Query" DataSource="#Ref-0">
+<XtraReportsLayoutSerializer SerializerVersion="24.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral" Name="XtraReport1" VerticalContentSplitting="Smart" Margins="20, 20, 25, 13" PaperKind="Custom" PageWidth="1090" PageHeight="378" Version="24.1" DataMember="Query" DataSource="#Ref-0">
 	<Parameters>
 		<Item1 Ref="2" Name="dwra_statement_nbr"/>
 		<Item2 Ref="3" Name="dwra_statement_rev"/>
@@ -93,49 +93,49 @@
 						<Item2 Ref="38" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 					</ExpressionBindings>
 				</Item1>
-				<Item2 Ref="39" ControlType="XRLabel" Name="bs_order_beg_date_t" TextAlignment="MiddleLeft" Multiline="true" Text="Beg Date" SizeF="75,14" LocationFloat="352,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
+				<Item2 Ref="39" ControlType="XRLabel" Name="bs_order_beg_date_t" TextAlignment="MiddleLeft" Multiline="true" Text="Beg Date" SizeF="78,14" LocationFloat="352,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 					<ExpressionBindings>
 						<Item1 Ref="40" EventName="BeforePrint" PropertyName="Text" Expression="Iif(type=='O','','Beg Date')"/>
 						<Item2 Ref="41" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 					</ExpressionBindings>
 				</Item2>
-				<Item3 Ref="42" ControlType="XRLabel" Name="bs_order_end_date_t" TextAlignment="MiddleLeft" Multiline="true" Text=" End Date" SizeF="75,14" LocationFloat="417,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
+				<Item3 Ref="42" ControlType="XRLabel" Name="bs_order_end_date_t" TextAlignment="MiddleLeft" Multiline="true" Text=" End Date" SizeF="78,14" LocationFloat="417,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 					<ExpressionBindings>
 						<Item1 Ref="43" EventName="BeforePrint" PropertyName="Text" Expression="Iif(type=='O','','End Date')"/>
 						<Item2 Ref="44" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 					</ExpressionBindings>
 				</Item3>
-				<Item4 Ref="45" ControlType="XRLabel" Name="document_nbr_t" TextAlignment="MiddleLeft" Multiline="true" Text="Document" SizeF="67,14" LocationFloat="480,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
+				<Item4 Ref="45" ControlType="XRLabel" Name="document_nbr_t" TextAlignment="MiddleLeft" Multiline="true" Text="Document" SizeF="70,14" LocationFloat="480,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 					<ExpressionBindings>
 						<Item1 Ref="46" EventName="BeforePrint" PropertyName="Text" Expression="Iif(type=='O','','Document')"/>
 						<Item2 Ref="47" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 					</ExpressionBindings>
 				</Item4>
-				<Item5 Ref="48" ControlType="XRLabel" Name="type_comp_desc_t" TextAlignment="MiddleCenter" Multiline="true" Text="Component" SizeF="67,14" LocationFloat="553,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
+				<Item5 Ref="48" ControlType="XRLabel" Name="type_comp_desc_t" TextAlignment="MiddleCenter" Multiline="true" Text="Component" SizeF="70,14" LocationFloat="553,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 					<ExpressionBindings>
 						<Item1 Ref="49" EventName="BeforePrint" PropertyName="Text" Expression="Iif(type=='O','','Component')"/>
 						<Item2 Ref="50" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 					</ExpressionBindings>
 				</Item5>
-				<Item6 Ref="51" ControlType="XRLabel" Name="based_on_t" TextAlignment="MiddleLeft" Multiline="true" Text="Based On" SizeF="67,14" LocationFloat="699,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
+				<Item6 Ref="51" ControlType="XRLabel" Name="based_on_t" TextAlignment="MiddleLeft" Multiline="true" Text="Based On" SizeF="70,14" LocationFloat="699,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 					<ExpressionBindings>
 						<Item1 Ref="52" EventName="BeforePrint" PropertyName="Text" Expression="Iif(type=='O','','Based On')"/>
 						<Item2 Ref="53" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 					</ExpressionBindings>
 				</Item6>
-				<Item7 Ref="54" ControlType="XRLabel" Name="volume_used_t" TextAlignment="MiddleLeft" Multiline="true" Text="Volume" SizeF="67,14" LocationFloat="792,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
+				<Item7 Ref="54" ControlType="XRLabel" Name="volume_used_t" TextAlignment="MiddleLeft" Multiline="true" Text="Volume" SizeF="70,14" LocationFloat="792,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 					<ExpressionBindings>
 						<Item1 Ref="55" EventName="BeforePrint" PropertyName="Text" Expression="Iif(type=='O','','Volume')"/>
 						<Item2 Ref="56" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 					</ExpressionBindings>
 				</Item7>
-				<Item8 Ref="57" ControlType="XRLabel" Name="component_price_t" TextAlignment="MiddleLeft" Multiline="true" Text="Per Unit $" SizeF="67,14" LocationFloat="874,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
+				<Item8 Ref="57" ControlType="XRLabel" Name="component_price_t" TextAlignment="MiddleLeft" Multiline="true" Text="Per Unit $" SizeF="70,14" LocationFloat="874,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 					<ExpressionBindings>
 						<Item1 Ref="58" EventName="BeforePrint" PropertyName="Text" Expression="Iif(type=='O','','Per Unit $')"/>
 						<Item2 Ref="59" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 					</ExpressionBindings>
 				</Item8>
-				<Item9 Ref="60" ControlType="XRLabel" Name="component_val_t" TextAlignment="MiddleLeft" Multiline="true" Text="Total" SizeF="87,14" LocationFloat="958,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
+				<Item9 Ref="60" ControlType="XRLabel" Name="component_val_t" TextAlignment="MiddleLeft" Multiline="true" Text="Total" SizeF="90,14" LocationFloat="958,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 					<ExpressionBindings>
 						<Item1 Ref="61" EventName="BeforePrint" PropertyName="Text" Expression="Iif(type=='O','','Total')"/>
 						<Item2 Ref="62" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
@@ -145,18 +145,18 @@
 		</Item15>
 		<Item16 Ref="63" ControlType="GroupFooterBand" Name="groupFooterBand5" Level="1" HeightF="105">
 			<Controls>
-				<Item1 Ref="64" ControlType="XRLabel" Name="t_12" TextAlignment="MiddleLeft" Multiline="true" Text="Meter Total  ===" SizeF="93,14" LocationFloat="849,5" AnchorVertical="Both" Font="Calibri, 8pt, style=Bold" Visible="True">
+				<Item1 Ref="64" ControlType="XRLabel" Name="t_12" TextAlignment="MiddleLeft" Multiline="true" Text="Meter Total  ===" SizeF="96,14" LocationFloat="849,5" AnchorVertical="Both" Font="Calibri, 8pt, style=Bold" Visible="True">
 					<ExpressionBindings>
 						<Item1 Ref="65" EventName="BeforePrint" PropertyName="Text" Expression="Iif(type=='O','','Meter Total ======&gt;')"/>
 						<Item2 Ref="66" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 					</ExpressionBindings>
 				</Item1>
-				<Item2 Ref="67" ControlType="XRLabel" Name="t_13" TextAlignment="MiddleLeft" Multiline="true" Text=">" SizeF="20,15" LocationFloat="925,3" AnchorVertical="Both" Font="Calibri, 9pt, style=Bold" Visible="True">
+				<Item2 Ref="67" ControlType="XRLabel" Name="t_13" TextAlignment="MiddleLeft" Multiline="true" Text=">" SizeF="23,15" LocationFloat="925,3" AnchorVertical="Both" Font="Calibri, 9pt, style=Bold" Visible="True">
 					<ExpressionBindings>
 						<Item1 Ref="68" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 					</ExpressionBindings>
 				</Item2>
-				<Item3 Ref="69" ControlType="XRLabel" Name="t_6" TextAlignment="MiddleLeft" Multiline="true" Text="$" SizeF="9,13" LocationFloat="959,5" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
+				<Item3 Ref="69" ControlType="XRLabel" Name="t_6" TextAlignment="MiddleLeft" Multiline="true" Text="$" SizeF="12,13" LocationFloat="959,5" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 					<ExpressionBindings>
 						<Item1 Ref="70" EventName="BeforePrint" PropertyName="Text" Expression="Iif(type=='O','','$')"/>
 						<Item2 Ref="71" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
@@ -227,12 +227,12 @@
 						<Item2 Ref="104" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O' || acctg_trans_seq_nbr!=1,false,true)"/>
 					</ExpressionBindings>
 				</Item8>
-				<Item9 Ref="105" ControlType="XRLabel" Name="t_3" TextAlignment="MiddleLeft" Multiline="true" Text="$" SizeF="9,13" LocationFloat="860,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
+				<Item9 Ref="105" ControlType="XRLabel" Name="t_3" TextAlignment="MiddleLeft" Multiline="true" Text="$" SizeF="12,13" LocationFloat="860,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 					<ExpressionBindings>
 						<Item1 Ref="106" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 					</ExpressionBindings>
 				</Item9>
-				<Item10 Ref="107" ControlType="XRLabel" Name="t_4" TextAlignment="MiddleLeft" Multiline="true" Text="$" SizeF="9,13" LocationFloat="959,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
+				<Item10 Ref="107" ControlType="XRLabel" Name="t_4" TextAlignment="MiddleLeft" Multiline="true" Text="$" SizeF="12,13" LocationFloat="959,1" AnchorVertical="Both" Font="Calibri, 8pt" Visible="True">
 					<ExpressionBindings>
 						<Item1 Ref="108" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(type=='O',false,true)"/>
 					</ExpressionBindings>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<XtraReportsLayoutSerializer SerializerVersion="24.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral" Name="XtraReport1" VerticalContentSplitting="Smart" Margins="-0, -0, 25, 25" PaperKind="Custom" PageWidth="846" PageHeight="311" Version="24.1" DataMember="Query" DataSource="#Ref-0">
+<XtraReportsLayoutSerializer SerializerVersion="24.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral" Name="XtraReport1" VerticalContentSplitting="Smart" Margins="-0, -0, 25, 25" PaperKind="Custom" PageWidth="851" PageHeight="311" Version="24.1" DataMember="Query" DataSource="#Ref-0">
 	<Parameters>
 		<Item1 Ref="2" Name="statement_nbr"/>
 		<Item2 Ref="3" Name="statement_rev_nbr"/>
@@ -17,17 +17,17 @@
 		<Item2 Ref="10" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="25"/>
 		<Item3 Ref="11" ControlType="ReportHeaderBand" Name="header" HeightF="42">
 			<Controls>
-				<Item1 Ref="12" ControlType="XRLabel" Name="date_t" TextAlignment="MiddleLeft" Multiline="true" Text="Date" SizeF="53,15" LocationFloat="2,3" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
-				<Item2 Ref="13" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleRight" Multiline="true" Text="MCF" SizeF="60,15" LocationFloat="62,3" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
-				<Item3 Ref="14" ControlType="XRLabel" Name="t_2" TextAlignment="MiddleRight" Multiline="true" Text="MMBtu Sat" SizeF="60,15" LocationFloat="122,3" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
-				<Item4 Ref="15" ControlType="XRLabel" Name="t_3" TextAlignment="MiddleRight" Multiline="true" Text="MMBtu Dry" SizeF="60,15" LocationFloat="183,3" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
-				<Item5 Ref="16" ControlType="XRLabel" Name="t_4" TextAlignment="MiddleLeft" Multiline="true" Text="Price Component" SizeF="101,15" LocationFloat="249,3" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
-				<Item6 Ref="17" ControlType="XRLabel" Name="t_6" TextAlignment="MiddleLeft" Multiline="true" Text="Price" SizeF="49,15" LocationFloat="637,3" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
-				<Item7 Ref="18" ControlType="XRLabel" Name="t_7" TextAlignment="MiddleLeft" Multiline="true" Text="Value" SizeF="34,15" LocationFloat="700,3" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
-				<Item8 Ref="19" ControlType="XRLabel" Name="t_8" TextAlignment="MiddleLeft" Multiline="true" Text="Daily Total" SizeF="63,15" LocationFloat="775,3" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
-				<Item9 Ref="20" ControlType="XRLabel" Name="t_5" TextAlignment="MiddleLeft" Multiline="true" Text="Units" SizeF="62,15" LocationFloat="566,3" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
-				<Item10 Ref="21" ControlType="XRLabel" Name="t_10" TextAlignment="MiddleLeft" Multiline="true" Text="Price Description" SizeF="101,15" LocationFloat="398,3" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
-				<Item11 Ref="22" ControlType="XRLabel" Name="t_9" TextAlignment="MiddleLeft" Multiline="true" Text="Totals:" SizeF="50,15" LocationFloat="-0,24" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
+				<Item1 Ref="12" ControlType="XRLabel" Name="date_t" TextAlignment="MiddleLeft" Multiline="true" Text="Date" SizeF="56,15" LocationFloat="2,3" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+				<Item2 Ref="13" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleRight" Multiline="true" Text="MCF" SizeF="63,15" LocationFloat="62,3" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+				<Item3 Ref="14" ControlType="XRLabel" Name="t_2" TextAlignment="MiddleRight" Multiline="true" Text="MMBtu Sat" SizeF="63,15" LocationFloat="122,3" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+				<Item4 Ref="15" ControlType="XRLabel" Name="t_3" TextAlignment="MiddleRight" Multiline="true" Text="MMBtu Dry" SizeF="63,15" LocationFloat="183,3" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+				<Item5 Ref="16" ControlType="XRLabel" Name="t_4" TextAlignment="MiddleLeft" Multiline="true" Text="Price Component" SizeF="104,15" LocationFloat="249,3" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+				<Item6 Ref="17" ControlType="XRLabel" Name="t_6" TextAlignment="MiddleLeft" Multiline="true" Text="Price" SizeF="52,15" LocationFloat="637,3" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+				<Item7 Ref="18" ControlType="XRLabel" Name="t_7" TextAlignment="MiddleLeft" Multiline="true" Text="Value" SizeF="37,15" LocationFloat="700,3" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+				<Item8 Ref="19" ControlType="XRLabel" Name="t_8" TextAlignment="MiddleLeft" Multiline="true" Text="Daily Total" SizeF="66,15" LocationFloat="775,3" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
+				<Item9 Ref="20" ControlType="XRLabel" Name="t_5" TextAlignment="MiddleLeft" Multiline="true" Text="Units" SizeF="65,15" LocationFloat="566,3" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+				<Item10 Ref="21" ControlType="XRLabel" Name="t_10" TextAlignment="MiddleLeft" Multiline="true" Text="Price Description" SizeF="104,15" LocationFloat="398,3" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+				<Item11 Ref="22" ControlType="XRLabel" Name="t_9" TextAlignment="MiddleLeft" Multiline="true" Text="Totals:" SizeF="53,15" LocationFloat="-0,24" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
 				<Item12 Ref="23" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="789,0" LocationFloat="57,21"  LineDirection="Horizontal" Visible="True"/>
 				<Item13 Ref="24" ControlType="XRLine" Name="l_2" FillColor="255,128,128,128" SizeF="789,0" LocationFloat="57,40"  LineDirection="Horizontal" Visible="True"/>
 				<Item14 Ref="25" ControlType="XRLabel" Name="month_dry_mmbtu" TextFormatString="{0:#,##0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="60,15" LocationFloat="183,24" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True">

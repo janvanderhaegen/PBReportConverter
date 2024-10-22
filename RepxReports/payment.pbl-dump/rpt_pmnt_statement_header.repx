@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<XtraReportsLayoutSerializer SerializerVersion="24.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral" Name="XtraReport1" VerticalContentSplitting="Smart" Margins="25, 25, 23, 0" PaperKind="Custom" PageWidth="1075" PageHeight="996" Version="24.1" DataMember="Query" DataSource="#Ref-0">
+<XtraReportsLayoutSerializer SerializerVersion="24.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral" Name="XtraReport1" VerticalContentSplitting="Smart" Margins="25, 25, 23, 0" PaperKind="Custom" PageWidth="1080" PageHeight="996" Version="24.1" DataMember="Query" DataSource="#Ref-0">
 	<Parameters>
 		<Item1 Ref="2" Name="dwra_statement_nbr"/>
 		<Item2 Ref="3" Name="dwra_statement_rev"/>
@@ -51,8 +51,8 @@
 						<Item1 Ref="21" EventName="BeforePrint" PropertyName="Text" Expression="[primary_phone_number]"/>
 					</ExpressionBindings>
 				</Item5>
-				<Item6 Ref="22" ControlType="XRLabel" Name="book_mo_t" TextAlignment="MiddleLeft" Multiline="true" Text="Phone:" SizeF="49,19" LocationFloat="16,109" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True"/>
-				<Item7 Ref="23" ControlType="XRLabel" Name="curr_prod_mo_t" TextAlignment="MiddleLeft" Multiline="true" Text="ATTN:" SizeF="41,19" LocationFloat="16,271" AnchorVertical="Both" Font="Calibri, 11pt, style=Bold" Visible="True"/>
+				<Item6 Ref="22" ControlType="XRLabel" Name="book_mo_t" TextAlignment="MiddleLeft" Multiline="true" Text="Phone:" SizeF="52,19" LocationFloat="16,109" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True"/>
+				<Item7 Ref="23" ControlType="XRLabel" Name="curr_prod_mo_t" TextAlignment="MiddleLeft" Multiline="true" Text="ATTN:" SizeF="44,19" LocationFloat="16,271" AnchorVertical="Both" Font="Calibri, 11pt, style=Bold" Visible="True"/>
 				<Item8 Ref="24" ControlType="XRLabel" Name="payee_address_1" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="338,19" LocationFloat="17,169" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True">
 					<ExpressionBindings>
 						<Item1 Ref="25" EventName="BeforePrint" PropertyName="Text" Expression="[payee_address_1]"/>
@@ -73,14 +73,14 @@
 						<Item1 Ref="31" EventName="BeforePrint" PropertyName="Text" Expression="[compute_7]"/>
 					</ExpressionBindings>
 				</Item11>
-				<Item12 Ref="32" ControlType="XRLabel" Name="t_4" TextAlignment="MiddleLeft" Multiline="true" Text="Statement Total Amount " SizeF="162,19" LocationFloat="534,411" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True"/>
+				<Item12 Ref="32" ControlType="XRLabel" Name="t_4" TextAlignment="MiddleLeft" Multiline="true" Text="Statement Total Amount " SizeF="165,19" LocationFloat="534,411" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True"/>
 				<Item13 Ref="33" ControlType="XRLabel" Name="currency_code" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="85,19" LocationFloat="698,411" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True">
 					<ExpressionBindings>
 						<Item1 Ref="34" EventName="BeforePrint" PropertyName="Text" Expression="[currency_code]"/>
 					</ExpressionBindings>
 				</Item13>
-				<Item14 Ref="35" ControlType="XRLabel" Name="t_5" TextAlignment="MiddleLeft" Multiline="true" Text="Payment Date:" SizeF="95,19" LocationFloat="534,436" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True"/>
-				<Item15 Ref="36" ControlType="XRLabel" Name="t_6" TextAlignment="MiddleLeft" Multiline="true" Text="$" SizeF="11,18" LocationFloat="902,411" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True"/>
+				<Item14 Ref="35" ControlType="XRLabel" Name="t_5" TextAlignment="MiddleLeft" Multiline="true" Text="Payment Date:" SizeF="98,19" LocationFloat="534,436" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True"/>
+				<Item15 Ref="36" ControlType="XRLabel" Name="t_6" TextAlignment="MiddleLeft" Multiline="true" Text="$" SizeF="14,18" LocationFloat="902,411" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True"/>
 				<Item16 Ref="37" ControlType="XRLabel" Name="total_val" TextFormatString="{0:#,##0.00;(#,##0.00)}" TextAlignment="MiddleRight"  Multiline="true" SizeF="95,19" LocationFloat="914,411" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True">
 					<ExpressionBindings>
 						<Item1 Ref="38" EventName="BeforePrint" PropertyName="Text" Expression="[total_val]"/>
@@ -91,15 +91,15 @@
 						<Item1 Ref="40" EventName="BeforePrint" PropertyName="Text" Expression="[statement_due_date]"/>
 					</ExpressionBindings>
 				</Item17>
-				<Item18 Ref="41" ControlType="XRLabel" Name="contract_nbr_t" TextAlignment="MiddleRight" Multiline="true" Text="Contract #:" SizeF="105,19" LocationFloat="679,175" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True"/>
-				<Item19 Ref="42" ControlType="XRLabel" Name="type_t" TextAlignment="MiddleRight" Multiline="true" Text="Customer #:" SizeF="105,19" LocationFloat="695,217" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True"/>
+				<Item18 Ref="41" ControlType="XRLabel" Name="contract_nbr_t" TextAlignment="MiddleRight" Multiline="true" Text="Contract #:" SizeF="108,19" LocationFloat="679,175" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True"/>
+				<Item19 Ref="42" ControlType="XRLabel" Name="type_t" TextAlignment="MiddleRight" Multiline="true" Text="Customer #:" SizeF="108,19" LocationFloat="695,217" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True"/>
 				<Item20 Ref="43" ControlType="XRLabel" Name="payee_ba_nbr" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="87,19" LocationFloat="809,217" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True">
 					<ExpressionBindings>
 						<Item1 Ref="44" EventName="BeforePrint" PropertyName="Text" Expression="[payee_ba_nbr]"/>
 					</ExpressionBindings>
 				</Item20>
 				<Item21 Ref="45" ControlType="XRSubreport" Name="rpt_pmnt_statement_header_k" SizeF="158,23" LocationFloat="789,175">
-					<ReportSource Ref="47" Name="rpt_pmnt_statement_header_k" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_header_k, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="150" PageHeight="19" Version="24.1" DataMember="Query" DataSource="#Ref-46">
+					<ReportSource Ref="47" Name="rpt_pmnt_statement_header_k" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_header_k, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="155" PageHeight="19" Version="24.1" DataMember="Query" DataSource="#Ref-46">
 						<Parameters>
 							<Item1 Ref="48" Name="dwra_statement_nbr"/>
 							<Item2 Ref="49" Name="dwra_statement_rev"/>
@@ -164,7 +164,7 @@
 						<Item1 Ref="71" EventName="BeforePrint" PropertyName="Text" Expression="[payee_attn]"/>
 					</ExpressionBindings>
 				</Item25>
-				<Item26 Ref="72" ControlType="XRLabel" Name="t_2" TextAlignment="MiddleLeft" Multiline="true" Text="Phone:" SizeF="49,19" LocationFloat="16,293" AnchorVertical="Both" Font="Calibri, 11pt, style=Bold" Visible="True"/>
+				<Item26 Ref="72" ControlType="XRLabel" Name="t_2" TextAlignment="MiddleLeft" Multiline="true" Text="Phone:" SizeF="52,19" LocationFloat="16,293" AnchorVertical="Both" Font="Calibri, 11pt, style=Bold" Visible="True"/>
 				<Item27 Ref="73" ControlType="XRLabel" Name="payee_phone_number" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="138,17" LocationFloat="69,293" AnchorVertical="Both" Font="Tahoma, 10pt, style=Bold" Visible="True">
 					<ExpressionBindings>
 						<Item1 Ref="74" EventName="BeforePrint" PropertyName="Text" Expression="[payee_phone_number]"/>
@@ -175,20 +175,20 @@
 						<Item1 Ref="76" EventName="BeforePrint" PropertyName="Text" Expression="[payee_fax_number]"/>
 					</ExpressionBindings>
 				</Item28>
-				<Item29 Ref="77" ControlType="XRLabel" Name="t_3" TextAlignment="MiddleLeft" Multiline="true" Text="Fax:" SizeF="49,19" LocationFloat="16,314" AnchorVertical="Both" Font="Calibri, 11pt, style=Bold" Visible="True"/>
-				<Item30 Ref="78" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleCenter" Multiline="true" Text="PURCHASE STATEMENT" SizeF="264,19" LocationFloat="651,31" AnchorVertical="Both" Font="Calibri, 11pt, style=Bold" Visible="True"/>
+				<Item29 Ref="77" ControlType="XRLabel" Name="t_3" TextAlignment="MiddleLeft" Multiline="true" Text="Fax:" SizeF="52,19" LocationFloat="16,314" AnchorVertical="Both" Font="Calibri, 11pt, style=Bold" Visible="True"/>
+				<Item30 Ref="78" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleCenter" Multiline="true" Text="PURCHASE STATEMENT" SizeF="267,19" LocationFloat="651,31" AnchorVertical="Both" Font="Calibri, 11pt, style=Bold" Visible="True"/>
 				<Item31 Ref="79" ControlType="XRLabel" Name="statement_date" TextFormatString="{0:[shortdate]}" TextAlignment="MiddleCenter"  Multiline="true" SizeF="114,20" LocationFloat="729,53" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True">
 					<ExpressionBindings>
 						<Item1 Ref="80" EventName="BeforePrint" PropertyName="Text" Expression="[statement_date]"/>
 					</ExpressionBindings>
 				</Item31>
-				<Item32 Ref="81" ControlType="XRLabel" Name="statement_nbr_t" TextAlignment="MiddleRight" Multiline="true" Text="Statement #:" SizeF="105,19" LocationFloat="669,92" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True"/>
+				<Item32 Ref="81" ControlType="XRLabel" Name="statement_nbr_t" TextAlignment="MiddleRight" Multiline="true" Text="Statement #:" SizeF="108,19" LocationFloat="669,92" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True"/>
 				<Item33 Ref="82" ControlType="XRLabel" Name="statement_nbr" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="119,20" LocationFloat="782,92" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True">
 					<ExpressionBindings>
 						<Item1 Ref="83" EventName="BeforePrint" PropertyName="Text" Expression="[statement_nbr]"/>
 					</ExpressionBindings>
 				</Item33>
-				<Item34 Ref="84" ControlType="XRLabel" Name="statement_due_date_t" TextAlignment="MiddleRight" Multiline="true" Text="Payment Due Date:" SizeF="138,19" LocationFloat="667,134" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True"/>
+				<Item34 Ref="84" ControlType="XRLabel" Name="statement_due_date_t" TextAlignment="MiddleRight" Multiline="true" Text="Payment Due Date:" SizeF="141,19" LocationFloat="667,134" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True"/>
 				<Item35 Ref="85" ControlType="XRLabel" Name="statement_due_date" TextFormatString="{0:[shortdate]}" TextAlignment="MiddleLeft"  Multiline="true" SizeF="105,20" LocationFloat="812,134" AnchorVertical="Both" Font="Calibri, 11pt" Visible="True">
 					<ExpressionBindings>
 						<Item1 Ref="86" EventName="BeforePrint" PropertyName="Text" Expression="[statement_due_date]"/>
@@ -206,7 +206,7 @@
 						<Item2 Ref="92" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(pay_method=='C',false,true)"/>
 					</ExpressionBindings>
 				</Item37>
-				<Item38 Ref="93" ControlType="XRLabel" Name="t_8" TextAlignment="MiddleLeft" Multiline="true" Text="Account #:" SizeF="61,16" LocationFloat="8,659" AnchorVertical="Both" Font="Calibri, 10pt" Visible="True">
+				<Item38 Ref="93" ControlType="XRLabel" Name="t_8" TextAlignment="MiddleLeft" Multiline="true" Text="Account #:" SizeF="64,16" LocationFloat="8,659" AnchorVertical="Both" Font="Calibri, 10pt" Visible="True">
 					<ExpressionBindings>
 						<Item1 Ref="94" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(pay_method=='C',false,true)"/>
 					</ExpressionBindings>
@@ -229,7 +229,7 @@
 						<Item2 Ref="103" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(pay_method=='C',false,true)"/>
 					</ExpressionBindings>
 				</Item41>
-				<Item42 Ref="104" ControlType="XRLabel" Name="t_9" TextAlignment="MiddleLeft" Multiline="true" Text="ABA #:" SizeF="41,16" LocationFloat="8,676" AnchorVertical="Both" Font="Calibri, 10pt" Visible="True">
+				<Item42 Ref="104" ControlType="XRLabel" Name="t_9" TextAlignment="MiddleLeft" Multiline="true" Text="ABA #:" SizeF="44,16" LocationFloat="8,676" AnchorVertical="Both" Font="Calibri, 10pt" Visible="True">
 					<ExpressionBindings>
 						<Item1 Ref="105" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(pay_method=='C',false,true)"/>
 					</ExpressionBindings>

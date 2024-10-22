@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<XtraReportsLayoutSerializer SerializerVersion="24.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral" Name="XtraReport1" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="521" PageHeight="295" Version="24.1" DataMember="Query" DataSource="#Ref-0">
+<XtraReportsLayoutSerializer SerializerVersion="24.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral" Name="XtraReport1" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="524" PageHeight="295" Version="24.1" DataMember="Query" DataSource="#Ref-0">
 	<Parameters>
 		<Item1 Ref="2" Name="dwra_ba_nbr"/>
 	</Parameters>
@@ -11,8 +11,8 @@
 		<Item2 Ref="4" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="25"/>
 		<Item3 Ref="5" ControlType="ReportHeaderBand" Name="header" HeightF="19">
 			<Controls>
-				<Item1 Ref="6" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="471,0" LocationFloat="-0,16"  LineDirection="Horizontal" Visible="True"/>
-				<Item2 Ref="7" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleLeft" Multiline="true" Text="Contacts" SizeF="65,15" LocationFloat="226,-0" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
+				<Item1 Ref="6" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="474,0" LocationFloat="-0,16"  LineDirection="Horizontal" Visible="True"/>
+				<Item2 Ref="7" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleLeft" Multiline="true" Text="Contacts" SizeF="68,15" LocationFloat="226,-0" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
 			</Controls>
 		</Item3>
 		<Item4 Ref="8" ControlType="GroupHeaderBand" Name="summary" HeightF="-0" Visible="False" Level="0">

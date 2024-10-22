@@ -8,11 +8,11 @@ internal class PBExpressionParser
     private StringReader? _reader;
     private int _lastChar;
     private char _lastCharAsChar;
-    private readonly StringBuilder _sb = new();
-    private readonly StringBuilder _exprBufferSb = new();
+    private readonly StringBuilder _expressionSb = new();
+    private readonly StringBuilder _expressionBufferSb = new();
     private readonly StringBuilder _lastStrBufferSb = new();
     private bool _writeToBuffer = false;
-    private static readonly List<string> _knownOps = ["when", "then", "and", "or", "else", "not"];
+    private static readonly List<string> _knownKeywords = ["when", "then", "and", "or", "else", "not"];
     private static readonly List<char> _exprDelims = ['(', ')', ',', '\''];
     private string _event = "BeforePrint";
     internal static readonly string[] sourceArray = ["left", "right"];
@@ -29,11 +29,11 @@ internal class PBExpressionParser
     {
         if (_writeToBuffer)
         {
-            _exprBufferSb.Append(value);
+            _expressionBufferSb.Append(value);
         }
         else
         {
-            _sb.Append(value);
+            _expressionSb.Append(value);
         }
     }
 
@@ -99,7 +99,7 @@ internal class PBExpressionParser
 
     public (string printEvent, string expr) Parse(string expression)
     {
-        _sb.Clear();
+        _expressionSb.Clear();
         expression = Regex.Replace(expression, @"\sfor [a-zA-Z0-9]+(\s[0-9]+)?", "");
         _reader = new StringReader(expression);
         _event = "BeforePrint";
@@ -108,7 +108,7 @@ internal class PBExpressionParser
 
         _reader.Dispose();
 
-        return (_event, _sb.ToString().Replace("<>", "!=").Replace("&", "&amp;").Replace("<", "&lt;").Replace(">", "&gt;"));
+        return (_event, _expressionSb.ToString().Replace("<>", "!=").Replace("&", "&amp;").Replace("<", "&lt;").Replace(">", "&gt;"));
     }
 
     private void ParseBracketExpression()
@@ -161,7 +161,7 @@ internal class PBExpressionParser
             {
                 var str = ParseString();
 
-                if (_knownOps.Contains(str.ToLower()))
+                if (_knownKeywords.Contains(str.ToLower()))
                 {
                     var mapOp = MapOperation(str.ToLower());
                     if (mapOp != string.Empty)
@@ -231,7 +231,7 @@ internal class PBExpressionParser
 
     private void SkipParameters()
     {
-        _sb.Length -= 1;
+        _expressionSb.Length -= 1;
         var bracketPairCheck = 0;
         while(_lastChar >= 0)
         {
@@ -335,8 +335,8 @@ internal class PBExpressionParser
         var elseCheck = false;
         _writeToBuffer = true;
         ParseExpression();
-        var expressionToCheck = _exprBufferSb.ToString();
-        _exprBufferSb.Clear();
+        var expressionToCheck = _expressionBufferSb.ToString();
+        _expressionBufferSb.Clear();
         _writeToBuffer = false;
         for (; ; )
         {
@@ -367,12 +367,12 @@ internal class PBExpressionParser
     {
         _writeToBuffer = true;
         ParseExpression();
-        var firstParam = _exprBufferSb.ToString();
-        _exprBufferSb.Clear();
+        var firstParam = _expressionBufferSb.ToString();
+        _expressionBufferSb.Clear();
         ReadCharSkipWhitespace();
         ParseExpression();
-        var secondParam = _exprBufferSb.ToString();
-        _exprBufferSb.Clear();
+        var secondParam = _expressionBufferSb.ToString();
+        _expressionBufferSb.Clear();
         _writeToBuffer = false;
         if (_lastChar == ')' || _lastChar < 0)
         {

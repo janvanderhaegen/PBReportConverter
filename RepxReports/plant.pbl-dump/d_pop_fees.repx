@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<XtraReportsLayoutSerializer SerializerVersion="24.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral" Name="XtraReport1" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="383" PageHeight="286" Version="24.1" DataMember="Query" DataSource="#Ref-0">
+<XtraReportsLayoutSerializer SerializerVersion="24.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral" Name="XtraReport1" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="386" PageHeight="286" Version="24.1" DataMember="Query" DataSource="#Ref-0">
 	<Parameters>
 		<Item1 Ref="2" Name="dwra_prod_month"/>
 		<Item2 Ref="3" Name="dwra_facility_cd"/>
@@ -15,9 +15,9 @@
 		<Item2 Ref="8" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="25"/>
 		<Item3 Ref="9" ControlType="ReportHeaderBand" Name="header" HeightF="18">
 			<Controls>
-				<Item1 Ref="10" ControlType="XRLabel" Name="valid_charge_type_t" TextAlignment="MiddleRight" Multiline="true" Text="Fees / Adjustments" SizeF="97,15" LocationFloat="7,27" AnchorVertical="Both" Font="Arial, 8pt" Visible="False"/>
-				<Item2 Ref="11" ControlType="XRLabel" Name="price_t" TextAlignment="MiddleRight" Multiline="true" Text="Fee Rate" SizeF="82,15" LocationFloat="92,27" AnchorVertical="Both" Font="Arial, 8pt" Visible="False"/>
-				<Item3 Ref="12" ControlType="XRLabel" Name="compute_0003_t" TextAlignment="MiddleRight" Multiline="true" Text="Value" SizeF="72,15" LocationFloat="179,27" AnchorVertical="Both" Font="Arial, 8pt" Visible="False"/>
+				<Item1 Ref="10" ControlType="XRLabel" Name="valid_charge_type_t" TextAlignment="MiddleRight" Multiline="true" Text="Fees / Adjustments" SizeF="100,15" LocationFloat="7,27" AnchorVertical="Both" Font="Arial, 8pt" Visible="False"/>
+				<Item2 Ref="11" ControlType="XRLabel" Name="price_t" TextAlignment="MiddleRight" Multiline="true" Text="Fee Rate" SizeF="85,15" LocationFloat="92,27" AnchorVertical="Both" Font="Arial, 8pt" Visible="False"/>
+				<Item3 Ref="12" ControlType="XRLabel" Name="compute_0003_t" TextAlignment="MiddleRight" Multiline="true" Text="Value" SizeF="75,15" LocationFloat="179,27" AnchorVertical="Both" Font="Arial, 8pt" Visible="False"/>
 				<Item4 Ref="13" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="256,-23" LocationFloat="-0,41"  LineDirection="Horizontal" Visible="False"/>
 			</Controls>
 		</Item3>

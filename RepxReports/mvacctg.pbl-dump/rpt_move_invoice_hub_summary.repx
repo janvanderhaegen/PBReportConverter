@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<XtraReportsLayoutSerializer SerializerVersion="24.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral" Name="XtraReport1" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="836" PageHeight="592" Version="24.1" DataMember="Query" DataSource="#Ref-0">
+<XtraReportsLayoutSerializer SerializerVersion="24.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral" Name="XtraReport1" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="841" PageHeight="592" Version="24.1" DataMember="Query" DataSource="#Ref-0">
 	<Parameters>
 		<Item1 Ref="2" Name="statement_nbr"/>
 		<Item2 Ref="3" Name="statement_rev_nbr"/>
@@ -19,14 +19,14 @@
 						<Item1 Ref="10" EventName="BeforePrint" PropertyName="Text" Expression="[displayed_statement_nbr]"/>
 					</ExpressionBindings>
 				</Item1>
-				<Item2 Ref="11" ControlType="XRLabel" Name="t_7" TextAlignment="MiddleLeft" Multiline="true" Text="Invoice No: " SizeF="79,17" LocationFloat="590,72" AnchorVertical="Both" Font="Tahoma, 10pt, style=Bold" Visible="True"/>
-				<Item3 Ref="12" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleLeft" Multiline="true" Text="Contract No: " SizeF="90,17" LocationFloat="580,91" AnchorVertical="Both" Font="Tahoma, 10pt, style=Bold" Visible="True"/>
+				<Item2 Ref="11" ControlType="XRLabel" Name="t_7" TextAlignment="MiddleLeft" Multiline="true" Text="Invoice No: " SizeF="82,17" LocationFloat="590,72" AnchorVertical="Both" Font="Tahoma, 10pt, style=Bold" Visible="True"/>
+				<Item3 Ref="12" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleLeft" Multiline="true" Text="Contract No: " SizeF="93,17" LocationFloat="580,91" AnchorVertical="Both" Font="Tahoma, 10pt, style=Bold" Visible="True"/>
 				<Item4 Ref="13" ControlType="XRLabel" Name="alias_contract_nbr" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="115,17" LocationFloat="671,91" AnchorVertical="Both" Font="Tahoma, 10pt" Visible="True">
 					<ExpressionBindings>
 						<Item1 Ref="14" EventName="BeforePrint" PropertyName="Text" Expression="[alias_contract_nbr]"/>
 					</ExpressionBindings>
 				</Item4>
-				<Item5 Ref="15" ControlType="XRLabel" Name="t_8" TextAlignment="MiddleLeft" Multiline="true" Text="Invoice Date: " SizeF="95,17" LocationFloat="574,111" AnchorVertical="Both" Font="Tahoma, 10pt, style=Bold" Visible="True"/>
+				<Item5 Ref="15" ControlType="XRLabel" Name="t_8" TextAlignment="MiddleLeft" Multiline="true" Text="Invoice Date: " SizeF="98,17" LocationFloat="574,111" AnchorVertical="Both" Font="Tahoma, 10pt, style=Bold" Visible="True"/>
 				<Item6 Ref="16" ControlType="XRLabel" Name="invoice_date" TextFormatString="{0:[shortdate]}" TextAlignment="MiddleLeft"  Multiline="true" SizeF="115,17" LocationFloat="671,111" AnchorVertical="Both" Font="Tahoma, 10pt" Visible="True">
 					<ExpressionBindings>
 						<Item1 Ref="17" EventName="BeforePrint" PropertyName="Text" Expression="[invoice_date]"/>
@@ -37,8 +37,8 @@
 						<Item1 Ref="19" EventName="BeforePrint" PropertyName="Text" Expression="[facility_name]"/>
 					</ExpressionBindings>
 				</Item7>
-				<Item8 Ref="20" ControlType="XRLabel" Name="t_5" TextAlignment="MiddleCenter" Multiline="true" Text="Invoice Summary" SizeF="413,17" LocationFloat="205,25" AnchorVertical="Both" Font="Tahoma, 10pt, style=Bold" Visible="True"/>
-				<Item9 Ref="21" ControlType="XRLabel" Name="t_6" TextAlignment="MiddleLeft" Multiline="true" Text="Delivery Period: " SizeF="112,17" LocationFloat="294,45" AnchorVertical="Both" Font="Tahoma, 10pt, style=Bold" Visible="True"/>
+				<Item8 Ref="20" ControlType="XRLabel" Name="t_5" TextAlignment="MiddleCenter" Multiline="true" Text="Invoice Summary" SizeF="416,17" LocationFloat="205,25" AnchorVertical="Both" Font="Tahoma, 10pt, style=Bold" Visible="True"/>
+				<Item9 Ref="21" ControlType="XRLabel" Name="t_6" TextAlignment="MiddleLeft" Multiline="true" Text="Delivery Period: " SizeF="115,17" LocationFloat="294,45" AnchorVertical="Both" Font="Tahoma, 10pt, style=Bold" Visible="True"/>
 				<Item10 Ref="22" ControlType="XRLabel" Name="compute_1_field" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="172,17" LocationFloat="410,45" AnchorVertical="Both" Font="Tahoma, 10pt, style=Bold" Visible="True">
 					<ExpressionBindings>
 						<Item1 Ref="23" EventName="BeforePrint" PropertyName="Text" Expression="[compute_1]"/>
@@ -53,20 +53,20 @@
 						<Item1 Ref="26" EventName="BeforePrint" PropertyName="Text" Expression="[comp_minimumfee]"/>
 					</ExpressionBindings>
 				</Item1>
-				<Item2 Ref="27" ControlType="XRLabel" Name="t_13" TextAlignment="MiddleRight" Multiline="true" Text="HUB MONTHLY MINIMUM TRANSACTION CHARGE - " SizeF="259,14" LocationFloat="375,26" AnchorVertical="Both" Font="Tahoma, 8pt" Visible="True"/>
-				<Item3 Ref="28" ControlType="XRLabel" Name="t_12" TextAlignment="MiddleRight" Multiline="true" Text="TOTAL NON-AFFILIATED TRANSACTIONS - " SizeF="219,14" LocationFloat="415,5" AnchorVertical="Both" Font="Tahoma, 8pt" Visible="True"/>
+				<Item2 Ref="27" ControlType="XRLabel" Name="t_13" TextAlignment="MiddleRight" Multiline="true" Text="HUB MONTHLY MINIMUM TRANSACTION CHARGE - " SizeF="262,14" LocationFloat="375,26" AnchorVertical="Both" Font="Tahoma, 8pt" Visible="True"/>
+				<Item3 Ref="28" ControlType="XRLabel" Name="t_12" TextAlignment="MiddleRight" Multiline="true" Text="TOTAL NON-AFFILIATED TRANSACTIONS - " SizeF="222,14" LocationFloat="415,5" AnchorVertical="Both" Font="Tahoma, 8pt" Visible="True"/>
 				<Item4 Ref="29" ControlType="XRLabel" Name="compnonaffiliatevalue_field" TextFormatString="{0:$#,##0.00}" TextAlignment="MiddleRight"  Multiline="true" SizeF="101,14" LocationFloat="677,5" AnchorVertical="Both" Font="Tahoma, 8pt" Visible="True">
 					<ExpressionBindings>
 						<Item1 Ref="30" EventName="BeforePrint" PropertyName="Text" Expression="[compnonaffiliatevalue]"/>
 					</ExpressionBindings>
 				</Item4>
-				<Item5 Ref="31" ControlType="XRLabel" Name="t_14" TextAlignment="MiddleRight" Multiline="true" Text="GREATER OF TOTAL NON-AFFILIATED TRANSACTIONS OR HUB MONTHLY MINIMUM - " SizeF="434,14" LocationFloat="200,48" AnchorVertical="Both" Font="Tahoma, 8pt" Visible="True"/>
+				<Item5 Ref="31" ControlType="XRLabel" Name="t_14" TextAlignment="MiddleRight" Multiline="true" Text="GREATER OF TOTAL NON-AFFILIATED TRANSACTIONS OR HUB MONTHLY MINIMUM - " SizeF="437,14" LocationFloat="200,48" AnchorVertical="Both" Font="Tahoma, 8pt" Visible="True"/>
 				<Item6 Ref="32" ControlType="XRLabel" Name="comptotaldue_field" TextFormatString="{0:$#,##0.00}" TextAlignment="MiddleRight"  Multiline="true" SizeF="101,14" LocationFloat="680,48" AnchorVertical="Both" Font="Tahoma, 8pt" Visible="True">
 					<ExpressionBindings>
 						<Item1 Ref="33" EventName="BeforePrint" PropertyName="Text" Expression="[comptotaldue]"/>
 					</ExpressionBindings>
 				</Item6>
-				<Item7 Ref="34" ControlType="XRLabel" Name="t_15" TextAlignment="MiddleRight" Multiline="true" Text="TOTAL AMOUNT DUE - " SizeF="116,14" LocationFloat="518,73" AnchorVertical="Both" Font="Tahoma, 8pt" Visible="True"/>
+				<Item7 Ref="34" ControlType="XRLabel" Name="t_15" TextAlignment="MiddleRight" Multiline="true" Text="TOTAL AMOUNT DUE - " SizeF="119,14" LocationFloat="518,73" AnchorVertical="Both" Font="Tahoma, 8pt" Visible="True"/>
 				<Item8 Ref="35" ControlType="XRLabel" Name="comptotalamountdue_field" TextFormatString="{0:$#,##0.00}" TextAlignment="MiddleRight"  Multiline="true" SizeF="101,14" LocationFloat="680,73" AnchorVertical="Both" Font="Tahoma, 8pt" Visible="True">
 					<ExpressionBindings>
 						<Item1 Ref="36" EventName="BeforePrint" PropertyName="Text" Expression="[comptotalamountdue]"/>
@@ -105,7 +105,7 @@
 						<Item1 Ref="47" EventName="BeforePrint" PropertyName="Text" Expression="[compaffiliatedtransactions]"/>
 					</ExpressionBindings>
 				</Item1>
-				<Item2 Ref="48" ControlType="XRLabel" Name="t_2" TextAlignment="MiddleLeft" Multiline="true" Text="(While technically Affiliated transactions are subject to the $0.02 Hub transfer fee up to the monthly $200 minimum, they are priced below at $0.00 for ease of invoice handling)" SizeF="471,32" LocationFloat="170,3" AnchorVertical="Both" Font="Tahoma, 8pt" Visible="True">
+				<Item2 Ref="48" ControlType="XRLabel" Name="t_2" TextAlignment="MiddleLeft" Multiline="true" Text="(While technically Affiliated transactions are subject to the $0.02 Hub transfer fee up to the monthly $200 minimum, they are priced below at $0.00 for ease of invoice handling)" SizeF="474,32" LocationFloat="170,3" AnchorVertical="Both" Font="Tahoma, 8pt" Visible="True">
 					<ExpressionBindings>
 						<Item1 Ref="49" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(affiliated_ind=='A',true,false)"/>
 					</ExpressionBindings>
@@ -133,18 +133,18 @@
 				<Item1 Ref="58" FieldName="rcpt_or_dlvry" />
 			</GroupFields>
 			<Controls>
-				<Item1 Ref="59" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="782,0" LocationFloat="4,5"  LineDirection="Horizontal" Visible="True"/>
-				<Item2 Ref="60" ControlType="XRLine" Name="l_2" FillColor="255,128,128,128" SizeF="780,0" LocationFloat="6,26"  LineDirection="Horizontal" Visible="True"/>
+				<Item1 Ref="59" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="787,0" LocationFloat="4,5"  LineDirection="Horizontal" Visible="True"/>
+				<Item2 Ref="60" ControlType="XRLine" Name="l_2" FillColor="255,128,128,128" SizeF="785,0" LocationFloat="6,26"  LineDirection="Horizontal" Visible="True"/>
 				<Item3 Ref="61" ControlType="XRLabel" Name="compute_2_field" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="134,14" LocationFloat="9,9" AnchorVertical="Both" Font="Tahoma, 8pt, style=Bold" Visible="True">
 					<ExpressionBindings>
 						<Item1 Ref="62" EventName="BeforePrint" PropertyName="Text" Expression="[compute_2]"/>
 					</ExpressionBindings>
 				</Item3>
-				<Item4 Ref="63" ControlType="XRLabel" Name="t_3" TextAlignment="MiddleLeft" Multiline="true" Text="CUSTOMER" SizeF="66,14" LocationFloat="179,9" AnchorVertical="Both" Font="Tahoma, 8pt, style=Bold" Visible="True"/>
-				<Item5 Ref="64" ControlType="XRLabel" Name="t_4" TextAlignment="MiddleLeft" Multiline="true" Text="CONTRACT" SizeF="68,14" LocationFloat="390,9" AnchorVertical="Both" Font="Tahoma, 8pt, style=Bold" Visible="True"/>
-				<Item6 Ref="65" ControlType="XRLabel" Name="t_9" TextAlignment="MiddleLeft" Multiline="true" Text="Dth" SizeF="45,14" LocationFloat="495,9" AnchorVertical="Both" Font="Tahoma, 8pt, style=Bold" Visible="True"/>
-				<Item7 Ref="66" ControlType="XRLabel" Name="t_10" TextAlignment="MiddleLeft" Multiline="true" Text="FEE $/Dth" SizeF="57,14" LocationFloat="582,9" AnchorVertical="Both" Font="Tahoma, 8pt, style=Bold" Visible="True"/>
-				<Item8 Ref="67" ControlType="XRLabel" Name="t_11" TextAlignment="MiddleLeft" Multiline="true" Text="TOTAL" SizeF="42,14" LocationFloat="693,9" AnchorVertical="Both" Font="Tahoma, 8pt, style=Bold" Visible="True"/>
+				<Item4 Ref="63" ControlType="XRLabel" Name="t_3" TextAlignment="MiddleLeft" Multiline="true" Text="CUSTOMER" SizeF="69,14" LocationFloat="179,9" AnchorVertical="Both" Font="Tahoma, 8pt, style=Bold" Visible="True"/>
+				<Item5 Ref="64" ControlType="XRLabel" Name="t_4" TextAlignment="MiddleLeft" Multiline="true" Text="CONTRACT" SizeF="71,14" LocationFloat="390,9" AnchorVertical="Both" Font="Tahoma, 8pt, style=Bold" Visible="True"/>
+				<Item6 Ref="65" ControlType="XRLabel" Name="t_9" TextAlignment="MiddleLeft" Multiline="true" Text="Dth" SizeF="48,14" LocationFloat="495,9" AnchorVertical="Both" Font="Tahoma, 8pt, style=Bold" Visible="True"/>
+				<Item7 Ref="66" ControlType="XRLabel" Name="t_10" TextAlignment="MiddleLeft" Multiline="true" Text="FEE $/Dth" SizeF="60,14" LocationFloat="582,9" AnchorVertical="Both" Font="Tahoma, 8pt, style=Bold" Visible="True"/>
+				<Item8 Ref="67" ControlType="XRLabel" Name="t_11" TextAlignment="MiddleLeft" Multiline="true" Text="TOTAL" SizeF="45,14" LocationFloat="693,9" AnchorVertical="Both" Font="Tahoma, 8pt, style=Bold" Visible="True"/>
 			</Controls>
 		</Item11>
 		<Item12 Ref="68" ControlType="GroupFooterBand" Name="groupFooterBand3" Level="1" HeightF="-0" Visible="False">
