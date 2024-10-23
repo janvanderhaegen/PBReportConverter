@@ -262,6 +262,10 @@ namespace PBReportConverter.Converters
             {
                 name = name.Substring(2);
             }
+            if (name.StartsWith("rpt_"))
+            {
+                name = name.Substring(4);
+            }
             var parts = name.Split('_');
             var sb = new StringBuilder();
             foreach (var part in parts)
