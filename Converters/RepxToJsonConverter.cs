@@ -194,9 +194,28 @@ namespace PBReportConverter.Converters
                         Console.Write(" - Skipped, layout unchanged \n");
                         return subreportNames;
                     }
+                    else
+                    {
+                        existingJson!["Data"]!["Layout"] = layout;
+                        existingJson!["Data"]!["Category"] = category;
+                        existingJson!["Data"]!["DisplayName"] = reportDisplayName;
+                        existingJson!["Data"]!["Description"] = reportDisplayName;
+                        existingJson!["Dependencies"] = JArray.FromObject(subreportIds.Select(sId => new
+                        {
+                            Id = sId,
+                            ResourceType = "ReportConfiguration"
+                        }).OrderBy(sId => sId.Id).ToArray());                        
+                        existingJson!["Version"] = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fffffffzzz");                        
+                        existingJson!["Category"] = category;
+                        existingJson!["DisplayName"] = reportDisplayName;
+                        existingJson!["Description"] = reportDisplayName;
+                        File.WriteAllText(outputPath, JsonConvert.SerializeObject(existingJson, Newtonsoft.Json.Formatting.Indented));
+                    }
                 }
-                File.WriteAllText(outputPath, JsonConvert.SerializeObject(json, Newtonsoft.Json.Formatting.Indented));
-
+                else
+                {
+                    File.WriteAllText(outputPath, JsonConvert.SerializeObject(json, Newtonsoft.Json.Formatting.Indented));
+                }
                 Console.Write(" - Done\n");
             }
             catch (Exception e)
