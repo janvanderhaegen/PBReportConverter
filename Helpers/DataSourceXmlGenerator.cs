@@ -51,14 +51,15 @@ internal static class DataSourceXmlGenerator
 
         _writer.WriteLine("<ResultSchema>");
         _writer.WriteLine("<DataSet Name =\"sqlDataSource1\">");
-        _writer.WriteLine($"<View Name=\"Query\">");
 
+        _writer.WriteLine($"<View Name=\"Query\">");
         foreach (var column in table._columns)
         {
             var colAttributes = column._attributes;
             _writer.WriteLine($"<Field Name=\"{colAttributes["name"]}\" Type=\"String\" />");
         }
         _writer.WriteLine("</View>");
+
         _writer.WriteLine("</DataSet>");
         _writer.WriteLine("</ResultSchema>");
         _writer.WriteLine("<ConnectionOptions CloseConnection=\"true\" />");
@@ -100,6 +101,18 @@ internal static class DataSourceXmlGenerator
         return "ORDER BY " + string.Join(',', sortList);
     }
 
+    /// <summary>
+    /// Extracts the name of the Stored Procedure from the PowerBuilder command that invokes it.
+    /// The format in question is: "1 execute [name_of_procedure];1 [list_of_arguments]".
+    /// <example>
+    /// The text:
+    /// "1 execute contract_brief_pur_sp;1 @query_date = :query_date, @cpty_ba_nbr = :cpty_ba_nbr, @contract_nbr = :contract_nbr"
+    /// returns:
+    /// "contract_brief_pur_sp"
+    /// </example>
+    /// </summary>
+    /// <param name="query"></param>
+    /// <returns>Name of Stored Procedure used in the DataSource</returns>
     private static string GetProcedureName(string query)
     {
         var startIndex = query.EndIndexOf("execute ");
@@ -107,6 +120,9 @@ internal static class DataSourceXmlGenerator
         return query[startIndex..endIndex];
     }
 
+    /// <param name="source"></param>
+    /// <param name="value"></param>
+    /// <returns>First index after the given string value.</returns>
     private static int EndIndexOf(this string source, string value)
     {
         int index = source.IndexOf(value);

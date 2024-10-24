@@ -9,7 +9,7 @@
 	<Bands>
 		<Item1 Ref="3" ControlType="TopMarginBand" Name="TopMargin" HeightF="25"/>
 		<Item2 Ref="4" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="25"/>
-		<Item3 Ref="5" ControlType="GroupHeaderBand" Name="summary" HeightF="-0" Visible="False" Level="0">
+		<Item3 Ref="5" ControlType="GroupFooterBand" Name="summary" HeightF="-0" Visible="False" Level="0">
 			<Controls>
 			</Controls>
 		</Item3>

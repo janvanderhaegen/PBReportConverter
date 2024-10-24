@@ -48,7 +48,7 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
             _globalHeight = parser.ReportHeight;
             _globalWidth = parser.ReportWidth;
 
-            WriteSingleLine("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
+            WriteLine("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
             var dataWindowIndex = structure.FindIndex(x => x._objectType == "datawindow");
             var dataWindowAttributes = structure[dataWindowIndex]._attributes;
             WriteStartObject($"<XtraReportsLayoutSerializer SerializerVersion=\"24.1.4.0\" Ref=\"{_ref++}\" ControlType=\"DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral\" Name=\"XtraReport1\" VerticalContentSplitting=\"Smart\" Margins=\"{X(dataWindowAttributes["print.margin.left"])}, {X(dataWindowAttributes["print.margin.right"])}, {Y(dataWindowAttributes["print.margin.top"])}, {Y(dataWindowAttributes["print.margin.bottom"])}\" PaperKind=\"Custom\" PageWidth=\"{parser.ReportWidth + X(dataWindowAttributes["print.margin.left"]) + X(dataWindowAttributes["print.margin.right"])}\" PageHeight=\"{parser.ReportHeight + Y(dataWindowAttributes["print.margin.top"]) + Y(dataWindowAttributes["print.margin.bottom"]) + 200}\" Version=\"24.1\" DataMember=\"Query\" DataSource=\"#Ref-0\">");
@@ -105,8 +105,8 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
         var dataReportAttributes = structure[dataWindowIndex]._attributes;
         WriteStartObject("<Bands>");
         int itemCounter = 1;
-        WriteSingleLine($"<Item{itemCounter++} Ref=\"{_ref++}\" ControlType=\"TopMarginBand\" Name=\"TopMargin\" HeightF=\"{Y(dataReportAttributes["print.margin.top"])}\"/>");
-        WriteSingleLine($"<Item{itemCounter++} Ref=\"{_ref++}\" ControlType=\"BottomMarginBand\" Name=\"BottomMargin\" HeightF=\"{Y(dataReportAttributes["print.margin.bottom"])}\"/>");
+        WriteLine($"<Item{itemCounter++} Ref=\"{_ref++}\" ControlType=\"TopMarginBand\" Name=\"TopMargin\" HeightF=\"{Y(dataReportAttributes["print.margin.top"])}\"/>");
+        WriteLine($"<Item{itemCounter++} Ref=\"{_ref++}\" ControlType=\"BottomMarginBand\" Name=\"BottomMargin\" HeightF=\"{Y(dataReportAttributes["print.margin.bottom"])}\"/>");
         foreach (var container in structure[1..])
         {
             switch (container._objectType)
@@ -134,7 +134,7 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
         itemCounter = 1;
         foreach (var (name, expression) in _currentComputes)
         {
-            WriteSingleLine($"<Item{itemCounter++} Ref=\"{_ref++}\" Name=\"{name}\" Expression=\"{expression}\" DataMember=\"Query\" />");
+            WriteLine($"<Item{itemCounter++} Ref=\"{_ref++}\" Name=\"{name}\" Expression=\"{expression}\" DataMember=\"Query\" />");
         }
         WriteEndObject("</CalculatedFields>");
         _currentComputes.Clear();
@@ -207,11 +207,11 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
                 var paramName = argList[subItemCounter++];
                 if (_globalParams.TryGetValue(arg, out var refNum))
                 {
-                    WriteSingleLine($"<Item{subItemCounter} Ref=\"{_ref++}\" ParameterName=\"{paramName}\" Parameter=\"#Ref-{refNum}\" />");
+                    WriteLine($"<Item{subItemCounter} Ref=\"{_ref++}\" ParameterName=\"{paramName}\" Parameter=\"#Ref-{refNum}\" />");
                 }
                 else
                 {
-                    WriteSingleLine($"<Item{subItemCounter} Ref=\"{_ref++}\" ParameterName=\"{paramName}\" DataMember=\"Query.{arg}\" />");
+                    WriteLine($"<Item{subItemCounter} Ref=\"{_ref++}\" ParameterName=\"{paramName}\" DataMember=\"Query.{arg}\" />");
                 }
             }
             WriteEndObject("</ParameterBindings>");
@@ -230,8 +230,8 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
 
     private void GenerateBorder(Dictionary<string, string> attributes, int border, ref int itemCounter)
     {
-        WriteStartObject($"<Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"XRShape\" Name=\"border_{itemCounter}\" LineWidth=\"2\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\">");
-        WriteSingleLine($"<Shape Ref=\"{_ref++}\" ShapeName=\"Rectangle\" />");
+        WriteStartObject($"<Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"XRShape\" Name=\"border_{itemCounter}\" LineWidth=\"{border}\" SizeF=\"{X(attributes["width"]) + _labelWidthOffset},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\">");
+        WriteLine($"<Shape Ref=\"{_ref++}\" ShapeName=\"Rectangle\" />");
         WriteEndObject($"</Item{itemCounter++}>");
     }
 
@@ -242,7 +242,7 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
         foreach (var element in arguments)
         {
             _globalParams.TryAdd(element, _ref);
-            WriteSingleLine($"<Item{itemCounter++} Ref=\"{_ref++}\" Name=\"{element}\"/>");
+            WriteLine($"<Item{itemCounter++} Ref=\"{_ref++}\" Name=\"{element}\"/>");
         }
         WriteEndObject("</Parameters>");
     }
@@ -312,7 +312,7 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
         WriteStartObject("<GroupFields>");
         foreach (var elem in groupBy)
         {
-            WriteSingleLine($"<Item{subItemCounter++} Ref=\"{_ref++}\" FieldName=\"{elem}\" />");
+            WriteLine($"<Item{subItemCounter++} Ref=\"{_ref++}\" FieldName=\"{elem}\" />");
         }
         subItemCounter = 1;
         WriteEndObject("</GroupFields>");
@@ -458,10 +458,10 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
                     
                     WriteStartObject("<ExpressionBindings>");
                     var subItemCounter = 1;
-                    WriteSingleLine($"<Item{subItemCounter++} Ref=\"{_ref++}\" EventName=\"BeforePrint\" PropertyName=\"Text\" Expression=\"[{expr}]\"/>");
+                    WriteLine($"<Item{subItemCounter++} Ref=\"{_ref++}\" EventName=\"BeforePrint\" PropertyName=\"Text\" Expression=\"[{expr}]\"/>");
                     foreach(var (attr, (prEvent, prExpr)) in attrExpressions)
                     {
-                        WriteSingleLine($"<Item{subItemCounter++} Ref=\"{_ref++}\" EventName=\"{prEvent}\" PropertyName=\"{attr}\" Expression=\"{prExpr}\"/>");
+                        WriteLine($"<Item{subItemCounter++} Ref=\"{_ref++}\" EventName=\"{prEvent}\" PropertyName=\"{attr}\" Expression=\"{prExpr}\"/>");
                     }
                     WriteEndObject("</ExpressionBindings>");
 
@@ -483,12 +483,12 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
 
                         if (fixedExpression != string.Empty)
                         {
-                            WriteSingleLine($"<Item{subItemCounter++} Ref=\"{_ref++}\" EventName=\"{printEvent}\" PropertyName=\"Text\" Expression=\"{fixedExpression}\"/>");
+                            WriteLine($"<Item{subItemCounter++} Ref=\"{_ref++}\" EventName=\"{printEvent}\" PropertyName=\"Text\" Expression=\"{fixedExpression}\"/>");
                         }
 
                         foreach (var (attr, (prEvent, prExpr)) in attrExpressions)
                         {
-                            WriteSingleLine($"<Item{subItemCounter++} Ref=\"{_ref++}\" EventName=\"{prEvent}\" PropertyName=\"{attr}\" Expression=\"{prExpr}\"/>");
+                            WriteLine($"<Item{subItemCounter++} Ref=\"{_ref++}\" EventName=\"{prEvent}\" PropertyName=\"{attr}\" Expression=\"{prExpr}\"/>");
                         }
 
                         WriteEndObject("</ExpressionBindings>");
@@ -496,7 +496,7 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
                     }
                     else
                     {
-                        WriteSingleLine($"<{textItemDef}/>");
+                        WriteLine($"<{textItemDef}/>");
                         itemCounter++;
                     }
                     break;
@@ -508,7 +508,7 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
                         if (!_globalPageAddedCheck)
                         {
                             _globalPageAddedCheck = true;
-                            WriteSingleLine($"<Item{itemCounter++} Ref=\"{_ref++}\" ControlType=\"XRPageInfo\" {nameAttr} PageInfo=\"Number\" TextAlignment=\"{ConvertAlignment(attributes["alignment"])}\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\" AnchorVertical=\"Both\" />");
+                            WriteLine($"<Item{itemCounter++} Ref=\"{_ref++}\" ControlType=\"XRPageInfo\" {nameAttr} PageInfo=\"Number\" TextAlignment=\"{ConvertAlignment(attributes["alignment"])}\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\" AnchorVertical=\"Both\" />");
                         }
                     }
                     else
@@ -518,14 +518,14 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
                         WriteStartObject($"<Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"{objType}\" Name=\"{name}_field\" TextFormatString=\"{FixFormattingString(formatString)}\" TextAlignment=\"{ConvertAlignment(attributes["alignment"])}\"  Multiline=\"true\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\" AnchorVertical=\"Both\" Font=\"{attributes["font.face"]}, {attributes["font.height"][1..]}pt{CheckBold(attributes["font.weight"])}\" Visible=\"{visibility}\">");
                         if(container._objectType == "group" && baseExpr.Contains("cumulative"))
                         {
-                            WriteSingleLine($"<Summary Ref=\"{_ref++}\" Running=\"Group\" />");
+                            WriteLine($"<Summary Ref=\"{_ref++}\" Running=\"Group\" />");
                         }
                         WriteStartObject("<ExpressionBindings>");
                         var subItemCounter = 1;
-                        WriteSingleLine($"<Item{subItemCounter++} Ref=\"{_ref++}\" EventName=\"{printEvent}\" PropertyName=\"Text\" Expression=\"{(printEvent == "BeforePrint" ? $"[{name}]": expression)}\"/>");
+                        WriteLine($"<Item{subItemCounter++} Ref=\"{_ref++}\" EventName=\"{printEvent}\" PropertyName=\"Text\" Expression=\"{(printEvent == "BeforePrint" ? $"[{name}]": expression)}\"/>");
                         foreach (var (attr, (prEvent, prExpr)) in attrExpressions)
                         {
-                            WriteSingleLine($"<Item{subItemCounter++} Ref=\"{_ref++}\" EventName=\"{prEvent}\" PropertyName=\"{attr}\" Expression=\"{prExpr}\"/>");
+                            WriteLine($"<Item{subItemCounter++} Ref=\"{_ref++}\" EventName=\"{prEvent}\" PropertyName=\"{attr}\" Expression=\"{prExpr}\"/>");
                         }
                         WriteEndObject("</ExpressionBindings>");
 
@@ -562,7 +562,7 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
                         height = y2 - y;
                     }
                     var direction = length == 0 ? "Vertical" : "Horizontal";
-                    WriteSingleLine($"<Item{itemCounter++} Ref=\"{_ref++}\" ControlType=\"{objType}\" Name=\"{attributes["name"]}\" FillColor=\"{Color(color)}\" SizeF=\"{length},{height}\" LocationFloat=\"{x},{y}\"  LineDirection=\"{direction}\" Visible=\"{visibility}\"/>");
+                    WriteLine($"<Item{itemCounter++} Ref=\"{_ref++}\" ControlType=\"{objType}\" Name=\"{attributes["name"]}\" FillColor=\"{Color(color)}\" SizeF=\"{length},{height}\" LocationFloat=\"{x},{y}\"  LineDirection=\"{direction}\" Visible=\"{visibility}\"/>");
                     break;
                 }
             case "rectangle":
@@ -572,7 +572,7 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
                         color = "";
                     }
                     WriteStartObject($"<Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"{objType}\" Name=\"{attributes["name"]}\" FillColor=\"{Color(color)}\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\" Visible=\"{visibility}\">");
-                    WriteSingleLine($"<Shape Ref=\"{_ref++}\" ShapeName=\"Rectangle\"/>");
+                    WriteLine($"<Shape Ref=\"{_ref++}\" ShapeName=\"Rectangle\"/>");
                     WriteEndObject($"</Item{itemCounter++}>");
                     break;
                 }
@@ -582,7 +582,7 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
     private void GenerateDataSource(TableModel table, int dataSourceRef)
     {
         WriteStartObject("<ComponentStorage>");
-        WriteSingleLine($"<Item1 Ref=\"{dataSourceRef}\" ObjectType=\"DevExpress.DataAccess.Sql.SqlDataSource,DevExpress.DataAccess.v24.1\" Name=\"sqlDataSource1\" Base64=\"{GenerateDataSourceXML(table)}\"/>");
+        WriteLine($"<Item1 Ref=\"{dataSourceRef}\" ObjectType=\"DevExpress.DataAccess.Sql.SqlDataSource,DevExpress.DataAccess.v24.1\" Name=\"sqlDataSource1\" Base64=\"{GenerateDataSourceXML(table)}\"/>");
         WriteEndObject("</ComponentStorage>");
     }
 
@@ -601,17 +601,17 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
 
     private void WriteStartObject(string str)
     {
-        WriteSingleLine(str);
+        WriteLine(str);
         _tabulator++;
     }
 
     private void WriteEndObject(string str)
     {
         _tabulator--;
-        WriteSingleLine(str);
+        WriteLine(str);
     }
 
-    private void WriteSingleLine(string str)
+    private void WriteLine(string str)
     {
         for (var i = 0; i < _tabulator; i++)
         {

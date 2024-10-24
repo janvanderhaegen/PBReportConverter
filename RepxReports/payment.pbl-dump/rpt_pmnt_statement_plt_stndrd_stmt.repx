@@ -16,7 +16,7 @@
 			<Controls>
 			</Controls>
 		</Item3>
-		<Item4 Ref="9" ControlType="GroupHeaderBand" Name="summary" HeightF="-0" Visible="False" Level="1">
+		<Item4 Ref="9" ControlType="GroupFooterBand" Name="summary" HeightF="-0" Visible="False" Level="1">
 			<Controls>
 			</Controls>
 		</Item4>
@@ -27,7 +27,7 @@
 		<Item6 Ref="11" ControlType="DetailBand" Name="detail" HeightF="610">
 			<Controls>
 				<Item1 Ref="12" ControlType="XRSubreport" Name="rpt_pmnt_statement_plt_stndrd_stmt_fees" SizeF="267,138" LocationFloat="6,276">
-					<ReportSource Ref="14" Name="rpt_pmnt_statement_plt_stndrd_stmt_fees" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_stndrd_stmt_fees, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="267" PageHeight="50" Version="24.1" DataMember="Query" DataSource="#Ref-13">
+					<ReportSource Ref="14" Name="rpt_pmnt_statement_plt_stndrd_stmt_fees" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_stndrd_stmt_fees, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="268" PageHeight="50" Version="24.1" DataMember="Query" DataSource="#Ref-13">
 						<Parameters>
 							<Item1 Ref="15" Name="dwra_prod_month"/>
 							<Item2 Ref="16" Name="dwra_facility_cd"/>
@@ -49,9 +49,9 @@
 									<Item4 Ref="26" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="256,-23" LocationFloat="-0,41"  LineDirection="Horizontal" Visible="False"/>
 								</Controls>
 							</Item3>
-							<Item4 Ref="27" ControlType="GroupHeaderBand" Name="summary" HeightF="17" Level="0">
+							<Item4 Ref="27" ControlType="GroupFooterBand" Name="summary" HeightF="17" Level="0">
 								<Controls>
-									<Item1 Ref="28" ControlType="XRLine" Name="l_2" FillColor="255,128,128,128" SizeF="71,0" LocationFloat="196,-0"  LineDirection="Horizontal" Visible="True"/>
+									<Item1 Ref="28" ControlType="XRLine" Name="l_2" FillColor="255,128,128,128" SizeF="72,0" LocationFloat="196,-0"  LineDirection="Horizontal" Visible="True"/>
 									<Item2 Ref="29" ControlType="XRLabel" Name="compute_1_field" TextFormatString="{0:$#,##0.00}" TextAlignment="MiddleRight"  Multiline="true" SizeF="95,13" LocationFloat="169,3" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
 										<ExpressionBindings>
 											<Item1 Ref="30" EventName="BeforePrint" PropertyName="Text" Expression="[compute_1]"/>
@@ -118,7 +118,7 @@
 								<Controls>
 								</Controls>
 							</Item3>
-							<Item4 Ref="57" ControlType="GroupHeaderBand" Name="summary" HeightF="-0" Visible="False" Level="0">
+							<Item4 Ref="57" ControlType="GroupFooterBand" Name="summary" HeightF="-0" Visible="False" Level="0">
 								<Controls>
 								</Controls>
 							</Item4>
@@ -175,11 +175,11 @@
 						<Item3 Ref="76" ParameterName="dwra_prod_month" Parameter="#Ref-2" />
 					</ParameterBindings>
 				</Item2>
-				<Item3 Ref="77" ControlType="XRShape" Name="border_3" LineWidth="2" SizeF="495,73" LocationFloat="553,278">
+				<Item3 Ref="77" ControlType="XRShape" Name="border_3" LineWidth="2" SizeF="498,73" LocationFloat="553,278">
 					<Shape Ref="78" ShapeName="Rectangle" />
 				</Item3>
 				<Item4 Ref="79" ControlType="XRSubreport" Name="rpt_pmnt_statement_plt_stndrd_contact" SizeF="495,73" LocationFloat="553,278">
-					<ReportSource Ref="81" Name="rpt_pmnt_statement_plt_stndrd_contact" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_stndrd_contact, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="474" PageHeight="45" Version="24.1" DataMember="Query" DataSource="#Ref-80">
+					<ReportSource Ref="81" Name="rpt_pmnt_statement_plt_stndrd_contact" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_stndrd_contact, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="487" PageHeight="45" Version="24.1" DataMember="Query" DataSource="#Ref-80">
 						<Parameters>
 							<Item1 Ref="82" Name="dwra_ba_nbr"/>
 						</Parameters>
@@ -191,11 +191,11 @@
 							<Item2 Ref="84" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="25"/>
 							<Item3 Ref="85" ControlType="ReportHeaderBand" Name="header" HeightF="19">
 								<Controls>
-									<Item1 Ref="86" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="474,0" LocationFloat="-0,16"  LineDirection="Horizontal" Visible="True"/>
+									<Item1 Ref="86" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="487,0" LocationFloat="-0,16"  LineDirection="Horizontal" Visible="True"/>
 									<Item2 Ref="87" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleLeft" Multiline="true" Text="Contacts" SizeF="68,15" LocationFloat="226,-0" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
 								</Controls>
 							</Item3>
-							<Item4 Ref="88" ControlType="GroupHeaderBand" Name="summary" HeightF="-0" Visible="False" Level="0">
+							<Item4 Ref="88" ControlType="GroupFooterBand" Name="summary" HeightF="-0" Visible="False" Level="0">
 								<Controls>
 								</Controls>
 							</Item4>
@@ -240,11 +240,11 @@
 						<Item1 Ref="101" EventName="BeforePrint" PropertyName="Text" Expression="[tax_purpose]"/>
 					</ExpressionBindings>
 				</Item5>
-				<Item6 Ref="102" ControlType="XRShape" Name="border_6" LineWidth="2" SizeF="267,145" LocationFloat="6,417">
+				<Item6 Ref="102" ControlType="XRShape" Name="border_6" LineWidth="2" SizeF="270,145" LocationFloat="6,417">
 					<Shape Ref="103" ShapeName="Rectangle" />
 				</Item6>
 				<Item7 Ref="104" ControlType="XRSubreport" Name="rpt_pmnt_statement_plt_stndrd_plant_smmry" SizeF="267,145" LocationFloat="6,417">
-					<ReportSource Ref="106" Name="rpt_pmnt_statement_plt_stndrd_plant_smmry" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_stndrd_plant_smmry, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 26, 26" PaperKind="Custom" PageWidth="264" PageHeight="52" Version="24.1" DataMember="Query" DataSource="#Ref-105">
+					<ReportSource Ref="106" Name="rpt_pmnt_statement_plt_stndrd_plant_smmry" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_stndrd_plant_smmry, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 26, 26" PaperKind="Custom" PageWidth="265" PageHeight="52" Version="24.1" DataMember="Query" DataSource="#Ref-105">
 						<Parameters>
 							<Item1 Ref="107" Name="dwra_prod_month"/>
 							<Item2 Ref="108" Name="dwra_facility_cd"/>
@@ -260,12 +260,12 @@
 							<Item3 Ref="113" ControlType="ReportHeaderBand" Name="header" HeightF="36">
 								<Controls>
 									<Item1 Ref="114" ControlType="XRLabel" Name="t_3" TextAlignment="MiddleCenter" Multiline="true" Text="Plant Product Volumes" SizeF="157,15" LocationFloat="68,-0" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
-									<Item2 Ref="115" ControlType="XRLine" Name="l_2" FillColor="255,128,128,128" SizeF="264,1" LocationFloat="-0,15"  LineDirection="Horizontal" Visible="True"/>
+									<Item2 Ref="115" ControlType="XRLine" Name="l_2" FillColor="255,128,128,128" SizeF="265,1" LocationFloat="-0,15"  LineDirection="Horizontal" Visible="True"/>
 									<Item3 Ref="116" ControlType="XRLabel" Name="t_7" TextAlignment="MiddleRight" Multiline="true" Text="Allocated" SizeF="60,15" LocationFloat="203,19" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
 									<Item4 Ref="117" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleRight" Multiline="true" Text="Theoretical" SizeF="65,15" LocationFloat="119,19" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
 								</Controls>
 							</Item3>
-							<Item4 Ref="118" ControlType="GroupHeaderBand" Name="summary" HeightF="-0" Visible="False" Level="0">
+							<Item4 Ref="118" ControlType="GroupFooterBand" Name="summary" HeightF="-0" Visible="False" Level="0">
 								<Controls>
 								</Controls>
 							</Item4>
@@ -314,11 +314,11 @@
 				<Item12 Ref="136" ControlType="XRLabel" Name="t_18" TextAlignment="MiddleRight" Multiline="true" Text="Vol" SizeF="22,13" LocationFloat="125,278" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
 				<Item13 Ref="137" ControlType="XRLabel" Name="price_t" TextAlignment="MiddleRight" Multiline="true" Text="Fee Rate" SizeF="53,13" LocationFloat="152,278" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
 				<Item14 Ref="138" ControlType="XRLine" Name="l_3" FillColor="255,128,128,128" SizeF="265,0" LocationFloat="6,292"  LineDirection="Horizontal" Visible="True"/>
-				<Item15 Ref="139" ControlType="XRShape" Name="border_15" LineWidth="2" SizeF="273,285" LocationFloat="276,277">
+				<Item15 Ref="139" ControlType="XRShape" Name="border_15" LineWidth="2" SizeF="276,285" LocationFloat="276,277">
 					<Shape Ref="140" ShapeName="Rectangle" />
 				</Item15>
 				<Item16 Ref="141" ControlType="XRSubreport" Name="rpt_pmnt_statement_plt_stndrd_stmt_ga" SizeF="273,285" LocationFloat="276,277">
-					<ReportSource Ref="143" Name="rpt_pmnt_statement_plt_stndrd_stmt_ga" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_stndrd_stmt_ga, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="264" PageHeight="270" Version="24.1" DataMember="Query" DataSource="#Ref-142">
+					<ReportSource Ref="143" Name="rpt_pmnt_statement_plt_stndrd_stmt_ga" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_stndrd_stmt_ga, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="287" PageHeight="270" Version="24.1" DataMember="Query" DataSource="#Ref-142">
 						<Parameters>
 							<Item1 Ref="144" Name="dwra_prod_month"/>
 							<Item2 Ref="145" Name="dwra_facility_code"/>
@@ -335,13 +335,13 @@
 							<Item3 Ref="151" ControlType="ReportHeaderBand" Name="header" HeightF="37">
 								<Controls>
 									<Item1 Ref="152" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleLeft" Multiline="true" Text="Analysis" SizeF="64,15" LocationFloat="101,1" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
-									<Item2 Ref="153" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="264,0" LocationFloat="-0,16"  LineDirection="Horizontal" Visible="True"/>
+									<Item2 Ref="153" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="287,0" LocationFloat="-0,16"  LineDirection="Horizontal" Visible="True"/>
 									<Item3 Ref="154" ControlType="XRLabel" Name="t_2" TextAlignment="MiddleLeft" Multiline="true" Text="Components" SizeF="78,15" LocationFloat="28,19" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
 									<Item4 Ref="155" ControlType="XRLabel" Name="t_4" TextAlignment="MiddleLeft" Multiline="true" Text="GPM" SizeF="26,15" LocationFloat="161,19" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
 									<Item5 Ref="156" ControlType="XRLabel" Name="t_3" TextAlignment="MiddleRight" Multiline="true" Text="Mole %" SizeF="40,15" LocationFloat="223,19" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
 								</Controls>
 							</Item3>
-							<Item4 Ref="157" ControlType="GroupHeaderBand" Name="summary" HeightF="-0" Visible="False" Level="0">
+							<Item4 Ref="157" ControlType="GroupFooterBand" Name="summary" HeightF="-0" Visible="False" Level="0">
 								<Controls>
 								</Controls>
 							</Item4>
@@ -485,11 +485,11 @@
 				</Item16>
 				<Item17 Ref="220" ControlType="XRLabel" Name="compute_0003_t" TextAlignment="MiddleRight" Multiline="true" Text="Value" SizeF="47,13" LocationFloat="221,278" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
 				<Item18 Ref="221" ControlType="XRLabel" Name="t_2" TextAlignment="MiddleLeft" Multiline="true" Text="Address" SizeF="68,14" LocationFloat="774,468" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
-				<Item19 Ref="222" ControlType="XRShape" Name="border_19" LineWidth="2" SizeF="1043,74" LocationFloat="6,200">
+				<Item19 Ref="222" ControlType="XRShape" Name="border_19" LineWidth="2" SizeF="1046,74" LocationFloat="6,200">
 					<Shape Ref="223" ShapeName="Rectangle" />
 				</Item19>
 				<Item20 Ref="224" ControlType="XRSubreport" Name="rpt_pmnt_statement_plt_stndrd_residue" SizeF="1043,74" LocationFloat="6,200">
-					<ReportSource Ref="226" Name="rpt_pmnt_statement_plt_stndrd_residue" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_stndrd_residue, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 26, 26" PaperKind="Custom" PageWidth="1012" PageHeight="71" Version="24.1" DataMember="Query" DataSource="#Ref-225">
+					<ReportSource Ref="226" Name="rpt_pmnt_statement_plt_stndrd_residue" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_stndrd_residue, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 26, 26" PaperKind="Custom" PageWidth="1036" PageHeight="71" Version="24.1" DataMember="Query" DataSource="#Ref-225">
 						<Parameters>
 							<Item1 Ref="227" Name="dwra_prod_month"/>
 							<Item2 Ref="228" Name="dwra_facility_code"/>
@@ -514,8 +514,8 @@ MMBTU" SizeF="79,25" LocationFloat="4,24" AnchorVertical="Both" Font="Arial, 7pt
 Value" SizeF="50,25" LocationFloat="962,24" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
 									<Item6 Ref="240" ControlType="XRLabel" Name="t_17" TextAlignment="MiddleCenter" Multiline="true" Text="Settlement
 Residue" SizeF="62,25" LocationFloat="792,24" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
-									<Item7 Ref="241" ControlType="XRLine" Name="l_2" FillColor="255,128,128,128" SizeF="1012,1" LocationFloat="-0,19"  LineDirection="Horizontal" Visible="True"/>
-									<Item8 Ref="242" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="1012,1" LocationFloat="-0,51"  LineDirection="Horizontal" Visible="True"/>
+									<Item7 Ref="241" ControlType="XRLine" Name="l_2" FillColor="255,128,128,128" SizeF="1036,1" LocationFloat="-0,19"  LineDirection="Horizontal" Visible="True"/>
+									<Item8 Ref="242" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="1036,1" LocationFloat="-0,51"  LineDirection="Horizontal" Visible="True"/>
 									<Item9 Ref="243" ControlType="XRLabel" Name="t_9" TextAlignment="MiddleCenter" Multiline="true" Text="Theoretical
 Residue" SizeF="64,25" LocationFloat="236,24" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
 									<Item10 Ref="244" ControlType="XRLabel" Name="t_2" TextAlignment="MiddleCenter" Multiline="true" Text="Allocated
@@ -530,7 +530,7 @@ MCF" SizeF="70,25" LocationFloat="502,24" AnchorVertical="Both" Font="Arial, 7pt
 									<Item15 Ref="249" ControlType="XRLabel" Name="t_k_percent" TextAlignment="MiddleCenter" Multiline="true" Text="Contract %" SizeF="77,13" LocationFloat="699,36" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
 								</Controls>
 							</Item3>
-							<Item4 Ref="250" ControlType="GroupHeaderBand" Name="summary" HeightF="-0" Visible="False" Level="0">
+							<Item4 Ref="250" ControlType="GroupFooterBand" Name="summary" HeightF="-0" Visible="False" Level="0">
 								<Controls>
 								</Controls>
 							</Item4>
@@ -620,11 +620,11 @@ MCF" SizeF="70,25" LocationFloat="502,24" AnchorVertical="Both" Font="Arial, 7pt
 						<Item5 Ref="287" ParameterName="dwra_run_datetime" Parameter="#Ref-5" />
 					</ParameterBindings>
 				</Item20>
-				<Item21 Ref="288" ControlType="XRShape" Name="border_21" LineWidth="2" SizeF="231,195" LocationFloat="6,2">
+				<Item21 Ref="288" ControlType="XRShape" Name="border_21" LineWidth="2" SizeF="234,195" LocationFloat="6,2">
 					<Shape Ref="289" ShapeName="Rectangle" />
 				</Item21>
 				<Item22 Ref="290" ControlType="XRSubreport" Name="rpt_pmnt_statement_plt_stndrd_wlhd_smmry" SizeF="231,195" LocationFloat="6,2">
-					<ReportSource Ref="292" Name="rpt_pmnt_statement_plt_stndrd_wlhd_smmry" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_stndrd_wlhd_smmry, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 26, 26" PaperKind="Custom" PageWidth="236" PageHeight="204" Version="24.1" DataMember="Query" DataSource="#Ref-291">
+					<ReportSource Ref="292" Name="rpt_pmnt_statement_plt_stndrd_wlhd_smmry" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_stndrd_wlhd_smmry, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 26, 26" PaperKind="Custom" PageWidth="254" PageHeight="204" Version="24.1" DataMember="Query" DataSource="#Ref-291">
 						<Parameters>
 							<Item1 Ref="293" Name="dwra_prod_month"/>
 							<Item2 Ref="294" Name="dwra_facility_code"/>
@@ -643,10 +643,10 @@ MCF" SizeF="70,25" LocationFloat="502,24" AnchorVertical="Both" Font="Arial, 7pt
 									<Item1 Ref="301" ControlType="XRLabel" Name="t_7" TextAlignment="MiddleCenter" Multiline="true" Text="MCF" SizeF="47,12" LocationFloat="106,23" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
 									<Item2 Ref="302" ControlType="XRLabel" Name="t_8" TextAlignment="MiddleCenter" Multiline="true" Text="MMBTU" SizeF="72,12" LocationFloat="164,23" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
 									<Item3 Ref="303" ControlType="XRLabel" Name="t_4" TextAlignment="MiddleLeft" Multiline="true" Text="Wellhead Information" SizeF="166,14" LocationFloat="4,1" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
-									<Item4 Ref="304" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="234,0" LocationFloat="2,15"  LineDirection="Horizontal" Visible="True"/>
+									<Item4 Ref="304" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="252,0" LocationFloat="2,15"  LineDirection="Horizontal" Visible="True"/>
 								</Controls>
 							</Item3>
-							<Item4 Ref="305" ControlType="GroupHeaderBand" Name="summary" HeightF="1" Level="0">
+							<Item4 Ref="305" ControlType="GroupFooterBand" Name="summary" HeightF="1" Level="0">
 								<Controls>
 								</Controls>
 							</Item4>
@@ -760,11 +760,11 @@ MCF" SizeF="70,25" LocationFloat="502,24" AnchorVertical="Both" Font="Arial, 7pt
 						<Item5 Ref="357" ParameterName="dwra_run_datetime" Parameter="#Ref-5" />
 					</ParameterBindings>
 				</Item22>
-				<Item23 Ref="358" ControlType="XRShape" Name="border_23" LineWidth="2" SizeF="810,195" LocationFloat="239,2">
+				<Item23 Ref="358" ControlType="XRShape" Name="border_23" LineWidth="2" SizeF="813,195" LocationFloat="239,2">
 					<Shape Ref="359" ShapeName="Rectangle" />
 				</Item23>
 				<Item24 Ref="360" ControlType="XRSubreport" Name="rpt_pmnt_statement_plt_stndrd_product_smmry" SizeF="810,195" LocationFloat="239,2">
-					<ReportSource Ref="362" Name="rpt_pmnt_statement_plt_stndrd_product_smmry" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_stndrd_product_smmry, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 26, 26" PaperKind="Custom" PageWidth="780" PageHeight="100" Version="24.1" DataMember="Query" DataSource="#Ref-361">
+					<ReportSource Ref="362" Name="rpt_pmnt_statement_plt_stndrd_product_smmry" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_stndrd_product_smmry, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 26, 26" PaperKind="Custom" PageWidth="813" PageHeight="100" Version="24.1" DataMember="Query" DataSource="#Ref-361">
 						<Parameters>
 							<Item1 Ref="363" Name="dwra_prod_month"/>
 							<Item2 Ref="364" Name="dwra_facility_cd"/>
@@ -790,16 +790,16 @@ MCF" SizeF="70,25" LocationFloat="502,24" AnchorVertical="Both" Font="Arial, 7pt
 									<Item7 Ref="378" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleRight" Multiline="true" Text="Theoretical" SizeF="65,15" LocationFloat="237,25" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
 									<Item8 Ref="379" ControlType="XRLabel" Name="t_7" TextAlignment="MiddleRight" Multiline="true" Text="Allocated" SizeF="60,15" LocationFloat="321,25" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
 									<Item9 Ref="380" ControlType="XRLabel" Name="t_8" TextAlignment="MiddleRight" Multiline="true" Text="Shrink" SizeF="59,15" LocationFloat="400,25" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
-									<Item10 Ref="381" ControlType="XRLine" Name="l_5" FillColor="255,128,128,128" SizeF="780,0" LocationFloat="-0,15"  LineDirection="Horizontal" Visible="True"/>
-									<Item11 Ref="382" ControlType="XRLine" Name="l_2" FillColor="255,128,128,128" SizeF="656,1" LocationFloat="124,48"  LineDirection="Horizontal" Visible="True"/>
+									<Item10 Ref="381" ControlType="XRLine" Name="l_5" FillColor="255,128,128,128" SizeF="813,0" LocationFloat="-0,15"  LineDirection="Horizontal" Visible="True"/>
+									<Item11 Ref="382" ControlType="XRLine" Name="l_2" FillColor="255,128,128,128" SizeF="680,1" LocationFloat="124,48"  LineDirection="Horizontal" Visible="True"/>
 								</Controls>
 							</Item3>
-							<Item4 Ref="383" ControlType="GroupHeaderBand" Name="summary" HeightF="34" Level="0">
+							<Item4 Ref="383" ControlType="GroupFooterBand" Name="summary" HeightF="34" Level="0">
 								<Controls>
 									<Item1 Ref="384" ControlType="XRLabel" Name="t_12" TextAlignment="MiddleLeft" Multiline="true" Text="Subtotal - Liquids" SizeF="90,15" LocationFloat="4,17" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
 									<Item2 Ref="385" ControlType="XRLine" Name="l_4" FillColor="255,128,128,128" SizeF="249,0" LocationFloat="221,13"  LineDirection="Horizontal" Visible="True"/>
 									<Item3 Ref="386" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="77,0" LocationFloat="539,13"  LineDirection="Horizontal" Visible="True"/>
-									<Item4 Ref="387" ControlType="XRLine" Name="l_3" FillColor="255,128,128,128" SizeF="80,0" LocationFloat="700,13"  LineDirection="Horizontal" Visible="True"/>
+									<Item4 Ref="387" ControlType="XRLine" Name="l_3" FillColor="255,128,128,128" SizeF="88,0" LocationFloat="700,13"  LineDirection="Horizontal" Visible="True"/>
 									<Item5 Ref="388" ControlType="XRLabel" Name="compute_1_field" TextFormatString="{0:#,##0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="61,17" LocationFloat="549,18" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
 										<ExpressionBindings>
 											<Item1 Ref="389" EventName="BeforePrint" PropertyName="Text" Expression="[compute_1]"/>
@@ -1020,11 +1020,11 @@ MCF" SizeF="70,25" LocationFloat="502,24" AnchorVertical="Both" Font="Arial, 7pt
 					</ExpressionBindings>
 				</Item28>
 				<Item29 Ref="491" ControlType="XRLabel" Name="t_15" TextAlignment="MiddleRight" Multiline="true" Text="Pressure Base" SizeF="78,12" LocationFloat="957,52" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
-				<Item30 Ref="492" ControlType="XRShape" Name="border_30" LineWidth="2" SizeF="850,81" LocationFloat="198,100">
+				<Item30 Ref="492" ControlType="XRShape" Name="border_30" LineWidth="2" SizeF="853,81" LocationFloat="198,100">
 					<Shape Ref="493" ShapeName="Rectangle" />
 				</Item30>
 				<Item31 Ref="494" ControlType="XRSubreport" Name="rpt_pmnt_statement_plt_stndrd_stmt_smmry" SizeF="850,81" LocationFloat="198,100">
-					<ReportSource Ref="496" Name="rpt_pmnt_statement_plt_stndrd_stmt_smmry" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_stndrd_stmt_smmry, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 26, 26" PaperKind="Custom" PageWidth="685" PageHeight="79" Version="24.1" DataMember="Query" DataSource="#Ref-495">
+					<ReportSource Ref="496" Name="rpt_pmnt_statement_plt_stndrd_stmt_smmry" ControlType="ReportMigration.XtraReports.rpt_pmnt_statement_plt_stndrd_stmt_smmry, ReportMigration, Version=1.0.0.0, Culture=neutral" VerticalContentSplitting="Smart" Margins="25, 25, 26, 26" PaperKind="Custom" PageWidth="850" PageHeight="79" Version="24.1" DataMember="Query" DataSource="#Ref-495">
 						<Parameters>
 							<Item1 Ref="497" Name="dwra_prod_month"/>
 							<Item2 Ref="498" Name="dwra_facility_cd"/>
@@ -1058,11 +1058,11 @@ Value" SizeF="45,30" LocationFloat="635,17" AnchorVertical="Both" Font="Arial, 8
 									<Item9 Ref="514" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="0,31" LocationFloat="437,16"  LineDirection="Vertical" Visible="True"/>
 									<Item10 Ref="515" ControlType="XRLine" Name="l_4" FillColor="255,128,128,128" SizeF="0,31" LocationFloat="523,16"  LineDirection="Vertical" Visible="True"/>
 									<Item11 Ref="516" ControlType="XRLine" Name="l_11" FillColor="255,128,128,128" SizeF="0,31" LocationFloat="606,16"  LineDirection="Vertical" Visible="True"/>
-									<Item12 Ref="517" ControlType="XRLine" Name="l_13" FillColor="255,128,128,128" SizeF="-10,31" LocationFloat="695,16"  LineDirection="Horizontal" Visible="False"/>
-									<Item13 Ref="518" ControlType="XRLine" Name="l_8" FillColor="255,128,128,128" SizeF="685,0" LocationFloat="-0,15"  LineDirection="Horizontal" Visible="True"/>
+									<Item12 Ref="517" ControlType="XRLine" Name="l_13" FillColor="255,128,128,128" SizeF="0,31" LocationFloat="695,16"  LineDirection="Vertical" Visible="True"/>
+									<Item13 Ref="518" ControlType="XRLine" Name="l_8" FillColor="255,128,128,128" SizeF="850,0" LocationFloat="-0,15"  LineDirection="Horizontal" Visible="True"/>
 								</Controls>
 							</Item3>
-							<Item4 Ref="519" ControlType="GroupHeaderBand" Name="summary" HeightF="32" Level="0">
+							<Item4 Ref="519" ControlType="GroupFooterBand" Name="summary" HeightF="32" Level="0">
 								<Controls>
 									<Item1 Ref="520" ControlType="XRLabel" Name="rate_mmbtu_field" TextFormatString="{0:#0.00000}" TextAlignment="MiddleRight"  Multiline="true" SizeF="61,15" LocationFloat="113,17" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
 										<ExpressionBindings>
@@ -1111,8 +1111,8 @@ Value" SizeF="45,30" LocationFloat="635,17" AnchorVertical="Both" Font="Arial, 8
 									<Item13 Ref="540" ControlType="XRLine" Name="l_2" FillColor="255,128,128,128" SizeF="0,32" LocationFloat="437,-0"  LineDirection="Vertical" Visible="True"/>
 									<Item14 Ref="541" ControlType="XRLine" Name="l_5" FillColor="255,128,128,128" SizeF="0,32" LocationFloat="523,-0"  LineDirection="Vertical" Visible="True"/>
 									<Item15 Ref="542" ControlType="XRLine" Name="l_12" FillColor="255,128,128,128" SizeF="0,32" LocationFloat="606,-0"  LineDirection="Vertical" Visible="True"/>
-									<Item16 Ref="543" ControlType="XRLine" Name="l_14" FillColor="255,128,128,128" SizeF="-10,32" LocationFloat="695,-0"  LineDirection="Horizontal" Visible="False"/>
-									<Item17 Ref="544" ControlType="XRLine" Name="l_3" FillColor="255,128,128,128" SizeF="508,0" LocationFloat="177,1"  LineDirection="Horizontal" Visible="True"/>
+									<Item16 Ref="543" ControlType="XRLine" Name="l_14" FillColor="255,128,128,128" SizeF="0,32" LocationFloat="695,-0"  LineDirection="Vertical" Visible="True"/>
+									<Item17 Ref="544" ControlType="XRLine" Name="l_3" FillColor="255,128,128,128" SizeF="666,0" LocationFloat="177,1"  LineDirection="Horizontal" Visible="True"/>
 								</Controls>
 							</Item4>
 							<Item5 Ref="545" ControlType="ReportFooterBand" Name="footer" HeightF="-0" Visible="False">

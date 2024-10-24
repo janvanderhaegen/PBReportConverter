@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<XtraReportsLayoutSerializer SerializerVersion="24.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral" Name="XtraReport1" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="314" PageHeight="520" Version="24.1" DataMember="Query" DataSource="#Ref-0">
+<XtraReportsLayoutSerializer SerializerVersion="24.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral" Name="XtraReport1" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="337" PageHeight="520" Version="24.1" DataMember="Query" DataSource="#Ref-0">
 	<Parameters>
 		<Item1 Ref="2" Name="dwra_prod_month"/>
 		<Item2 Ref="3" Name="dwra_facility_code"/>
@@ -16,13 +16,13 @@
 		<Item3 Ref="9" ControlType="ReportHeaderBand" Name="header" HeightF="37">
 			<Controls>
 				<Item1 Ref="10" ControlType="XRLabel" Name="t_1" TextAlignment="MiddleLeft" Multiline="true" Text="Analysis" SizeF="64,15" LocationFloat="101,1" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
-				<Item2 Ref="11" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="264,0" LocationFloat="-0,16"  LineDirection="Horizontal" Visible="True"/>
+				<Item2 Ref="11" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="287,0" LocationFloat="-0,16"  LineDirection="Horizontal" Visible="True"/>
 				<Item3 Ref="12" ControlType="XRLabel" Name="t_2" TextAlignment="MiddleLeft" Multiline="true" Text="Components" SizeF="78,15" LocationFloat="28,19" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
 				<Item4 Ref="13" ControlType="XRLabel" Name="t_4" TextAlignment="MiddleLeft" Multiline="true" Text="GPM" SizeF="26,15" LocationFloat="161,19" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
 				<Item5 Ref="14" ControlType="XRLabel" Name="t_3" TextAlignment="MiddleRight" Multiline="true" Text="Mole %" SizeF="40,15" LocationFloat="223,19" AnchorVertical="Both" Font="Arial, 8pt" Visible="True"/>
 			</Controls>
 		</Item3>
-		<Item4 Ref="15" ControlType="GroupHeaderBand" Name="summary" HeightF="-0" Visible="False" Level="0">
+		<Item4 Ref="15" ControlType="GroupFooterBand" Name="summary" HeightF="-0" Visible="False" Level="0">
 			<Controls>
 			</Controls>
 		</Item4>

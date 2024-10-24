@@ -88,54 +88,27 @@ internal class PBReportParser(string path)
             GroupCount++;
         }
 
-        if (attributes.TryGetValue("band", out var band))
+        if (attributes.TryGetValue("band", out var bandName))
         {
-            var container = FindContainerByName(band);
+            var container = FindContainerByName(bandName);
             if (container == null)
             {
-                container = new(band, new() { { "height", "0" } });
+                container = new(bandName, new() { { "height", "0" } });
                 container._elements.Add(new(key, attributes));
                 _structure.Add(container);
             }
             container._elements.Add(new(key, attributes));
             if (container._objectType == "background") return;
 
-            double height;
-            if (band.Contains("header."))
+            if(GetContainerHeight(container, bandName) > 0)
             {
-                height = double.Parse(container._attributes["header.height"]);
-            }
-            else if (band.Contains("trailer."))
-            {
-                height = double.Parse(container._attributes["trailer.height"]);
-            }
-            else
-            {
-                height = double.Parse(container._attributes["height"]);
-            }
-
-            if (attributes.TryGetValue("x", out var x) && height > 0)
-            {
-                var xnum = X(x);
-                var width = X(attributes["width"]);
-                if (xnum + width + 3 > ReportWidth)
-                {
-                    ReportWidth = xnum + width + 3;
-                }
+                SetReportWidth(attributes);
             }
         }
         else
         {
             _structure.Add(new(key, attributes));
-            if (attributes.TryGetValue("height", out var height))
-            {
-                ReportHeight += Y(height);
-            }
-            else if (attributes.TryGetValue("header.height", out height))
-            {
-                ReportHeight += Y(height);
-                ReportHeight += Y(attributes["trailer.height"]);
-            }
+            UpdateReportHeight(attributes);
         }
     }
 
@@ -381,6 +354,56 @@ internal class PBReportParser(string path)
             }
         }
         return null;
+    }
+
+    private void UpdateReportHeight(Dictionary<string, string> attributes)
+    {
+        if (attributes.TryGetValue("height", out var height))
+        {
+            ReportHeight += Y(height);
+        }
+        else if (attributes.TryGetValue("header.height", out height))
+        {
+            ReportHeight += Y(height);
+            ReportHeight += Y(attributes["trailer.height"]);
+        }
+    }
+
+    private static double GetContainerHeight(ContainerModel container, string bandName)
+    {
+        if (bandName.Contains("header."))
+        {
+            return double.Parse(container._attributes["header.height"]);
+        }
+        else if (bandName.Contains("trailer."))
+        {
+            return double.Parse(container._attributes["trailer.height"]);
+        }
+        else
+        {
+            return double.Parse(container._attributes["height"]);
+        }
+    }
+
+    private void SetReportWidth(Dictionary<string, string> attributes)
+    {
+        if (attributes.TryGetValue("x", out var x))
+        {
+            var xnum = X(x);
+            var width = X(attributes["width"]);
+            if (xnum + width + 3 > ReportWidth)
+            {
+                ReportWidth = xnum + width + 3;
+            }
+        }
+        else if (attributes.TryGetValue("x2", out x))
+        {
+            var width = X(x);
+            if (width > ReportWidth)
+            {
+                ReportWidth = width;
+            }
+        }
     }
 }
 

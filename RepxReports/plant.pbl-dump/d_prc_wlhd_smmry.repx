@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<XtraReportsLayoutSerializer SerializerVersion="24.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral" Name="XtraReport1" VerticalContentSplitting="Smart" Margins="25, 25, 26, 26" PaperKind="Custom" PageWidth="286" PageHeight="456" Version="24.1" DataMember="Query" DataSource="#Ref-0">
+<XtraReportsLayoutSerializer SerializerVersion="24.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral" Name="XtraReport1" VerticalContentSplitting="Smart" Margins="25, 25, 26, 26" PaperKind="Custom" PageWidth="304" PageHeight="456" Version="24.1" DataMember="Query" DataSource="#Ref-0">
 	<Parameters>
 		<Item1 Ref="2" Name="dwra_prod_month"/>
 		<Item2 Ref="3" Name="dwra_facility_code"/>
@@ -18,10 +18,10 @@
 				<Item1 Ref="10" ControlType="XRLabel" Name="t_7" TextAlignment="MiddleCenter" Multiline="true" Text="MCF" SizeF="47,12" LocationFloat="106,23" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
 				<Item2 Ref="11" ControlType="XRLabel" Name="t_8" TextAlignment="MiddleCenter" Multiline="true" Text="MMBTU" SizeF="72,12" LocationFloat="164,23" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
 				<Item3 Ref="12" ControlType="XRLabel" Name="t_4" TextAlignment="MiddleLeft" Multiline="true" Text="Wellhead Information" SizeF="166,14" LocationFloat="4,1" AnchorVertical="Both" Font="Arial, 8pt, style=Bold" Visible="True"/>
-				<Item4 Ref="13" ControlType="XRLine" Name="l_1" FillColor="Black" SizeF="234,0" LocationFloat="2,15"  LineDirection="Horizontal" Visible="True"/>
+				<Item4 Ref="13" ControlType="XRLine" Name="l_1" FillColor="Black" SizeF="252,0" LocationFloat="2,15"  LineDirection="Horizontal" Visible="True"/>
 			</Controls>
 		</Item3>
-		<Item4 Ref="14" ControlType="GroupHeaderBand" Name="summary" HeightF="1" Level="0">
+		<Item4 Ref="14" ControlType="GroupFooterBand" Name="summary" HeightF="1" Level="0">
 			<Controls>
 			</Controls>
 		</Item4>

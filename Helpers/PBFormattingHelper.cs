@@ -85,7 +85,7 @@ internal static class PBFormattingHelper
             "header" => "ReportHeader",
             "footer" => "ReportFooter",
             "detail" => "Detail",
-            "summary" => "GroupHeader",
+            "summary" => "GroupFooter",
             "report" => "XRSubreport",
             "line" => "XRLine",
             "group" => ctrlType,

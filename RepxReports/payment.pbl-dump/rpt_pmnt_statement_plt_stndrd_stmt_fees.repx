@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<XtraReportsLayoutSerializer SerializerVersion="24.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral" Name="XtraReport1" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="317" PageHeight="300" Version="24.1" DataMember="Query" DataSource="#Ref-0">
+<XtraReportsLayoutSerializer SerializerVersion="24.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral" Name="XtraReport1" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="318" PageHeight="300" Version="24.1" DataMember="Query" DataSource="#Ref-0">
 	<Parameters>
 		<Item1 Ref="2" Name="dwra_prod_month"/>
 		<Item2 Ref="3" Name="dwra_facility_cd"/>
@@ -21,9 +21,9 @@
 				<Item4 Ref="13" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="256,-23" LocationFloat="-0,41"  LineDirection="Horizontal" Visible="False"/>
 			</Controls>
 		</Item3>
-		<Item4 Ref="14" ControlType="GroupHeaderBand" Name="summary" HeightF="17" Level="0">
+		<Item4 Ref="14" ControlType="GroupFooterBand" Name="summary" HeightF="17" Level="0">
 			<Controls>
-				<Item1 Ref="15" ControlType="XRLine" Name="l_2" FillColor="255,128,128,128" SizeF="71,0" LocationFloat="196,-0"  LineDirection="Horizontal" Visible="True"/>
+				<Item1 Ref="15" ControlType="XRLine" Name="l_2" FillColor="255,128,128,128" SizeF="72,0" LocationFloat="196,-0"  LineDirection="Horizontal" Visible="True"/>
 				<Item2 Ref="16" ControlType="XRLabel" Name="compute_1_field" TextFormatString="{0:$#,##0.00}" TextAlignment="MiddleRight"  Multiline="true" SizeF="95,13" LocationFloat="169,3" AnchorVertical="Both" Font="Arial, 7pt" Visible="True">
 					<ExpressionBindings>
 						<Item1 Ref="17" EventName="BeforePrint" PropertyName="Text" Expression="[compute_1]"/>
