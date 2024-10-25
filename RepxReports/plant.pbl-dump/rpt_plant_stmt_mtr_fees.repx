@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="24.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral" Name="XtraReport1" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="428" PageHeight="321" Version="24.1" DataMember="Query" DataSource="#Ref-0">
+	<Parameters>
+		<Item1 Ref="2" Name="prod_month"/>
+		<Item2 Ref="3" Name="plant_facility_code"/>
+		<Item3 Ref="4" Name="proc_k"/>
+		<Item4 Ref="5" Name="source_sta"/>
+		<Item5 Ref="6" Name="source_pipeline"/>
+		<Item6 Ref="7" Name="run_datetime"/>
+	</Parameters>
+	<ComponentStorage>
+		<Item1 Ref="0" ObjectType="DevExpress.DataAccess.Sql.SqlDataSource,DevExpress.DataAccess.v24.1" Name="sqlDataSource1" Base64="PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjxTcWxEYXRhU291cmNlIE5hbWU9InNxbERhdGFTb3VyY2UxIj4NCjxDb25uZWN0aW9uIE5hbWU9IlRJRVMgRGF0YSIgRnJvbUFwcENvbmZpZz0idHJ1ZSIgLz4NCjxRdWVyeSBUeXBlPSJTdG9yZWRQcm9jUXVlcnkiIE5hbWU9IlF1ZXJ5Ij4NCjxQcm9jTmFtZT5kYm8ucGxhbnRfc3RtdF9tdHJfZmVlc19zcDwvUHJvY05hbWU+DQo8UGFyYW1ldGVyIE5hbWU9IkBwcm9kX21vbnRoIiBUeXBlPSJEZXZFeHByZXNzLkRhdGFBY2Nlc3MuRXhwcmVzc2lvbiI+KFN5c3RlbS5TdHJpbmcpKD9wcm9kX21vbnRoKTwvUGFyYW1ldGVyPg0KPFBhcmFtZXRlciBOYW1lPSJAcGxhbnRfZmFjaWxpdHlfY29kZSIgVHlwZT0iRGV2RXhwcmVzcy5EYXRhQWNjZXNzLkV4cHJlc3Npb24iPihTeXN0ZW0uU3RyaW5nKSg/cGxhbnRfZmFjaWxpdHlfY29kZSk8L1BhcmFtZXRlcj4NCjxQYXJhbWV0ZXIgTmFtZT0iQHByb2NfayIgVHlwZT0iRGV2RXhwcmVzcy5EYXRhQWNjZXNzLkV4cHJlc3Npb24iPihTeXN0ZW0uU3RyaW5nKSg/cHJvY19rKTwvUGFyYW1ldGVyPg0KPFBhcmFtZXRlciBOYW1lPSJAc291cmNlX3N0YSIgVHlwZT0iRGV2RXhwcmVzcy5EYXRhQWNjZXNzLkV4cHJlc3Npb24iPihTeXN0ZW0uU3RyaW5nKSg/c291cmNlX3N0YSk8L1BhcmFtZXRlcj4NCjxQYXJhbWV0ZXIgTmFtZT0iQHNvdXJjZV9waXBlbGluZSIgVHlwZT0iRGV2RXhwcmVzcy5EYXRhQWNjZXNzLkV4cHJlc3Npb24iPihTeXN0ZW0uU3RyaW5nKSg/c291cmNlX3BpcGVsaW5lKTwvUGFyYW1ldGVyPg0KPFBhcmFtZXRlciBOYW1lPSJAcnVuX2RhdGV0aW1lIiBUeXBlPSJEZXZFeHByZXNzLkRhdGFBY2Nlc3MuRXhwcmVzc2lvbiI+KFN5c3RlbS5TdHJpbmcpKD9ydW5fZGF0ZXRpbWUpPC9QYXJhbWV0ZXI+DQo8L1F1ZXJ5Pg0KPFJlc3VsdFNjaGVtYT4NCjxEYXRhU2V0IE5hbWUgPSJzcWxEYXRhU291cmNlMSI+DQo8VmlldyBOYW1lPSJRdWVyeSI+DQo8RmllbGQgTmFtZT0idmFsaWRfY2hhcmdlX3R5cGUiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJkZWNyaXB0aW9uIiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0iZmVlX3VuaXRzIiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0iZmVlX3F1YW50aXR5IiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0iZmVlX3JhdGUiIFR5cGU9IlN0cmluZyIgLz4NCjwvVmlldz4NCjwvRGF0YVNldD4NCjwvUmVzdWx0U2NoZW1hPg0KPENvbm5lY3Rpb25PcHRpb25zIENsb3NlQ29ubmVjdGlvbj0idHJ1ZSIgLz4NCjwvU3FsRGF0YVNvdXJjZT4NCg=="/>
+	</ComponentStorage>
+	<Bands>
+		<Item1 Ref="8" ControlType="TopMarginBand" Name="TopMargin" HeightF="25"/>
+		<Item2 Ref="9" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="25"/>
+		<Item3 Ref="10" ControlType="ReportHeaderBand" Name="header" HeightF="39">
+			<Controls>
+				<Item1 Ref="11" ControlType="XRLabel" Name="t_1_label" TextAlignment="MiddleLeft" Multiline="true" Text="Fees" SizeF="50,17" LocationFloat="4,3" AnchorVertical="Both" Font="Tahoma, 10pt, style=Bold" Visible="True"/>
+				<Item2 Ref="12" ControlType="XRLabel" Name="description_t_label" TextAlignment="MiddleLeft" Multiline="true" Text="Description" SizeF="67,12" LocationFloat="4,25" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True"/>
+				<Item3 Ref="13" ControlType="XRLabel" Name="fee_units_t_label" TextAlignment="MiddleRight" Multiline="true" Text="Fee Units" SizeF="48,12" LocationFloat="91,25" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True"/>
+				<Item4 Ref="14" ControlType="XRLabel" Name="fee_quantity_t_label" TextAlignment="MiddleRight" Multiline="true" Text="Fee Quantity" SizeF="73,12" LocationFloat="159,25" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True"/>
+				<Item5 Ref="15" ControlType="XRLabel" Name="fee_rate_t_label" TextAlignment="MiddleRight" Multiline="true" Text="Fee Rate" SizeF="54,12" LocationFloat="245,25" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True"/>
+				<Item6 Ref="16" ControlType="XRLabel" Name="t_2_label" TextAlignment="MiddleRight" Multiline="true" Text="Fee Rate" SizeF="60,12" LocationFloat="316,25" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True"/>
+			</Controls>
+		</Item3>
+		<Item4 Ref="17" ControlType="GroupFooterBand" Name="summary" HeightF="15" Level="0">
+			<Controls>
+				<Item1 Ref="18" ControlType="XRLabel" Name="t_3_label" TextAlignment="MiddleRight" Multiline="true" Text="Total" SizeF="34,14" LocationFloat="2,1" AnchorVertical="Both" Font="Tahoma, 8pt, style=Bold" Visible="True"/>
+			</Controls>
+		</Item4>
+		<Item5 Ref="19" ControlType="ReportFooterBand" Name="footer" HeightF="-0" Visible="False">
+			<Controls>
+			</Controls>
+		</Item5>
+		<Item6 Ref="20" ControlType="DetailBand" Name="detail" HeightF="17">
+			<Controls>
+				<Item1 Ref="21" ControlType="XRLabel" Name="fee_units_label" TextFormatString="" TextAlignment="MiddleCenter"  Multiline="true" SizeF="55,12" LocationFloat="89,-0" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="22" EventName="BeforePrint" PropertyName="Text" Expression="[fee_units]"/>
+					</ExpressionBindings>
+				</Item1>
+				<Item2 Ref="23" ControlType="XRLabel" Name="decription_label" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="79,12" LocationFloat="6,-0" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="24" EventName="BeforePrint" PropertyName="Text" Expression="[decription]"/>
+					</ExpressionBindings>
+				</Item2>
+				<Item3 Ref="25" ControlType="XRLabel" Name="fee_quantity_label" TextFormatString="{0:#,##0.00}" TextAlignment="MiddleRight"  Multiline="true" SizeF="83,12" LocationFloat="148,-0" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="26" EventName="BeforePrint" PropertyName="Text" Expression="[fee_quantity]"/>
+					</ExpressionBindings>
+				</Item3>
+				<Item4 Ref="27" ControlType="XRLabel" Name="fee_rate_label" TextFormatString="" TextAlignment="MiddleRight"  Multiline="true" SizeF="62,12" LocationFloat="235,-0" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="28" EventName="BeforePrint" PropertyName="Text" Expression="[fee_rate]"/>
+					</ExpressionBindings>
+				</Item4>
+				<Item5 Ref="29" ControlType="XRLabel" Name="compute_1_field" TextFormatString="{0:$#,##0.00}" TextAlignment="MiddleRight"  Multiline="true" SizeF="75,12" LocationFloat="300,-0" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="30" EventName="BeforePrint" PropertyName="Text" Expression="[compute_1]"/>
+					</ExpressionBindings>
+				</Item5>
+			</Controls>
+		</Item6>
+	</Bands>
+	<CalculatedFields>
+		<Item1 Ref="31" Name="compute_1" Expression=" fee_quantity*fee_rate" DataMember="Query" />
+	</CalculatedFields>
+</XtraReportsLayoutSerializer>

@@ -89,15 +89,26 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
         }
     }
 
-    private static List<string> GetColumns(TableModel tableContainer)
+    private List<string> GetColumns(TableModel tableContainer)
     {
-        var result = new List<string>();
+        var columns = new List<string>();
 
         foreach(var elem in tableContainer._columns)
         {
-            result.Add(elem._attributes["name"]);
+            var name = elem._attributes["name"];
+            var dbname = elem._attributes["dbname"];
+            var tableNameEndIndex = dbname.IndexOf('.');
+            if (tableNameEndIndex > 0)
+            {
+                dbname = dbname[(tableNameEndIndex + 1)..];
+            }
+            columns.Add(elem._attributes["name"]);
+            if(dbname != name)
+            {
+                _currentComputes.Add((name, dbname));
+            }
         }
-        return result;
+        return columns;
     }
 
     public void GenerateBody(List<ContainerModel> structure, int dataWindowIndex)
@@ -113,7 +124,7 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
             {
                 case "group":
                     {
-                        GenerateGroupElements(container, ref itemCounter);
+                        GenerateGroupBands(container, ref itemCounter);
                         break;
                     }
                 case "table":
@@ -292,7 +303,7 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
         return " Visible=\"False\"";
     }
 
-    public void GenerateGroupElements(ContainerModel container, ref int itemCounter)
+    public void GenerateGroupBands(ContainerModel container, ref int itemCounter)
     {
         var attributes = container._attributes;
         var elements = container._elements;
@@ -412,11 +423,7 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
 
         if(attributes.TryGetValue("name", out var name))
         {
-            if (_globalParams.ContainsKey(name))
-            {
-                name += "_label";
-            }
-            nameAttr = $"Name=\"{name}\"";
+            nameAttr = $"Name=\"{name}_label\"";
         }
 
         attributes.TryGetValue("format", out var formatString);
@@ -429,7 +436,15 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
                 var (printEvent, fixedExpression) = CheckForExpressionString(attrValue);
                 if(fixedExpression != string.Empty)
                 {
-                    if(attr == "visible")
+                    foreach (var param in _globalParams.Keys)
+                    {
+                        if (fixedExpression.Contains(param))
+                        {
+                            fixedExpression = fixedExpression.Replace(param, '?' + param);
+                            break;
+                        }
+                    }
+                    if (attr == "visible")
                     {
                         fixedExpression = fixedExpression.Replace(",1", ",true").Replace(",0", ",false");
                     }
@@ -477,6 +492,14 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
                     var (printEvent, fixedExpression) = CheckForExpressionString(text);
                     if (attrExpressions.Count > 0 || fixedExpression != string.Empty)
                     {
+                        foreach(var param in _globalParams.Keys)
+                        {
+                            if (fixedExpression.Contains(param))
+                            {
+                                fixedExpression = fixedExpression.Replace(param, '?' + param);
+                                break;
+                            }
+                        }
                         WriteStartObject($"<{textItemDef}>");
                         WriteStartObject("<ExpressionBindings>");
                         var subItemCounter = 1;
@@ -515,6 +538,14 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
                     {
                         var baseExpr = attributes["expression"];
                         var (printEvent, expression) = Expression(baseExpr);
+                        foreach (var param in _globalParams.Keys)
+                        {
+                            if (expression.Contains(param))
+                            {
+                                expression = expression.Replace(param, '?' + param);
+                                break;
+                            }
+                        }
                         WriteStartObject($"<Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"{objType}\" Name=\"{name}_field\" TextFormatString=\"{FixFormattingString(formatString)}\" TextAlignment=\"{ConvertAlignment(attributes["alignment"])}\"  Multiline=\"true\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\" AnchorVertical=\"Both\" Font=\"{attributes["font.face"]}, {attributes["font.height"][1..]}pt{CheckBold(attributes["font.weight"])}\" Visible=\"{visibility}\">");
                         if(container._objectType == "group" && baseExpr.Contains("cumulative"))
                         {

@@ -56,7 +56,13 @@ internal static class DataSourceXmlGenerator
         foreach (var column in table._columns)
         {
             var colAttributes = column._attributes;
-            _writer.WriteLine($"<Field Name=\"{colAttributes["name"]}\" Type=\"String\" />");
+            var name = colAttributes["dbname"];
+            var tableNameEndIndex = name.IndexOf('.');
+            if (tableNameEndIndex > 0)
+            {
+                name = name[(tableNameEndIndex + 1)..];
+            }
+            _writer.WriteLine($"<Field Name=\"{name}\" Type=\"String\" />");
         }
         _writer.WriteLine("</View>");
 

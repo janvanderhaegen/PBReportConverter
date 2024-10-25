@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="24.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral" Name="XtraReport1" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="340" PageHeight="268" Version="24.1" DataMember="Query" DataSource="#Ref-0">
+	<Parameters>
+		<Item1 Ref="2" Name="prod_month"/>
+		<Item2 Ref="3" Name="plant_facility_code"/>
+		<Item3 Ref="4" Name="proc_k"/>
+		<Item4 Ref="5" Name="source_station"/>
+		<Item5 Ref="6" Name="source_pipeline"/>
+		<Item6 Ref="7" Name="run_datetime"/>
+	</Parameters>
+	<ComponentStorage>
+		<Item1 Ref="0" ObjectType="DevExpress.DataAccess.Sql.SqlDataSource,DevExpress.DataAccess.v24.1" Name="sqlDataSource1" Base64="PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjxTcWxEYXRhU291cmNlIE5hbWU9InNxbERhdGFTb3VyY2UxIj4NCjxDb25uZWN0aW9uIE5hbWU9IlRJRVMgRGF0YSIgRnJvbUFwcENvbmZpZz0idHJ1ZSIgLz4NCjxRdWVyeSBUeXBlPSJTdG9yZWRQcm9jUXVlcnkiIE5hbWU9IlF1ZXJ5Ij4NCjxQcm9jTmFtZT5kYm8ucGxhbnRfc3RtdF9tdHJfdG90YWxfcHJwX3BheW1lbnRfc3A8L1Byb2NOYW1lPg0KPFBhcmFtZXRlciBOYW1lPSJAcHJvZF9tb250aCIgVHlwZT0iRGV2RXhwcmVzcy5EYXRhQWNjZXNzLkV4cHJlc3Npb24iPihTeXN0ZW0uU3RyaW5nKSg/cHJvZF9tb250aCk8L1BhcmFtZXRlcj4NCjxQYXJhbWV0ZXIgTmFtZT0iQHBsYW50X2ZhY2lsaXR5X2NvZGUiIFR5cGU9IkRldkV4cHJlc3MuRGF0YUFjY2Vzcy5FeHByZXNzaW9uIj4oU3lzdGVtLlN0cmluZykoP3BsYW50X2ZhY2lsaXR5X2NvZGUpPC9QYXJhbWV0ZXI+DQo8UGFyYW1ldGVyIE5hbWU9IkBwcm9jX2siIFR5cGU9IkRldkV4cHJlc3MuRGF0YUFjY2Vzcy5FeHByZXNzaW9uIj4oU3lzdGVtLlN0cmluZykoP3Byb2Nfayk8L1BhcmFtZXRlcj4NCjxQYXJhbWV0ZXIgTmFtZT0iQHNvdXJjZV9zdGF0aW9uIiBUeXBlPSJEZXZFeHByZXNzLkRhdGFBY2Nlc3MuRXhwcmVzc2lvbiI+KFN5c3RlbS5TdHJpbmcpKD9zb3VyY2Vfc3RhdGlvbik8L1BhcmFtZXRlcj4NCjxQYXJhbWV0ZXIgTmFtZT0iQHNvdXJjZV9waXBlbGluZSIgVHlwZT0iRGV2RXhwcmVzcy5EYXRhQWNjZXNzLkV4cHJlc3Npb24iPihTeXN0ZW0uU3RyaW5nKSg/c291cmNlX3BpcGVsaW5lKTwvUGFyYW1ldGVyPg0KPFBhcmFtZXRlciBOYW1lPSJAcnVuX2RhdGV0aW1lIiBUeXBlPSJEZXZFeHByZXNzLkRhdGFBY2Nlc3MuRXhwcmVzc2lvbiI+KFN5c3RlbS5TdHJpbmcpKD9ydW5fZGF0ZXRpbWUpPC9QYXJhbWV0ZXI+DQo8L1F1ZXJ5Pg0KPFJlc3VsdFNjaGVtYT4NCjxEYXRhU2V0IE5hbWUgPSJzcWxEYXRhU291cmNlMSI+DQo8VmlldyBOYW1lPSJRdWVyeSI+DQo8RmllbGQgTmFtZT0idG90YWxfcHJvZHVjZXJfcGF5bWVudCIgVHlwZT0iU3RyaW5nIiAvPg0KPC9WaWV3Pg0KPC9EYXRhU2V0Pg0KPC9SZXN1bHRTY2hlbWE+DQo8Q29ubmVjdGlvbk9wdGlvbnMgQ2xvc2VDb25uZWN0aW9uPSJ0cnVlIiAvPg0KPC9TcWxEYXRhU291cmNlPg0K"/>
+	</ComponentStorage>
+	<Bands>
+		<Item1 Ref="8" ControlType="TopMarginBand" Name="TopMargin" HeightF="25"/>
+		<Item2 Ref="9" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="25"/>
+		<Item3 Ref="10" ControlType="ReportHeaderBand" Name="header" HeightF="-0" Visible="False">
+			<Controls>
+			</Controls>
+		</Item3>
+		<Item4 Ref="11" ControlType="GroupFooterBand" Name="summary" HeightF="-0" Visible="False" Level="0">
+			<Controls>
+			</Controls>
+		</Item4>
+		<Item5 Ref="12" ControlType="ReportFooterBand" Name="footer" HeightF="-0" Visible="False">
+			<Controls>
+			</Controls>
+		</Item5>
+		<Item6 Ref="13" ControlType="DetailBand" Name="detail" HeightF="18">
+			<Controls>
+				<Item1 Ref="14" ControlType="XRLabel" Name="total_producer_payment_t_label" TextAlignment="MiddleRight" Multiline="true" Text="Total Producer Payment:" SizeF="173,15" LocationFloat="-0,-0" AnchorVertical="Both" Font="Tahoma, 9pt, style=Bold" Visible="True"/>
+				<Item2 Ref="15" ControlType="XRLabel" Name="total_producer_payment_label" TextFormatString="{0:$#,##0.00}" TextAlignment="MiddleRight"  Multiline="true" SizeF="113,20" LocationFloat="174,-0" AnchorVertical="Both" Font="Tahoma, 9pt, style=Bold" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="16" EventName="BeforePrint" PropertyName="Text" Expression="[total_producer_payment]"/>
+					</ExpressionBindings>
+				</Item2>
+			</Controls>
+		</Item6>
+	</Bands>
+	<CalculatedFields>
+	</CalculatedFields>
+</XtraReportsLayoutSerializer>

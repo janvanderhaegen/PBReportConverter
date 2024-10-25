@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="24.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral" Name="XtraReport1" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="719" PageHeight="326" Version="24.1" DataMember="Query" DataSource="#Ref-0">
+	<Parameters>
+		<Item1 Ref="2" Name="prod_month"/>
+		<Item2 Ref="3" Name="plant_facility_code"/>
+		<Item3 Ref="4" Name="proc_k"/>
+		<Item4 Ref="5" Name="source_station"/>
+		<Item5 Ref="6" Name="source_pipeline"/>
+		<Item6 Ref="7" Name="run_datetime"/>
+		<Item7 Ref="8" Name="settlement_type"/>
+	</Parameters>
+	<ComponentStorage>
+		<Item1 Ref="0" ObjectType="DevExpress.DataAccess.Sql.SqlDataSource,DevExpress.DataAccess.v24.1" Name="sqlDataSource1" Base64="PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjxTcWxEYXRhU291cmNlIE5hbWU9InNxbERhdGFTb3VyY2UxIj4NCjxDb25uZWN0aW9uIE5hbWU9IlRJRVMgRGF0YSIgRnJvbUFwcENvbmZpZz0idHJ1ZSIgLz4NCjxRdWVyeSBUeXBlPSJTdG9yZWRQcm9jUXVlcnkiIE5hbWU9IlF1ZXJ5Ij4NCjxQcm9jTmFtZT5kYm8ucGxhbnRfc3RtdF9tdHJfbmdsc19zcDwvUHJvY05hbWU+DQo8UGFyYW1ldGVyIE5hbWU9IkBwcm9kX21vbnRoIiBUeXBlPSJEZXZFeHByZXNzLkRhdGFBY2Nlc3MuRXhwcmVzc2lvbiI+KFN5c3RlbS5TdHJpbmcpKD9wcm9kX21vbnRoKTwvUGFyYW1ldGVyPg0KPFBhcmFtZXRlciBOYW1lPSJAcGxhbnRfZmFjaWxpdHlfY29kZSIgVHlwZT0iRGV2RXhwcmVzcy5EYXRhQWNjZXNzLkV4cHJlc3Npb24iPihTeXN0ZW0uU3RyaW5nKSg/cGxhbnRfZmFjaWxpdHlfY29kZSk8L1BhcmFtZXRlcj4NCjxQYXJhbWV0ZXIgTmFtZT0iQHByb2NfayIgVHlwZT0iRGV2RXhwcmVzcy5EYXRhQWNjZXNzLkV4cHJlc3Npb24iPihTeXN0ZW0uU3RyaW5nKSg/cHJvY19rKTwvUGFyYW1ldGVyPg0KPFBhcmFtZXRlciBOYW1lPSJAc291cmNlX3N0YXRpb24iIFR5cGU9IkRldkV4cHJlc3MuRGF0YUFjY2Vzcy5FeHByZXNzaW9uIj4oU3lzdGVtLlN0cmluZykoP3NvdXJjZV9zdGF0aW9uKTwvUGFyYW1ldGVyPg0KPFBhcmFtZXRlciBOYW1lPSJAc291cmNlX3BpcGVsaW5lIiBUeXBlPSJEZXZFeHByZXNzLkRhdGFBY2Nlc3MuRXhwcmVzc2lvbiI+KFN5c3RlbS5TdHJpbmcpKD9zb3VyY2VfcGlwZWxpbmUpPC9QYXJhbWV0ZXI+DQo8UGFyYW1ldGVyIE5hbWU9IkBydW5fZGF0ZXRpbWUiIFR5cGU9IkRldkV4cHJlc3MuRGF0YUFjY2Vzcy5FeHByZXNzaW9uIj4oU3lzdGVtLlN0cmluZykoP3J1bl9kYXRldGltZSk8L1BhcmFtZXRlcj4NCjxQYXJhbWV0ZXIgTmFtZT0iQHNldHRsZW1lbnRfdHlwZSIgVHlwZT0iRGV2RXhwcmVzcy5EYXRhQWNjZXNzLkV4cHJlc3Npb24iPihTeXN0ZW0uU3RyaW5nKSg/c2V0dGxlbWVudF90eXBlKTwvUGFyYW1ldGVyPg0KPC9RdWVyeT4NCjxSZXN1bHRTY2hlbWE+DQo8RGF0YVNldCBOYW1lID0ic3FsRGF0YVNvdXJjZTEiPg0KPFZpZXcgTmFtZT0iUXVlcnkiPg0KPEZpZWxkIE5hbWU9ImRlc2NyaXB0aW9uIiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0ic2V0dGxlX3VuaXQiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJ0aGVvcmV0aWNhbF9nYWxsb25zIiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0iZml4ZWRfcmVjb3ZlcnlfcGVyY2VudCIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9ImFsbG9jYXRlZF9xdWFudGl0eSIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9InNldHRsZV9xdWFudGl0eSIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9InByb2R1Y2VyX3BlcmNlbnQiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJ2YWx1ZSIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9InByaWNlIiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0ic2VxX25iciIgVHlwZT0iU3RyaW5nIiAvPg0KPC9WaWV3Pg0KPC9EYXRhU2V0Pg0KPC9SZXN1bHRTY2hlbWE+DQo8Q29ubmVjdGlvbk9wdGlvbnMgQ2xvc2VDb25uZWN0aW9uPSJ0cnVlIiAvPg0KPC9TcWxEYXRhU291cmNlPg0K"/>
+	</ComponentStorage>
+	<Bands>
+		<Item1 Ref="9" ControlType="TopMarginBand" Name="TopMargin" HeightF="25"/>
+		<Item2 Ref="10" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="25"/>
+		<Item3 Ref="11" ControlType="ReportHeaderBand" Name="header" HeightF="36">
+			<Controls>
+				<Item1 Ref="12" ControlType="XRLabel" Name="t_2_label" TextAlignment="MiddleLeft" Multiline="true" Text="Plant Products" SizeF="109,17" LocationFloat="2,3" AnchorVertical="Both" Font="Tahoma, 10pt, style=Bold" Visible="True"/>
+				<Item2 Ref="13" ControlType="XRLabel" Name="description_t_label" TextAlignment="MiddleLeft" Multiline="true" Text="Description" SizeF="61,12" LocationFloat="2,22" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True"/>
+				<Item3 Ref="14" ControlType="XRLabel" Name="settle_unit_t_label" TextAlignment="MiddleRight" Multiline="true" Text="Settle Unit" SizeF="62,12" LocationFloat="62,22" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True"/>
+				<Item4 Ref="15" ControlType="XRLabel" Name="theoretical_gallons_t_label" TextAlignment="MiddleRight" Multiline="true" Text="Theoretical Gallons" SizeF="91,12" LocationFloat="122,22" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True"/>
+				<Item5 Ref="16" ControlType="XRLabel" Name="fixed_recovery_percent_t_label" TextAlignment="MiddleRight" Multiline="true" Text="Fixed Recovery %" SizeF="85,12" LocationFloat="215,22" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="17" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(?settlement_type=='FXR',true,false)"/>
+					</ExpressionBindings>
+				</Item5>
+				<Item6 Ref="18" ControlType="XRLabel" Name="allocated_quantity_t_label" TextAlignment="MiddleRight" Multiline="true" Text="Allocated Quantity" SizeF="87,12" LocationFloat="303,22" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True"/>
+				<Item7 Ref="19" ControlType="XRLabel" Name="producer_percent_t_label" TextAlignment="MiddleRight" Multiline="true" Text="Producer %" SizeF="53,12" LocationFloat="393,22" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True"/>
+				<Item8 Ref="20" ControlType="XRLabel" Name="settle_quantity_t_label" TextAlignment="MiddleRight" Multiline="true" Text="Settle Quantity" SizeF="88,12" LocationFloat="448,22" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True"/>
+				<Item9 Ref="21" ControlType="XRLabel" Name="price_t_label" TextAlignment="MiddleRight" Multiline="true" Text="Price" SizeF="31,12" LocationFloat="558,22" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True"/>
+				<Item10 Ref="22" ControlType="XRLabel" Name="value_t_label" TextAlignment="MiddleRight" Multiline="true" Text="Value" SizeF="31,12" LocationFloat="633,22" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True"/>
+			</Controls>
+		</Item3>
+		<Item4 Ref="23" ControlType="GroupFooterBand" Name="summary" HeightF="22" Level="0">
+			<Controls>
+				<Item1 Ref="24" ControlType="XRLabel" Name="t_1_label" TextAlignment="MiddleRight" Multiline="true" Text="Total" SizeF="34,14" LocationFloat="2,5" AnchorVertical="Both" Font="Tahoma, 8pt, style=Bold" Visible="True"/>
+			</Controls>
+		</Item4>
+		<Item5 Ref="25" ControlType="ReportFooterBand" Name="footer" HeightF="-0" Visible="False">
+			<Controls>
+			</Controls>
+		</Item5>
+		<Item6 Ref="26" ControlType="DetailBand" Name="detail" HeightF="18">
+			<Controls>
+				<Item1 Ref="27" ControlType="XRLabel" Name="description_label" TextFormatString="" TextAlignment="MiddleLeft"  Multiline="true" SizeF="59,14" LocationFloat="2,1" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="28" EventName="BeforePrint" PropertyName="Text" Expression="[description]"/>
+					</ExpressionBindings>
+				</Item1>
+				<Item2 Ref="29" ControlType="XRLabel" Name="settle_unit_label" TextFormatString="" TextAlignment="MiddleCenter"  Multiline="true" SizeF="58,14" LocationFloat="64,1" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="30" EventName="BeforePrint" PropertyName="Text" Expression="[settle_unit]"/>
+					</ExpressionBindings>
+				</Item2>
+				<Item3 Ref="31" ControlType="XRLabel" Name="theoretical_gallons_label" TextFormatString="{0:#,##0.00}" TextAlignment="MiddleRight"  Multiline="true" SizeF="88,14" LocationFloat="124,1" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="32" EventName="BeforePrint" PropertyName="Text" Expression="[theoretical_gallons]"/>
+					</ExpressionBindings>
+				</Item3>
+				<Item4 Ref="33" ControlType="XRLabel" Name="fixed_recovery_percent_label" TextFormatString="{0:#0.00}" TextAlignment="MiddleRight"  Multiline="true" SizeF="55,14" LocationFloat="226,1" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="34" EventName="BeforePrint" PropertyName="Text" Expression="[fixed_recovery_percent]"/>
+						<Item2 Ref="35" EventName="BeforePrint" PropertyName="Visible" Expression="Iif(?settlement_type=='FXR',true,false)"/>
+					</ExpressionBindings>
+				</Item4>
+				<Item5 Ref="36" ControlType="XRLabel" Name="allocated_quantity_label" TextFormatString="{0:#,##0.00}" TextAlignment="MiddleRight"  Multiline="true" SizeF="84,14" LocationFloat="301,1" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="37" EventName="BeforePrint" PropertyName="Text" Expression="[allocated_quantity]"/>
+					</ExpressionBindings>
+				</Item5>
+				<Item6 Ref="38" ControlType="XRLabel" Name="producer_percent_label" TextFormatString="" TextAlignment="MiddleCenter"  Multiline="true" SizeF="44,14" LocationFloat="393,1" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="39" EventName="BeforePrint" PropertyName="Text" Expression="[producer_percent]"/>
+					</ExpressionBindings>
+				</Item6>
+				<Item7 Ref="40" ControlType="XRLabel" Name="settle_quantity_label" TextFormatString="{0:#,##0.00}" TextAlignment="MiddleRight"  Multiline="true" SizeF="85,14" LocationFloat="448,1" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="41" EventName="BeforePrint" PropertyName="Text" Expression="[settle_quantity]"/>
+					</ExpressionBindings>
+				</Item7>
+				<Item8 Ref="42" ControlType="XRLabel" Name="price_label" TextFormatString="{0:$#0.000000;($#0.000000)}" TextAlignment="MiddleRight"  Multiline="true" SizeF="55,14" LocationFloat="540,1" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="43" EventName="BeforePrint" PropertyName="Text" Expression="[price]"/>
+					</ExpressionBindings>
+				</Item8>
+				<Item9 Ref="44" ControlType="XRLabel" Name="value_label" TextFormatString="{0:$#,##0.00;($#,##0.00)}" TextAlignment="MiddleRight"  Multiline="true" SizeF="68,15" LocationFloat="598,1" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True">
+					<ExpressionBindings>
+						<Item1 Ref="45" EventName="BeforePrint" PropertyName="Text" Expression="[value]"/>
+					</ExpressionBindings>
+				</Item9>
+			</Controls>
+		</Item6>
+	</Bands>
+	<CalculatedFields>
+	</CalculatedFields>
+</XtraReportsLayoutSerializer>
