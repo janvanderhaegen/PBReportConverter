@@ -44,7 +44,8 @@ internal static class DataSourceXmlGenerator
 
         foreach (var paramName in parameters)
         {
-            _writer.WriteLine($"<Parameter Name=\"@{paramName}\" Type=\"DevExpress.DataAccess.Expression\">(System.String)(?{paramName})</Parameter>");
+            var paramType = paramName.Contains("month") || paramName.Contains("date") ? "System.DateTime" : "System.String";
+            _writer.WriteLine($"<Parameter Name=\"@{paramName}\" Type=\"DevExpress.DataAccess.Expression\">({paramType})(?{paramName})</Parameter>");
         }
 
         _writer.WriteLine("</Query>");
@@ -123,7 +124,13 @@ internal static class DataSourceXmlGenerator
     {
         var startIndex = query.EndIndexOf("execute ");
         var endIndex = query.IndexOf(';');
-        return query[startIndex..endIndex];
+        var procedureFullName = query[startIndex..endIndex];
+        var dotIndex = procedureFullName.IndexOf('.');
+        if(dotIndex != -1)
+        {
+            return procedureFullName[(dotIndex + 1)..];
+        }
+        return procedureFullName;
     }
 
     /// <param name="source"></param>

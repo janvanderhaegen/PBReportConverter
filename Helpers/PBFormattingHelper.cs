@@ -74,8 +74,22 @@ internal static class PBFormattingHelper
         }
 
         var formatStr = value.Split("~t")[0];
+        Span<char> newFormatStr = stackalloc char[formatStr.Length];
+        int pos = 0;
+        foreach(char c in formatStr)
+        {
+            if(c == 'm')
+            {
+                newFormatStr[pos++] = 'M';
+            }
+            else
+            {
+                newFormatStr[pos++] = Char.ToLower(c);
+            }
+        }
 
-        return $"{{0:{formatStr.ToLower().Replace("mm", "MM")}}}";
+        //return $"{{0:{formatStr.ToLower().Replace("mm", "MM")}}}";
+        return $"{{0:{newFormatStr[..pos].ToString()}}}";
     }
 
     public static string? ConvertElementType(string ctrlType)

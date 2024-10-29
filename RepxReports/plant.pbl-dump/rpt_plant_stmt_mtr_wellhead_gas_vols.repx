@@ -1,111 +1,106 @@
-<?xml version="1.0" encoding="utf-8"?>
-<XtraReportsLayoutSerializer SerializerVersion="24.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral" Name="XtraReport1" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="265" PageHeight="466" Version="24.1" DataMember="Query" DataSource="#Ref-0">
-	<Parameters>
-		<Item1 Ref="2" Name="prod_month"/>
-		<Item2 Ref="3" Name="plant_facility_code"/>
-		<Item3 Ref="4" Name="proc_k"/>
-		<Item4 Ref="5" Name="source_station"/>
-		<Item5 Ref="6" Name="source_pipeline"/>
-		<Item6 Ref="7" Name="run_datetime"/>
-	</Parameters>
-	<ComponentStorage>
-		<Item1 Ref="0" ObjectType="DevExpress.DataAccess.Sql.SqlDataSource,DevExpress.DataAccess.v24.1" Name="sqlDataSource1" Base64="PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjxTcWxEYXRhU291cmNlIE5hbWU9InNxbERhdGFTb3VyY2UxIj4NCjxDb25uZWN0aW9uIE5hbWU9IlRJRVMgRGF0YSIgRnJvbUFwcENvbmZpZz0idHJ1ZSIgLz4NCjxRdWVyeSBUeXBlPSJTdG9yZWRQcm9jUXVlcnkiIE5hbWU9IlF1ZXJ5Ij4NCjxQcm9jTmFtZT5kYm8ucGxhbnRfc3RtdF9tdHJfd2VsbF9nYXNfdm9sX3NwPC9Qcm9jTmFtZT4NCjxQYXJhbWV0ZXIgTmFtZT0iQHByb2RfbW9udGgiIFR5cGU9IkRldkV4cHJlc3MuRGF0YUFjY2Vzcy5FeHByZXNzaW9uIj4oU3lzdGVtLlN0cmluZykoP3Byb2RfbW9udGgpPC9QYXJhbWV0ZXI+DQo8UGFyYW1ldGVyIE5hbWU9IkBwbGFudF9mYWNpbGl0eV9jb2RlIiBUeXBlPSJEZXZFeHByZXNzLkRhdGFBY2Nlc3MuRXhwcmVzc2lvbiI+KFN5c3RlbS5TdHJpbmcpKD9wbGFudF9mYWNpbGl0eV9jb2RlKTwvUGFyYW1ldGVyPg0KPFBhcmFtZXRlciBOYW1lPSJAcHJvY19rIiBUeXBlPSJEZXZFeHByZXNzLkRhdGFBY2Nlc3MuRXhwcmVzc2lvbiI+KFN5c3RlbS5TdHJpbmcpKD9wcm9jX2spPC9QYXJhbWV0ZXI+DQo8UGFyYW1ldGVyIE5hbWU9IkBzb3VyY2Vfc3RhdGlvbiIgVHlwZT0iRGV2RXhwcmVzcy5EYXRhQWNjZXNzLkV4cHJlc3Npb24iPihTeXN0ZW0uU3RyaW5nKSg/c291cmNlX3N0YXRpb24pPC9QYXJhbWV0ZXI+DQo8UGFyYW1ldGVyIE5hbWU9IkBzb3VyY2VfcGlwZWxpbmUiIFR5cGU9IkRldkV4cHJlc3MuRGF0YUFjY2Vzcy5FeHByZXNzaW9uIj4oU3lzdGVtLlN0cmluZykoP3NvdXJjZV9waXBlbGluZSk8L1BhcmFtZXRlcj4NCjxQYXJhbWV0ZXIgTmFtZT0iQHJ1bl9kYXRldGltZSIgVHlwZT0iRGV2RXhwcmVzcy5EYXRhQWNjZXNzLkV4cHJlc3Npb24iPihTeXN0ZW0uU3RyaW5nKSg/cnVuX2RhdGV0aW1lKTwvUGFyYW1ldGVyPg0KPC9RdWVyeT4NCjxSZXN1bHRTY2hlbWE+DQo8RGF0YVNldCBOYW1lID0ic3FsRGF0YVNvdXJjZTEiPg0KPFZpZXcgTmFtZT0iUXVlcnkiPg0KPEZpZWxkIE5hbWU9IndlbGxoZWFkX21tYnR1IiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0ibmV0X2RlbGl2ZXJlZF9tbWJ0dSIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9InNocmlua19tbWJ0dSIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9InBsYW50X2Z1ZWxfbW1idHUiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJyZXNpZHVlX3RoZW9fbW1idHUiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJyZXNpZHVlX3NhbGVfbW1idHUiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJ3ZWxsaGVhZF9tY2YiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJuZXRfZGVsaXZlcmVkX21jZiIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9InNocmlua19tY2YiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJwbGFudF9mdWVsX21jZiIgVHlwZT0iU3RyaW5nIiAvPg0KPEZpZWxkIE5hbWU9InJlc2lkdWVfdGhlb19tY2YiIFR5cGU9IlN0cmluZyIgLz4NCjxGaWVsZCBOYW1lPSJyZXNpZHVlX3NhbGVfbWNmIiBUeXBlPSJTdHJpbmciIC8+DQo8RmllbGQgTmFtZT0id2VsbGhlYWRfYnR1IiBUeXBlPSJTdHJpbmciIC8+DQo8L1ZpZXc+DQo8L0RhdGFTZXQ+DQo8L1Jlc3VsdFNjaGVtYT4NCjxDb25uZWN0aW9uT3B0aW9ucyBDbG9zZUNvbm5lY3Rpb249InRydWUiIC8+DQo8L1NxbERhdGFTb3VyY2U+DQo="/>
-	</ComponentStorage>
-	<Bands>
-		<Item1 Ref="8" ControlType="TopMarginBand" Name="TopMargin" HeightF="25"/>
-		<Item2 Ref="9" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="25"/>
-		<Item3 Ref="10" ControlType="ReportHeaderBand" Name="header" HeightF="-0" Visible="False">
-			<Controls>
-			</Controls>
-		</Item3>
-		<Item4 Ref="11" ControlType="GroupFooterBand" Name="summary" HeightF="-0" Visible="False" Level="0">
-			<Controls>
-			</Controls>
-		</Item4>
-		<Item5 Ref="12" ControlType="ReportFooterBand" Name="footer" HeightF="-0" Visible="False">
-			<Controls>
-			</Controls>
-		</Item5>
-		<Item6 Ref="13" ControlType="DetailBand" Name="detail" HeightF="216">
-			<Controls>
-				<Item1 Ref="14" ControlType="XRLabel" Name="volumes_t_label" TextAlignment="MiddleLeft" Multiline="true" Text="Volumes" SizeF="107,17" LocationFloat="2,1" AnchorVertical="Both" Font="Tahoma, 10pt, style=Bold" Visible="True"/>
-				<Item2 Ref="15" ControlType="XRLabel" Name="wellhead_btu_t_label" TextAlignment="MiddleRight" Multiline="true" Text="Wellhead Btu:" SizeF="90,15" LocationFloat="4,176" AnchorVertical="Both" Font="Tahoma, 8pt" Visible="True"/>
-				<Item3 Ref="16" ControlType="XRLabel" Name="wellhead_btu_label" TextFormatString="" TextAlignment="MiddleRight"  Multiline="true" SizeF="67,15" LocationFloat="4,196" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True">
-					<ExpressionBindings>
-						<Item1 Ref="17" EventName="BeforePrint" PropertyName="Text" Expression="[wellhead_btu]"/>
-					</ExpressionBindings>
-				</Item3>
-				<Item4 Ref="18" ControlType="XRLabel" Name="wellhead_t_label" TextAlignment="MiddleLeft" Multiline="true" Text="Gross Wellhead" SizeF="85,12" LocationFloat="4,44" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True"/>
-				<Item5 Ref="19" ControlType="XRLabel" Name="net_delivered_t_label" TextAlignment="MiddleLeft" Multiline="true" Text="Net Delivered" SizeF="78,12" LocationFloat="4,66" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True"/>
-				<Item6 Ref="20" ControlType="XRLabel" Name="shrink_t_label" TextAlignment="MiddleLeft" Multiline="true" Text="Shrink" SizeF="78,12" LocationFloat="4,88" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True"/>
-				<Item7 Ref="21" ControlType="XRLabel" Name="plant_fuel_t_label" TextAlignment="MiddleLeft" Multiline="true" Text="Plant Fuel" SizeF="78,12" LocationFloat="4,110" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True"/>
-				<Item8 Ref="22" ControlType="XRLabel" Name="t_1_label" TextAlignment="MiddleLeft" Multiline="true" Text="Residue Theo" SizeF="78,12" LocationFloat="4,132" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True"/>
-				<Item9 Ref="23" ControlType="XRLabel" Name="residue_sale_t_label" TextAlignment="MiddleLeft" Multiline="true" Text="Residue Sale" SizeF="78,12" LocationFloat="4,153" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True"/>
-				<Item10 Ref="24" ControlType="XRLabel" Name="wellhead_mcf_label" TextFormatString="{0:#,##0.0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="61,15" LocationFloat="85,44" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True">
-					<ExpressionBindings>
-						<Item1 Ref="25" EventName="BeforePrint" PropertyName="Text" Expression="[wellhead_mcf]"/>
-					</ExpressionBindings>
-				</Item10>
-				<Item11 Ref="26" ControlType="XRLabel" Name="net_delivered_mcf_label" TextFormatString="{0:#,##0.0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="61,15" LocationFloat="85,66" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True">
-					<ExpressionBindings>
-						<Item1 Ref="27" EventName="BeforePrint" PropertyName="Text" Expression="[net_delivered_mcf]"/>
-					</ExpressionBindings>
-				</Item11>
-				<Item12 Ref="28" ControlType="XRLabel" Name="shrink_mcf_label" TextFormatString="{0:#,##0.0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="61,15" LocationFloat="85,88" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True">
-					<ExpressionBindings>
-						<Item1 Ref="29" EventName="BeforePrint" PropertyName="Text" Expression="[shrink_mcf]"/>
-					</ExpressionBindings>
-				</Item12>
-				<Item13 Ref="30" ControlType="XRLabel" Name="plant_fuel_mcf_label" TextFormatString="{0:#,##0.0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="61,15" LocationFloat="85,110" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True">
-					<ExpressionBindings>
-						<Item1 Ref="31" EventName="BeforePrint" PropertyName="Text" Expression="[plant_fuel_mcf]"/>
-					</ExpressionBindings>
-				</Item13>
-				<Item14 Ref="32" ControlType="XRLabel" Name="residue_theo_mcf_label" TextFormatString="{0:#,##0.0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="61,15" LocationFloat="85,132" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True">
-					<ExpressionBindings>
-						<Item1 Ref="33" EventName="BeforePrint" PropertyName="Text" Expression="[residue_theo_mcf]"/>
-					</ExpressionBindings>
-				</Item14>
-				<Item15 Ref="34" ControlType="XRLabel" Name="residue_sale_mcf_label" TextFormatString="{0:#,##0.0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="61,15" LocationFloat="85,153" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True">
-					<ExpressionBindings>
-						<Item1 Ref="35" EventName="BeforePrint" PropertyName="Text" Expression="[residue_sale_mcf]"/>
-					</ExpressionBindings>
-				</Item15>
-				<Item16 Ref="36" ControlType="XRLabel" Name="mcf_t_label" TextAlignment="MiddleRight" Multiline="true" Text="MCF" SizeF="46,14" LocationFloat="99,23" AnchorVertical="Both" Font="Tahoma, 8pt" Visible="True"/>
-				<Item17 Ref="37" ControlType="XRLabel" Name="mmbtu_t_label" TextAlignment="MiddleRight" Multiline="true" Text="MMBtu" SizeF="47,14" LocationFloat="165,22" AnchorVertical="Both" Font="Tahoma, 8pt" Visible="True"/>
-				<Item18 Ref="38" ControlType="XRLabel" Name="net_delivered_mmbtu_label" TextFormatString="{0:#,##0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="61,15" LocationFloat="151,66" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True">
-					<ExpressionBindings>
-						<Item1 Ref="39" EventName="BeforePrint" PropertyName="Text" Expression="[net_delivered_mmbtu]"/>
-					</ExpressionBindings>
-				</Item18>
-				<Item19 Ref="40" ControlType="XRLabel" Name="shrink_mmbtu_label" TextFormatString="{0:#,##0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="61,15" LocationFloat="151,88" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True">
-					<ExpressionBindings>
-						<Item1 Ref="41" EventName="BeforePrint" PropertyName="Text" Expression="[shrink_mmbtu]"/>
-					</ExpressionBindings>
-				</Item19>
-				<Item20 Ref="42" ControlType="XRLabel" Name="plant_fuel_mmbtu_label" TextFormatString="{0:#,##0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="61,15" LocationFloat="151,110" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True">
-					<ExpressionBindings>
-						<Item1 Ref="43" EventName="BeforePrint" PropertyName="Text" Expression="[plant_fuel_mmbtu]"/>
-					</ExpressionBindings>
-				</Item20>
-				<Item21 Ref="44" ControlType="XRLabel" Name="residue_theo_mmbtu_label" TextFormatString="{0:#,##0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="61,15" LocationFloat="151,132" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True">
-					<ExpressionBindings>
-						<Item1 Ref="45" EventName="BeforePrint" PropertyName="Text" Expression="[residue_theo_mmbtu]"/>
-					</ExpressionBindings>
-				</Item21>
-				<Item22 Ref="46" ControlType="XRLabel" Name="residue_sale_mmbtu_label" TextFormatString="{0:#,##0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="61,15" LocationFloat="151,153" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True">
-					<ExpressionBindings>
-						<Item1 Ref="47" EventName="BeforePrint" PropertyName="Text" Expression="[residue_sale_mmbtu]"/>
-					</ExpressionBindings>
-				</Item22>
-				<Item23 Ref="48" ControlType="XRLabel" Name="wellhead_mmbtu_label" TextFormatString="{0:#,##0}" TextAlignment="MiddleRight"  Multiline="true" SizeF="61,15" LocationFloat="151,44" AnchorVertical="Both" Font="Tahoma, 7pt" Visible="True">
-					<ExpressionBindings>
-						<Item1 Ref="49" EventName="BeforePrint" PropertyName="Text" Expression="[wellhead_mmbtu]"/>
-					</ExpressionBindings>
-				</Item23>
-			</Controls>
-		</Item6>
-	</Bands>
-	<CalculatedFields>
-	</CalculatedFields>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="24.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Name="rpt_plant_stmt_mtr_wellhead_gas_vols" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="265" PageHeight="466" Version="24.1" DataMember="Query" DataSource="#Ref-0">
+  <Parameters>
+    <Item1 Ref="3" Name="prod_month" />
+    <Item2 Ref="4" Name="plant_facility_code" />
+    <Item3 Ref="5" Name="proc_k" />
+    <Item4 Ref="6" Name="source_station" />
+    <Item5 Ref="7" Name="source_pipeline" />
+    <Item6 Ref="8" Name="run_datetime" />
+  </Parameters>
+  <Bands>
+    <Item1 Ref="9" ControlType="TopMarginBand" Name="TopMargin" HeightF="25" />
+    <Item2 Ref="10" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="25" />
+    <Item3 Ref="11" ControlType="ReportHeaderBand" Name="header" HeightF="0" Visible="false" />
+    <Item4 Ref="12" ControlType="GroupFooterBand" Name="summary" HeightF="0" Visible="false" />
+    <Item5 Ref="13" ControlType="ReportFooterBand" Name="footer" HeightF="0" Visible="false" />
+    <Item6 Ref="14" ControlType="DetailBand" Name="detail" HeightF="216">
+      <Controls>
+        <Item1 Ref="15" ControlType="XRLine" Name="xrLine4" SizeF="70,2" LocationFloat="4,193" />
+        <Item2 Ref="16" ControlType="XRLine" Name="xrLine3" SizeF="215,2" LocationFloat="0,37" />
+        <Item3 Ref="17" ControlType="XRLine" Name="xrLine2" SizeF="215,2" LocationFloat="0,20" />
+        <Item4 Ref="18" ControlType="XRLine" Name="xrLine1" SizeF="215,2" LocationFloat="0,1" />
+        <Item5 Ref="19" ControlType="XRLabel" Name="volumes_t_label" Multiline="true" CanGrow="false" Text="Volumes" AnchorVertical="Both" TextAlignment="MiddleLeft" SizeF="107,17" LocationFloat="2,1" Font="Tahoma, 10pt, style=Bold" />
+        <Item6 Ref="20" ControlType="XRLabel" Name="wellhead_btu_t_label" Multiline="true" CanGrow="false" Text="Wellhead Btu:" AnchorVertical="Both" TextAlignment="MiddleLeft" SizeF="90,15" LocationFloat="4,176" Font="Tahoma, 8pt">
+          <StylePriority Ref="21" UseTextAlignment="false" />
+        </Item6>
+        <Item7 Ref="22" ControlType="XRLabel" Name="wellhead_btu_label" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="67,15" LocationFloat="4,196" Font="Tahoma, 7pt">
+          <ExpressionBindings>
+            <Item1 Ref="23" EventName="BeforePrint" PropertyName="Text" Expression="[wellhead_btu]" />
+          </ExpressionBindings>
+        </Item7>
+        <Item8 Ref="24" ControlType="XRLabel" Name="wellhead_t_label" Multiline="true" CanGrow="false" Text="Gross Wellhead" AnchorVertical="Both" TextAlignment="MiddleLeft" SizeF="85,12" LocationFloat="4,44" Font="Tahoma, 7pt" />
+        <Item9 Ref="25" ControlType="XRLabel" Name="net_delivered_t_label" Multiline="true" CanGrow="false" Text="Net Delivered" AnchorVertical="Both" TextAlignment="MiddleLeft" SizeF="78,12" LocationFloat="4,66" Font="Tahoma, 7pt" />
+        <Item10 Ref="26" ControlType="XRLabel" Name="shrink_t_label" Multiline="true" CanGrow="false" Text="Shrink" AnchorVertical="Both" TextAlignment="MiddleLeft" SizeF="78,12" LocationFloat="4,88" Font="Tahoma, 7pt" />
+        <Item11 Ref="27" ControlType="XRLabel" Name="plant_fuel_t_label" Multiline="true" CanGrow="false" Text="Plant Fuel" AnchorVertical="Both" TextAlignment="MiddleLeft" SizeF="78,12" LocationFloat="4,110" Font="Tahoma, 7pt" />
+        <Item12 Ref="28" ControlType="XRLabel" Name="t_1_label" Multiline="true" CanGrow="false" Text="Residue Theo" AnchorVertical="Both" TextAlignment="MiddleLeft" SizeF="78,12" LocationFloat="4,132" Font="Tahoma, 7pt" />
+        <Item13 Ref="29" ControlType="XRLabel" Name="residue_sale_t_label" Multiline="true" CanGrow="false" Text="Residue Sale" AnchorVertical="Both" TextAlignment="MiddleLeft" SizeF="78,12" LocationFloat="4,153" Font="Tahoma, 7pt" />
+        <Item14 Ref="30" ControlType="XRLabel" Name="wellhead_mcf_label" TextFormatString="{0:#,##0.0}" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="61,15" LocationFloat="85,44" Font="Tahoma, 7pt">
+          <ExpressionBindings>
+            <Item1 Ref="31" EventName="BeforePrint" PropertyName="Text" Expression="[wellhead_mcf]" />
+          </ExpressionBindings>
+        </Item14>
+        <Item15 Ref="32" ControlType="XRLabel" Name="net_delivered_mcf_label" TextFormatString="{0:#,##0.0}" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="61,15" LocationFloat="85,66" Font="Tahoma, 7pt">
+          <ExpressionBindings>
+            <Item1 Ref="33" EventName="BeforePrint" PropertyName="Text" Expression="[net_delivered_mcf]" />
+          </ExpressionBindings>
+        </Item15>
+        <Item16 Ref="34" ControlType="XRLabel" Name="shrink_mcf_label" TextFormatString="{0:#,##0.0}" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="61,15" LocationFloat="85,88" Font="Tahoma, 7pt">
+          <ExpressionBindings>
+            <Item1 Ref="35" EventName="BeforePrint" PropertyName="Text" Expression="[shrink_mcf]" />
+          </ExpressionBindings>
+        </Item16>
+        <Item17 Ref="36" ControlType="XRLabel" Name="plant_fuel_mcf_label" TextFormatString="{0:#,##0.0}" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="61,15" LocationFloat="85,110" Font="Tahoma, 7pt">
+          <ExpressionBindings>
+            <Item1 Ref="37" EventName="BeforePrint" PropertyName="Text" Expression="[plant_fuel_mcf]" />
+          </ExpressionBindings>
+        </Item17>
+        <Item18 Ref="38" ControlType="XRLabel" Name="residue_theo_mcf_label" TextFormatString="{0:#,##0.0}" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="61,15" LocationFloat="85,132" Font="Tahoma, 7pt">
+          <ExpressionBindings>
+            <Item1 Ref="39" EventName="BeforePrint" PropertyName="Text" Expression="[residue_theo_mcf]" />
+          </ExpressionBindings>
+        </Item18>
+        <Item19 Ref="40" ControlType="XRLabel" Name="residue_sale_mcf_label" TextFormatString="{0:#,##0.0}" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="61,15" LocationFloat="85,153" Font="Tahoma, 7pt">
+          <ExpressionBindings>
+            <Item1 Ref="41" EventName="BeforePrint" PropertyName="Text" Expression="[residue_sale_mcf]" />
+          </ExpressionBindings>
+        </Item19>
+        <Item20 Ref="42" ControlType="XRLabel" Name="mcf_t_label" Multiline="true" CanGrow="false" Text="MCF" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="46,14" LocationFloat="99,23" Font="Tahoma, 8pt" />
+        <Item21 Ref="43" ControlType="XRLabel" Name="mmbtu_t_label" Multiline="true" CanGrow="false" Text="MMBtu" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="47,14" LocationFloat="165,22" Font="Tahoma, 8pt" />
+        <Item22 Ref="44" ControlType="XRLabel" Name="net_delivered_mmbtu_label" TextFormatString="{0:#,##0}" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="61,15" LocationFloat="151,66" Font="Tahoma, 7pt">
+          <ExpressionBindings>
+            <Item1 Ref="45" EventName="BeforePrint" PropertyName="Text" Expression="[net_delivered_mmbtu]" />
+          </ExpressionBindings>
+        </Item22>
+        <Item23 Ref="46" ControlType="XRLabel" Name="shrink_mmbtu_label" TextFormatString="{0:#,##0}" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="61,15" LocationFloat="151,88" Font="Tahoma, 7pt">
+          <ExpressionBindings>
+            <Item1 Ref="47" EventName="BeforePrint" PropertyName="Text" Expression="[shrink_mmbtu]" />
+          </ExpressionBindings>
+        </Item23>
+        <Item24 Ref="48" ControlType="XRLabel" Name="plant_fuel_mmbtu_label" TextFormatString="{0:#,##0}" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="61,15" LocationFloat="151,110" Font="Tahoma, 7pt">
+          <ExpressionBindings>
+            <Item1 Ref="49" EventName="BeforePrint" PropertyName="Text" Expression="[plant_fuel_mmbtu]" />
+          </ExpressionBindings>
+        </Item24>
+        <Item25 Ref="50" ControlType="XRLabel" Name="residue_theo_mmbtu_label" TextFormatString="{0:#,##0}" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="61,15" LocationFloat="151,132" Font="Tahoma, 7pt">
+          <ExpressionBindings>
+            <Item1 Ref="51" EventName="BeforePrint" PropertyName="Text" Expression="[residue_theo_mmbtu]" />
+          </ExpressionBindings>
+        </Item25>
+        <Item26 Ref="52" ControlType="XRLabel" Name="residue_sale_mmbtu_label" TextFormatString="{0:#,##0}" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="61,15" LocationFloat="151,153" Font="Tahoma, 7pt">
+          <ExpressionBindings>
+            <Item1 Ref="53" EventName="BeforePrint" PropertyName="Text" Expression="[residue_sale_mmbtu]" />
+          </ExpressionBindings>
+        </Item26>
+        <Item27 Ref="54" ControlType="XRLabel" Name="wellhead_mmbtu_label" TextFormatString="{0:#,##0}" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="61,15" LocationFloat="151,44" Font="Tahoma, 7pt">
+          <ExpressionBindings>
+            <Item1 Ref="55" EventName="BeforePrint" PropertyName="Text" Expression="[wellhead_mmbtu]" />
+          </ExpressionBindings>
+        </Item27>
+      </Controls>
+    </Item6>
+  </Bands>
+  <ComponentStorage>
+    <Item1 Ref="0" ObjectType="DevExpress.DataAccess.Sql.SqlDataSource,DevExpress.DataAccess.v24.1" Name="sqlDataSource1" Base64="PFNxbERhdGFTb3VyY2UgTmFtZT0ic3FsRGF0YVNvdXJjZTEiPjxDb25uZWN0aW9uIE5hbWU9IlRJRVMgRGF0YSIgRnJvbUFwcENvbmZpZz0idHJ1ZSIgLz48UXVlcnkgVHlwZT0iU3RvcmVkUHJvY1F1ZXJ5IiBOYW1lPSJRdWVyeSI+PFBhcmFtZXRlciBOYW1lPSJAcHJvZF9tb250aCIgVHlwZT0iRGV2RXhwcmVzcy5EYXRhQWNjZXNzLkV4cHJlc3Npb24iPihTeXN0ZW0uRGF0ZVRpbWUpKD9wcm9kX21vbnRoKTwvUGFyYW1ldGVyPjxQYXJhbWV0ZXIgTmFtZT0iQHBsYW50X2ZhY2lsaXR5X2NvZGUiIFR5cGU9IkRldkV4cHJlc3MuRGF0YUFjY2Vzcy5FeHByZXNzaW9uIj4oU3lzdGVtLlN0cmluZykoP3BsYW50X2ZhY2lsaXR5X2NvZGUpPC9QYXJhbWV0ZXI+PFBhcmFtZXRlciBOYW1lPSJAcHJvY19rIiBUeXBlPSJEZXZFeHByZXNzLkRhdGFBY2Nlc3MuRXhwcmVzc2lvbiI+KFN5c3RlbS5TdHJpbmcpKD9wcm9jX2spPC9QYXJhbWV0ZXI+PFBhcmFtZXRlciBOYW1lPSJAc291cmNlX3N0YXRpb24iIFR5cGU9IkRldkV4cHJlc3MuRGF0YUFjY2Vzcy5FeHByZXNzaW9uIj4oU3lzdGVtLlN0cmluZykoP3NvdXJjZV9zdGF0aW9uKTwvUGFyYW1ldGVyPjxQYXJhbWV0ZXIgTmFtZT0iQHNvdXJjZV9waXBlbGluZSIgVHlwZT0iRGV2RXhwcmVzcy5EYXRhQWNjZXNzLkV4cHJlc3Npb24iPihTeXN0ZW0uU3RyaW5nKSg/c291cmNlX3BpcGVsaW5lKTwvUGFyYW1ldGVyPjxQYXJhbWV0ZXIgTmFtZT0iQHJ1bl9kYXRldGltZSIgVHlwZT0iRGV2RXhwcmVzcy5EYXRhQWNjZXNzLkV4cHJlc3Npb24iPihTeXN0ZW0uRGF0ZVRpbWUpKD9ydW5fZGF0ZXRpbWUpPC9QYXJhbWV0ZXI+PFByb2NOYW1lPnBsYW50X3N0bXRfbXRyX3dlbGxfZ2FzX3ZvbF9zcDwvUHJvY05hbWU+PC9RdWVyeT48UmVzdWx0U2NoZW1hPjxEYXRhU2V0IE5hbWU9InNxbERhdGFTb3VyY2UxIj48VmlldyBOYW1lPSJRdWVyeSI+PEZpZWxkIE5hbWU9IndlbGxoZWFkX21tYnR1IiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9Im5ldF9kZWxpdmVyZWRfbW1idHUiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0ic2hyaW5rX21tYnR1IiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9InBsYW50X2Z1ZWxfbW1idHUiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0icmVzaWR1ZV90aGVvX21tYnR1IiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9InJlc2lkdWVfc2FsZV9tbWJ0dSIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJ3ZWxsaGVhZF9tY2YiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0ibmV0X2RlbGl2ZXJlZF9tY2YiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0ic2hyaW5rX21jZiIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJwbGFudF9mdWVsX21jZiIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJyZXNpZHVlX3RoZW9fbWNmIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9InJlc2lkdWVfc2FsZV9tY2YiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0id2VsbGhlYWRfYnR1IiBUeXBlPSJTdHJpbmciIC8+PC9WaWV3PjwvRGF0YVNldD48L1Jlc3VsdFNjaGVtYT48Q29ubmVjdGlvbk9wdGlvbnMgQ2xvc2VDb25uZWN0aW9uPSJ0cnVlIiAvPjwvU3FsRGF0YVNvdXJjZT4=" />
+  </ComponentStorage>
 </XtraReportsLayoutSerializer>
