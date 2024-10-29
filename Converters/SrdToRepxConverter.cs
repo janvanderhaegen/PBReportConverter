@@ -16,14 +16,22 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
     private int _groupCount;
     private double _globalHeight;
     private double _globalWidth;
-    private bool _globalPageAddedCheck = false;
     private readonly Dictionary<string, int> _globalParams = [];
     private List<(string name, string expression)> _currentComputes = [];
     private List<string> _currentColumns = [];
+
+    // Attributes which may have expressions tied to their value
     private static readonly List<string> _expressionableAttributes = ["visible", "height", "width"];
+
     // Offset is added to account for font options that are not present in DevExpress, causing some text to not fit into the usual dimensions by a couple of pixels
     private static readonly int _labelWidthOffset = 3;
 
+    /// <summary>
+    /// Main public method used to start the conversion of the given file path.
+    /// The method first parses the source file via the initialized PBReportParser, and stores the result into a structure of ContainerModel objects.
+    /// It then initializes the "_global" and "_current" variables, before generating the data source and body of the resulting .repx file.
+    /// </summary>
+    /// <param name="fileName"></param>
     public void GenerateRepxFile(string fileName)
     {
         Console.Write($"Converting {fileName} to .repx");
@@ -53,12 +61,15 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
             var dataWindowAttributes = structure[dataWindowIndex]._attributes;
             WriteStartObject($"<XtraReportsLayoutSerializer SerializerVersion=\"24.1.4.0\" Ref=\"{_ref++}\" ControlType=\"DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral\" Name=\"XtraReport1\" VerticalContentSplitting=\"Smart\" Margins=\"{X(dataWindowAttributes["print.margin.left"])}, {X(dataWindowAttributes["print.margin.right"])}, {Y(dataWindowAttributes["print.margin.top"])}, {Y(dataWindowAttributes["print.margin.bottom"])}\" PaperKind=\"Custom\" PageWidth=\"{parser.ReportWidth + X(dataWindowAttributes["print.margin.left"]) + X(dataWindowAttributes["print.margin.right"])}\" PageHeight=\"{parser.ReportHeight + Y(dataWindowAttributes["print.margin.top"]) + Y(dataWindowAttributes["print.margin.bottom"]) + 200}\" Version=\"24.1\" DataMember=\"Query\" DataSource=\"#Ref-0\">");
 
+            // Extracts the single TableModel object from the structure, to be used for extracting column names and generating the Data Source encoded XML.
             var tableContainer = (TableModel)structure.Where(x => x.GetType() == typeof(TableModel)).ToList()[0];
 
             _currentColumns = GetColumns(tableContainer);
 
+            // Generates input parameters of the report, if there are any present.
             if (tableContainer._attributes.TryGetValue("arguments", out string? value))
-                GenerateParameters(PBFormattingHelper.GetParameters(value));
+                GenerateParameters(GetParameters(value));
+
             GenerateDataSource(tableContainer, 0);
             GenerateBody(structure, dataWindowIndex);
 
@@ -78,6 +89,7 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
         }
         finally
         {
+            // Disposes of the writer and resets the state of the converter, to be ready for the next input file.
             _writer?.Dispose();
 
             _ref = 1;
@@ -89,6 +101,14 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
         }
     }
 
+    /// <summary>
+    /// Fetches list of column names from the parsed TableModel, as they are named in the database.
+    /// If the database and PowerBuilder names are different, it also adds the name mapping to the list of compute values, to be added later in the report.
+    /// As the PowerBuilder elements are using the PowerBuilder column name, but the Data Source needs the original name as it is in the database,
+    /// it's necessary to create this computed value, so as to not break any Text Label links to the Table Columns.
+    /// </summary>
+    /// <param name="tableContainer"></param>
+    /// <returns></returns>
     private List<string> GetColumns(TableModel tableContainer)
     {
         var columns = new List<string>();
@@ -97,11 +117,14 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
         {
             var name = elem._attributes["name"];
             var dbname = elem._attributes["dbname"];
+            
+            // Removes the table name from the column name, if present.
             var tableNameEndIndex = dbname.IndexOf('.');
             if (tableNameEndIndex > 0)
             {
                 dbname = dbname[(tableNameEndIndex + 1)..];
             }
+
             columns.Add(elem._attributes["name"]);
             if(dbname != name)
             {
@@ -111,7 +134,13 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
         return columns;
     }
 
-    public void GenerateBody(List<ContainerModel> structure, int dataWindowIndex)
+    /// <summary>
+    /// Generates the header, footer and detail bands of the report, as well as any existing group headers and footers.
+    /// After this, it generates all the calculated fields from the _currentComputes list, which gets filled up within the methods called by GenerateBody().
+    /// </summary>
+    /// <param name="structure"></param>
+    /// <param name="dataWindowIndex"></param>
+    private void GenerateBody(List<ContainerModel> structure, int dataWindowIndex)
     {
         var dataReportAttributes = structure[dataWindowIndex]._attributes;
         WriteStartObject("<Bands>");
@@ -148,27 +177,41 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
             WriteLine($"<Item{itemCounter++} Ref=\"{_ref++}\" Name=\"{name}\" Expression=\"{expression}\" DataMember=\"Query\" />");
         }
         WriteEndObject("</CalculatedFields>");
+        // Resets the computes after they've been used.
         _currentComputes.Clear();
     }
 
+    /// <summary>
+    /// Generates the SubReport specified within the main report.
+    /// The SubReport needs its entire .repx specification written inside of the main report's body,
+    /// so multiple tmp variables are added to preserve the parent report's configuration state until SubReport generation is completed.
+    /// The method creates a new parser for the SubReport's source file and repeats all the steps present in the generation of the main report.
+    /// After this, it generates the parameter bindings between the input parameters of the SubReport and the input parameters OR result columns of the main report.
+    /// At the end, it returns the configuration state to that of the parent report.
+    /// </summary>
+    /// <param name="subreport"></param>
+    /// <param name="itemCounter"></param>
+    /// <exception cref="Exception">Thrown in file specified in the SubReport's attributes isn't present in the _inputDir.</exception>
     private void GenerateSubReport(ObjectModel subreport, ref int itemCounter)
     {
         var objType = ConvertElementType(subreport._objectType);
         var attributes = subreport._attributes;
 
+        // Generates a transparent rectangle around the SubReport if the border attribute is present
         if (attributes.TryGetValue("border", out var borderStr) && int.TryParse(borderStr, out var border) && border > 0)
         {
             GenerateBorder(attributes, border, ref itemCounter);
         }
 
+        // Preserving the parent report's configuration state in tmp variables
         var tmpHeight = _globalHeight;
         var tmpWidth = _globalWidth;
         var tmpGroupCount = _groupCount;
-        var tmpPageCheck = _globalPageAddedCheck;
         var tmpUom = uom;
         var tmpComputes = new List<(string name, string expression)>(_currentComputes);
         var tmpColumns = new List<string>(_currentColumns);
 
+        // Fetches the first .srd or .p file with the name specified as the SubReport
         var subreportPath = string.Empty;
         var files = new[] { $"{attributes["dataobject"]}.srd", $"{attributes["dataobject"]}.p" }.SelectMany(pattern => Directory.GetFiles(_inputDir, pattern, SearchOption.AllDirectories)).ToArray();
         if (files.Length > 0)
@@ -178,7 +221,7 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
 
         if (subreportPath.Length == 0)
         {
-            throw new Exception($"Source file doesn't exist for subreport: {attributes["dataobject"]}");
+            throw new FileNotFoundException($"Source file doesn't exist for subreport: {attributes["dataobject"]}");
         }
 
         WriteStartObject($"<Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"{objType}\" Name=\"{attributes["dataobject"]}\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\">");
@@ -186,10 +229,10 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
         PBReportParser parser = new(subreportPath);
         var structure = parser.Parse();
 
+        // Sets configuration state to that of the SubReport
         _globalHeight = parser.ReportHeight;
         _globalWidth = parser.ReportWidth;
         _groupCount = parser.GroupCount;
-        _globalPageAddedCheck = false;
         _currentComputes.Clear();
 
         var dataWindowIndex = structure.FindIndex(x => x._objectType == "datawindow");
@@ -208,6 +251,7 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
 
         WriteEndObject("</ReportSource>");
 
+        // nest_arguments are the arguments passed to the SubReport as input parameters.
         if(attributes.TryGetValue("nest_arguments", out var argsString))
         {
             var parameterArguments = GetParameters(attributes["nest_arguments"]);
@@ -216,10 +260,12 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
             foreach (var arg in parameterArguments)
             {
                 var paramName = argList[subItemCounter++];
+                // Checks if input parameter is present in the parent report and binds it to its reference number
                 if (_globalParams.TryGetValue(arg, out var refNum))
                 {
                     WriteLine($"<Item{subItemCounter} Ref=\"{_ref++}\" ParameterName=\"{paramName}\" Parameter=\"#Ref-{refNum}\" />");
                 }
+                // Otherwise, it's bound to a column from the result table
                 else
                 {
                     WriteLine($"<Item{subItemCounter} Ref=\"{_ref++}\" ParameterName=\"{paramName}\" DataMember=\"Query.{arg}\" />");
@@ -230,10 +276,10 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
 
         WriteEndObject($"</Item{itemCounter++}>");
 
+        // Restores parent configuration state
         _globalHeight = tmpHeight;
         _globalWidth = tmpWidth;
         _groupCount = tmpGroupCount;
-        _globalPageAddedCheck = tmpPageCheck;
         uom = tmpUom;
         _currentComputes = tmpComputes;
         _currentColumns = tmpColumns;
@@ -246,6 +292,11 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
         WriteEndObject($"</Item{itemCounter++}>");
     }
 
+    /// <summary>
+    /// Generates the list of input parameters and, if not already present, adds them to the list of known parameters and their reference numbers,
+    /// to be used in SubReport parameter bindings
+    /// </summary>
+    /// <param name="arguments"></param>
     private void GenerateParameters(List<string> arguments)
     {
         WriteStartObject("<Parameters>");
@@ -258,7 +309,14 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
         WriteEndObject("</Parameters>");
     }
 
-    public void GenerateBand(ContainerModel container, ref int itemCounter)
+    /// <summary>
+    /// Generates the given report band.
+    /// Generates all the text elements listed within its specifications first, after which it generates the shapes,
+    /// so as to make sure all the background shapes are shown behind the text.
+    /// </summary>
+    /// <param name="container"></param>
+    /// <param name="itemCounter"></param>
+    private void GenerateBand(ContainerModel container, ref int itemCounter)
     {
         var objType = ConvertElementType(container._objectType);
         if (objType == null)
@@ -270,6 +328,10 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
         int subItemCounter = 1;
         var backgroundShapes = new List<ObjectModel>();
         var height = Y(attributes["height"]);
+
+        // The PowerBuilder summary band is converted into the GroupFooter band.
+        // The GroupFooter's level must be higher than any of the actual Group bands present in the report,
+        // to make sure that it's underneath all of them, as the summary band is supposed to be at the bottom of the report.
         var summaryLevel = container._objectType == "summary" ? $" Level=\"{_groupCount}\"" : "";
 
         WriteStartObject($"<Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"{objType}Band\" Name=\"{container._objectType}\" HeightF=\"{height}\"{SetVisible(height)}{summaryLevel}>");
@@ -294,6 +356,7 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
         WriteEndObject($"</Item{itemCounter++}>");
     }
 
+    // Adds the Visible=False attribute to a band, only if its height is set to 0
     private static string SetVisible(double height)
     {
         if (height > 0)
@@ -303,11 +366,19 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
         return " Visible=\"False\"";
     }
 
-    public void GenerateGroupBands(ContainerModel container, ref int itemCounter)
+    /// <summary>
+    /// PowerBuilder reports have a single group object for both the header and footer bands, the attributes of which are prefixed with header. and trailer. respectively.
+    /// This method generates the header and footer bands separately based on the specifications from the original group object.
+    /// </summary>
+    /// <param name="container"></param>
+    /// <param name="itemCounter"></param>
+    /// <exception cref="Exception"></exception>
+    private void GenerateGroupBands(ContainerModel container, ref int itemCounter)
     {
         var attributes = container._attributes;
         var elements = container._elements;
 
+        // Gets the group's level.
         if (!int.TryParse(attributes["level"], out var level))
         {
             throw new Exception($"Group element {attributes["name"]} is missing level attribute");
@@ -316,9 +387,11 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
         int subItemCounter = 1;
         var backgroundShapes = new List<ObjectModel>();
 
-        // Generate Group Header
+        // Generates Group Header.
         var height = Y(attributes["header.height"]);
         WriteStartObject($"<Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"GroupHeaderBand\" Name=\"groupHeaderBand{attributes["level"]}\" Level=\"{_groupCount - level}\" HeightF=\"{height}\"{SetVisible(height)}>");
+
+        // Generates the fields by which the data is grouped by.
         var groupBy = attributes["by"].Trim('(', ')').Split(',');
         WriteStartObject("<GroupFields>");
         foreach (var elem in groupBy)
@@ -328,6 +401,7 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
         subItemCounter = 1;
         WriteEndObject("</GroupFields>");
         WriteStartObject("<Controls>");
+        // Filters elements of the group for those that contain the prefix "header"
         foreach (var element in elements.Where(x => x._attributes["band"].Contains("header")))
         {
             var objType = ConvertElementType(element._objectType);
@@ -347,12 +421,13 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
         WriteEndObject("</Controls>");
         WriteEndObject($"</Item{itemCounter++}>");
 
-        // Generate Group Footer
+        // Generates Group Footer.
         height = Y(attributes["trailer.height"]);
         WriteStartObject($"<Item{itemCounter} Ref=\"{_ref++}\" ControlType=\"GroupFooterBand\" Name=\"groupFooterBand{attributes["level"]}\" Level=\"{_groupCount - level}\" HeightF=\"{height}\"{SetVisible(height)}>");
         WriteStartObject("<Controls>");
         subItemCounter = 1;
         backgroundShapes.Clear();
+        // Filters elements of the group for those that contain the prefix "trailer"
         foreach (var element in elements.Where(x => x._attributes["band"].Contains("trailer")))
         {
             if (ConvertElementType(element._objectType) == "XRShape")
@@ -372,7 +447,16 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
         WriteEndObject($"</Item{itemCounter++}>");
     }
 
-    public void GenerateElement(ObjectModel element, ref int itemCounter, ContainerModel container)
+    /// <summary>
+    /// Generates an element within a band.
+    /// The method first determines the element's position and dimensions within the container band, and sets its visibility to False if it exceeds the band's dimensions.
+    /// After this, it checks if any of the attributes from _expressionableAttributes have expression definitions within them, and adds them to a list for use in expression bindings.
+    /// Based on the object's type, it generates the appropriate specifications and expression bindings.
+    /// </summary>
+    /// <param name="element"></param>
+    /// <param name="itemCounter"></param>
+    /// <param name="container"></param>
+    private void GenerateElement(ObjectModel element, ref int itemCounter, ContainerModel container)
     {
         var objType = ConvertElementType(element._objectType);
         if (objType == null)
@@ -396,6 +480,8 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
         double containerHeight;
         var band = attributes["band"];
 
+        // The following block of code is for determining where the element fits within the container,
+        // and if it should be visible (in case it's positioned outside of it)
         if (band.Contains("header."))
         {
             containerHeight = Y(container._attributes["header.height"]);
@@ -428,6 +514,7 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
 
         attributes.TryGetValue("format", out var formatString);
 
+        // Checks if expressionable attributes have expressions in them.
         List<(string attr, (string printEvent, string expr))> attrExpressions = [];
         foreach(var attr in _expressionableAttributes)
         {
@@ -494,6 +581,7 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
                     {
                         foreach(var param in _globalParams.Keys)
                         {
+                            // If an input parameter is used in the expression, it needs to be prefixed with '?'
                             if (fixedExpression.Contains(param))
                             {
                                 fixedExpression = fixedExpression.Replace(param, '?' + param);
@@ -526,13 +614,10 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
                 }
             case "compute":
                 {
+                    // There is no expression for a page number in DevExpress, so instead we add the XRPageInfo element, which displays the page number.
                     if(attributes["expression"] == "page()")
                     {
-                        if (!_globalPageAddedCheck)
-                        {
-                            _globalPageAddedCheck = true;
-                            WriteLine($"<Item{itemCounter++} Ref=\"{_ref++}\" ControlType=\"XRPageInfo\" {nameAttr} PageInfo=\"Number\" TextAlignment=\"{ConvertAlignment(attributes["alignment"])}\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\" AnchorVertical=\"Both\" />");
-                        }
+                        WriteLine($"<Item{itemCounter++} Ref=\"{_ref++}\" ControlType=\"XRPageInfo\" {nameAttr} PageInfo=\"Number\" TextAlignment=\"{ConvertAlignment(attributes["alignment"])}\" SizeF=\"{X(attributes["width"])},{Y(attributes["height"])}\" LocationFloat=\"{X(attributes["x"])},{Y(attributes["y"])}\" AnchorVertical=\"Both\" />");
                     }
                     else
                     {
@@ -540,6 +625,7 @@ internal class SrdToRepxConverter(string inputDir, string outputDir)
                         var (printEvent, expression) = Expression(baseExpr);
                         foreach (var param in _globalParams.Keys)
                         {
+                            // If an input parameter is used in the expression, it needs to be prefixed with '?'
                             if (expression.Contains(param))
                             {
                                 expression = expression.Replace(param, '?' + param);

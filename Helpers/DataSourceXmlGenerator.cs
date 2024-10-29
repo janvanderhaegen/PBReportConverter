@@ -77,6 +77,7 @@ internal static class DataSourceXmlGenerator
         return Convert.ToBase64String(Encoding.UTF8.GetBytes(resultString));
     }
 
+    // Fetches all the specified stored procedure parameters via regex (they follow the "@paramName" pattern)
     private static List<string> GetProcedureParams(string query)
     {
         var startIndex = query.IndexOf(';')+1;
@@ -86,6 +87,7 @@ internal static class DataSourceXmlGenerator
         return matches.Select(x => x.Groups[1].Value).ToList();
     }
 
+    // Converts the PowerBuilder sort string into an SQL one.
     private static string ParseSorting(string sortString, TableModel table)
     {
         if(sortString == "")
