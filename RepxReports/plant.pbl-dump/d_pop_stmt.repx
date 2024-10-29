@@ -15,7 +15,7 @@
     <Item1 Ref="10" ControlType="TopMarginBand" Name="TopMargin" HeightF="26" />
     <Item2 Ref="11" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="26" />
     <Item3 Ref="12" ControlType="ReportHeaderBand" Name="header" HeightF="-0" Visible="false" />
-    <Item4 Ref="13" ControlType="GroupHeaderBand" Name="summary" Level="1" HeightF="-0" Visible="false" />
+    <Item4 Ref="13" ControlType="GroupFooterBand" Name="summary" Level="1" HeightF="-0" Visible="false" />
     <Item5 Ref="14" ControlType="ReportFooterBand" Name="footer" HeightF="-0" Visible="false">
       <Controls>
         <Item1 Ref="15" ControlType="XRLabel" Name="t_4" Multiline="true" CanGrow="false" Text="Note:  RETAIN FOR TAX PURPOSES:  DUPLICATES WILL NOT BE FURNISHED." AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="496,15" LocationFloat="-0,2" Font="Arial, 8pt, style=Bold" Visible="false" />
@@ -52,7 +52,7 @@
     </Item5>
     <Item6 Ref="30" ControlType="DetailBand" Name="detail" HeightF="567">
       <Controls>
-        <Item1 Ref="31" ControlType="XRShape" Name="border_1" LineWidth="2" SizeF="263,115" LocationFloat="4,276">
+        <Item1 Ref="31" ControlType="XRShape" Name="border_1" LineWidth="2" SizeF="266,115" LocationFloat="4,276">
           <Shape Ref="32" ShapeName="Rectangle" />
         </Item1>
         <Item2 Ref="33" ControlType="XRSubreport" Name="d_pop_fees" SizeF="263,115" LocationFloat="4,276">
@@ -117,7 +117,7 @@
             </ComponentStorage>
           </ReportSource>
         </Item2>
-        <Item3 Ref="65" ControlType="XRShape" Name="border_3" LineWidth="2" SizeF="231,195" LocationFloat="4,1">
+        <Item3 Ref="65" ControlType="XRShape" Name="border_3" LineWidth="2" SizeF="234,195" LocationFloat="4,1">
           <Shape Ref="66" ShapeName="Rectangle" />
         </Item3>
         <Item4 Ref="67" ControlType="XRSubreport" Name="d_prc_wlhd_smmry" SizeF="231,195" LocationFloat="4,1">
@@ -228,7 +228,7 @@
             </ComponentStorage>
           </ReportSource>
         </Item4>
-        <Item5 Ref="124" ControlType="XRShape" Name="border_5" LineWidth="2" SizeF="813,195" LocationFloat="237,1">
+        <Item5 Ref="124" ControlType="XRShape" Name="border_5" LineWidth="2" SizeF="816,195" LocationFloat="237,1">
           <Shape Ref="125" ShapeName="Rectangle" />
         </Item5>
         <Item6 Ref="126" ControlType="XRSubreport" Name="d_pop_product_smmry" SizeF="813,195" LocationFloat="237,1">
@@ -240,7 +240,7 @@
             <Item5 Ref="131" ParameterName="dwra_ded_pipe" DataMember="Query.ded_pipe" />
             <Item6 Ref="132" ParameterName="dwra_run_datetime" Parameter="#Ref-6" />
           </ParameterBindings>
-          <ReportSource Ref="134" ControlType="PBReportConverter.XtraReports.d_pop_product_smmry, PBReportConverter, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" VerticalContentSplitting="Smart" Margins="25, 25, 26, 26" PaperKind="Custom" PageWidth="863" PageHeight="352" Version="24.1" DataMember="Query" DataSource="#Ref-133">
+          <ReportSource Ref="134" ControlType="PBReportConverter.XtraReports.d_pop_product_smmry, PBReportConverter, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" VerticalContentSplitting="Smart" Margins="25, 25, 26, 26" PaperKind="Custom" PageWidth="878" PageHeight="352" Version="24.1" DataMember="Query" DataSource="#Ref-133">
             <Parameters>
               <Item1 Ref="135" Name="dwra_prod_month" />
               <Item2 Ref="136" Name="dwra_facility_cd" />
@@ -263,9 +263,9 @@
               <Item3 Ref="149" ControlType="ReportHeaderBand" Name="header" HeightF="51">
                 <Controls>
                   <Item1 Ref="150" ControlType="XRLabel" Name="t_3" Multiline="true" CanGrow="false" Text="Component Settlement" AnchorVertical="Both" TextAlignment="MiddleCenter" SizeF="157,15" LocationFloat="291,0" Font="Arial, 8pt, style=Bold" />
-                  <Item2 Ref="151" ControlType="XRLine" Name="l_2" SizeF="682,2" LocationFloat="130,48" />
+                  <Item2 Ref="151" ControlType="XRLine" Name="l_2" SizeF="698,2" LocationFloat="130,48" />
                   <Item3 Ref="152" ControlType="XRLabel" Name="t_13" Multiline="true" CanGrow="false" Text="Units of Measure" AnchorVertical="Both" TextAlignment="MiddleLeft" SizeF="103,15" LocationFloat="138,25" Font="Arial, 8pt" />
-                  <Item4 Ref="153" ControlType="XRLine" Name="l_5" SizeF="812,2" LocationFloat="0,14" />
+                  <Item4 Ref="153" ControlType="XRLine" Name="l_5" SizeF="828,2" LocationFloat="0,14" />
                   <Item5 Ref="154" ControlType="XRLabel" Name="t_10" Multiline="true" CanGrow="false" Text="Contract %" AnchorVertical="Both" TextAlignment="MiddleCenter" SizeF="73,15" LocationFloat="473,25" Font="Arial, 8pt" />
                   <Item6 Ref="155" ControlType="XRLabel" Name="t_4" Multiline="true" CanGrow="false" Text="Settlement" AnchorVertical="Both" TextAlignment="MiddleCenter" SizeF="73,15" LocationFloat="548,25" Font="Arial, 8pt" />
                   <Item7 Ref="156" ControlType="XRLabel" Name="t_2" Multiline="true" CanGrow="false" Text="Price" AnchorVertical="Both" TextAlignment="MiddleLeft" SizeF="28,15" LocationFloat="655,25" Font="Arial, 8pt" />
@@ -275,12 +275,12 @@
                   <Item11 Ref="160" ControlType="XRLabel" Name="t_8" Multiline="true" CanGrow="false" Text="Shrink" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="59,15" LocationFloat="406,25" Font="Arial, 8pt" />
                 </Controls>
               </Item3>
-              <Item4 Ref="161" ControlType="GroupHeaderBand" Name="summary" HeightF="34">
+              <Item4 Ref="161" ControlType="GroupFooterBand" Name="summary" HeightF="34">
                 <Controls>
                   <Item1 Ref="162" ControlType="XRLabel" Name="t_12" Multiline="true" CanGrow="false" Text="Subtotal - Liquids" AnchorVertical="Both" TextAlignment="MiddleLeft" SizeF="90,15" LocationFloat="4,17" Font="Arial, 8pt" />
                   <Item2 Ref="163" ControlType="XRLine" Name="l_4" SizeF="249,2" LocationFloat="226,13" />
                   <Item3 Ref="164" ControlType="XRLine" Name="l_1" SizeF="77,2" LocationFloat="544,13" />
-                  <Item4 Ref="165" ControlType="XRLine" Name="l_3" SizeF="81,2" LocationFloat="706,13" />
+                  <Item4 Ref="165" ControlType="XRLine" Name="l_3" SizeF="87,2" LocationFloat="706,13" />
                   <Item5 Ref="166" ControlType="XRLabel" Name="compute_1_field" TextFormatString="{0:#,##0}" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="61,17" LocationFloat="555,18" Font="Arial, 7pt">
                     <ExpressionBindings>
                       <Item1 Ref="167" EventName="BeforePrint" PropertyName="Text" Expression="[compute_1]" />
@@ -308,50 +308,50 @@
                   </Item9>
                 </Controls>
               </Item4>
-              <Item5 Ref="176" ControlType="ReportFooterBand" Name="footer" HeightF="2" />
-              <Item6 Ref="177" ControlType="DetailBand" Name="detail" HeightF="18">
+              <Item5 Ref="176" ControlType="ReportFooterBand" Name="footer" HeightF="0" Visible="false" />
+              <Item6 Ref="177" ControlType="DetailBand" Name="detail" HeightF="15">
                 <Controls>
-                  <Item1 Ref="178" ControlType="XRLabel" Name="description" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleLeft" SizeF="113,16" LocationFloat="17,1" Font="Arial, 8pt">
+                  <Item1 Ref="178" ControlType="XRLabel" Name="description" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleLeft" SizeF="113,13" LocationFloat="17,1" Font="Arial, 8pt">
                     <ExpressionBindings>
                       <Item1 Ref="179" EventName="BeforePrint" PropertyName="Text" Expression="[description]" />
                     </ExpressionBindings>
                   </Item1>
-                  <Item2 Ref="180" ControlType="XRLabel" Name="units" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleLeft" SizeF="79,15" LocationFloat="148,1" Font="Arial, 7pt">
+                  <Item2 Ref="180" ControlType="XRLabel" Name="units" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleLeft" SizeF="79,12" LocationFloat="148,1" Font="Arial, 7pt">
                     <ExpressionBindings>
                       <Item1 Ref="181" EventName="BeforePrint" PropertyName="Text" Expression="[units]" />
                     </ExpressionBindings>
                   </Item2>
-                  <Item3 Ref="182" ControlType="XRLabel" Name="price" TextFormatString="{0:#0.0000000}" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="67,15" LocationFloat="619,1" Font="Arial, 7pt">
+                  <Item3 Ref="182" ControlType="XRLabel" Name="price" TextFormatString="{0:#0.0000000}" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="67,12" LocationFloat="619,1" Font="Arial, 7pt">
                     <ExpressionBindings>
                       <Item1 Ref="183" EventName="BeforePrint" PropertyName="Text" Expression="[price]" />
                     </ExpressionBindings>
                   </Item3>
-                  <Item4 Ref="184" ControlType="XRLabel" Name="value_field" TextFormatString="{0:$#,##0.00}" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="88,15" LocationFloat="694,1" Font="Arial, 7pt">
+                  <Item4 Ref="184" ControlType="XRLabel" Name="value_field" TextFormatString="{0:$#,##0.00}" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="88,12" LocationFloat="694,1" Font="Arial, 7pt">
                     <ExpressionBindings>
                       <Item1 Ref="185" EventName="BeforePrint" PropertyName="Text" Expression="[value]" />
                     </ExpressionBindings>
                   </Item4>
-                  <Item5 Ref="186" ControlType="XRLabel" Name="all_gal" TextFormatString="{0:#,##0}" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="72,15" LocationFloat="311,1" Font="Arial, 7pt">
+                  <Item5 Ref="186" ControlType="XRLabel" Name="all_gal" TextFormatString="{0:#,##0}" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="72,12" LocationFloat="311,1" Font="Arial, 7pt">
                     <ExpressionBindings>
                       <Item1 Ref="187" EventName="BeforePrint" PropertyName="Text" Expression="[all_gal]" />
                     </ExpressionBindings>
                   </Item5>
-                  <Item6 Ref="188" ControlType="XRLabel" Name="mmbtu_shr" TextFormatString="{0:#,##0}" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="72,15" LocationFloat="389,1" Font="Arial, 7pt" Visible="false">
+                  <Item6 Ref="188" ControlType="XRLabel" Name="mmbtu_shr" TextFormatString="{0:#,##0}" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="72,12" LocationFloat="389,1" Font="Arial, 7pt" Visible="false">
                     <ExpressionBindings>
                       <Item1 Ref="189" EventName="BeforePrint" PropertyName="Text" Expression="[mmbtu_shr]" />
                     </ExpressionBindings>
                   </Item6>
-                  <Item7 Ref="190" ControlType="XRLabel" Name="inlet_theo" TextFormatString="{0:#,##0}" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="72,15" LocationFloat="236,1" Font="Arial, 7pt" Visible="false">
+                  <Item7 Ref="190" ControlType="XRLabel" Name="inlet_theo" TextFormatString="{0:#,##0}" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="72,12" LocationFloat="236,1" Font="Arial, 7pt" Visible="false">
                     <ExpressionBindings>
                       <Item1 Ref="191" EventName="BeforePrint" PropertyName="Text" Expression="[inlet_theo]" />
                     </ExpressionBindings>
                   </Item7>
-                  <Item8 Ref="192" ControlType="XRLabel" Name="cust_gal" TextFormatString="{0:#,##0}" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="61,15" LocationFloat="555,1" Font="Arial, 7pt">
+                  <Item8 Ref="192" ControlType="XRLabel" Name="cust_gal" TextFormatString="{0:#,##0}" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="61,12" LocationFloat="555,1" Font="Arial, 7pt">
                     <ExpressionBindings>
                       <Item1 Ref="193" EventName="BeforePrint" PropertyName="Text" Expression="[cust_gal]" />
                     </ExpressionBindings>
                   </Item8>
-                  <Item9 Ref="194" ControlType="XRLabel" Name="per_share" TextFormatString="{0:##0.00%}" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="61,16" LocationFloat="474,1" Font="Arial, 7pt">
+                  <Item9 Ref="194" ControlType="XRLabel" Name="per_share" TextFormatString="{0:##0.00%}" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="61,13" LocationFloat="474,1" Font="Arial, 7pt">
                     <ExpressionBindings>
                       <Item1 Ref="195" EventName="BeforePrint" PropertyName="Text" Expression="[per_share]" />
                     </ExpressionBindings>
@@ -369,7 +369,7 @@
             <Item1 Ref="197" EventName="BeforePrint" PropertyName="Text" Expression="[sellers_wi]" />
           </ExpressionBindings>
         </Item7>
-        <Item8 Ref="198" ControlType="XRShape" Name="border_8" LineWidth="2" SizeF="498,126" LocationFloat="548,276">
+        <Item8 Ref="198" ControlType="XRShape" Name="border_8" LineWidth="2" SizeF="501,126" LocationFloat="548,276">
           <Shape Ref="199" ShapeName="Rectangle" />
         </Item8>
         <Item9 Ref="200" ControlType="XRSubreport" Name="d_pop_contact" SizeF="498,126" LocationFloat="548,276">
@@ -407,7 +407,7 @@
             </ComponentStorage>
           </ReportSource>
         </Item9>
-        <Item10 Ref="216" ControlType="XRShape" Name="border_10" LineWidth="2" SizeF="263,169" LocationFloat="4,393">
+        <Item10 Ref="216" ControlType="XRShape" Name="border_10" LineWidth="2" SizeF="266,169" LocationFloat="4,393">
           <Shape Ref="217" ShapeName="Rectangle" />
         </Item10>
         <Item11 Ref="218" ControlType="XRSubreport" Name="d_pop_plant_smmry" SizeF="263,169" LocationFloat="4,393">
@@ -470,7 +470,7 @@
             <Item1 Ref="249" EventName="BeforePrint" PropertyName="Text" Expression="[station_notes]" />
           </ExpressionBindings>
         </Item15>
-        <Item16 Ref="250" ControlType="XRShape" Name="border_16" LineWidth="2" SizeF="275,286" LocationFloat="270,276">
+        <Item16 Ref="250" ControlType="XRShape" Name="border_16" LineWidth="2" SizeF="278,286" LocationFloat="270,276">
           <Shape Ref="251" ShapeName="Rectangle" />
         </Item16>
         <Item17 Ref="252" ControlType="XRSubreport" Name="d_pop_ga" SizeF="275,286" LocationFloat="270,276">
@@ -632,7 +632,7 @@
           </ReportSource>
         </Item17>
         <Item18 Ref="331" ControlType="XRLine" Name="l_5" LineDirection="Vertical" SizeF="2,119" LocationFloat="4,273" />
-        <Item19 Ref="332" ControlType="XRShape" Name="border_19" LineWidth="2" SizeF="1044,74" LocationFloat="4,199">
+        <Item19 Ref="332" ControlType="XRShape" Name="border_19" LineWidth="2" SizeF="1047,74" LocationFloat="4,199">
           <Shape Ref="333" ShapeName="Rectangle" />
         </Item19>
         <Item20 Ref="334" ControlType="XRSubreport" Name="d_pop_residue" SizeF="1044,74" LocationFloat="4,199">
@@ -772,7 +772,7 @@
       <Controls>
         <Item1 Ref="409" ControlType="XRLabel" Name="t_2" Multiline="true" CanGrow="false" Text="PERCENT OF PROCEEDS STATEMENT" AnchorVertical="Both" TextAlignment="MiddleCenter" SizeF="265,17" LocationFloat="337,3" Font="Arial, 10pt" />
         <Item2 Ref="410" ControlType="XRLabel" Name="t_3" Multiline="true" CanGrow="false" Text="Lease Information" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="93,14" LocationFloat="516,34" Font="Arial, 8pt" />
-        <Item3 Ref="411" ControlType="XRShape" Name="xrShape1" LineWidth="2" SizeF="851,81" LocationFloat="196,97">
+        <Item3 Ref="411" ControlType="XRShape" Name="xrShape1" LineWidth="2" SizeF="856,81" LocationFloat="196,97">
           <Shape Ref="412" ShapeName="Rectangle" />
         </Item3>
         <Item4 Ref="413" ControlType="XRSubreport" Name="d_pop_smmry" SizeF="851,81" LocationFloat="196,97">
@@ -1028,7 +1028,7 @@
             <Item1 Ref="548" EventName="BeforePrint" PropertyName="Text" Expression="[compute_3]" />
           </ExpressionBindings>
         </Item33>
-        <Item34 Ref="549" ControlType="XRShape" Name="r_1" FillColor="Gray" SizeF="852,65" LocationFloat="195,32">
+        <Item34 Ref="549" ControlType="XRShape" Name="r_1" FillColor="Gray" SizeF="856,65" LocationFloat="195,32">
           <Shape Ref="550" ShapeName="Rectangle" />
         </Item34>
       </Controls>

@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="24.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Name="rpt_plant_stmt_mtr_plant_ngl_summary" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="883" PageHeight="310" Version="24.1" DataMember="Query" DataSource="#Ref-0">
+  <Parameters>
+    <Item1 Ref="3" Name="prod_month" />
+    <Item2 Ref="4" Name="proc_pipe" />
+    <Item3 Ref="5" Name="run_datetime" />
+  </Parameters>
+  <Bands>
+    <Item1 Ref="6" ControlType="TopMarginBand" Name="TopMargin" HeightF="25" />
+    <Item2 Ref="7" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="25" />
+    <Item3 Ref="8" ControlType="ReportHeaderBand" Name="header" HeightF="39">
+      <Controls>
+        <Item1 Ref="9" ControlType="XRLine" Name="xrLine3" SizeF="833,2" LocationFloat="0,37" />
+        <Item2 Ref="10" ControlType="XRLine" Name="xrLine2" SizeF="833,2" LocationFloat="0,20" />
+        <Item3 Ref="11" ControlType="XRLine" Name="xrLine1" SizeF="833,2" LocationFloat="0,1" />
+        <Item4 Ref="12" ControlType="XRLabel" Name="t_1_label" Multiline="true" CanGrow="false" Text="Plant Product Volumes" AnchorVertical="Both" TextAlignment="MiddleLeft" SizeF="172,19" LocationFloat="4,1" Font="Tahoma, 10pt, style=Bold" />
+        <Item5 Ref="13" ControlType="XRLabel" Name="eth_theo_t_label" Multiline="true" CanGrow="false" Text="Eth Theo" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="69,16" LocationFloat="13,22" Font="Tahoma, 8pt" />
+        <Item6 Ref="14" ControlType="XRLabel" Name="ethane_t_label" Multiline="true" CanGrow="false" Text="Ethane" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="69,16" LocationFloat="86,22" Font="Tahoma, 8pt" />
+        <Item7 Ref="15" ControlType="XRLabel" Name="pro_theo_t_label" Multiline="true" CanGrow="false" Text="Pro Theo" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="69,16" LocationFloat="179,22" Font="Tahoma, 8pt" />
+        <Item8 Ref="16" ControlType="XRLabel" Name="propane_t_label" Multiline="true" CanGrow="false" Text="Propane" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="76,16" LocationFloat="254,22" Font="Tahoma, 8pt" />
+        <Item9 Ref="17" ControlType="XRLabel" Name="i_but_theo_t_label" Multiline="true" CanGrow="false" Text="I-But Theo" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="82,16" LocationFloat="332,22" Font="Tahoma, 8pt" />
+        <Item10 Ref="18" ControlType="XRLabel" Name="i_butane_t_label" Multiline="true" CanGrow="false" Text="I-Butane" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="82,16" LocationFloat="411,22" Font="Tahoma, 8pt" />
+        <Item11 Ref="19" ControlType="XRLabel" Name="n_but_theo_t_label" Multiline="true" CanGrow="false" Text="N-But Theo" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="82,16" LocationFloat="495,22" Font="Tahoma, 8pt" />
+        <Item12 Ref="20" ControlType="XRLabel" Name="n_butane_t_label" Multiline="true" CanGrow="false" Text="N-Butane" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="82,16" LocationFloat="575,22" Font="Tahoma, 8pt" />
+        <Item13 Ref="21" ControlType="XRLabel" Name="nat_theo_t_label" Multiline="true" CanGrow="false" Text="Nat Theo" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="82,16" LocationFloat="662,22" Font="Tahoma, 8pt" />
+        <Item14 Ref="22" ControlType="XRLabel" Name="nat_gas_t_label" Multiline="true" CanGrow="false" Text="Nat Gas" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="82,16" LocationFloat="749,22" Font="Tahoma, 8pt" />
+      </Controls>
+    </Item3>
+    <Item4 Ref="23" ControlType="GroupFooterBand" Name="summary" HeightF="0" Visible="false" />
+    <Item5 Ref="24" ControlType="ReportFooterBand" Name="footer" HeightF="0" Visible="false" />
+    <Item6 Ref="25" ControlType="DetailBand" Name="detail" HeightF="24">
+      <Controls>
+        <Item1 Ref="26" ControlType="XRLine" Name="xrLine4" SizeF="833,2" LocationFloat="0,22" />
+        <Item2 Ref="27" ControlType="XRLabel" Name="eth_theo_label" TextFormatString="{0:#,##0}" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="79,21" LocationFloat="6,3" Font="Tahoma, 8pt">
+          <ExpressionBindings>
+            <Item1 Ref="28" EventName="BeforePrint" PropertyName="Text" Expression="[eth_theo]" />
+          </ExpressionBindings>
+        </Item2>
+        <Item3 Ref="29" ControlType="XRLabel" Name="ethane_label" TextFormatString="{0:#,##0}" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="79,21" LocationFloat="87,3" Font="Tahoma, 8pt">
+          <ExpressionBindings>
+            <Item1 Ref="30" EventName="BeforePrint" PropertyName="Text" Expression="[ethane]" />
+          </ExpressionBindings>
+        </Item3>
+        <Item4 Ref="31" ControlType="XRLabel" Name="pro_theo_label" TextFormatString="{0:#,##0}" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="79,21" LocationFloat="169,2" Font="Tahoma, 8pt">
+          <ExpressionBindings>
+            <Item1 Ref="32" EventName="BeforePrint" PropertyName="Text" Expression="[pro_theo]" />
+          </ExpressionBindings>
+        </Item4>
+        <Item5 Ref="33" ControlType="XRLabel" Name="propane_label" TextFormatString="{0:#,##0}" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="79,21" LocationFloat="250,3" Font="Tahoma, 8pt">
+          <ExpressionBindings>
+            <Item1 Ref="34" EventName="BeforePrint" PropertyName="Text" Expression="[propane]" />
+          </ExpressionBindings>
+        </Item5>
+        <Item6 Ref="35" ControlType="XRLabel" Name="i_but_theo_label" TextFormatString="{0:#,##0}" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="79,21" LocationFloat="333,3" Font="Tahoma, 8pt">
+          <ExpressionBindings>
+            <Item1 Ref="36" EventName="BeforePrint" PropertyName="Text" Expression="[i_but_theo]" />
+          </ExpressionBindings>
+        </Item6>
+        <Item7 Ref="37" ControlType="XRLabel" Name="i_butane_label" TextFormatString="{0:#,##0}" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="79,21" LocationFloat="414,3" Font="Tahoma, 8pt">
+          <ExpressionBindings>
+            <Item1 Ref="38" EventName="BeforePrint" PropertyName="Text" Expression="[i_butane]" />
+          </ExpressionBindings>
+        </Item7>
+        <Item8 Ref="39" ControlType="XRLabel" Name="n_but_theo_label" TextFormatString="{0:#,##0}" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="79,21" LocationFloat="498,2" Font="Tahoma, 8pt">
+          <ExpressionBindings>
+            <Item1 Ref="40" EventName="BeforePrint" PropertyName="Text" Expression="[n_but_theo]" />
+          </ExpressionBindings>
+        </Item8>
+        <Item9 Ref="41" ControlType="XRLabel" Name="n_butane_label" TextFormatString="{0:#,##0}" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="79,21" LocationFloat="583,2" Font="Tahoma, 8pt">
+          <ExpressionBindings>
+            <Item1 Ref="42" EventName="BeforePrint" PropertyName="Text" Expression="[n_butane]" />
+          </ExpressionBindings>
+        </Item9>
+        <Item10 Ref="43" ControlType="XRLabel" Name="nat_theo_label" TextFormatString="{0:#,##0}" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="79,21" LocationFloat="666,2" Font="Tahoma, 8pt">
+          <ExpressionBindings>
+            <Item1 Ref="44" EventName="BeforePrint" PropertyName="Text" Expression="[nat_theo]" />
+          </ExpressionBindings>
+        </Item10>
+        <Item11 Ref="45" ControlType="XRLabel" Name="nat_gas_label" TextFormatString="{0:#,##0}" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="79,21" LocationFloat="751,2" Font="Tahoma, 8pt">
+          <ExpressionBindings>
+            <Item1 Ref="46" EventName="BeforePrint" PropertyName="Text" Expression="[nat_gas]" />
+          </ExpressionBindings>
+        </Item11>
+      </Controls>
+    </Item6>
+  </Bands>
+  <ComponentStorage>
+    <Item1 Ref="0" ObjectType="DevExpress.DataAccess.Sql.SqlDataSource,DevExpress.DataAccess.v24.1" Name="sqlDataSource1" Base64="PFNxbERhdGFTb3VyY2UgTmFtZT0ic3FsRGF0YVNvdXJjZTEiPjxDb25uZWN0aW9uIE5hbWU9IlRJRVMgRGF0YSIgRnJvbUFwcENvbmZpZz0idHJ1ZSIgLz48UXVlcnkgVHlwZT0iU3RvcmVkUHJvY1F1ZXJ5IiBOYW1lPSJRdWVyeSI+PFBhcmFtZXRlciBOYW1lPSJAcHJvZF9tb250aCIgVHlwZT0iRGV2RXhwcmVzcy5EYXRhQWNjZXNzLkV4cHJlc3Npb24iPihTeXN0ZW0uRGF0ZVRpbWUpKD9wcm9kX21vbnRoKTwvUGFyYW1ldGVyPjxQYXJhbWV0ZXIgTmFtZT0iQHByb2NfcGlwZSIgVHlwZT0iRGV2RXhwcmVzcy5EYXRhQWNjZXNzLkV4cHJlc3Npb24iPihTeXN0ZW0uU3RyaW5nKSg/cHJvY19waXBlKTwvUGFyYW1ldGVyPjxQYXJhbWV0ZXIgTmFtZT0iQHJ1bl9kYXRldGltZSIgVHlwZT0iRGV2RXhwcmVzcy5EYXRhQWNjZXNzLkV4cHJlc3Npb24iPihTeXN0ZW0uRGF0ZVRpbWUpKD9ydW5fZGF0ZXRpbWUpPC9QYXJhbWV0ZXI+PFByb2NOYW1lPnBsYW50X3N0bXRfbXRyX3BsYW50X25nbF9zdW1tYXJ5X3NwPC9Qcm9jTmFtZT48L1F1ZXJ5PjxSZXN1bHRTY2hlbWE+PERhdGFTZXQgTmFtZT0ic3FsRGF0YVNvdXJjZTEiPjxWaWV3IE5hbWU9IlF1ZXJ5Ij48RmllbGQgTmFtZT0iZXRoX3RoZW8iIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iZXRoYW5lIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9InByb190aGVvIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9InByb3BhbmUiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iaV9idXRfdGhlbyIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJpX2J1dGFuZSIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJuX2J1dF90aGVvIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9Im5fYnV0YW5lIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9Im5hdF90aGVvIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9Im5hdF9nYXMiIFR5cGU9IlN0cmluZyIgLz48L1ZpZXc+PC9EYXRhU2V0PjwvUmVzdWx0U2NoZW1hPjxDb25uZWN0aW9uT3B0aW9ucyBDbG9zZUNvbm5lY3Rpb249InRydWUiIC8+PC9TcWxEYXRhU291cmNlPg==" />
+  </ComponentStorage>
+</XtraReportsLayoutSerializer>

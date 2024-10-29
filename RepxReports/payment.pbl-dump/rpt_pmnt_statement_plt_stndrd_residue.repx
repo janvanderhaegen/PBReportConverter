@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<XtraReportsLayoutSerializer SerializerVersion="24.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral" Name="XtraReport1" VerticalContentSplitting="Smart" Margins="25, 25, 26, 26" PaperKind="Custom" PageWidth="1062" PageHeight="323" Version="24.1" DataMember="Query" DataSource="#Ref-0">
+<XtraReportsLayoutSerializer SerializerVersion="24.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral" Name="XtraReport1" VerticalContentSplitting="Smart" Margins="25, 25, 26, 26" PaperKind="Custom" PageWidth="1086" PageHeight="323" Version="24.1" DataMember="Query" DataSource="#Ref-0">
 	<Parameters>
 		<Item1 Ref="2" Name="dwra_prod_month"/>
 		<Item2 Ref="3" Name="dwra_facility_code"/>
@@ -24,8 +24,8 @@ MMBTU" SizeF="79,25" LocationFloat="4,24" AnchorVertical="Both" Font="Arial, 7pt
 Value" SizeF="50,25" LocationFloat="962,24" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
 				<Item6 Ref="15" ControlType="XRLabel" Name="t_17" TextAlignment="MiddleCenter" Multiline="true" Text="Settlement
 Residue" SizeF="62,25" LocationFloat="792,24" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
-				<Item7 Ref="16" ControlType="XRLine" Name="l_2" FillColor="255,128,128,128" SizeF="1012,1" LocationFloat="-0,19"  LineDirection="Horizontal" Visible="True"/>
-				<Item8 Ref="17" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="1012,1" LocationFloat="-0,51"  LineDirection="Horizontal" Visible="True"/>
+				<Item7 Ref="16" ControlType="XRLine" Name="l_2" FillColor="255,128,128,128" SizeF="1036,1" LocationFloat="-0,19"  LineDirection="Horizontal" Visible="True"/>
+				<Item8 Ref="17" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="1036,1" LocationFloat="-0,51"  LineDirection="Horizontal" Visible="True"/>
 				<Item9 Ref="18" ControlType="XRLabel" Name="t_9" TextAlignment="MiddleCenter" Multiline="true" Text="Theoretical
 Residue" SizeF="64,25" LocationFloat="236,24" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
 				<Item10 Ref="19" ControlType="XRLabel" Name="t_2" TextAlignment="MiddleCenter" Multiline="true" Text="Allocated
@@ -40,7 +40,7 @@ MCF" SizeF="70,25" LocationFloat="502,24" AnchorVertical="Both" Font="Arial, 7pt
 				<Item15 Ref="24" ControlType="XRLabel" Name="t_k_percent" TextAlignment="MiddleCenter" Multiline="true" Text="Contract %" SizeF="77,13" LocationFloat="699,36" AnchorVertical="Both" Font="Arial, 7pt" Visible="True"/>
 			</Controls>
 		</Item3>
-		<Item4 Ref="25" ControlType="GroupHeaderBand" Name="summary" HeightF="-0" Visible="False" Level="0">
+		<Item4 Ref="25" ControlType="GroupFooterBand" Name="summary" HeightF="-0" Visible="False" Level="0">
 			<Controls>
 			</Controls>
 		</Item4>

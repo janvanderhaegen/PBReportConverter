@@ -44,21 +44,29 @@ internal static class DataSourceXmlGenerator
 
         foreach (var paramName in parameters)
         {
-            _writer.WriteLine($"<Parameter Name=\"@{paramName}\" Type=\"DevExpress.DataAccess.Expression\">(System.String)(?{paramName})</Parameter>");
+            var paramType = paramName.Contains("month") || paramName.Contains("date") ? "System.DateTime" : "System.String";
+            _writer.WriteLine($"<Parameter Name=\"@{paramName}\" Type=\"DevExpress.DataAccess.Expression\">({paramType})(?{paramName})</Parameter>");
         }
 
         _writer.WriteLine("</Query>");
 
         _writer.WriteLine("<ResultSchema>");
         _writer.WriteLine("<DataSet Name =\"sqlDataSource1\">");
-        _writer.WriteLine($"<View Name=\"Query\">");
 
+        _writer.WriteLine($"<View Name=\"Query\">");
         foreach (var column in table._columns)
         {
             var colAttributes = column._attributes;
-            _writer.WriteLine($"<Field Name=\"{colAttributes["name"]}\" Type=\"String\" />");
+            var name = colAttributes["dbname"];
+            var tableNameEndIndex = name.IndexOf('.');
+            if (tableNameEndIndex > 0)
+            {
+                name = name[(tableNameEndIndex + 1)..];
+            }
+            _writer.WriteLine($"<Field Name=\"{name}\" Type=\"String\" />");
         }
         _writer.WriteLine("</View>");
+
         _writer.WriteLine("</DataSet>");
         _writer.WriteLine("</ResultSchema>");
         _writer.WriteLine("<ConnectionOptions CloseConnection=\"true\" />");
@@ -69,6 +77,7 @@ internal static class DataSourceXmlGenerator
         return Convert.ToBase64String(Encoding.UTF8.GetBytes(resultString));
     }
 
+    // Fetches all the specified stored procedure parameters via regex (they follow the "@paramName" pattern)
     private static List<string> GetProcedureParams(string query)
     {
         var startIndex = query.IndexOf(';')+1;
@@ -78,6 +87,7 @@ internal static class DataSourceXmlGenerator
         return matches.Select(x => x.Groups[1].Value).ToList();
     }
 
+    // Converts the PowerBuilder sort string into an SQL one.
     private static string ParseSorting(string sortString, TableModel table)
     {
         if(sortString == "")
@@ -100,13 +110,34 @@ internal static class DataSourceXmlGenerator
         return "ORDER BY " + string.Join(',', sortList);
     }
 
+    /// <summary>
+    /// Extracts the name of the Stored Procedure from the PowerBuilder command that invokes it.
+    /// The format in question is: "1 execute [name_of_procedure];1 [list_of_arguments]".
+    /// <example>
+    /// The text:
+    /// "1 execute contract_brief_pur_sp;1 @query_date = :query_date, @cpty_ba_nbr = :cpty_ba_nbr, @contract_nbr = :contract_nbr"
+    /// returns:
+    /// "contract_brief_pur_sp"
+    /// </example>
+    /// </summary>
+    /// <param name="query"></param>
+    /// <returns>Name of Stored Procedure used in the DataSource</returns>
     private static string GetProcedureName(string query)
     {
         var startIndex = query.EndIndexOf("execute ");
         var endIndex = query.IndexOf(';');
-        return query[startIndex..endIndex];
+        var procedureFullName = query[startIndex..endIndex];
+        var dotIndex = procedureFullName.IndexOf('.');
+        if(dotIndex != -1)
+        {
+            return procedureFullName[(dotIndex + 1)..];
+        }
+        return procedureFullName;
     }
 
+    /// <param name="source"></param>
+    /// <param name="value"></param>
+    /// <returns>First index after the given string value.</returns>
     private static int EndIndexOf(this string source, string value)
     {
         int index = source.IndexOf(value);

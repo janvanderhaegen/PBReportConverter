@@ -15,7 +15,7 @@
 			<Controls>
 			</Controls>
 		</Item3>
-		<Item4 Ref="8" ControlType="GroupHeaderBand" Name="summary" HeightF="-0" Visible="False" Level="0">
+		<Item4 Ref="8" ControlType="GroupFooterBand" Name="summary" HeightF="-0" Visible="False" Level="0">
 			<Controls>
 			</Controls>
 		</Item4>

@@ -2,10 +2,22 @@
 
 namespace PBReportConverter.Helpers;
 
+/// <summary>
+/// Static helper class containing various methods for format conversion between PowerBuilder and DevExpress
+/// </summary>
 internal static class PBFormattingHelper
 {
+    // Unit of measure provided by the converter.
+    // The possible units are:
+    // 0 - PowerBuilder Unit
+    // 1 - Display pixels
+    // 2 - 1/1000 of a logical inch
+    // 3 - 1/1000 of a logical centimeter
     public static int uom;
+
     private static readonly PBExpressionParser _parser = new();
+
+    // Converts the provided X-coordinate number in string form into the equivalent number in hundredths of an inch, which is the default unit of measure for DevExpress.
     public static double X(string value)
     {
         if (!double.TryParse(value.Split("~t")[0], out var numValue))
@@ -22,6 +34,7 @@ internal static class PBFormattingHelper
         };
     }
 
+    // Converts the provided Y-coordinate number in string form into the equivalent number in hundredths of an inch, which is the default unit of measure for DevExpress.
     public static double Y(string value)
     {
         if (!double.TryParse(value.Split("~t")[0], out var numValue))
@@ -38,6 +51,7 @@ internal static class PBFormattingHelper
         };
     }
 
+    // Checks if value has expression string and returns it in the DevExpress format if so.
     public static (string printEvent, string expr) CheckForExpressionString(string value)
     {
         var splitString = value.Split("~t");
@@ -50,11 +64,13 @@ internal static class PBFormattingHelper
         return Expression(splitString[1]);
     }
 
+    // Parses and converts the given PowerBuilder expression into its DevExpress equivalent
     public static (string printEvent, string expr) Expression(string expression)
     {
         return _parser.Parse(expression);
     }
 
+    // Maps PowerBuilder attribute into its DevExpress equivalent
     public static string MapAttr(string attr)
     {
         return attr switch
@@ -66,6 +82,7 @@ internal static class PBFormattingHelper
         };
     }
 
+    // Returns DevExpress equivalent of the text format string
     public static string FixFormattingString(string? value)
     {
         if (string.IsNullOrEmpty(value) || value.Equals("[general]", StringComparison.CurrentCultureIgnoreCase))
@@ -73,9 +90,29 @@ internal static class PBFormattingHelper
             return "";
         }
 
-        var formatStr = value.Split("~t")[0];
+        if(value.Equals("[shortdate]", StringComparison.CurrentCultureIgnoreCase))
+        {
+            return "dd-MM-yyyy";
+        }
 
-        return $"{{0:{formatStr.ToLower().Replace("mm", "MM")}}}";
+        var formatStr = value.Split("~t")[0];
+        Span<char> newFormatStr = stackalloc char[formatStr.Length];
+        int pos = 0;
+        foreach(char c in formatStr)
+        {
+            // TODO find way to discern between ms representing months and ms representing minutes
+            // Until then, double-check any datetime formatting strings in the .repx files, as months should be represented with M and minutes with m.
+            if(c == 'm')
+            {
+                newFormatStr[pos++] = 'M';
+            }
+            else
+            {
+                newFormatStr[pos++] = Char.ToLower(c);
+            }
+        }
+
+        return $"{{0:{newFormatStr[..pos].ToString()}}}";
     }
 
     public static string? ConvertElementType(string ctrlType)
@@ -85,7 +122,7 @@ internal static class PBFormattingHelper
             "header" => "ReportHeader",
             "footer" => "ReportFooter",
             "detail" => "Detail",
-            "summary" => "GroupHeader",
+            "summary" => "GroupFooter",
             "report" => "XRSubreport",
             "line" => "XRLine",
             "group" => ctrlType,
@@ -95,6 +132,7 @@ internal static class PBFormattingHelper
         };
     }
 
+    // Converts encoded color code number into an RGB representation used in DevExpress.
     public static string Color(string colorCode)
     {
         if (colorCode == "")
@@ -112,6 +150,7 @@ internal static class PBFormattingHelper
         return $"255,{red},{green},{blue}";
     }
 
+    // Fetches text alignment
     public static string ConvertAlignment(string alignment)
     {
         return alignment switch
@@ -124,6 +163,7 @@ internal static class PBFormattingHelper
         };
     }
 
+    // Gets list of subreport input parameters
     public static List<string> GetParameters(string paramString)
     {
         var parameters = new List<string>();

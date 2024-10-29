@@ -21,7 +21,7 @@
 				<Item4 Ref="13" ControlType="XRLine" Name="l_1" FillColor="255,128,128,128" SizeF="256,-23" LocationFloat="-0,41"  LineDirection="Horizontal" Visible="False"/>
 			</Controls>
 		</Item3>
-		<Item4 Ref="14" ControlType="GroupHeaderBand" Name="summary" HeightF="-0" Visible="False" Level="0">
+		<Item4 Ref="14" ControlType="GroupFooterBand" Name="summary" HeightF="-0" Visible="False" Level="0">
 			<Controls>
 			</Controls>
 		</Item4>

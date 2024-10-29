@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="24.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Name="rpt_plant_stmt_mtr_ga" VerticalContentSplitting="Smart" Margins="25, 25, 25, 25" PaperKind="Custom" PageWidth="195" PageHeight="482" Version="24.1" DataMember="Query" DataSource="#Ref-0">
+  <Parameters>
+    <Item1 Ref="3" Name="dwra_plant_facility_code" />
+    <Item2 Ref="4" Name="dwra_prod_month" />
+    <Item3 Ref="5" Name="dwra_proc_k" />
+    <Item4 Ref="6" Name="dwra_source_sta" />
+    <Item5 Ref="7" Name="dwra_source_pipeline" />
+    <Item6 Ref="8" Name="dwra_run_datetime" />
+  </Parameters>
+  <CalculatedFields>
+    <Item1 Ref="9" Name="gas_analysis_c1_mol" Expression="c1_mol" DataMember="Query" />
+    <Item2 Ref="10" Name="gas_analysis_c1_gpm" Expression="c1_gpm" DataMember="Query" />
+    <Item3 Ref="11" Name="gas_analysis_co2_mol" Expression="co2_mol" DataMember="Query" />
+    <Item4 Ref="12" Name="gas_analysis_c2_mol" Expression="c2_mol" DataMember="Query" />
+    <Item5 Ref="13" Name="gas_analysis_c2_gpm" Expression="c2_gpm" DataMember="Query" />
+    <Item6 Ref="14" Name="gas_analysis_c3_mol" Expression="c3_mol" DataMember="Query" />
+    <Item7 Ref="15" Name="gas_analysis_c3_gpm" Expression="c3_gpm" DataMember="Query" />
+    <Item8 Ref="16" Name="gas_analysis_ic4_mol" Expression="ic4_mol" DataMember="Query" />
+    <Item9 Ref="17" Name="gas_analysis_ic4_gpm" Expression="ic4_gpm" DataMember="Query" />
+    <Item10 Ref="18" Name="gas_analysis_nc4_mol" Expression="nc4_mol" DataMember="Query" />
+    <Item11 Ref="19" Name="gas_analysis_nc4_gpm" Expression="nc4_gpm" DataMember="Query" />
+    <Item12 Ref="20" Name="gas_analysis_ic5_mol" Expression="ic5_mol" DataMember="Query" />
+    <Item13 Ref="21" Name="gas_analysis_ic5_gpm" Expression="ic5_gpm" DataMember="Query" />
+    <Item14 Ref="22" Name="gas_analysis_nc5_mol" Expression="nc5_mol" DataMember="Query" />
+    <Item15 Ref="23" Name="gas_analysis_ic5_gpm_1" Expression="ic5_gpm" DataMember="Query" />
+    <Item16 Ref="24" Name="gas_analysis_c6_mol" Expression="c6_mol" DataMember="Query" />
+    <Item17 Ref="25" Name="gas_analysis_c6_gpm" Expression="c6_gpm" DataMember="Query" />
+    <Item18 Ref="26" Name="gas_analysis_nit_mol" Expression="nit_mol" DataMember="Query" />
+  </CalculatedFields>
+  <Bands>
+    <Item1 Ref="27" ControlType="TopMarginBand" Name="TopMargin" HeightF="25" />
+    <Item2 Ref="28" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="25" />
+    <Item3 Ref="29" ControlType="ReportHeaderBand" Name="header" HeightF="0" Visible="false" />
+    <Item4 Ref="30" ControlType="GroupFooterBand" Name="summary" HeightF="17">
+      <Controls>
+        <Item1 Ref="31" ControlType="XRLabel" Name="gpm_total" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="48,12" LocationFloat="41,1" Font="Tahoma, 7pt, style=Bold">
+          <ExpressionBindings>
+            <Item1 Ref="32" EventName="BeforePrint" PropertyName="Text" Expression="[c1_gpm]+[c2_gpm]+[c3_gpm]+[c6_gpm]+[ic4_gpm]+[ic5_gpm]+[nc4_gpm]" />
+          </ExpressionBindings>
+          <StylePriority Ref="33" UseFont="false" />
+        </Item1>
+        <Item2 Ref="34" ControlType="XRLabel" Name="mol_total" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="48,12" LocationFloat="94,1" Font="Tahoma, 7pt, style=Bold">
+          <ExpressionBindings>
+            <Item1 Ref="35" EventName="BeforePrint" PropertyName="Text" Expression="[c1_mol]+[c2_mol]+[c3_mol]+[c6_mol]+[co2_mol]+[ic4_mol]+[ic5_mol]+[nc4_mol]+[nc5_mol]+[nit_mol]" />
+          </ExpressionBindings>
+          <StylePriority Ref="36" UseFont="false" />
+        </Item2>
+        <Item3 Ref="37" ControlType="XRLine" Name="xrLine5" SizeF="145,2" LocationFloat="0,15" />
+        <Item4 Ref="38" ControlType="XRLabel" Name="t_2_label" Multiline="true" CanGrow="false" Text="Total" AnchorVertical="Both" TextAlignment="MiddleLeft" SizeF="30,15" LocationFloat="4,1" Font="Tahoma, 8pt, style=Bold" />
+      </Controls>
+    </Item4>
+    <Item5 Ref="39" ControlType="ReportFooterBand" Name="footer" HeightF="0" Visible="false" />
+    <Item6 Ref="40" ControlType="DetailBand" Name="detail" HeightF="217">
+      <Controls>
+        <Item1 Ref="41" ControlType="XRLine" Name="xrLine4" SizeF="145,2" LocationFloat="0,215" />
+        <Item2 Ref="42" ControlType="XRLine" Name="xrLine3" SizeF="145,2" LocationFloat="0,37" />
+        <Item3 Ref="43" ControlType="XRLine" Name="xrLine2" SizeF="145,2" LocationFloat="0,20" />
+        <Item4 Ref="44" ControlType="XRLine" Name="xrLine1" SizeF="145,2" LocationFloat="0,1" />
+        <Item5 Ref="45" ControlType="XRLabel" Name="t_1_label" Multiline="true" CanGrow="false" Text="Analysis" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="60,17" LocationFloat="7,2" Font="Tahoma, 10pt, style=Bold" />
+        <Item6 Ref="46" ControlType="XRLabel" Name="mole_t_label" Multiline="true" CanGrow="false" Text="Mol" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="47,14" LocationFloat="94,23" Font="Tahoma, 8pt" />
+        <Item7 Ref="47" ControlType="XRLabel" Name="gpm_t_label" Multiline="true" CanGrow="false" Text="GPM" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="84,14" LocationFloat="6,24" Font="Tahoma, 8pt" />
+        <Item8 Ref="48" ControlType="XRLabel" Name="gas_analysis_c1_mol_t_label" Multiline="true" CanGrow="false" Text="C1" AnchorVertical="Both" TextAlignment="MiddleLeft" SizeF="35,12" LocationFloat="4,42" Font="Tahoma, 7pt" />
+        <Item9 Ref="49" ControlType="XRLabel" Name="gas_analysis_c1_gpm_label" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="48,12" LocationFloat="41,42" Font="Tahoma, 7pt">
+          <ExpressionBindings>
+            <Item1 Ref="50" EventName="BeforePrint" PropertyName="Text" Expression="[gas_analysis_c1_gpm]" />
+          </ExpressionBindings>
+        </Item9>
+        <Item10 Ref="51" ControlType="XRLabel" Name="gas_analysis_co2_mol_t_label" Multiline="true" CanGrow="false" Text="Co2" AnchorVertical="Both" TextAlignment="MiddleLeft" SizeF="35,12" LocationFloat="4,58" Font="Tahoma, 7pt" />
+        <Item11 Ref="52" ControlType="XRLabel" Name="gas_analysis_c1_mol_label" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="48,12" LocationFloat="94,42" Font="Tahoma, 7pt">
+          <ExpressionBindings>
+            <Item1 Ref="53" EventName="BeforePrint" PropertyName="Text" Expression="[gas_analysis_c1_mol]" />
+          </ExpressionBindings>
+        </Item11>
+        <Item12 Ref="54" ControlType="XRLabel" Name="gas_analysis_co2_mol_label" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="48,12" LocationFloat="94,60" Font="Tahoma, 7pt">
+          <ExpressionBindings>
+            <Item1 Ref="55" EventName="BeforePrint" PropertyName="Text" Expression="[gas_analysis_co2_mol]" />
+          </ExpressionBindings>
+        </Item12>
+        <Item13 Ref="56" ControlType="XRLabel" Name="gas_analysis_c2_mol_label" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="48,12" LocationFloat="94,77" Font="Tahoma, 7pt">
+          <ExpressionBindings>
+            <Item1 Ref="57" EventName="BeforePrint" PropertyName="Text" Expression="[gas_analysis_c2_mol]" />
+          </ExpressionBindings>
+        </Item13>
+        <Item14 Ref="58" ControlType="XRLabel" Name="gas_analysis_c2_gpm_label" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="48,12" LocationFloat="41,77" Font="Tahoma, 7pt">
+          <ExpressionBindings>
+            <Item1 Ref="59" EventName="BeforePrint" PropertyName="Text" Expression="[gas_analysis_c2_gpm]" />
+          </ExpressionBindings>
+        </Item14>
+        <Item15 Ref="60" ControlType="XRLabel" Name="gas_analysis_c2_mol_t_label" Multiline="true" CanGrow="false" Text="C2" AnchorVertical="Both" TextAlignment="MiddleLeft" SizeF="35,12" LocationFloat="4,77" Font="Tahoma, 7pt" />
+        <Item16 Ref="61" ControlType="XRLabel" Name="gas_analysis_c3_mol_label" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="48,12" LocationFloat="94,95" Font="Tahoma, 7pt">
+          <ExpressionBindings>
+            <Item1 Ref="62" EventName="BeforePrint" PropertyName="Text" Expression="[gas_analysis_c3_mol]" />
+          </ExpressionBindings>
+        </Item16>
+        <Item17 Ref="63" ControlType="XRLabel" Name="gas_analysis_c3_gpm_label" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="48,12" LocationFloat="41,95" Font="Tahoma, 7pt">
+          <ExpressionBindings>
+            <Item1 Ref="64" EventName="BeforePrint" PropertyName="Text" Expression="[gas_analysis_c3_gpm]" />
+          </ExpressionBindings>
+        </Item17>
+        <Item18 Ref="65" ControlType="XRLabel" Name="gas_analysis_c3_mol_t_label" Multiline="true" CanGrow="false" Text="C3" AnchorVertical="Both" TextAlignment="MiddleLeft" SizeF="35,12" LocationFloat="4,95" Font="Tahoma, 7pt" />
+        <Item19 Ref="66" ControlType="XRLabel" Name="gas_analysis_ic4_mol_label" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="48,12" LocationFloat="94,113" Font="Tahoma, 7pt">
+          <ExpressionBindings>
+            <Item1 Ref="67" EventName="BeforePrint" PropertyName="Text" Expression="[gas_analysis_ic4_mol]" />
+          </ExpressionBindings>
+        </Item19>
+        <Item20 Ref="68" ControlType="XRLabel" Name="gas_analysis_ic4_gpm_label" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="48,12" LocationFloat="41,113" Font="Tahoma, 7pt">
+          <ExpressionBindings>
+            <Item1 Ref="69" EventName="BeforePrint" PropertyName="Text" Expression="[gas_analysis_ic4_gpm]" />
+          </ExpressionBindings>
+        </Item20>
+        <Item21 Ref="70" ControlType="XRLabel" Name="gas_analysis_ic4_mol_t_label" Multiline="true" CanGrow="false" Text="Ic4" AnchorVertical="Both" TextAlignment="MiddleLeft" SizeF="35,12" LocationFloat="4,113" Font="Tahoma, 7pt" />
+        <Item22 Ref="71" ControlType="XRLabel" Name="gas_analysis_nc4_mol_label" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="48,12" LocationFloat="94,131" Font="Tahoma, 7pt">
+          <ExpressionBindings>
+            <Item1 Ref="72" EventName="BeforePrint" PropertyName="Text" Expression="[gas_analysis_nc4_mol]" />
+          </ExpressionBindings>
+        </Item22>
+        <Item23 Ref="73" ControlType="XRLabel" Name="gas_analysis_nc4_gpm_label" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="48,12" LocationFloat="41,131" Font="Tahoma, 7pt">
+          <ExpressionBindings>
+            <Item1 Ref="74" EventName="BeforePrint" PropertyName="Text" Expression="[gas_analysis_nc4_gpm]" />
+          </ExpressionBindings>
+        </Item23>
+        <Item24 Ref="75" ControlType="XRLabel" Name="gas_analysis_nc4_mol_t_label" Multiline="true" CanGrow="false" Text="Nc4" AnchorVertical="Both" TextAlignment="MiddleLeft" SizeF="35,12" LocationFloat="4,131" Font="Tahoma, 7pt" />
+        <Item25 Ref="76" ControlType="XRLabel" Name="gas_analysis_ic5_mol_label" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="48,12" LocationFloat="94,148" Font="Tahoma, 7pt">
+          <ExpressionBindings>
+            <Item1 Ref="77" EventName="BeforePrint" PropertyName="Text" Expression="[gas_analysis_ic5_mol]" />
+          </ExpressionBindings>
+        </Item25>
+        <Item26 Ref="78" ControlType="XRLabel" Name="gas_analysis_ic5_gpm_label" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="48,12" LocationFloat="41,148" Font="Tahoma, 7pt">
+          <ExpressionBindings>
+            <Item1 Ref="79" EventName="BeforePrint" PropertyName="Text" Expression="[gas_analysis_ic5_gpm]" />
+          </ExpressionBindings>
+        </Item26>
+        <Item27 Ref="80" ControlType="XRLabel" Name="gas_analysis_ic5_mol_t_label" Multiline="true" CanGrow="false" Text="Ic5" AnchorVertical="Both" TextAlignment="MiddleLeft" SizeF="35,12" LocationFloat="4,148" Font="Tahoma, 7pt" />
+        <Item28 Ref="81" ControlType="XRLabel" Name="gas_analysis_nc5_mol_label" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="48,12" LocationFloat="94,166" Font="Tahoma, 7pt">
+          <ExpressionBindings>
+            <Item1 Ref="82" EventName="BeforePrint" PropertyName="Text" Expression="[gas_analysis_nc5_mol]" />
+          </ExpressionBindings>
+        </Item28>
+        <Item29 Ref="83" ControlType="XRLabel" Name="gas_analysis_ic5_gpm_1_label" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="48,12" LocationFloat="41,166" Font="Tahoma, 7pt">
+          <ExpressionBindings>
+            <Item1 Ref="84" EventName="BeforePrint" PropertyName="Text" Expression="[gas_analysis_ic5_gpm_1]" />
+          </ExpressionBindings>
+        </Item29>
+        <Item30 Ref="85" ControlType="XRLabel" Name="gas_analysis_nc5_mol_t_label" Multiline="true" CanGrow="false" Text="Nc5" AnchorVertical="Both" TextAlignment="MiddleLeft" SizeF="35,12" LocationFloat="4,166" Font="Tahoma, 7pt" />
+        <Item31 Ref="86" ControlType="XRLabel" Name="gas_analysis_c6_mol_label" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="48,12" LocationFloat="94,184" Font="Tahoma, 7pt">
+          <ExpressionBindings>
+            <Item1 Ref="87" EventName="BeforePrint" PropertyName="Text" Expression="[gas_analysis_c6_mol]" />
+          </ExpressionBindings>
+        </Item31>
+        <Item32 Ref="88" ControlType="XRLabel" Name="gas_analysis_c6_gpm_label" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="48,12" LocationFloat="41,184" Font="Tahoma, 7pt">
+          <ExpressionBindings>
+            <Item1 Ref="89" EventName="BeforePrint" PropertyName="Text" Expression="[gas_analysis_c6_gpm]" />
+          </ExpressionBindings>
+        </Item32>
+        <Item33 Ref="90" ControlType="XRLabel" Name="gas_analysis_c6_mol_t_label" Multiline="true" CanGrow="false" Text="C6" AnchorVertical="Both" TextAlignment="MiddleLeft" SizeF="35,12" LocationFloat="4,184" Font="Tahoma, 7pt" />
+        <Item34 Ref="91" ControlType="XRLabel" Name="gas_analysis_nit_mol_label" Multiline="true" CanGrow="false" AnchorVertical="Both" TextAlignment="MiddleRight" SizeF="48,12" LocationFloat="94,201" Font="Tahoma, 7pt">
+          <ExpressionBindings>
+            <Item1 Ref="92" EventName="BeforePrint" PropertyName="Text" Expression="[gas_analysis_nit_mol]" />
+          </ExpressionBindings>
+        </Item34>
+        <Item35 Ref="93" ControlType="XRLabel" Name="gas_analysis_nit_mol_t_label" Multiline="true" CanGrow="false" Text="Nit" AnchorVertical="Both" TextAlignment="MiddleLeft" SizeF="35,12" LocationFloat="4,201" Font="Tahoma, 7pt" />
+      </Controls>
+    </Item6>
+  </Bands>
+  <ComponentStorage>
+    <Item1 Ref="0" ObjectType="DevExpress.DataAccess.Sql.SqlDataSource,DevExpress.DataAccess.v24.1" Name="sqlDataSource1" Base64="PFNxbERhdGFTb3VyY2UgTmFtZT0ic3FsRGF0YVNvdXJjZTEiPjxDb25uZWN0aW9uIE5hbWU9IlRJRVMgRGF0YSIgRnJvbUFwcENvbmZpZz0idHJ1ZSIgLz48UXVlcnkgVHlwZT0iQ3VzdG9tU3FsUXVlcnkiIE5hbWU9IlF1ZXJ5Ij48UGFyYW1ldGVyIE5hbWU9IkBkd3JhX3BsYW50X2ZhY2lsaXR5X2NvZGUiIFR5cGU9IkRldkV4cHJlc3MuRGF0YUFjY2Vzcy5FeHByZXNzaW9uIj4oU3lzdGVtLlN0cmluZykoP2R3cmFfcGxhbnRfZmFjaWxpdHlfY29kZSk8L1BhcmFtZXRlcj48UGFyYW1ldGVyIE5hbWU9IkBkd3JhX3Byb2RfbW9udGgiIFR5cGU9IkRldkV4cHJlc3MuRGF0YUFjY2Vzcy5FeHByZXNzaW9uIj4oU3lzdGVtLkRhdGVUaW1lKSg/ZHdyYV9wcm9kX21vbnRoKTwvUGFyYW1ldGVyPjxQYXJhbWV0ZXIgTmFtZT0iQGR3cmFfcHJvY19rIiBUeXBlPSJEZXZFeHByZXNzLkRhdGFBY2Nlc3MuRXhwcmVzc2lvbiI+KFN5c3RlbS5TdHJpbmcpKD9kd3JhX3Byb2Nfayk8L1BhcmFtZXRlcj48UGFyYW1ldGVyIE5hbWU9IkBkd3JhX3NvdXJjZV9zdGEiIFR5cGU9IkRldkV4cHJlc3MuRGF0YUFjY2Vzcy5FeHByZXNzaW9uIj4oU3lzdGVtLlN0cmluZykoP2R3cmFfc291cmNlX3N0YSk8L1BhcmFtZXRlcj48UGFyYW1ldGVyIE5hbWU9IkBkd3JhX3NvdXJjZV9waXBlbGluZSIgVHlwZT0iRGV2RXhwcmVzcy5EYXRhQWNjZXNzLkV4cHJlc3Npb24iPihTeXN0ZW0uU3RyaW5nKSg/ZHdyYV9zb3VyY2VfcGlwZWxpbmUpPC9QYXJhbWV0ZXI+PFBhcmFtZXRlciBOYW1lPSJAZHdyYV9ydW5fZGF0ZXRpbWUiIFR5cGU9IkRldkV4cHJlc3MuRGF0YUFjY2Vzcy5FeHByZXNzaW9uIj4oU3lzdGVtLkRhdGVUaW1lKSg/ZHdyYV9ydW5fZGF0ZXRpbWUpPC9QYXJhbWV0ZXI+PFNxbD5TRUxFQ1QgICBkYm8uZ2FzX2FuYWx5c2lzLm1ldGhhbmVfcGN0IGMxX21vbCwgDQoJCSAgUm91bmQoZGJvLmdhc19hbmFseXNpcy5tZXRoYW5lX2dwbSw0KSBjMV9ncG0sICANCiAgICAgICAgIGRiby5nYXNfYW5hbHlzaXMuYzAyX3BjdCBjbzJfbW9sLCAgIA0KICAgICAgICAgZGJvLmdhc19hbmFseXNpcy5ldGhhbmVfcGN0IGMyX21vbCwgICANCiAgICAgICAgIFJvdW5kKGRiby5nYXNfYW5hbHlzaXMuZXRoYW5lX2dwbSw0KSBjMl9ncG0sICAgDQogICAgICAgICBkYm8uZ2FzX2FuYWx5c2lzLnByb3BhbmVfcGN0IGMzX21vbCwgICANCiAgICAgICAgIFJvdW5kKGRiby5nYXNfYW5hbHlzaXMucHJvcGFuZV9ncG0sNCkgYzNfZ3BtLCAgIA0KICAgICAgICAgZGJvLmdhc19hbmFseXNpcy5pc29fYnV0YW5lX3BjdCBpYzRfbW9sLCAgIA0KICAgICAgICAgUm91bmQoZGJvLmdhc19hbmFseXNpcy5pc29fYnV0YW5lX2dwbSw0KSBpYzRfZ3BtLCAgIA0KCQkgZGJvLmdhc19hbmFseXNpcy5ub3JfYnV0YW5lX3BjdCBuYzRfbW9sLCAgIA0KICAgICAgICAgUm91bmQoZGJvLmdhc19hbmFseXNpcy5ub3JfYnV0YW5lX2dwbSw0KSBuYzRfZ3BtLCAgIA0KICAgICAgICAgZGJvLmdhc19hbmFseXNpcy5pc29fcGVudGFuZV9wY3QgaWM1X21vbCwgICANCiAgICAgICAgIFJvdW5kKGRiby5nYXNfYW5hbHlzaXMuaXNvX3BlbnRhbmVfZ3BtLDQpIGljNV9ncG0sICAgDQogICAgICAgICBkYm8uZ2FzX2FuYWx5c2lzLm5vcl9wZW50YW5lX3BjdCBuYzVfbW9sLCAgIA0KICAgICAgICAgUm91bmQoZGJvLmdhc19hbmFseXNpcy5ub3JfcGVudGFuZV9ncG0sNCkgaWM1X2dwbSwgICANCiAgICAgICAgIGRiby5nYXNfYW5hbHlzaXMuaGV4YW5lX3BjdCBjNl9tb2wsICAgDQogICAgICAgICBSb3VuZChkYm8uZ2FzX2FuYWx5c2lzLmhleGFuZV9ncG0sNCkgYzZfZ3BtLA0KCQlkYm8uZ2FzX2FuYWx5c2lzLm5pdHJvX3BjdCBuaXRfbW9sDQogICAgRlJPTSBwbGFudF9tbWJ0dV9zZXR0bGVtZW50IGIgSk9JTiBkYm8uZ2FzX2FuYWx5c2lzIE9OIGRiby5nYXNfYW5hbHlzaXMucGlwZWxpbmVfY29kZSA9IGIuZ2FfcGlwZSANCgkJCQkJCQkJCUFORCBkYm8uZ2FzX2FuYWx5c2lzLnN0YXRpb25fbmJyID0gYi5nYV9zdGFfbmJyDQogICBXSEVSRSAoIGIucHJvY19waXBlID0gQGR3cmFfcGxhbnRfZmFjaWxpdHlfY29kZSApIA0KCQlBTkQJKCBiLnN0YXJ0X2RhdGUgPSBAZHdyYV9wcm9kX21vbnRoICkgDQoJCUFORCAoIGIucHJvY19rID0gQGR3cmFfcHJvY19rKSANCgkJQU5EICggYi5zb3VyY2Vfc3RhID0gQGR3cmFfc291cmNlX3N0YSkNCgkJQU5EICggYi5zb3VyY2VfcGlwZSA9IEBkd3JhX3NvdXJjZV9waXBlbGluZSkNCgkJQU5EIChiLnJ1bl9kYXRldGltZSA9IEBkd3JhX3J1bl9kYXRldGltZSkgDQoJCUFORCAoYi5zdGFydF9kYXRlIGJldHdlZW4gZGJvLmdhc19hbmFseXNpcy5iZWdfZWZmX2RhdGUgYW5kIGRiby5nYXNfYW5hbHlzaXMuZW5kX2VmZl9kYXRlICkgDQoJCUFORCBkYm8uZ2FzX2FuYWx5c2lzLnNlcV9uYnIgPSAoU0VMRUNUIE1heChnYXMuc2VxX25icikNCgkJCQkJCQkJCQlGUk9NIGdhc19hbmFseXNpcyBnYXMNCgkJCQkJCQkJCQlXSEVSRSBnYXMucGlwZWxpbmVfY29kZSA9IGRiby5nYXNfYW5hbHlzaXMucGlwZWxpbmVfY29kZQ0KCQkJCQkJCQkJCQlBTkQgZ2FzLnN0YXRpb25fbmJyID0gZGJvLmdhc19hbmFseXNpcy5zdGF0aW9uX25icg0KCQkJCQkJCQkJCQlBTkQgKGIuc3RhcnRfZGF0ZSBCRVRXRUVOIGdhcy5iZWdfZWZmX2RhdGUgYW5kIGdhcy5lbmRfZWZmX2RhdGUpKQ0KIDwvU3FsPjwvUXVlcnk+PFJlc3VsdFNjaGVtYT48RGF0YVNldCBOYW1lPSJzcWxEYXRhU291cmNlMSI+PFZpZXcgTmFtZT0iUXVlcnkiPjxGaWVsZCBOYW1lPSJjMV9tb2wiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iYzFfZ3BtIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9ImNvMl9tb2wiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iYzJfbW9sIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9ImMyX2dwbSIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJjM19tb2wiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iYzNfZ3BtIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9ImljNF9tb2wiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iaWM0X2dwbSIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJuYzRfbW9sIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9Im5jNF9ncG0iIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iaWM1X21vbCIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJpYzVfZ3BtIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9Im5jNV9tb2wiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iaWM1X2dwbSIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJjNl9tb2wiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iYzZfZ3BtIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9Im5pdF9tb2wiIFR5cGU9IlN0cmluZyIgLz48L1ZpZXc+PC9EYXRhU2V0PjwvUmVzdWx0U2NoZW1hPjxDb25uZWN0aW9uT3B0aW9ucyBDbG9zZUNvbm5lY3Rpb249InRydWUiIC8+PC9TcWxEYXRhU291cmNlPg==" />
+  </ComponentStorage>
+</XtraReportsLayoutSerializer>
